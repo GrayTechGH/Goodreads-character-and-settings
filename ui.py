@@ -13,6 +13,8 @@ if False:
     get_icons = get_resources = None
 
 # The class that all interface action plugins must inherit from
+from qt.core import QMenu, QMessageBox, QToolButton
+
 from calibre.gui2.actions import InterfaceAction
 from calibre_plugins.Goodreads_character_and_settings.main import DemoDialog
 
@@ -20,6 +22,7 @@ from calibre_plugins.Goodreads_character_and_settings.main import DemoDialog
 class InterfacePlugin(InterfaceAction):
 
     name = 'Goodreads character and settings'
+    popup_type = QToolButton.MenuButtonPopup
 
     # Declare the main action associated with this plugin
     # The keyboard shortcut can be None if you don't want to use a keyboard
@@ -47,6 +50,17 @@ class InterfacePlugin(InterfaceAction):
         # above
         self.qaction.setIcon(icon)
         self.qaction.triggered.connect(self.show_dialog)
+        self.menu = QMenu(self.gui)
+        self.qaction.setMenu(self.menu)
+
+        self.import_action = self.menu.addAction('Import')
+        self.import_action.triggered.connect(self.import_books)
+
+        self.about_action = self.menu.addAction('About')
+        self.about_action.triggered.connect(self.show_about)
+
+        self.config_action = self.menu.addAction('Customize plugin...')
+        self.config_action.triggered.connect(self.show_config)
 
     def show_dialog(self):
         # The base plugin object defined in __init__.py
@@ -62,6 +76,17 @@ class InterfacePlugin(InterfaceAction):
         # parent of the dialog
         d = DemoDialog(self.gui, self.qaction.icon(), do_user_config)
         d.show()
+
+    def import_books(self):
+        pass
+
+    def show_about(self):
+        text = get_resources('about.txt')
+        QMessageBox.about(self.gui, 'About Goodreads character and settings',
+                text.decode('utf-8'))
+
+    def show_config(self):
+        self.interface_action_base_plugin.do_user_config(parent=self.gui)
 
     def apply_settings(self):
         from calibre_plugins.Goodreads_character_and_settings.config import prefs
