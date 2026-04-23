@@ -1,6 +1,6 @@
 from time import sleep
 
-from qt.core import QAction, QMenu
+from qt.core import QAction, QMenu, QStyle
 
 from calibre.gui2 import error_dialog, info_dialog
 from calibre.gui2.actions import InterfaceAction
@@ -23,6 +23,7 @@ class GoodreadsCharacterAndSettingsAction(InterfaceAction):
 
     def genesis(self):
         self.qaction.triggered.connect(self.populate_selected_books)
+        self._set_default_toolbar_icon()
 
         menu = QMenu(self.gui)
         run_action = QAction('Populate selected books', self.gui)
@@ -34,6 +35,18 @@ class GoodreadsCharacterAndSettingsAction(InterfaceAction):
         menu.addAction(config_action)
 
         self.qaction.setMenu(menu)
+
+    def _set_default_toolbar_icon(self):
+        if not self.qaction.icon().isNull():
+            return
+
+        # Use a built-in Qt icon so the toolbar entry is never icon-less.
+        sp_dialog_open = getattr(QStyle, 'SP_DialogOpenButton', None)
+        if sp_dialog_open is None and hasattr(QStyle, 'StandardPixmap'):
+            sp_dialog_open = QStyle.StandardPixmap.SP_DialogOpenButton
+
+        if sp_dialog_open is not None:
+            self.qaction.setIcon(self.gui.style().standardIcon(sp_dialog_open))
 
     def show_configuration(self):
         self.interface_action_base_plugin.do_user_config(self.gui)
