@@ -3,7 +3,7 @@
 
 
 __license__   = 'GPL v3'
-__copyright__ = '2011, Kovid Goyal <kovid@kovidgoyal.net>'
+__copyright__ = '2026, GrayTechGH'
 __docformat__ = 'restructuredtext en'
 
 # The class that all Interface Action plugin wrappers must inherit from
@@ -21,9 +21,9 @@ class InterfacePluginDemo(InterfaceActionBase):
     calibre utilities to run without needing to load the GUI libraries.
     '''
     name                = 'Goodreads character and settings'
-    description         = 'An advanced plugin demo'
+    description         = 'Plugin that imports character and settings data from Goodreads and writes it to custom fields'
     supported_platforms = ['windows', 'osx', 'linux']
-    author              = 'Kovid Goyal'
+    author              = 'GrayTechGH'
     version             = (1, 0, 0)
     minimum_calibre_version = (0, 7, 53)
 

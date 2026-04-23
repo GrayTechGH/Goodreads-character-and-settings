@@ -3,7 +3,7 @@
 
 
 __license__   = 'GPL v3'
-__copyright__ = '2011, Kovid Goyal <kovid@kovidgoyal.net>'
+__copyright__ = '2026, GrayTechGH'
 __docformat__ = 'restructuredtext en'
 
 from qt.core import QCheckBox, QComboBox, QFormLayout, QLabel, QSpinBox, QVBoxLayout, QWidget
@@ -32,10 +32,7 @@ class ConfigWidget(QWidget):
         self.l = QVBoxLayout()
         self.setLayout(self.l)
 
-        description = QLabel(
-            'Choose which calibre fields should receive Goodreads character and '
-            'settings data when import support is added.'
-        )
+        description = QLabel('Select the character and settings fields')
         description.setWordWrap(True)
         self.l.addWidget(description)
 
@@ -96,7 +93,6 @@ class ConfigWidget(QWidget):
             or self.current_field_uses_custom_column(self.settings_field)
         )
         self.write_empty_to_custom_fields.setEnabled(enabled)
-        self.write_empty_to_custom_fields.setVisible(enabled)
         if enabled:
             self.write_empty_to_custom_fields.setToolTip(
                 'If Goodreads does not provide a value, store the text "Empty" '
