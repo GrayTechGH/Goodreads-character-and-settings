@@ -18,8 +18,12 @@ FIELD_NONE = 'none'
 
 prefs.defaults['character_field'] = FIELD_NONE
 prefs.defaults['settings_field'] = FIELD_NONE
+prefs.defaults['countries_field'] = FIELD_NONE
+prefs.defaults['include_country_with_location'] = True
 prefs.defaults['write_empty_to_custom_fields'] = False
 prefs.defaults['query_interval_seconds'] = 30
+prefs.defaults['max_books_per_job'] = 100
+prefs.defaults['debug_preview'] = False
 
 
 class ConfigWidget(QWidget):
@@ -45,6 +49,20 @@ class ConfigWidget(QWidget):
         self.settings_field = self.create_field_combo()
         self.form.addRow('Settings field:', self.settings_field)
 
+        self.countries_field = self.create_field_combo()
+        self.form.addRow('Countries field:', self.countries_field)
+
+        self.include_country_with_location = QCheckBox(
+            'Include country with location'
+        )
+        self.include_country_with_location.setChecked(
+            prefs['include_country_with_location']
+        )
+        self.include_country_with_location.setToolTip(
+            'Keep the country in parentheses in the Settings field.'
+        )
+        self.form.addRow('', self.include_country_with_location)
+
         self.write_empty_to_custom_fields = QCheckBox(
             'Write "Empty" when Goodreads has no value'
         )
@@ -60,13 +78,23 @@ class ConfigWidget(QWidget):
         self.query_interval_seconds.setValue(prefs['query_interval_seconds'])
         self.form.addRow('Time between queries:', self.query_interval_seconds)
 
+        self.max_books_per_job = QSpinBox(self)
+        self.max_books_per_job.setMinimum(1)
+        self.max_books_per_job.setMaximum(100000)
+        self.max_books_per_job.setValue(prefs['max_books_per_job'])
+        self.form.addRow('Max. Books/Job:', self.max_books_per_job)
+
         self.load_field(self.character_field, prefs['character_field'])
         self.load_field(self.settings_field, prefs['settings_field'])
+        self.load_field(self.countries_field, prefs['countries_field'])
 
         self.character_field.currentIndexChanged.connect(
             self.update_empty_option_state
         )
         self.settings_field.currentIndexChanged.connect(
+            self.update_empty_option_state
+        )
+        self.countries_field.currentIndexChanged.connect(
             self.update_empty_option_state
         )
         self.update_empty_option_state()
@@ -91,6 +119,7 @@ class ConfigWidget(QWidget):
         enabled = (
             self.current_field_uses_custom_column(self.character_field)
             or self.current_field_uses_custom_column(self.settings_field)
+            or self.current_field_uses_custom_column(self.countries_field)
         )
         self.write_empty_to_custom_fields.setEnabled(enabled)
         if enabled:
@@ -101,14 +130,19 @@ class ConfigWidget(QWidget):
         else:
             self.write_empty_to_custom_fields.setChecked(False)
             self.write_empty_to_custom_fields.setToolTip(
-                'This option is only available when Characters or Settings uses '
-                'a custom field.'
+                'This option is only available when Characters, Settings, or '
+                'Countries uses a custom field.'
             )
 
     def save_settings(self):
         prefs['character_field'] = self.character_field.currentData()
         prefs['settings_field'] = self.settings_field.currentData()
+        prefs['countries_field'] = self.countries_field.currentData()
+        prefs['include_country_with_location'] = (
+            self.include_country_with_location.isChecked()
+        )
         prefs['write_empty_to_custom_fields'] = (
             self.write_empty_to_custom_fields.isChecked()
         )
         prefs['query_interval_seconds'] = self.query_interval_seconds.value()
+        prefs['max_books_per_job'] = self.max_books_per_job.value()

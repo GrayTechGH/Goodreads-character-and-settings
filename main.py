@@ -40,8 +40,9 @@ class GoodreadsPreviewRunner(object):
             )
             return
 
+        max_books_per_job = max(1, int(prefs['max_books_per_job']))
         books_with_ids = [
-            book for book in selected_books[:5]
+            book for book in selected_books[:max_books_per_job]
             if book['goodreads_id']
         ]
 
@@ -62,8 +63,21 @@ class GoodreadsPreviewRunner(object):
                 html = fetch_goodreads_page(book['goodreads_id'])
                 characters = extract_goodreads_values(html, 'Characters')
                 settings = extract_goodreads_values(html, 'Setting')
-                formatted_settings = format_settings(settings)
-                body = build_preview_message(characters, formatted_settings)
+                formatted_settings, countries = format_settings(
+                    settings,
+                    include_country_with_location=prefs['include_country_with_location'],
+                )
+                body = build_preview_message(characters, formatted_settings, countries)
+                if (
+                    prefs['debug_preview']
+                    and not characters
+                    and not formatted_settings
+                    and not countries
+                ):
+                    body = '{}\n\n{}'.format(
+                        body,
+                        build_debug_message(html),
+                    )
             except Exception as err:
                 body = 'Failed to fetch or parse Goodreads data.\n\n{}'.format(err)
 
@@ -117,18 +131,40 @@ def fetch_goodreads_page(goodreads_id, timeout=30):
 
 def extract_goodreads_values(html, label):
     values = []
+    labels = expand_label_aliases(label)
 
-    values.extend(extract_values_from_json(label, html))
-    values.extend(extract_values_from_detail_section(label, html))
-    values.extend(extract_values_from_html_block(label, html))
+    for candidate in labels:
+        values.extend(extract_values_from_json(candidate, html))
+        values.extend(extract_values_from_embedded_state(candidate, html))
+        values.extend(extract_values_from_detail_section(candidate, html))
+        values.extend(extract_values_from_html_block(candidate, html))
 
     deduped = []
     seen = set()
     for value in values:
-        normalized = cleanup_value(value)
-        if normalized and normalized not in seen:
+        for normalized in normalize_extracted_value(value):
+            if normalized and normalized not in seen:
+                seen.add(normalized)
+                deduped.append(normalized)
+    return deduped
+
+
+def expand_label_aliases(label):
+    aliases = [label]
+    lower_label = label.lower()
+
+    if lower_label == 'setting':
+        aliases.extend(['Settings', 'Places'])
+    elif lower_label == 'characters':
+        aliases.append('Character')
+
+    deduped = []
+    seen = set()
+    for value in aliases:
+        normalized = value.lower()
+        if normalized not in seen:
             seen.add(normalized)
-            deduped.append(normalized)
+            deduped.append(value)
     return deduped
 
 
@@ -145,6 +181,121 @@ def extract_values_from_json(label, html):
             continue
         values.extend(find_label_values_in_json(payload, label.lower()))
     return values
+
+
+def extract_values_from_embedded_state(label, html):
+    values = []
+    for candidate_html in iter_embedded_state_variants(html):
+        key_names = [label.lower()]
+        if label.lower() == 'characters':
+            key_names.append('characters')
+        elif label.lower() in ('setting', 'settings', 'places'):
+            key_names.append('places')
+
+        for key_name in key_names:
+            values.extend(extract_keyed_values_from_embedded_state(candidate_html, key_name))
+
+        pattern = r'"name"\s*:\s*"{0}"'.format(re.escape(label))
+        for match in re.finditer(pattern, candidate_html, flags=re.IGNORECASE):
+            tail = candidate_html[match.end():match.end() + 12000]
+            raw_values = extract_values_payload_from_tail(tail)
+            if raw_values is not None:
+                values.extend(flatten_json_values(raw_values))
+    return values
+
+
+def iter_embedded_state_variants(html):
+    variants = []
+    candidates = [
+        html,
+        unescape(html),
+        html.replace('\\"', '"'),
+        unescape(html).replace('\\"', '"'),
+    ]
+    seen = set()
+    for candidate in candidates:
+        if candidate not in seen:
+            seen.add(candidate)
+            variants.append(candidate)
+    return variants
+
+
+def extract_values_payload_from_tail(tail):
+    string_match = re.search(
+        r'"values"\s*:\s*"(?P<value>(?:\\.|[^"])*)"',
+        tail,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+    if string_match:
+        raw_value = string_match.group('value')
+        return try_parse_json_string('"{}"'.format(raw_value))
+
+    direct_match = re.search(
+        r'"values"\s*:\s*(?P<value>\[.*?\]|\{.*?\})',
+        tail,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+    if direct_match:
+        raw_value = direct_match.group('value')
+        return try_parse_json_string(raw_value)
+
+    return None
+
+
+def extract_keyed_values_from_embedded_state(html, key_name):
+    values = []
+    pattern = r'"{0}"\s*:'.format(re.escape(key_name))
+    for match in re.finditer(pattern, html, flags=re.IGNORECASE):
+        tail = html[match.end():]
+        raw_values, consumed = extract_bracketed_json_payload(tail)
+        if raw_values is None:
+            continue
+        values.extend(flatten_json_values(raw_values))
+        if consumed:
+            tail = tail[consumed:]
+    return values
+
+
+def extract_bracketed_json_payload(text):
+    start = None
+    opening = ''
+    for index, char in enumerate(text):
+        if char in '[{':
+            start = index
+            opening = char
+            break
+        if char not in ' \t\r\n:':
+            return None, 0
+    if start is None:
+        return None, 0
+
+    closing = ']' if opening == '[' else '}'
+    depth = 0
+    in_string = False
+    escape = False
+
+    for index in range(start, len(text)):
+        char = text[index]
+        if in_string:
+            if escape:
+                escape = False
+            elif char == '\\':
+                escape = True
+            elif char == '"':
+                in_string = False
+            continue
+
+        if char == '"':
+            in_string = True
+        elif char == opening:
+            depth += 1
+        elif char == closing:
+            depth -= 1
+            if depth == 0:
+                payload = text[start:index + 1]
+                return try_parse_json_string(payload), index + 1
+
+    return None, 0
 
 
 def find_label_values_in_json(node, label):
@@ -172,9 +323,13 @@ def flatten_json_values(node):
         for item in node:
             values.extend(flatten_json_values(item))
     elif isinstance(node, dict):
-        for key in ('name', 'text', 'value'):
-            if key in node:
-                values.extend(flatten_json_values(node[key]))
+        formatted = format_json_value_object(node)
+        if formatted:
+            values.append(formatted)
+        else:
+            for key in ('name', 'text', 'value'):
+                if key in node:
+                    values.extend(flatten_json_values(node[key]))
     elif isinstance(node, str):
         parsed = try_parse_json_string(node)
         if parsed is not None:
@@ -182,6 +337,39 @@ def flatten_json_values(node):
         else:
             values.append(node)
     return values
+
+
+def format_json_value_object(node):
+    if not isinstance(node, dict):
+        return ''
+
+    name = cleanup_value(node.get('name'))
+    country = cleanup_value(node.get('countryName'))
+
+    if name and country:
+        return '{} ({})'.format(name, country)
+    if name:
+        return name
+
+    for key in ('text', 'value'):
+        value = cleanup_value(node.get(key))
+        if value:
+            return value
+    return ''
+
+
+def normalize_extracted_value(value):
+    parsed = try_parse_json_string(value) if isinstance(value, str) else None
+    if parsed is not None:
+        normalized = []
+        for item in flatten_json_values(parsed):
+            cleaned = cleanup_value(item)
+            if cleaned:
+                normalized.append(cleaned)
+        return normalized
+
+    cleaned = cleanup_value(value)
+    return [cleaned] if cleaned else []
 
 
 def extract_values_from_detail_section(label, html):
@@ -224,7 +412,7 @@ def extract_values_from_detail_section(label, html):
 
 
 def extract_values_from_html_block(label, html):
-    label_pattern = r'(?:>\s*{0}\s*<|"\s*{0}\s*"|>\s*{0}\s*:?\s*<)'.format(
+    label_pattern = r'(?:>\s*{0}\s*<|>\s*{0}\s*:?\s*<)'.format(
         re.escape(label)
     )
     match = re.search(label_pattern, html, flags=re.IGNORECASE)
@@ -255,9 +443,9 @@ def extract_values_from_html_block(label, html):
     return [part for part in parts if part]
 
 
-def format_settings(settings):
+def format_settings(settings, include_country_with_location=True):
     if not settings:
-        return []
+        return [], []
 
     places = []
     countries = []
@@ -267,8 +455,11 @@ def format_settings(settings):
     for value in settings:
         match = re.match(r'^(?P<place>.+?)\s*\((?P<country>.+?)\)$', value)
         if match:
-            place = match.group('place').replace(', ', ' - ')
+            place_name = match.group('place').replace(', ', ' - ')
             country = cleanup_value(match.group('country'))
+            place = place_name
+            if include_country_with_location and country:
+                place = '{} ({})'.format(place_name, country)
             if place and place not in seen_places:
                 seen_places.add(place)
                 places.append(place)
@@ -282,19 +473,49 @@ def format_settings(settings):
             seen_places.add(place)
             places.append(place)
 
-    combined = []
-    if places:
-        combined.append(' , '.join(places))
-    if countries:
-        combined.append(', '.join(countries))
-    return [part for part in combined if part]
+    formatted_places = [' , '.join(places)] if places else []
+    formatted_countries = [', '.join(countries)] if countries else []
+    return formatted_places, formatted_countries
 
 
-def build_preview_message(characters, settings):
-    return 'Settings: {}\n\nCharacters: {}'.format(
+def build_preview_message(characters, settings, countries):
+    return 'Settings: {}\nCountries: {}\n\nCharacters: {}'.format(
         ', '.join(settings) if settings else 'Not found',
+        ', '.join(countries) if countries else 'Not found',
         ', '.join(characters) if characters else 'Not found',
     )
+
+
+def build_debug_message(html):
+    labels = ('Characters', 'Setting', 'Settings', 'Places')
+    lines = ['Debug:']
+
+    for label in labels:
+        json_values = extract_values_from_json(label, html)
+        state_values = extract_values_from_embedded_state(label, html)
+        detail_values = extract_values_from_detail_section(label, html)
+        html_values = extract_values_from_html_block(label, html)
+        marker_found = has_label_marker(html, label)
+        json_count = len(extract_normalized_values(json_values))
+        state_count = len(extract_normalized_values(state_values))
+        detail_count = len(extract_normalized_values(detail_values))
+        html_count = len(extract_normalized_values(html_values))
+        lines.append(
+            '{}: markers={} json={} state={} detail={} html={}'.format(
+                label,
+                'yes' if marker_found else 'no',
+                json_count,
+                state_count,
+                detail_count,
+                html_count,
+            )
+        )
+        if marker_found and not any((json_count, state_count, detail_count, html_count)):
+            snippet = extract_marker_snippet(html, label)
+            if snippet:
+                lines.append('  snippet={}'.format(snippet))
+
+    return '\n'.join(lines)
 
 
 def get_metadata_identifiers(mi):
@@ -331,6 +552,38 @@ def cleanup_value(value):
     return value.strip(' ,;:-')
 
 
+def has_label_marker(html, label):
+    return bool(
+        re.search(r'>\s*{}\s*<'.format(re.escape(label)), html, flags=re.IGNORECASE)
+        or re.search(r'"\s*{}\s*"'.format(re.escape(label)), html, flags=re.IGNORECASE)
+    )
+
+
+def extract_normalized_values(values):
+    normalized = []
+    for value in values:
+        normalized.extend(normalize_extracted_value(value))
+    return normalized
+
+
+def extract_marker_snippet(html, label, radius=180):
+    patterns = [
+        r'>\s*{}\s*<'.format(re.escape(label)),
+        r'"\s*{}\s*"'.format(re.escape(label)),
+    ]
+    for pattern in patterns:
+        match = re.search(pattern, html, flags=re.IGNORECASE)
+        if not match:
+            continue
+        start = max(0, match.start() - radius)
+        end = min(len(html), match.end() + radius)
+        snippet = html[start:end]
+        snippet = snippet.replace('\n', ' ').replace('\r', ' ')
+        snippet = re.sub(r'\s+', ' ', snippet)
+        return snippet[:240]
+    return ''
+
+
 def strip_tags(text):
     return re.sub(r'<[^>]+>', ' ', text or '')
 
@@ -339,9 +592,21 @@ def try_parse_json_string(value):
     if not isinstance(value, str):
         return None
     text = value.strip()
-    if not text or text[0] not in '[{':
+    if not text:
         return None
-    try:
-        return json.loads(text)
-    except Exception:
-        return None
+
+    current = text
+    for _ in range(3):
+        stripped = current.strip()
+        if not stripped:
+            return None
+        if stripped[0] not in '[{"':
+            return None
+        try:
+            parsed = json.loads(stripped)
+        except Exception:
+            return None
+        if not isinstance(parsed, str):
+            return parsed
+        current = unescape(parsed)
+    return None
