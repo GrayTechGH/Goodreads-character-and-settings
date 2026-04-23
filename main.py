@@ -119,6 +119,7 @@ def extract_goodreads_values(html, label):
     values = []
 
     values.extend(extract_values_from_json(label, html))
+    values.extend(extract_values_from_detail_section(label, html))
     values.extend(extract_values_from_html_block(label, html))
 
     deduped = []
@@ -175,7 +176,50 @@ def flatten_json_values(node):
             if key in node:
                 values.extend(flatten_json_values(node[key]))
     elif isinstance(node, str):
-        values.append(node)
+        parsed = try_parse_json_string(node)
+        if parsed is not None:
+            values.extend(flatten_json_values(parsed))
+        else:
+            values.append(node)
+    return values
+
+
+def extract_values_from_detail_section(label, html):
+    label_match = re.search(
+        r'>\s*{}\s*<'.format(re.escape(label)),
+        html,
+        flags=re.IGNORECASE,
+    )
+    if not label_match:
+        return []
+
+    tail = html[label_match.end():label_match.end() + 12000]
+    stop_labels = [
+        'Characters', 'Setting', 'Literary awards', 'Awards', 'Places',
+        'Book details & editions', 'This edition', 'Lists with This Book',
+        'Readers also enjoyed', 'Community Reviews', 'Genres',
+    ]
+    stop_patterns = [
+        r'>\s*{}\s*<'.format(re.escape(stop_label))
+        for stop_label in stop_labels
+        if stop_label.lower() != label.lower()
+    ]
+    stop_match = re.search('|'.join(stop_patterns), tail, flags=re.IGNORECASE)
+    if stop_match:
+        tail = tail[:stop_match.start()]
+
+    values = []
+    for anchor_match in re.finditer(
+        r'<a\b[^>]*>(?P<text>.*?)</a>',
+        tail,
+        flags=re.IGNORECASE | re.DOTALL,
+    ):
+        text = cleanup_value(anchor_match.group('text'))
+        if not text:
+            continue
+        if text.lower() in ('show more', 'show less'):
+            continue
+        values.append(text)
     return values
 
 
@@ -289,3 +333,15 @@ def cleanup_value(value):
 
 def strip_tags(text):
     return re.sub(r'<[^>]+>', ' ', text or '')
+
+
+def try_parse_json_string(value):
+    if not isinstance(value, str):
+        return None
+    text = value.strip()
+    if not text or text[0] not in '[{':
+        return None
+    try:
+        return json.loads(text)
+    except Exception:
+        return None
