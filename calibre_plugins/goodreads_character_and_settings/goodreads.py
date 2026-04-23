@@ -85,7 +85,7 @@ def _extract_settings_from_json(html):
                 key = (item.get('name') or '').lower()
                 if 'setting' in key and item.get('value'):
                     settings.extend(_normalize_setting_item(str(item['value'])))
-            if isinstance(item, str) and 'united states' in item.lower() and '(' in item and ')' in item:
+            if isinstance(item, str) and '(' in item and ')' in item:
                 settings.extend(_normalize_setting_item(item))
     return settings
 
