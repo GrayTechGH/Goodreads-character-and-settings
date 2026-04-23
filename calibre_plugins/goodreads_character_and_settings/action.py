@@ -1,9 +1,11 @@
+from time import sleep
+
 from qt.core import QAction, QMenu
 
 from calibre.gui2 import error_dialog, info_dialog
 from calibre.gui2.actions import InterfaceAction
 
-from calibre_plugins.goodreads_character_and_settings.config import PREFS
+from calibre_plugins.goodreads_character_and_settings.config import PREFS, TAGS_TARGET
 from calibre_plugins.goodreads_character_and_settings.goodreads import (
     extract_characters_and_settings,
     fetch_book_page,
@@ -37,13 +39,16 @@ class GoodreadsCharacterAndSettingsAction(InterfaceAction):
         self.interface_action_base_plugin.do_user_config(self.gui)
 
     def populate_selected_books(self):
-        chars_col = PREFS['characters_column']
-        settings_col = PREFS['settings_column']
-        if not chars_col and not settings_col:
+        chars_target = PREFS['characters_column']
+        settings_target = PREFS['settings_column']
+        empty_for_custom_fields = bool(PREFS['empty_for_custom_fields'])
+        query_delay_seconds = int(PREFS['query_delay_seconds'] or 30)
+
+        if not chars_target and not settings_target:
             error_dialog(
                 self.gui,
-                'No columns configured',
-                'Configure at least one custom column before running this action.',
+                'No destinations configured',
+                'Configure at least one destination before running this action.',
                 show=True,
             )
             return
@@ -60,7 +65,7 @@ class GoodreadsCharacterAndSettingsAction(InterfaceAction):
         errors = []
         touched_ids = []
 
-        for row in rows:
+        for i, row in enumerate(rows):
             book_id = model.id(row)
             mi = db.get_metadata(book_id, index_is_id=True)
             gr_id = (mi.identifiers or {}).get('goodreads')
@@ -76,10 +81,14 @@ class GoodreadsCharacterAndSettingsAction(InterfaceAction):
                 continue
 
             values = {}
-            if chars_col and characters:
-                values[chars_col] = ', '.join(characters)
-            if settings_col and settings:
-                values[settings_col] = ', '.join(settings)
+            if chars_target:
+                value = self._build_value(db, book_id, chars_target, characters, empty_for_custom_fields)
+                if value is not None:
+                    values[chars_target] = value
+            if settings_target:
+                value = self._build_value(db, book_id, settings_target, settings, empty_for_custom_fields)
+                if value is not None:
+                    values[settings_target] = value
 
             if not values:
                 skipped += 1
@@ -88,6 +97,9 @@ class GoodreadsCharacterAndSettingsAction(InterfaceAction):
             self._set_custom_values(db, book_id, values)
             touched_ids.append(book_id)
             updated += 1
+
+            if query_delay_seconds > 0 and i < len(rows) - 1:
+                sleep(query_delay_seconds)
 
         db.commit()
         if touched_ids:
@@ -106,4 +118,43 @@ class GoodreadsCharacterAndSettingsAction(InterfaceAction):
 
         # Older calibre fallback.
         for field, value in values.items():
+            if field == TAGS_TARGET and hasattr(db, 'set_tags'):
+                db.set_tags(book_id, value, append=False)
+                continue
+            if field == TAGS_TARGET:
+                continue
             db.set_custom(book_id, value, label=field)
+
+    def _build_value(self, db, book_id, field, items, empty_for_custom_fields):
+        cleaned_items = [x for x in items if x.strip().lower() != 'empty']
+
+        if field == TAGS_TARGET:
+            if not cleaned_items:
+                return None
+            existing_tags = self._get_existing_tags(db, book_id)
+            return self._dedupe(existing_tags + cleaned_items)
+
+        if cleaned_items:
+            return ', '.join(cleaned_items)
+
+        if empty_for_custom_fields:
+            return 'Empty'
+
+        return None
+
+    def _get_existing_tags(self, db, book_id):
+        if hasattr(db, 'new_api') and hasattr(db.new_api, 'field_for'):
+            tags = db.new_api.field_for('tags', book_id) or []
+            return [tag for tag in tags if tag and tag.strip().lower() != 'empty']
+        mi = db.get_metadata(book_id, index_is_id=True)
+        return [tag for tag in (mi.tags or []) if tag and tag.strip().lower() != 'empty']
+
+    @staticmethod
+    def _dedupe(items):
+        seen = set()
+        out = []
+        for item in items:
+            if item not in seen:
+                out.append(item)
+                seen.add(item)
+        return out
