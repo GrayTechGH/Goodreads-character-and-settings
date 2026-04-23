@@ -3,7 +3,7 @@
 
 
 __license__   = 'GPL v3'
-__copyright__ = '2011, Kovid Goyal <kovid@kovidgoyal.net>'
+__copyright__ = '2024, Kovid Goyal <kovid@kovidgoyal.net>'
 __docformat__ = 'restructuredtext en'
 
 if False:
@@ -28,7 +28,7 @@ class InterfacePlugin(InterfaceAction):
     # The keyboard shortcut can be None if you don't want to use a keyboard
     # shortcut. Remember that currently calibre has no central management for
     # keyboard shortcuts, so try to use an unusual/unused shortcut.
-    action_spec = ('Goodreads character and settings', None,
+    action_spec = ('Goodreads C & S', None,
             'Run Goodreads character and settings', 'Ctrl+Shift+F1')
 
     def genesis(self):
