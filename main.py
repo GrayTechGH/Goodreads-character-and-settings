@@ -14,7 +14,7 @@ if False:
 
 from qt.core import QDialog, QLabel, QMessageBox, QPushButton, QVBoxLayout
 
-from calibre_plugins.interface_demo.config import prefs
+from calibre_plugins.Goodreads_character_and_settings.config import prefs
 
 
 class DemoDialog(QDialog):
@@ -37,7 +37,7 @@ class DemoDialog(QDialog):
         self.label = QLabel(prefs['hello_world_msg'])
         self.l.addWidget(self.label)
 
-        self.setWindowTitle('Interface Plugin Demo')
+        self.setWindowTitle('Goodreads character and settings')
         self.setWindowIcon(icon)
 
         self.about_button = QPushButton('About', self)
@@ -77,7 +77,7 @@ class DemoDialog(QDialog):
         # get_resources will return a dictionary mapping names to bytes. Names that
         # are not found in the zip file will not be in the returned dictionary.
         text = get_resources('about.txt')
-        QMessageBox.about(self, 'About the Interface Plugin Demo',
+        QMessageBox.about(self, 'About Goodreads character and settings',
                 text.decode('utf-8'))
 
     def marked(self):

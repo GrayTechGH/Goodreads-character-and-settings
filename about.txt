@@ -1,5 +1,5 @@
-The Interface Plugin Demo
-===========================
+Goodreads character and settings
+================================
 
 Created by Kovid Goyal
 

@@ -11,11 +11,11 @@ from qt.core import QHBoxLayout, QLabel, QLineEdit, QWidget
 from calibre.utils.config import JSONConfig
 
 # This is where all preferences for this plugin will be stored
-# Remember that this name (i.e. plugins/interface_demo) is also
+# Remember that this name (i.e. plugins/Goodreads_character_and_settings) is also
 # in a global namespace, so make it as unique as possible.
 # You should always prefix your config file name with plugins/,
 # so as to ensure you don't accidentally clobber a calibre config file
-prefs = JSONConfig('plugins/interface_demo')
+prefs = JSONConfig('plugins/Goodreads_character_and_settings')
 
 # Set defaults
 prefs.defaults['hello_world_msg'] = 'Hello, World!'
