@@ -62,7 +62,11 @@ class InterfacePluginDemo(InterfaceActionBase):
         # GUI libraries to be loaded, which we do not want when using calibre
         # from the command line
         from calibre_plugins.Goodreads_character_and_settings.config import ConfigWidget
-        return ConfigWidget()
+        custom_fields = []
+        ac = self.actual_plugin_
+        if ac is not None:
+            custom_fields = get_custom_fields(ac.gui.current_db)
+        return ConfigWidget(custom_fields=custom_fields)
 
     def save_settings(self, config_widget):
         '''
@@ -76,3 +80,14 @@ class InterfacePluginDemo(InterfaceActionBase):
         ac = self.actual_plugin_
         if ac is not None:
             ac.apply_settings()
+
+
+def get_custom_fields(db):
+    field_metadata = getattr(db, 'field_metadata', {})
+    custom_fields = []
+    for lookup_name in sorted(getattr(db, 'custom_field_keys', lambda: [])()):
+        metadata = field_metadata.get(lookup_name, {})
+        name = metadata.get('name', lookup_name)
+        display_name = '{} ({})'.format(name, lookup_name)
+        custom_fields.append((lookup_name, display_name))
+    return custom_fields
