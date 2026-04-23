@@ -13,9 +13,7 @@ from html import unescape
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
-from qt.core import QMessageBox
-
-from calibre_plugins.Goodreads_character_and_settings.config import prefs
+from calibre_plugins.Goodreads_character_and_settings.config import FIELD_NONE, FIELD_TAGS, prefs
 
 
 GOODREADS_BASE_URL = 'https://www.goodreads.com'
@@ -23,6 +21,7 @@ GOODREADS_USER_AGENT = (
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
     '(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
 )
+_SKIP_WRITE = object()
 
 
 class GoodreadsPreviewRunner(object):
@@ -33,11 +32,7 @@ class GoodreadsPreviewRunner(object):
     def run_for_selection(self):
         selected_books = self.get_selected_books()
         if not selected_books:
-            QMessageBox.information(
-                self.gui,
-                'Goodreads character and settings',
-                'Select at least one library book to test Goodreads extraction.',
-            )
+            self.show_status('No books selected.')
             return
 
         max_books_per_job = max(1, int(prefs['max_books_per_job']))
@@ -47,14 +42,12 @@ class GoodreadsPreviewRunner(object):
         ]
 
         if not books_with_ids:
-            QMessageBox.information(
-                self.gui,
-                'Goodreads character and settings',
-                'None of the selected books has a Goodreads id.',
-            )
+            self.show_status('No selected books have a Goodreads id.')
             return
 
         interval_seconds = max(1, int(prefs['query_interval_seconds']))
+        updated_count = 0
+        failed_count = 0
         for index, book in enumerate(books_with_ids):
             if index:
                 time.sleep(interval_seconds)
@@ -67,25 +60,23 @@ class GoodreadsPreviewRunner(object):
                     settings,
                     include_country_with_location=prefs['include_country_with_location'],
                 )
-                body = build_preview_message(characters, formatted_settings, countries)
-                if (
-                    prefs['debug_preview']
-                    and not characters
-                    and not formatted_settings
-                    and not countries
-                ):
-                    body = '{}\n\n{}'.format(
-                        body,
-                        build_debug_message(html),
-                    )
-            except Exception as err:
-                body = 'Failed to fetch or parse Goodreads data.\n\n{}'.format(err)
+                self.update_book_fields(
+                    book,
+                    characters,
+                    formatted_settings,
+                    countries,
+                )
+                updated_count += 1
+            except Exception:
+                failed_count += 1
 
-            QMessageBox.information(
-                self.gui,
-                '{} by {}'.format(book['title'], book['author']),
-                body,
+        self.refresh_gui(updated_count)
+        self.show_status(
+            'Goodreads character and settings updated {} book(s); {} failed.'.format(
+                updated_count,
+                failed_count,
             )
+        )
 
     def get_selected_books(self):
         library_view = getattr(self.gui, 'library_view', None)
@@ -108,11 +99,105 @@ class GoodreadsPreviewRunner(object):
             mi = db.get_metadata(book_id, index_is_id=True)
             identifiers = get_metadata_identifiers(mi)
             books.append({
+                'book_id': book_id,
                 'title': mi.title or 'Unknown Title',
                 'author': format_authors(getattr(mi, 'authors', None)),
                 'goodreads_id': clean_goodreads_id(identifiers.get('goodreads')),
             })
         return books
+
+    def update_book_fields(self, book, characters, settings, countries):
+        db = self.gui.current_db
+        book_id = book['book_id']
+
+        assignments = [
+            ('character_field', characters),
+            ('settings_field', settings),
+            ('countries_field', countries),
+        ]
+
+        for pref_name, values in assignments:
+            self.write_field_value(db, book_id, prefs[pref_name], values)
+
+    def write_field_value(self, db, book_id, field_name, values):
+        if field_name == FIELD_NONE:
+            return
+
+        existing_values = self.get_existing_field_values(db, book_id, field_name)
+
+        if field_name == FIELD_TAGS:
+            payload = merge_unique_values(existing_values, values)
+            if not payload:
+                return
+        else:
+            payload = self.prepare_custom_field_value(
+                db,
+                field_name,
+                existing_values,
+                values,
+            )
+            if payload is _SKIP_WRITE:
+                return
+
+        new_api = getattr(db, 'new_api', None)
+        if new_api is not None and hasattr(new_api, 'set_field'):
+            new_api.set_field(field_name, {book_id: payload})
+            return
+
+        mi = db.get_metadata(book_id, index_is_id=True)
+        setter = getattr(mi, 'set', None)
+        if callable(setter):
+            setter(field_name, payload)
+        else:
+            setattr(mi, field_name, payload)
+        db.set_metadata(book_id, mi, set_title=False, set_authors=False, commit=True)
+
+    def get_existing_field_values(self, db, book_id, field_name):
+        mi = db.get_metadata(book_id, index_is_id=True)
+        if field_name == FIELD_TAGS:
+            return list(getattr(mi, 'tags', None) or [])
+
+        getter = getattr(mi, 'get', None)
+        if callable(getter):
+            current_value = getter(field_name)
+        else:
+            current_value = getattr(mi, field_name, None)
+        return normalize_field_values(current_value)
+
+    def prepare_custom_field_value(self, db, field_name, existing_values, values):
+        if values:
+            metadata = getattr(db, 'field_metadata', {}).get(field_name, {})
+            is_multiple = metadata.get('is_multiple')
+            merged_values = merge_unique_values(existing_values, values)
+            if is_multiple:
+                return merged_values
+            return ', '.join(merged_values)
+
+        if prefs['write_empty_to_custom_fields']:
+            metadata = getattr(db, 'field_metadata', {}).get(field_name, {})
+            is_multiple = metadata.get('is_multiple')
+            merged_values = merge_unique_values(existing_values, ['Empty'])
+            if is_multiple:
+                return merged_values
+            return ', '.join(merged_values)
+        return _SKIP_WRITE
+
+    def refresh_gui(self, updated_count):
+        if not updated_count:
+            return
+        model = getattr(getattr(self.gui, 'library_view', None), 'model', lambda: None)()
+        if model is not None and hasattr(model, 'refresh_ids'):
+            model.refresh_ids([])
+        elif model is not None and hasattr(model, 'refresh'):
+            model.refresh()
+        tags_view = getattr(self.gui, 'tags_view', None)
+        if tags_view is not None and hasattr(tags_view, 'recount'):
+            tags_view.recount()
+
+    def show_status(self, message, timeout=5000):
+        status_bar = getattr(self.gui, 'status_bar', None)
+        if status_bar is not None and hasattr(status_bar, 'show_message'):
+            status_bar.show_message(message, timeout)
 
 
 def fetch_goodreads_page(goodreads_id, timeout=30):
@@ -127,6 +212,36 @@ def fetch_goodreads_page(goodreads_id, timeout=30):
         raise RuntimeError('Network error while fetching {}: {}'.format(url, err))
 
     return raw.decode('utf-8', errors='replace')
+
+
+def normalize_field_values(value):
+    if value is None:
+        return []
+    if isinstance(value, (list, tuple, set)):
+        normalized = []
+        for item in value:
+            cleaned = cleanup_value(item)
+            if cleaned:
+                normalized.append(cleaned)
+        return normalized
+    if isinstance(value, str):
+        parts = [cleanup_value(part) for part in value.split(',')]
+        return [part for part in parts if part]
+
+    cleaned = cleanup_value(value)
+    return [cleaned] if cleaned else []
+
+
+def merge_unique_values(existing_values, new_values):
+    merged = []
+    seen = set()
+    for source in (existing_values or [], new_values or []):
+        for value in source:
+            cleaned = cleanup_value(value)
+            if cleaned and cleaned not in seen:
+                seen.add(cleaned)
+                merged.append(cleaned)
+    return merged
 
 
 def extract_goodreads_values(html, label):
