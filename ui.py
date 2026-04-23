@@ -16,7 +16,7 @@ if False:
 from qt.core import QMenu, QMessageBox, QToolButton
 
 from calibre.gui2.actions import InterfaceAction
-from calibre_plugins.Goodreads_character_and_settings.main import DemoDialog
+from calibre_plugins.Goodreads_character_and_settings.main import GoodreadsPreviewRunner
 
 
 class InterfacePlugin(InterfaceAction):
@@ -33,7 +33,7 @@ class InterfacePlugin(InterfaceAction):
         # The qaction is automatically created from the action_spec defined
         # above
         self.qaction.setIcon(icon)
-        self.qaction.triggered.connect(self.show_dialog)
+        self.qaction.triggered.connect(self.import_books)
         self.menu = QMenu(self.gui)
         self.qaction.setMenu(self.menu)
 
@@ -46,14 +46,8 @@ class InterfacePlugin(InterfaceAction):
         self.config_action = self.menu.addAction('Customize plugin...')
         self.config_action.triggered.connect(self.show_config)
 
-    def show_dialog(self):
-        base_plugin_object = self.interface_action_base_plugin
-        do_user_config = base_plugin_object.do_user_config
-        d = DemoDialog(self.gui, self.qaction.icon(), do_user_config)
-        d.show()
-
     def import_books(self):
-        pass
+        GoodreadsPreviewRunner(self.gui).run_for_selection()
 
     def show_about(self):
         text = get_resources('about.txt')
