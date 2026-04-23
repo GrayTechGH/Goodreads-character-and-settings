@@ -28,7 +28,7 @@ class InterfacePlugin(InterfaceAction):
     # The keyboard shortcut can be None if you don't want to use a keyboard
     # shortcut. Remember that currently calibre has no central management for
     # keyboard shortcuts, so try to use an unusual/unused shortcut.
-    action_spec = ('Goodreads C & S', None,
+    action_spec = ('Goodreads C && S', None,
             'Run Goodreads character and settings', 'Ctrl+Shift+F1')
 
     def genesis(self):
