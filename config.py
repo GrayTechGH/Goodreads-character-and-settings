@@ -6,46 +6,35 @@ __license__   = 'GPL v3'
 __copyright__ = '2011, Kovid Goyal <kovid@kovidgoyal.net>'
 __docformat__ = 'restructuredtext en'
 
-from qt.core import (
-    QCheckBox,
-    QComboBox,
-    QFormLayout,
-    QLabel,
-    QLineEdit,
-    QMessageBox,
-    QSpinBox,
-    QVBoxLayout,
-    QWidget,
-)
+from qt.core import QCheckBox, QComboBox, QFormLayout, QLabel, QSpinBox, QVBoxLayout, QWidget
 
 from calibre.utils.config import JSONConfig
 
 prefs = JSONConfig('plugins/Goodreads_character_and_settings')
 
-DESTINATION_CUSTOM = 'custom_column'
-DESTINATION_TAGS = 'tags'
-DESTINATION_NONE = 'none'
+FIELD_TAGS = 'tags'
+FIELD_NONE = 'none'
 
 
-prefs.defaults['character_destination'] = DESTINATION_NONE
-prefs.defaults['character_custom_field'] = '#characters'
-prefs.defaults['settings_destination'] = DESTINATION_NONE
-prefs.defaults['settings_custom_field'] = '#settings'
-prefs.defaults['clear_if_missing'] = True
+prefs.defaults['character_field'] = FIELD_NONE
+prefs.defaults['settings_field'] = FIELD_NONE
+prefs.defaults['write_empty_to_custom_fields'] = False
 prefs.defaults['query_interval_seconds'] = 30
 
 
 class ConfigWidget(QWidget):
 
-    def __init__(self):
+    def __init__(self, custom_fields=None):
         QWidget.__init__(self)
+
+        self.custom_fields = custom_fields or []
 
         self.l = QVBoxLayout()
         self.setLayout(self.l)
 
         description = QLabel(
-            'Choose where Goodreads character and settings data should be stored '
-            'when import support is added.'
+            'Choose which calibre fields should receive Goodreads character and '
+            'settings data when import support is added.'
         )
         description.setWordWrap(True)
         self.l.addWidget(description)
@@ -53,111 +42,77 @@ class ConfigWidget(QWidget):
         self.form = QFormLayout()
         self.l.addLayout(self.form)
 
-        self.character_destination = self.create_destination_combo()
-        self.character_destination.currentIndexChanged.connect(
-            self.update_field_states
-        )
-        self.form.addRow('Characters destination:', self.character_destination)
+        self.character_field = self.create_field_combo()
+        self.form.addRow('Characters field:', self.character_field)
 
-        self.character_custom_field = QLineEdit(self)
-        self.character_custom_field.setText(prefs['character_custom_field'])
-        self.character_custom_field.setPlaceholderText('#characters')
-        self.form.addRow(
-            'Characters custom field:', self.character_custom_field
-        )
+        self.settings_field = self.create_field_combo()
+        self.form.addRow('Settings field:', self.settings_field)
 
-        self.settings_destination = self.create_destination_combo()
-        self.settings_destination.currentIndexChanged.connect(
-            self.update_field_states
+        self.write_empty_to_custom_fields = QCheckBox(
+            'Write "Empty" when Goodreads has no value'
         )
-        self.form.addRow('Settings destination:', self.settings_destination)
-
-        self.settings_custom_field = QLineEdit(self)
-        self.settings_custom_field.setText(prefs['settings_custom_field'])
-        self.settings_custom_field.setPlaceholderText('#settings')
-        self.form.addRow(
-            'Settings custom field:', self.settings_custom_field
+        self.write_empty_to_custom_fields.setChecked(
+            prefs['write_empty_to_custom_fields']
         )
-
-        self.clear_if_missing = QCheckBox(
-            'Clear the destination field when Goodreads has no value'
-        )
-        self.clear_if_missing.setChecked(prefs['clear_if_missing'])
-        self.form.addRow('', self.clear_if_missing)
+        self.form.addRow('', self.write_empty_to_custom_fields)
 
         self.query_interval_seconds = QSpinBox(self)
         self.query_interval_seconds.setMinimum(1)
         self.query_interval_seconds.setMaximum(3600)
         self.query_interval_seconds.setSuffix(' seconds')
         self.query_interval_seconds.setValue(prefs['query_interval_seconds'])
-        self.form.addRow(
-            'Time between queries:', self.query_interval_seconds
-        )
+        self.form.addRow('Time between queries:', self.query_interval_seconds)
 
-        self.load_destination(
-            self.character_destination, prefs['character_destination']
-        )
-        self.load_destination(
-            self.settings_destination, prefs['settings_destination']
-        )
-        self.update_field_states()
+        self.load_field(self.character_field, prefs['character_field'])
+        self.load_field(self.settings_field, prefs['settings_field'])
 
-    def create_destination_combo(self):
+        self.character_field.currentIndexChanged.connect(
+            self.update_empty_option_state
+        )
+        self.settings_field.currentIndexChanged.connect(
+            self.update_empty_option_state
+        )
+        self.update_empty_option_state()
+
+    def create_field_combo(self):
         combo = QComboBox(self)
-        combo.addItem('Custom field', DESTINATION_CUSTOM)
-        combo.addItem('Tags', DESTINATION_TAGS)
-        combo.addItem('Do not import', DESTINATION_NONE)
+        combo.addItem('Do not import', FIELD_NONE)
+        combo.addItem('Tags', FIELD_TAGS)
+        for lookup_name, display_name in self.custom_fields:
+            combo.addItem(display_name, lookup_name)
         return combo
 
-    def load_destination(self, combo, value):
+    def load_field(self, combo, value):
         index = combo.findData(value)
         combo.setCurrentIndex(index if index >= 0 else 0)
 
-    def update_field_states(self):
-        character_is_custom = (
-            self.character_destination.currentData() == DESTINATION_CUSTOM
+    def current_field_uses_custom_column(self, combo):
+        value = combo.currentData()
+        return value not in (FIELD_NONE, FIELD_TAGS)
+
+    def update_empty_option_state(self):
+        enabled = (
+            self.current_field_uses_custom_column(self.character_field)
+            or self.current_field_uses_custom_column(self.settings_field)
         )
-        settings_is_custom = (
-            self.settings_destination.currentData() == DESTINATION_CUSTOM
-        )
-        self.character_custom_field.setEnabled(character_is_custom)
-        self.settings_custom_field.setEnabled(settings_is_custom)
-
-    def validate(self):
-        if (
-            self.character_destination.currentData() == DESTINATION_CUSTOM
-            and not self.character_custom_field.text().strip()
-        ):
-            QMessageBox.warning(
-                self,
-                'Missing custom field',
-                'Enter a custom field lookup name for Characters or choose Tags '
-                'or Do not import.',
+        self.write_empty_to_custom_fields.setEnabled(enabled)
+        self.write_empty_to_custom_fields.setVisible(enabled)
+        if enabled:
+            self.write_empty_to_custom_fields.setToolTip(
+                'If Goodreads does not provide a value, store the text "Empty" '
+                'in any selected custom field.'
             )
-            return False
-
-        if (
-            self.settings_destination.currentData() == DESTINATION_CUSTOM
-            and not self.settings_custom_field.text().strip()
-        ):
-            QMessageBox.warning(
-                self,
-                'Missing custom field',
-                'Enter a custom field lookup name for Settings or choose Tags '
-                'or Do not import.',
+        else:
+            self.write_empty_to_custom_fields.setChecked(False)
+            self.write_empty_to_custom_fields.setToolTip(
+                'This option is only available when Characters or Settings uses '
+                'a custom field.'
             )
-            return False
-
-        return True
 
     def save_settings(self):
-        prefs['character_destination'] = self.character_destination.currentData()
-        prefs['character_custom_field'] = (
-            self.character_custom_field.text().strip()
+        prefs['character_field'] = self.character_field.currentData()
+        prefs['settings_field'] = self.settings_field.currentData()
+        prefs['write_empty_to_custom_fields'] = (
+            self.write_empty_to_custom_fields.isChecked()
         )
-        prefs['settings_destination'] = self.settings_destination.currentData()
-        prefs['settings_custom_field'] = (
-            self.settings_custom_field.text().strip()
-        )
-        prefs['clear_if_missing'] = self.clear_if_missing.isChecked()
         prefs['query_interval_seconds'] = self.query_interval_seconds.value()

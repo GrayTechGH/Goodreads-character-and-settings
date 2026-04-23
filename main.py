@@ -53,24 +53,18 @@ class DemoDialog(QDialog):
         self.resize(self.sizeHint())
 
     def build_summary(self):
-        character_destination = describe_destination(
-            prefs['character_destination'],
-            prefs['character_custom_field'],
-        )
-        settings_destination = describe_destination(
-            prefs['settings_destination'],
-            prefs['settings_custom_field'],
-        )
-        empty_behavior = (
-            'clear destination fields'
-            if prefs['clear_if_missing']
-            else 'leave existing values unchanged'
+        character_field = describe_field(prefs['character_field'])
+        settings_field = describe_field(prefs['settings_field'])
+        empty_behavior = describe_empty_behavior(
+            prefs['character_field'],
+            prefs['settings_field'],
+            prefs['write_empty_to_custom_fields'],
         )
 
         return (
             'Current configuration:\n'
-            f'Characters: {character_destination}\n'
-            f'Settings: {settings_destination}\n'
+            f'Characters field: {character_field}\n'
+            f'Settings field: {settings_field}\n'
             f'Missing Goodreads values: {empty_behavior}\n'
             f'Time between queries: {prefs["query_interval_seconds"]} seconds'
         )
@@ -88,10 +82,21 @@ class DemoDialog(QDialog):
         self.label.setText(self.build_summary())
 
 
-def describe_destination(destination, custom_field_name):
-    if destination == 'custom_column':
-        field_name = custom_field_name or 'custom field'
-        return f'custom field ({field_name})'
-    if destination == 'tags':
+def describe_field(field_name):
+    if field_name == 'none':
+        return 'do not import'
+    if field_name == 'tags':
         return 'tags'
-    return 'do not import'
+    return field_name
+
+
+def describe_empty_behavior(character_field, settings_field, write_empty_value):
+    uses_custom_field = (
+        character_field not in ('none', 'tags')
+        or settings_field not in ('none', 'tags')
+    )
+    if not uses_custom_field:
+        return 'not applicable'
+    if write_empty_value:
+        return 'write "Empty" to custom fields'
+    return 'leave custom fields unchanged'
