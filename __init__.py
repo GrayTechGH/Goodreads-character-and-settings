@@ -25,6 +25,7 @@ class InterfacePluginDemo(InterfaceActionBase):
     supported_platforms = ['windows', 'osx', 'linux']
     author              = 'GrayTechGH'
     version             = (1, 0, 0)
+    release_status      = 'Release Candidate 1'
     minimum_calibre_version = (0, 7, 53)
 
     #: This field defines the GUI plugin class that contains all the code
