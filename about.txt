@@ -1,7 +1,0 @@
-Goodreads character and settings
-================================
-
-Created by GrayTechGH
-
-Requires calibre >= 0.7.53
-

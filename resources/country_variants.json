@@ -1,0 +1,1899 @@
+{
+  "Afghanistan": {
+    "replace_in_settings": [
+      "Afghanistan",
+      "Islamic Republic of Afghanistan"
+    ],
+    "keep_in_settings": []
+  },
+  "Albania": {
+    "replace_in_settings": [
+      "Albania",
+      "Republic of Albania"
+    ],
+    "keep_in_settings": []
+  },
+  "Algeria": {
+    "replace_in_settings": [
+      "Algeria",
+      "People's Democratic Republic of Algeria"
+    ],
+    "keep_in_settings": []
+  },
+  "American Samoa": {
+    "replace_in_settings": [
+      "American Samoa"
+    ],
+    "keep_in_settings": []
+  },
+  "Andorra": {
+    "replace_in_settings": [
+      "Andorra",
+      "Principality of Andorra"
+    ],
+    "keep_in_settings": []
+  },
+  "Angola": {
+    "replace_in_settings": [
+      "Angola",
+      "Republic of Angola"
+    ],
+    "keep_in_settings": []
+  },
+  "Anguilla": {
+    "replace_in_settings": [
+      "Anguilla"
+    ],
+    "keep_in_settings": []
+  },
+  "Antarctica": {
+    "replace_in_settings": [
+      "Antarctica"
+    ],
+    "keep_in_settings": []
+  },
+  "Antigua and Barbuda": {
+    "replace_in_settings": [
+      "Antigua and Barbuda",
+      "Antigua & Barbuda"
+    ],
+    "keep_in_settings": []
+  },
+  "Argentina": {
+    "replace_in_settings": [
+      "Argentina",
+      "Argentine Republic"
+    ],
+    "keep_in_settings": []
+  },
+  "Armenia": {
+    "replace_in_settings": [
+      "Armenia",
+      "Republic of Armenia"
+    ],
+    "keep_in_settings": []
+  },
+  "Aruba": {
+    "replace_in_settings": [
+      "Aruba"
+    ],
+    "keep_in_settings": []
+  },
+  "Australia": {
+    "replace_in_settings": [
+      "Australia"
+    ],
+    "keep_in_settings": [
+      "New South Wales",
+      "Victoria",
+      "Queensland",
+      "Western Australia",
+      "South Australia",
+      "Tasmania",
+      "Northern Territory",
+      "Australian Capital Territory"
+    ]
+  },
+  "Austria": {
+    "replace_in_settings": [
+      "Austria",
+      "Republic of Austria"
+    ],
+    "keep_in_settings": []
+  },
+  "Azerbaijan": {
+    "replace_in_settings": [
+      "Azerbaijan",
+      "Republic of Azerbaijan"
+    ],
+    "keep_in_settings": []
+  },
+  "Bahamas": {
+    "replace_in_settings": [
+      "Bahamas",
+      "Commonwealth of the Bahamas"
+    ],
+    "keep_in_settings": []
+  },
+  "Bahrain": {
+    "replace_in_settings": [
+      "Bahrain",
+      "Kingdom of Bahrain"
+    ],
+    "keep_in_settings": []
+  },
+  "Bangladesh": {
+    "replace_in_settings": [
+      "Bangladesh",
+      "People's Republic of Bangladesh"
+    ],
+    "keep_in_settings": []
+  },
+  "Barbados": {
+    "replace_in_settings": [
+      "Barbados"
+    ],
+    "keep_in_settings": []
+  },
+  "Belarus": {
+    "replace_in_settings": [
+      "Belarus",
+      "Republic of Belarus"
+    ],
+    "keep_in_settings": []
+  },
+  "Belgium": {
+    "replace_in_settings": [
+      "Belgium",
+      "Kingdom of Belgium"
+    ],
+    "keep_in_settings": []
+  },
+  "Belize": {
+    "replace_in_settings": [
+      "Belize"
+    ],
+    "keep_in_settings": []
+  },
+  "Benin": {
+    "replace_in_settings": [
+      "Benin",
+      "Republic of Benin"
+    ],
+    "keep_in_settings": []
+  },
+  "Bermuda": {
+    "replace_in_settings": [
+      "Bermuda"
+    ],
+    "keep_in_settings": []
+  },
+  "Bhutan": {
+    "replace_in_settings": [
+      "Bhutan",
+      "Kingdom of Bhutan"
+    ],
+    "keep_in_settings": []
+  },
+  "Bolivia": {
+    "replace_in_settings": [
+      "Bolivia",
+      "Plurinational State of Bolivia",
+      "Bolivia, Plurinational State of"
+    ],
+    "keep_in_settings": []
+  },
+  "Bonaire, Sint Eustatius and Saba": {
+    "replace_in_settings": [
+      "Bonaire, Sint Eustatius and Saba",
+      "Bonaire, Sint Eustatius & Saba"
+    ],
+    "keep_in_settings": []
+  },
+  "Bosnia and Herzegovina": {
+    "replace_in_settings": [
+      "Bosnia and Herzegovina",
+      "Bosnia & Herzegovina",
+      "Republic of Bosnia and Herzegovina",
+      "Republic of Bosnia & Herzegovina"
+    ],
+    "keep_in_settings": []
+  },
+  "Botswana": {
+    "replace_in_settings": [
+      "Botswana",
+      "Republic of Botswana"
+    ],
+    "keep_in_settings": []
+  },
+  "Bouvet Island": {
+    "replace_in_settings": [
+      "Bouvet Island"
+    ],
+    "keep_in_settings": []
+  },
+  "Brazil": {
+    "replace_in_settings": [
+      "Brazil",
+      "Federative Republic of Brazil"
+    ],
+    "keep_in_settings": []
+  },
+  "British Indian Ocean Territory": {
+    "replace_in_settings": [
+      "British Indian Ocean Territory"
+    ],
+    "keep_in_settings": []
+  },
+  "Brunei": {
+    "replace_in_settings": [
+      "Brunei",
+      "Brunei Darussalam"
+    ],
+    "keep_in_settings": []
+  },
+  "Bulgaria": {
+    "replace_in_settings": [
+      "Bulgaria",
+      "Republic of Bulgaria"
+    ],
+    "keep_in_settings": []
+  },
+  "Burkina Faso": {
+    "replace_in_settings": [
+      "Burkina Faso"
+    ],
+    "keep_in_settings": []
+  },
+  "Burundi": {
+    "replace_in_settings": [
+      "Burundi",
+      "Republic of Burundi"
+    ],
+    "keep_in_settings": []
+  },
+  "Cambodia": {
+    "replace_in_settings": [
+      "Cambodia",
+      "Kingdom of Cambodia"
+    ],
+    "keep_in_settings": []
+  },
+  "Cameroon": {
+    "replace_in_settings": [
+      "Cameroon",
+      "Republic of Cameroon"
+    ],
+    "keep_in_settings": []
+  },
+  "Canada": {
+    "replace_in_settings": [
+      "Canada"
+    ],
+    "keep_in_settings": [
+      "Alberta",
+      "British Columbia",
+      "Manitoba",
+      "New Brunswick",
+      "Newfoundland",
+      "Newfoundland and Labrador",
+      "Newfoundland & Labrador",
+      "Nova Scotia",
+      "Ontario",
+      "Prince Edward Island",
+      "Quebec",
+      "Saskatchewan",
+      "Northwest Territories",
+      "Nunavut",
+      "Yukon"
+    ]
+  },
+  "Cape Verde": {
+    "replace_in_settings": [
+      "Cape Verde",
+      "Cabo Verde",
+      "Republic of Cabo Verde"
+    ],
+    "keep_in_settings": []
+  },
+  "Cayman Islands": {
+    "replace_in_settings": [
+      "Cayman Islands"
+    ],
+    "keep_in_settings": []
+  },
+  "Central African Republic": {
+    "replace_in_settings": [
+      "Central African Republic"
+    ],
+    "keep_in_settings": []
+  },
+  "Chad": {
+    "replace_in_settings": [
+      "Chad",
+      "Republic of Chad"
+    ],
+    "keep_in_settings": []
+  },
+  "Chile": {
+    "replace_in_settings": [
+      "Chile",
+      "Republic of Chile"
+    ],
+    "keep_in_settings": []
+  },
+  "China": {
+    "replace_in_settings": [
+      "China",
+      "People's Republic of China"
+    ],
+    "keep_in_settings": []
+  },
+  "Christmas Island": {
+    "replace_in_settings": [
+      "Christmas Island"
+    ],
+    "keep_in_settings": []
+  },
+  "Cocos (Keeling) Islands": {
+    "replace_in_settings": [
+      "Cocos Islands",
+      "Cocos (Keeling) Islands",
+      "Keeling Islands"
+    ],
+    "keep_in_settings": []
+  },
+  "Colombia": {
+    "replace_in_settings": [
+      "Colombia",
+      "Republic of Colombia"
+    ],
+    "keep_in_settings": []
+  },
+  "Comoros": {
+    "replace_in_settings": [
+      "Comoros",
+      "Union of the Comoros"
+    ],
+    "keep_in_settings": []
+  },
+  "Cook Islands": {
+    "replace_in_settings": [
+      "Cook Islands"
+    ],
+    "keep_in_settings": []
+  },
+  "Costa Rica": {
+    "replace_in_settings": [
+      "Costa Rica",
+      "Republic of Costa Rica"
+    ],
+    "keep_in_settings": []
+  },
+  "Croatia": {
+    "replace_in_settings": [
+      "Croatia",
+      "Republic of Croatia"
+    ],
+    "keep_in_settings": []
+  },
+  "Cuba": {
+    "replace_in_settings": [
+      "Cuba",
+      "Republic of Cuba"
+    ],
+    "keep_in_settings": []
+  },
+  "Curaçao": {
+    "replace_in_settings": [
+      "Curaçao"
+    ],
+    "keep_in_settings": []
+  },
+  "Cyprus": {
+    "replace_in_settings": [
+      "Cyprus",
+      "Republic of Cyprus"
+    ],
+    "keep_in_settings": []
+  },
+  "Czech Republic": {
+    "replace_in_settings": [
+      "Czechia",
+      "Czech Republic"
+    ],
+    "keep_in_settings": []
+  },
+  "Democratic Republic of the Congo": {
+    "replace_in_settings": [
+      "Democratic Republic of the Congo",
+      "Congo, The Democratic Republic of the"
+    ],
+    "keep_in_settings": []
+  },
+  "Denmark": {
+    "replace_in_settings": [
+      "Denmark",
+      "Kingdom of Denmark"
+    ],
+    "keep_in_settings": []
+  },
+  "Djibouti": {
+    "replace_in_settings": [
+      "Djibouti",
+      "Republic of Djibouti"
+    ],
+    "keep_in_settings": []
+  },
+  "Dominica": {
+    "replace_in_settings": [
+      "Dominica",
+      "Commonwealth of Dominica"
+    ],
+    "keep_in_settings": []
+  },
+  "Dominican Republic": {
+    "replace_in_settings": [
+      "Dominican Republic"
+    ],
+    "keep_in_settings": []
+  },
+  "Ecuador": {
+    "replace_in_settings": [
+      "Ecuador",
+      "Republic of Ecuador"
+    ],
+    "keep_in_settings": []
+  },
+  "Egypt": {
+    "replace_in_settings": [
+      "Egypt",
+      "Arab Republic of Egypt"
+    ],
+    "keep_in_settings": []
+  },
+  "El Salvador": {
+    "replace_in_settings": [
+      "El Salvador",
+      "Republic of El Salvador"
+    ],
+    "keep_in_settings": []
+  },
+  "Equatorial Guinea": {
+    "replace_in_settings": [
+      "Equatorial Guinea",
+      "Republic of Equatorial Guinea"
+    ],
+    "keep_in_settings": []
+  },
+  "Eritrea": {
+    "replace_in_settings": [
+      "Eritrea",
+      "the State of Eritrea"
+    ],
+    "keep_in_settings": []
+  },
+  "Estonia": {
+    "replace_in_settings": [
+      "Estonia",
+      "Republic of Estonia"
+    ],
+    "keep_in_settings": []
+  },
+  "Eswatini": {
+    "replace_in_settings": [
+      "Eswatini",
+      "Swaziland",
+      "Kingdom of Eswatini"
+    ],
+    "keep_in_settings": []
+  },
+  "Ethiopia": {
+    "replace_in_settings": [
+      "Ethiopia",
+      "Federal Democratic Republic of Ethiopia"
+    ],
+    "keep_in_settings": []
+  },
+  "Falkland Islands (Malvinas)": {
+    "replace_in_settings": [
+      "Falkland Islands",
+      "Falkland Islands (Malvinas)"
+    ],
+    "keep_in_settings": []
+  },
+  "Faroe Islands": {
+    "replace_in_settings": [
+      "Faroe Islands"
+    ],
+    "keep_in_settings": []
+  },
+  "Fiji": {
+    "replace_in_settings": [
+      "Fiji",
+      "Republic of Fiji"
+    ],
+    "keep_in_settings": []
+  },
+  "Finland": {
+    "replace_in_settings": [
+      "Finland",
+      "Republic of Finland"
+    ],
+    "keep_in_settings": []
+  },
+  "France": {
+    "replace_in_settings": [
+      "France",
+      "French Republic"
+    ],
+    "keep_in_settings": [
+      "Île-de-France",
+      "Normandy",
+      "Brittany",
+      "Burgundy",
+      "Centre-Val de Loire",
+      "Grand Est",
+      "Hauts-de-France",
+      "Occitanie",
+      "Nouvelle-Aquitaine",
+      "Pays de la Loire",
+      "Provence-Alpes-Côte d'Azur",
+      "Auvergne-Rhône-Alpes",
+      "Corsica",
+      "Bourgogne-Franche-Comté"
+    ]
+  },
+  "French Guiana": {
+    "replace_in_settings": [
+      "French Guiana"
+    ],
+    "keep_in_settings": []
+  },
+  "French Polynesia": {
+    "replace_in_settings": [
+      "French Polynesia"
+    ],
+    "keep_in_settings": []
+  },
+  "French Southern Territories": {
+    "replace_in_settings": [
+      "French Southern Territories"
+    ],
+    "keep_in_settings": []
+  },
+  "Gabon": {
+    "replace_in_settings": [
+      "Gabon",
+      "Gabonese Republic"
+    ],
+    "keep_in_settings": []
+  },
+  "Gambia": {
+    "replace_in_settings": [
+      "Gambia",
+      "Republic of the Gambia"
+    ],
+    "keep_in_settings": []
+  },
+  "Georgia": {
+    "replace_in_settings": [
+      "Georgia"
+    ],
+    "keep_in_settings": []
+  },
+  "Germany": {
+    "replace_in_settings": [
+      "Germany",
+      "Deutschland",
+      "Federal Republic of Germany"
+    ],
+    "keep_in_settings": [
+      "Baden-Württemberg",
+      "Bavaria",
+      "Berlin",
+      "Brandenburg",
+      "Bremen",
+      "Hamburg",
+      "Hesse",
+      "Lower Saxony",
+      "Mecklenburg-Vorpommern",
+      "North Rhine-Westphalia",
+      "Rhineland-Palatinate",
+      "Saarland",
+      "Saxony",
+      "Saxony-Anhalt",
+      "Schleswig-Holstein",
+      "Thuringia"
+    ]
+  },
+  "Ghana": {
+    "replace_in_settings": [
+      "Ghana",
+      "Republic of Ghana"
+    ],
+    "keep_in_settings": []
+  },
+  "Gibraltar": {
+    "replace_in_settings": [
+      "Gibraltar"
+    ],
+    "keep_in_settings": []
+  },
+  "Greece": {
+    "replace_in_settings": [
+      "Greece",
+      "Hellenic Republic"
+    ],
+    "keep_in_settings": []
+  },
+  "Greenland": {
+    "replace_in_settings": [
+      "Greenland"
+    ],
+    "keep_in_settings": []
+  },
+  "Grenada": {
+    "replace_in_settings": [
+      "Grenada"
+    ],
+    "keep_in_settings": []
+  },
+  "Guadeloupe": {
+    "replace_in_settings": [
+      "Guadeloupe"
+    ],
+    "keep_in_settings": []
+  },
+  "Guam": {
+    "replace_in_settings": [
+      "Guam"
+    ],
+    "keep_in_settings": []
+  },
+  "Guatemala": {
+    "replace_in_settings": [
+      "Guatemala",
+      "Republic of Guatemala"
+    ],
+    "keep_in_settings": []
+  },
+  "Guernsey": {
+    "replace_in_settings": [
+      "Guernsey"
+    ],
+    "keep_in_settings": []
+  },
+  "Guinea": {
+    "replace_in_settings": [
+      "Guinea",
+      "Republic of Guinea"
+    ],
+    "keep_in_settings": []
+  },
+  "Guinea-Bissau": {
+    "replace_in_settings": [
+      "Guinea-Bissau",
+      "Republic of Guinea-Bissau"
+    ],
+    "keep_in_settings": []
+  },
+  "Guyana": {
+    "replace_in_settings": [
+      "Guyana",
+      "Republic of Guyana"
+    ],
+    "keep_in_settings": []
+  },
+  "Haiti": {
+    "replace_in_settings": [
+      "Haiti",
+      "Republic of Haiti"
+    ],
+    "keep_in_settings": []
+  },
+  "Heard Island and McDonald Islands": {
+    "replace_in_settings": [
+      "Heard Island and McDonald Islands",
+      "Heard Island & McDonald Islands"
+    ],
+    "keep_in_settings": []
+  },
+  "Honduras": {
+    "replace_in_settings": [
+      "Honduras",
+      "Republic of Honduras"
+    ],
+    "keep_in_settings": []
+  },
+  "Hong Kong": {
+    "replace_in_settings": [
+      "Hong Kong",
+      "Hong Kong Special Administrative Region of China"
+    ],
+    "keep_in_settings": []
+  },
+  "Hungary": {
+    "replace_in_settings": [
+      "Hungary"
+    ],
+    "keep_in_settings": []
+  },
+  "Iceland": {
+    "replace_in_settings": [
+      "Iceland",
+      "Republic of Iceland"
+    ],
+    "keep_in_settings": []
+  },
+  "India": {
+    "replace_in_settings": [
+      "India",
+      "Republic of India"
+    ],
+    "keep_in_settings": []
+  },
+  "Indonesia": {
+    "replace_in_settings": [
+      "Indonesia",
+      "Republic of Indonesia"
+    ],
+    "keep_in_settings": []
+  },
+  "Iran": {
+    "replace_in_settings": [
+      "Iran",
+      "Islamic Republic of Iran",
+      "Iran, Islamic Republic of"
+    ],
+    "keep_in_settings": []
+  },
+  "Iraq": {
+    "replace_in_settings": [
+      "Iraq",
+      "Republic of Iraq"
+    ],
+    "keep_in_settings": []
+  },
+  "Ireland": {
+    "replace_in_settings": [
+      "Ireland"
+    ],
+    "keep_in_settings": []
+  },
+  "Isle of Man": {
+    "replace_in_settings": [
+      "Isle of Man"
+    ],
+    "keep_in_settings": []
+  },
+  "Israel": {
+    "replace_in_settings": [
+      "Israel",
+      "State of Israel"
+    ],
+    "keep_in_settings": []
+  },
+  "Italy": {
+    "replace_in_settings": [
+      "Italy",
+      "Italian Republic"
+    ],
+    "keep_in_settings": []
+  },
+  "Ivory Coast": {
+    "replace_in_settings": [
+      "Ivory Coast",
+      "Côte d'Ivoire",
+      "Republic of Côte d'Ivoire"
+    ],
+    "keep_in_settings": []
+  },
+  "Jamaica": {
+    "replace_in_settings": [
+      "Jamaica"
+    ],
+    "keep_in_settings": []
+  },
+  "Japan": {
+    "replace_in_settings": [
+      "Japan"
+    ],
+    "keep_in_settings": [
+      "Hokkaido",
+      "Aomori",
+      "Iwate",
+      "Miyagi",
+      "Akita",
+      "Yamagata",
+      "Fukushima",
+      "Ibaraki",
+      "Tochigi",
+      "Gunma",
+      "Saitama",
+      "Chiba",
+      "Tokyo",
+      "Kanagawa",
+      "Niigata",
+      "Toyama",
+      "Ishikawa",
+      "Fukui",
+      "Yamanashi",
+      "Nagano",
+      "Gifu",
+      "Shizuoka",
+      "Aichi",
+      "Mie",
+      "Shiga",
+      "Kyoto",
+      "Osaka",
+      "Hyogo",
+      "Nara",
+      "Wakayama",
+      "Tottori",
+      "Shimane",
+      "Okayama",
+      "Hiroshima",
+      "Yamaguchi",
+      "Tokushima",
+      "Kagawa",
+      "Ehime",
+      "Kochi",
+      "Fukuoka",
+      "Saga",
+      "Nagasaki",
+      "Kumamoto",
+      "Oita",
+      "Miyazaki",
+      "Kagoshima",
+      "Okinawa"
+    ]
+  },
+  "Jersey": {
+    "replace_in_settings": [
+      "Jersey"
+    ],
+    "keep_in_settings": []
+  },
+  "Jordan": {
+    "replace_in_settings": [
+      "Jordan",
+      "Hashemite Kingdom of Jordan"
+    ],
+    "keep_in_settings": []
+  },
+  "Kazakhstan": {
+    "replace_in_settings": [
+      "Kazakhstan",
+      "Republic of Kazakhstan"
+    ],
+    "keep_in_settings": []
+  },
+  "Kenya": {
+    "replace_in_settings": [
+      "Kenya",
+      "Republic of Kenya"
+    ],
+    "keep_in_settings": []
+  },
+  "Kiribati": {
+    "replace_in_settings": [
+      "Kiribati",
+      "Republic of Kiribati"
+    ],
+    "keep_in_settings": []
+  },
+  "Kuwait": {
+    "replace_in_settings": [
+      "Kuwait",
+      "State of Kuwait"
+    ],
+    "keep_in_settings": []
+  },
+  "Kyrgyzstan": {
+    "replace_in_settings": [
+      "Kyrgyzstan",
+      "Kyrgyz Republic"
+    ],
+    "keep_in_settings": []
+  },
+  "Laos": {
+    "replace_in_settings": [
+      "Laos",
+      "Lao People's Democratic Republic",
+      "Lao PDR"
+    ],
+    "keep_in_settings": []
+  },
+  "Latvia": {
+    "replace_in_settings": [
+      "Latvia",
+      "Republic of Latvia"
+    ],
+    "keep_in_settings": []
+  },
+  "Lebanon": {
+    "replace_in_settings": [
+      "Lebanon",
+      "Lebanese Republic"
+    ],
+    "keep_in_settings": []
+  },
+  "Lesotho": {
+    "replace_in_settings": [
+      "Lesotho",
+      "Kingdom of Lesotho"
+    ],
+    "keep_in_settings": []
+  },
+  "Liberia": {
+    "replace_in_settings": [
+      "Liberia",
+      "Republic of Liberia"
+    ],
+    "keep_in_settings": []
+  },
+  "Libya": {
+    "replace_in_settings": [
+      "Libya"
+    ],
+    "keep_in_settings": []
+  },
+  "Liechtenstein": {
+    "replace_in_settings": [
+      "Liechtenstein",
+      "Principality of Liechtenstein"
+    ],
+    "keep_in_settings": []
+  },
+  "Lithuania": {
+    "replace_in_settings": [
+      "Lithuania",
+      "Republic of Lithuania"
+    ],
+    "keep_in_settings": []
+  },
+  "Luxembourg": {
+    "replace_in_settings": [
+      "Luxembourg",
+      "Grand Duchy of Luxembourg"
+    ],
+    "keep_in_settings": []
+  },
+  "Macao": {
+    "replace_in_settings": [
+      "Macao",
+      "Macao Special Administrative Region of China"
+    ],
+    "keep_in_settings": []
+  },
+  "Madagascar": {
+    "replace_in_settings": [
+      "Madagascar",
+      "Republic of Madagascar"
+    ],
+    "keep_in_settings": []
+  },
+  "Malawi": {
+    "replace_in_settings": [
+      "Malawi",
+      "Republic of Malawi"
+    ],
+    "keep_in_settings": []
+  },
+  "Malaysia": {
+    "replace_in_settings": [
+      "Malaysia"
+    ],
+    "keep_in_settings": []
+  },
+  "Maldives": {
+    "replace_in_settings": [
+      "Maldives",
+      "Republic of Maldives"
+    ],
+    "keep_in_settings": []
+  },
+  "Mali": {
+    "replace_in_settings": [
+      "Mali",
+      "Republic of Mali"
+    ],
+    "keep_in_settings": []
+  },
+  "Malta": {
+    "replace_in_settings": [
+      "Malta",
+      "Republic of Malta"
+    ],
+    "keep_in_settings": []
+  },
+  "Marshall Islands": {
+    "replace_in_settings": [
+      "Marshall Islands",
+      "Republic of the Marshall Islands"
+    ],
+    "keep_in_settings": []
+  },
+  "Martinique": {
+    "replace_in_settings": [
+      "Martinique"
+    ],
+    "keep_in_settings": []
+  },
+  "Mauritania": {
+    "replace_in_settings": [
+      "Mauritania",
+      "Islamic Republic of Mauritania"
+    ],
+    "keep_in_settings": []
+  },
+  "Mauritius": {
+    "replace_in_settings": [
+      "Mauritius",
+      "Republic of Mauritius"
+    ],
+    "keep_in_settings": []
+  },
+  "Mayotte": {
+    "replace_in_settings": [
+      "Mayotte"
+    ],
+    "keep_in_settings": []
+  },
+  "Mexico": {
+    "replace_in_settings": [
+      "Mexico",
+      "United Mexican States"
+    ],
+    "keep_in_settings": []
+  },
+  "Micronesia, Federated States of": {
+    "replace_in_settings": [
+      "Micronesia, Federated States of",
+      "Federated States of Micronesia"
+    ],
+    "keep_in_settings": []
+  },
+  "Moldova": {
+    "replace_in_settings": [
+      "Moldova",
+      "Republic of Moldova",
+      "Moldova, Republic of"
+    ],
+    "keep_in_settings": []
+  },
+  "Monaco": {
+    "replace_in_settings": [
+      "Monaco",
+      "Principality of Monaco"
+    ],
+    "keep_in_settings": []
+  },
+  "Mongolia": {
+    "replace_in_settings": [
+      "Mongolia"
+    ],
+    "keep_in_settings": []
+  },
+  "Montenegro": {
+    "replace_in_settings": [
+      "Montenegro"
+    ],
+    "keep_in_settings": []
+  },
+  "Montserrat": {
+    "replace_in_settings": [
+      "Montserrat"
+    ],
+    "keep_in_settings": []
+  },
+  "Morocco": {
+    "replace_in_settings": [
+      "Morocco",
+      "Kingdom of Morocco"
+    ],
+    "keep_in_settings": []
+  },
+  "Mozambique": {
+    "replace_in_settings": [
+      "Mozambique",
+      "Republic of Mozambique"
+    ],
+    "keep_in_settings": []
+  },
+  "Myanmar": {
+    "replace_in_settings": [
+      "Myanmar",
+      "Burma",
+      "Republic of Myanmar"
+    ],
+    "keep_in_settings": []
+  },
+  "Namibia": {
+    "replace_in_settings": [
+      "Namibia",
+      "Republic of Namibia"
+    ],
+    "keep_in_settings": []
+  },
+  "Nauru": {
+    "replace_in_settings": [
+      "Nauru",
+      "Republic of Nauru"
+    ],
+    "keep_in_settings": []
+  },
+  "Nepal": {
+    "replace_in_settings": [
+      "Nepal",
+      "Federal Democratic Republic of Nepal"
+    ],
+    "keep_in_settings": []
+  },
+  "Netherlands": {
+    "replace_in_settings": [
+      "Netherlands",
+      "The Netherlands",
+      "Holland",
+      "Kingdom of the Netherlands"
+    ],
+    "keep_in_settings": []
+  },
+  "New Caledonia": {
+    "replace_in_settings": [
+      "New Caledonia"
+    ],
+    "keep_in_settings": []
+  },
+  "New Zealand": {
+    "replace_in_settings": [
+      "New Zealand"
+    ],
+    "keep_in_settings": []
+  },
+  "Nicaragua": {
+    "replace_in_settings": [
+      "Nicaragua",
+      "Republic of Nicaragua"
+    ],
+    "keep_in_settings": []
+  },
+  "Niger": {
+    "replace_in_settings": [
+      "Niger",
+      "Republic of the Niger"
+    ],
+    "keep_in_settings": []
+  },
+  "Nigeria": {
+    "replace_in_settings": [
+      "Nigeria",
+      "Federal Republic of Nigeria"
+    ],
+    "keep_in_settings": []
+  },
+  "Niue": {
+    "replace_in_settings": [
+      "Niue"
+    ],
+    "keep_in_settings": []
+  },
+  "Norfolk Island": {
+    "replace_in_settings": [
+      "Norfolk Island"
+    ],
+    "keep_in_settings": []
+  },
+  "North Korea": {
+    "replace_in_settings": [
+      "North Korea",
+      "Democratic People's Republic of Korea",
+      "Korea, Democratic People's Republic of"
+    ],
+    "keep_in_settings": []
+  },
+  "North Macedonia": {
+    "replace_in_settings": [
+      "North Macedonia",
+      "Republic of North Macedonia"
+    ],
+    "keep_in_settings": []
+  },
+  "Northern Mariana Islands": {
+    "replace_in_settings": [
+      "Northern Mariana Islands",
+      "Commonwealth of the Northern Mariana Islands"
+    ],
+    "keep_in_settings": []
+  },
+  "Norway": {
+    "replace_in_settings": [
+      "Norway",
+      "Kingdom of Norway"
+    ],
+    "keep_in_settings": []
+  },
+  "Oman": {
+    "replace_in_settings": [
+      "Oman",
+      "Sultanate of Oman"
+    ],
+    "keep_in_settings": []
+  },
+  "Pakistan": {
+    "replace_in_settings": [
+      "Pakistan",
+      "Islamic Republic of Pakistan"
+    ],
+    "keep_in_settings": []
+  },
+  "Palau": {
+    "replace_in_settings": [
+      "Palau",
+      "Republic of Palau"
+    ],
+    "keep_in_settings": []
+  },
+  "Palestine": {
+    "replace_in_settings": [
+      "Palestine",
+      "State of Palestine",
+      "Palestinian Territory",
+      "Palestinian Territories",
+      "Palestine, State of",
+      "the State of Palestine"
+    ],
+    "keep_in_settings": []
+  },
+  "Panama": {
+    "replace_in_settings": [
+      "Panama",
+      "Republic of Panama"
+    ],
+    "keep_in_settings": []
+  },
+  "Papua New Guinea": {
+    "replace_in_settings": [
+      "Papua New Guinea",
+      "Independent State of Papua New Guinea"
+    ],
+    "keep_in_settings": []
+  },
+  "Paraguay": {
+    "replace_in_settings": [
+      "Paraguay",
+      "Republic of Paraguay"
+    ],
+    "keep_in_settings": []
+  },
+  "Peru": {
+    "replace_in_settings": [
+      "Peru",
+      "Republic of Peru"
+    ],
+    "keep_in_settings": []
+  },
+  "Philippines": {
+    "replace_in_settings": [
+      "Philippines",
+      "Republic of the Philippines"
+    ],
+    "keep_in_settings": []
+  },
+  "Pitcairn": {
+    "replace_in_settings": [
+      "Pitcairn"
+    ],
+    "keep_in_settings": []
+  },
+  "Poland": {
+    "replace_in_settings": [
+      "Poland",
+      "Republic of Poland"
+    ],
+    "keep_in_settings": []
+  },
+  "Portugal": {
+    "replace_in_settings": [
+      "Portugal",
+      "Portuguese Republic"
+    ],
+    "keep_in_settings": []
+  },
+  "Puerto Rico": {
+    "replace_in_settings": [
+      "Puerto Rico"
+    ],
+    "keep_in_settings": []
+  },
+  "Qatar": {
+    "replace_in_settings": [
+      "Qatar",
+      "State of Qatar"
+    ],
+    "keep_in_settings": []
+  },
+  "Republic of the Congo": {
+    "replace_in_settings": [
+      "Republic of the Congo",
+      "Congo"
+    ],
+    "keep_in_settings": []
+  },
+  "Romania": {
+    "replace_in_settings": [
+      "Romania"
+    ],
+    "keep_in_settings": []
+  },
+  "Russia": {
+    "replace_in_settings": [
+      "Russian Federation",
+      "Russia"
+    ],
+    "keep_in_settings": []
+  },
+  "Rwanda": {
+    "replace_in_settings": [
+      "Rwanda",
+      "Rwandese Republic"
+    ],
+    "keep_in_settings": []
+  },
+  "Réunion": {
+    "replace_in_settings": [
+      "Réunion"
+    ],
+    "keep_in_settings": []
+  },
+  "Saint Barthélemy": {
+    "replace_in_settings": [
+      "Saint Barthélemy"
+    ],
+    "keep_in_settings": []
+  },
+  "Saint Helena, Ascension and Tristan da Cunha": {
+    "replace_in_settings": [
+      "Saint Helena, Ascension and Tristan da Cunha",
+      "Saint Helena, Ascension & Tristan da Cunha"
+    ],
+    "keep_in_settings": []
+  },
+  "Saint Kitts and Nevis": {
+    "replace_in_settings": [
+      "Saint Kitts and Nevis",
+      "Saint Kitts & Nevis"
+    ],
+    "keep_in_settings": []
+  },
+  "Saint Lucia": {
+    "replace_in_settings": [
+      "Saint Lucia"
+    ],
+    "keep_in_settings": []
+  },
+  "Saint Martin (French part)": {
+    "replace_in_settings": [
+      "Saint Martin",
+      "Saint Martin (French part)"
+    ],
+    "keep_in_settings": []
+  },
+  "Saint Pierre and Miquelon": {
+    "replace_in_settings": [
+      "Saint Pierre and Miquelon",
+      "Saint Pierre & Miquelon"
+    ],
+    "keep_in_settings": []
+  },
+  "Saint Vincent and the Grenadines": {
+    "replace_in_settings": [
+      "Saint Vincent and the Grenadines",
+      "Saint Vincent & the Grenadines"
+    ],
+    "keep_in_settings": []
+  },
+  "Samoa": {
+    "replace_in_settings": [
+      "Samoa",
+      "Independent State of Samoa"
+    ],
+    "keep_in_settings": []
+  },
+  "San Marino": {
+    "replace_in_settings": [
+      "San Marino",
+      "Republic of San Marino"
+    ],
+    "keep_in_settings": []
+  },
+  "Sao Tome and Principe": {
+    "replace_in_settings": [
+      "Sao Tome and Principe",
+      "Sao Tome & Principe",
+      "Democratic Republic of Sao Tome and Principe",
+      "Democratic Republic of Sao Tome & Principe"
+    ],
+    "keep_in_settings": []
+  },
+  "Saudi Arabia": {
+    "replace_in_settings": [
+      "Saudi Arabia",
+      "Kingdom of Saudi Arabia"
+    ],
+    "keep_in_settings": []
+  },
+  "Senegal": {
+    "replace_in_settings": [
+      "Senegal",
+      "Republic of Senegal"
+    ],
+    "keep_in_settings": []
+  },
+  "Serbia": {
+    "replace_in_settings": [
+      "Serbia",
+      "Republic of Serbia"
+    ],
+    "keep_in_settings": []
+  },
+  "Seychelles": {
+    "replace_in_settings": [
+      "Seychelles",
+      "Republic of Seychelles"
+    ],
+    "keep_in_settings": []
+  },
+  "Sierra Leone": {
+    "replace_in_settings": [
+      "Sierra Leone",
+      "Republic of Sierra Leone"
+    ],
+    "keep_in_settings": []
+  },
+  "Singapore": {
+    "replace_in_settings": [
+      "Singapore",
+      "Republic of Singapore"
+    ],
+    "keep_in_settings": []
+  },
+  "Sint Maarten (Dutch part)": {
+    "replace_in_settings": [
+      "Sint Maarten",
+      "Sint Maarten (Dutch part)"
+    ],
+    "keep_in_settings": []
+  },
+  "Slovakia": {
+    "replace_in_settings": [
+      "Slovakia",
+      "Slovak Republic"
+    ],
+    "keep_in_settings": []
+  },
+  "Slovenia": {
+    "replace_in_settings": [
+      "Slovenia",
+      "Republic of Slovenia"
+    ],
+    "keep_in_settings": []
+  },
+  "Solomon Islands": {
+    "replace_in_settings": [
+      "Solomon Islands"
+    ],
+    "keep_in_settings": []
+  },
+  "Somalia": {
+    "replace_in_settings": [
+      "Somalia",
+      "Federal Republic of Somalia"
+    ],
+    "keep_in_settings": []
+  },
+  "South Africa": {
+    "replace_in_settings": [
+      "South Africa",
+      "Republic of South Africa"
+    ],
+    "keep_in_settings": []
+  },
+  "South Georgia and the South Sandwich Islands": {
+    "replace_in_settings": [
+      "South Georgia and the South Sandwich Islands",
+      "South Georgia & the South Sandwich Islands"
+    ],
+    "keep_in_settings": []
+  },
+  "South Korea": {
+    "replace_in_settings": [
+      "South Korea",
+      "Republic of Korea",
+      "Korea, Republic of"
+    ],
+    "keep_in_settings": []
+  },
+  "South Sudan": {
+    "replace_in_settings": [
+      "South Sudan",
+      "Republic of South Sudan"
+    ],
+    "keep_in_settings": []
+  },
+  "Spain": {
+    "replace_in_settings": [
+      "Spain",
+      "Kingdom of Spain"
+    ],
+    "keep_in_settings": []
+  },
+  "Sri Lanka": {
+    "replace_in_settings": [
+      "Sri Lanka",
+      "Democratic Socialist Republic of Sri Lanka"
+    ],
+    "keep_in_settings": []
+  },
+  "Sudan": {
+    "replace_in_settings": [
+      "Sudan",
+      "Republic of the Sudan"
+    ],
+    "keep_in_settings": []
+  },
+  "Suriname": {
+    "replace_in_settings": [
+      "Suriname",
+      "Republic of Suriname"
+    ],
+    "keep_in_settings": []
+  },
+  "Svalbard and Jan Mayen": {
+    "replace_in_settings": [
+      "Svalbard and Jan Mayen",
+      "Svalbard & Jan Mayen"
+    ],
+    "keep_in_settings": []
+  },
+  "Sweden": {
+    "replace_in_settings": [
+      "Sweden",
+      "Kingdom of Sweden"
+    ],
+    "keep_in_settings": []
+  },
+  "Switzerland": {
+    "replace_in_settings": [
+      "Switzerland",
+      "Swiss Confederation"
+    ],
+    "keep_in_settings": []
+  },
+  "Syria": {
+    "replace_in_settings": [
+      "Syria",
+      "Syrian Arab Republic"
+    ],
+    "keep_in_settings": []
+  },
+  "Taiwan": {
+    "replace_in_settings": [
+      "Taiwan",
+      "Republic of China",
+      "Taiwan, Province of China"
+    ],
+    "keep_in_settings": []
+  },
+  "Tajikistan": {
+    "replace_in_settings": [
+      "Tajikistan",
+      "Republic of Tajikistan"
+    ],
+    "keep_in_settings": []
+  },
+  "Tanzania": {
+    "replace_in_settings": [
+      "Tanzania",
+      "United Republic of Tanzania",
+      "Tanzania, United Republic of"
+    ],
+    "keep_in_settings": []
+  },
+  "Thailand": {
+    "replace_in_settings": [
+      "Thailand",
+      "Kingdom of Thailand"
+    ],
+    "keep_in_settings": []
+  },
+  "Timor-Leste": {
+    "replace_in_settings": [
+      "Timor-Leste",
+      "Democratic Republic of Timor-Leste"
+    ],
+    "keep_in_settings": []
+  },
+  "Togo": {
+    "replace_in_settings": [
+      "Togo",
+      "Togolese Republic"
+    ],
+    "keep_in_settings": []
+  },
+  "Tokelau": {
+    "replace_in_settings": [
+      "Tokelau"
+    ],
+    "keep_in_settings": []
+  },
+  "Tonga": {
+    "replace_in_settings": [
+      "Tonga",
+      "Kingdom of Tonga"
+    ],
+    "keep_in_settings": []
+  },
+  "Trinidad and Tobago": {
+    "replace_in_settings": [
+      "Trinidad and Tobago",
+      "Trinidad & Tobago",
+      "Republic of Trinidad and Tobago",
+      "Republic of Trinidad & Tobago"
+    ],
+    "keep_in_settings": []
+  },
+  "Tunisia": {
+    "replace_in_settings": [
+      "Tunisia",
+      "Republic of Tunisia"
+    ],
+    "keep_in_settings": []
+  },
+  "Turkey": {
+    "replace_in_settings": [
+      "Turkey",
+      "Türkiye",
+      "Republic of Türkiye"
+    ],
+    "keep_in_settings": []
+  },
+  "Turkmenistan": {
+    "replace_in_settings": [
+      "Turkmenistan"
+    ],
+    "keep_in_settings": []
+  },
+  "Turks and Caicos Islands": {
+    "replace_in_settings": [
+      "Turks and Caicos Islands",
+      "Turks & Caicos Islands"
+    ],
+    "keep_in_settings": []
+  },
+  "Tuvalu": {
+    "replace_in_settings": [
+      "Tuvalu"
+    ],
+    "keep_in_settings": []
+  },
+  "Uganda": {
+    "replace_in_settings": [
+      "Uganda",
+      "Republic of Uganda"
+    ],
+    "keep_in_settings": []
+  },
+  "Ukraine": {
+    "replace_in_settings": [
+      "Ukraine"
+    ],
+    "keep_in_settings": []
+  },
+  "United Arab Emirates": {
+    "replace_in_settings": [
+      "UAE",
+      "U.A.E.",
+      "United Arab Emirates"
+    ],
+    "keep_in_settings": []
+  },
+  "United Kingdom": {
+    "replace_in_settings": [
+      "UK",
+      "U.K.",
+      "Britain",
+      "Great Britain",
+      "United Kingdom",
+      "The United Kingdom",
+      "United Kingdom of Great Britain and Northern Ireland",
+      "United Kingdom of Great Britain & Northern Ireland"
+    ],
+    "keep_in_settings": [
+      "England",
+      "Scotland",
+      "Wales",
+      "Northern Ireland"
+    ]
+  },
+  "United States": {
+    "replace_in_settings": [
+      "USA",
+      "U.S.A.",
+      "U.S.",
+      "US",
+      "America",
+      "United States of America",
+      "The United States of America",
+      "United States",
+      "The United States"
+    ],
+    "keep_in_settings": [
+      "Alabama",
+      "Alaska",
+      "Arizona",
+      "Arkansas",
+      "California",
+      "Colorado",
+      "Connecticut",
+      "Delaware",
+      "Florida",
+      "Georgia",
+      "Hawaii",
+      "Idaho",
+      "Illinois",
+      "Indiana",
+      "Iowa",
+      "Kansas",
+      "Kentucky",
+      "Louisiana",
+      "Maine",
+      "Maryland",
+      "Massachusetts",
+      "Michigan",
+      "Minnesota",
+      "Mississippi",
+      "Missouri",
+      "Montana",
+      "Nebraska",
+      "Nevada",
+      "New Hampshire",
+      "New Jersey",
+      "New Mexico",
+      "New York",
+      "North Carolina",
+      "North Dakota",
+      "Ohio",
+      "Oklahoma",
+      "Oregon",
+      "Pennsylvania",
+      "Rhode Island",
+      "South Carolina",
+      "South Dakota",
+      "Tennessee",
+      "Texas",
+      "Utah",
+      "Vermont",
+      "Virginia",
+      "Washington",
+      "West Virginia",
+      "Wisconsin",
+      "Wyoming",
+      "District of Columbia",
+      "D.C.",
+      "American Samoa",
+      "Guam",
+      "Northern Mariana Islands",
+      "Puerto Rico",
+      "U.S. Virgin Islands",
+      "United States Virgin Islands"
+    ]
+  },
+  "United States Minor Outlying Islands": {
+    "replace_in_settings": [
+      "United States Minor Outlying Islands"
+    ],
+    "keep_in_settings": []
+  },
+  "Uruguay": {
+    "replace_in_settings": [
+      "Uruguay",
+      "Eastern Republic of Uruguay"
+    ],
+    "keep_in_settings": []
+  },
+  "Uzbekistan": {
+    "replace_in_settings": [
+      "Uzbekistan",
+      "Republic of Uzbekistan"
+    ],
+    "keep_in_settings": []
+  },
+  "Vanuatu": {
+    "replace_in_settings": [
+      "Vanuatu",
+      "Republic of Vanuatu"
+    ],
+    "keep_in_settings": []
+  },
+  "Vatican City": {
+    "replace_in_settings": [
+      "Vatican City",
+      "Holy See",
+      "Holy See (Vatican City State)",
+      "The Vatican"
+    ],
+    "keep_in_settings": []
+  },
+  "Venezuela": {
+    "replace_in_settings": [
+      "Venezuela",
+      "Bolivarian Republic of Venezuela",
+      "Venezuela, Bolivarian Republic of"
+    ],
+    "keep_in_settings": []
+  },
+  "Vietnam": {
+    "replace_in_settings": [
+      "Vietnam",
+      "Viet Nam",
+      "Socialist Republic of Viet Nam"
+    ],
+    "keep_in_settings": []
+  },
+  "Virgin Islands, British": {
+    "replace_in_settings": [
+      "Virgin Islands, British",
+      "British Virgin Islands"
+    ],
+    "keep_in_settings": []
+  },
+  "Virgin Islands, U.S.": {
+    "replace_in_settings": [
+      "Virgin Islands, U.S.",
+      "Virgin Islands of the United States"
+    ],
+    "keep_in_settings": []
+  },
+  "Wallis and Futuna": {
+    "replace_in_settings": [
+      "Wallis and Futuna",
+      "Wallis & Futuna"
+    ],
+    "keep_in_settings": []
+  },
+  "Western Sahara": {
+    "replace_in_settings": [
+      "Western Sahara"
+    ],
+    "keep_in_settings": []
+  },
+  "Yemen": {
+    "replace_in_settings": [
+      "Yemen",
+      "Republic of Yemen"
+    ],
+    "keep_in_settings": []
+  },
+  "Zambia": {
+    "replace_in_settings": [
+      "Zambia",
+      "Republic of Zambia"
+    ],
+    "keep_in_settings": []
+  },
+  "Zimbabwe": {
+    "replace_in_settings": [
+      "Zimbabwe",
+      "Republic of Zimbabwe"
+    ],
+    "keep_in_settings": []
+  },
+  "Åland Islands": {
+    "replace_in_settings": [
+      "Åland Islands"
+    ],
+    "keep_in_settings": []
+  }
+}
