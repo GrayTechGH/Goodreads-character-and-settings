@@ -38,26 +38,6 @@ def ui_text(text):
     return plugin_ui_text(text, _)
 
 
-def print_supported_language_debug():
-    try:
-        from calibre.utils.localization import available_translations, get_lang
-
-        active_language = get_lang()
-        supported_languages = sorted(set(available_translations()) | {'en'})
-        print('Goodreads character and settings supported language debug:', flush=True)
-        print('Active language: {}'.format(active_language), flush=True)
-        print('Supported language count: {}'.format(len(supported_languages)), flush=True)
-        print(
-            'Supported languages: {}'.format(', '.join(supported_languages)),
-            flush=True,
-        )
-    except Exception as err:
-        print(
-            'Goodreads character and settings supported language debug failed: {}'.format(err),
-            flush=True,
-        )
-
-
 class InterfacePlugin(InterfaceAction):
 
     name = ui_text('Goodreads character and settings')
@@ -68,7 +48,6 @@ class InterfacePlugin(InterfaceAction):
 
     def genesis(self):
         self.current_runner = None
-        print_supported_language_debug()
         update_database_from_version()
         icon = get_icons('images/gr_cs_icon.png', ui_text('Goodreads character and settings Plugin'))
 
