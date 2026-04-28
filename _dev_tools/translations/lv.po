@@ -1,0 +1,174 @@
+# Goodreads Character and Settings plugin translations
+# This file was generated from plugin UI gettext strings.
+msgid ""
+msgstr ""
+"Project-Id-Version: Goodreads Character and Settings 1.0.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-28 00:00+0000\n"
+"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
+"Language-Team: \n"
+"Language: lv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Goodreads Character and Settings conversion script\n"
+
+msgid "Main"
+msgstr "Galvenā"
+
+msgid "Countries"
+msgstr "valstis"
+
+msgid "Regions"
+msgstr "reģioni"
+
+msgid "Autodelete"
+msgstr "automātiska dzēšana"
+
+msgid "Select the character and settings fields"
+msgstr "atlasīt varoņi and vietas laukss"
+
+msgid "Characters field:"
+msgstr "varoņi lauks:"
+
+msgid "Settings field:"
+msgstr "vietas lauks:"
+
+msgid "Countries field:"
+msgstr "valstis lauks:"
+
+msgid "Active calibre language"
+msgstr "aktīva calibre valoda"
+
+msgid "English short names"
+msgstr "īsie angļu names"
+
+msgid "English formal names"
+msgstr "oficiālie angļu names"
+
+msgid "Country names language:"
+msgstr "valstis names valoda:"
+
+msgid "Localize country names"
+msgstr "lokalizēt valstis names"
+
+msgid "Use the selected-language country names as country values. The selected-language names are also kept as aliases."
+msgstr "Use selected-language valstis names as valsts vērtības. Names are also kept as aizstājvārdi."
+
+msgid "Keep country in settings field"
+msgstr "paturēt valsts in vietas lauks"
+
+msgid "Keep the country in parentheses in the Settings field while also writing it to the Countries field."
+msgstr "paturēt valsts in parentheses in vietas lauks and also write it to valstis lauks."
+
+msgid "Keep region in settings field"
+msgstr "paturēt reģions in vietas lauks"
+
+msgid "Keep region or subdivision values such as states, provinces, and countries-in-Regions mappings in the Settings field."
+msgstr "paturēt reģions or subdivision vērtības in vietas lauks."
+
+msgid "Write \"Empty\" when Goodreads has no value"
+msgstr "Write \"Tukšs\" when Goodreads has no vērtība"
+
+msgid " seconds"
+msgstr " sekundes"
+
+msgid "Time between queries:"
+msgstr "laiks starp vaicājumiem:"
+
+msgid "Max. Books/Job:"
+msgstr "maks. grāmatas/uzdevums:"
+
+msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list."
+msgstr "valstis table. pievienot one canonical valsts per row, optional ISO country code, and aizstājvārdi as a comma-separated list."
+
+msgid "Add"
+msgstr "Pievienot"
+
+msgid "Remove"
+msgstr "Aizvākt"
+
+msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries."
+msgstr "reģioni table. Each reģions is preserved in vietas and mapped to the selected valsts in valstis."
+
+msgid "Values listed here are automatically removed if Goodreads returns them exactly."
+msgstr "vērtības listed here are automatically removed if Goodreads returns them exactly."
+
+msgid "Add Value"
+msgstr "pievienot vērtība"
+
+msgid "Remove Value"
+msgstr "noņemt vērtība"
+
+msgid "Restore defaults"
+msgstr "Atjaunot noklusējumus"
+
+msgid "Do not import"
+msgstr "neimportēt"
+
+msgid "Tags"
+msgstr "Birkas"
+
+msgid "Country"
+msgstr "valsts"
+
+msgid "ISO"
+msgstr "ISO"
+
+msgid "Aliases"
+msgstr "aizstājvārdi"
+
+msgid "Value"
+msgstr "Vērtība"
+
+msgid "If Goodreads does not provide a value, store the text \"Empty\" in any selected custom field."
+msgstr "If Goodreads does not provide a vērtība, store \"Tukšs\" in any selected custom lauks."
+
+msgid "This option is only available when Characters, Settings, or Countries uses a custom field."
+msgstr "This option is only available when varoņi, vietas, or valstis uses a custom lauks."
+
+msgid "Add a country first."
+msgstr "pievienot valsts first."
+
+msgid "Add Country"
+msgstr "pievienot valsts"
+
+msgid "Country name:"
+msgstr "valsts name:"
+
+msgid "Add Regions Country"
+msgstr "pievienot valsts reģioni"
+
+msgid "Country name cannot be empty."
+msgstr "valsts name cannot be empty."
+
+msgid "Country name must be unique."
+msgstr "valsts name must be unique."
+
+msgid "Country row {} uses a duplicate country name."
+msgstr "valsts row {} uses a duplicate valsts name."
+
+msgid "Country row {} uses a duplicate ISO country code."
+msgstr "valsts row {} uses a duplicate ISO valsts code."
+
+msgid "Run Goodreads character and settings"
+msgstr "Run Goodreads varoņi lauks and vietas lauks"
+
+msgid "Goodreads character and settings Plugin"
+msgstr "Goodreads varoņi lauks and vietas lauks Plugin"
+
+msgid "Import"
+msgstr "neimportēt"
+
+msgid "Customize plugin..."
+msgstr "Customize plugin..."
+
+msgid "About"
+msgstr "About"
+
+msgid "About Goodreads character and settings"
+msgstr "About Goodreads varoņi lauks and vietas lauks"
+
+msgid "Plugin that imports character and settings data from Goodreads and writes it to custom fields"
+msgstr "Plugin that imports character and settings data from Goodreads and writes it to custom fields"

@@ -1,0 +1,174 @@
+# Goodreads Character and Settings plugin translations
+# This file was generated from plugin UI gettext strings.
+msgid ""
+msgstr ""
+"Project-Id-Version: Goodreads Character and Settings 1.0.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-28 00:00+0000\n"
+"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
+"Language-Team: \n"
+"Language: mr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Goodreads Character and Settings conversion script\n"
+
+msgid "Main"
+msgstr "मुख्य"
+
+msgid "Countries"
+msgstr "देश"
+
+msgid "Regions"
+msgstr "प्रदेश"
+
+msgid "Autodelete"
+msgstr "स्वयंचलित हटवणे"
+
+msgid "Select the character and settings fields"
+msgstr "निवडा पात्रे and स्थळे फील्डs"
+
+msgid "Characters field:"
+msgstr "पात्रे फील्ड:"
+
+msgid "Settings field:"
+msgstr "स्थळे फील्ड:"
+
+msgid "Countries field:"
+msgstr "देश फील्ड:"
+
+msgid "Active calibre language"
+msgstr "सक्रिय calibre भाषा"
+
+msgid "English short names"
+msgstr "लहान इंग्रजी names"
+
+msgid "English formal names"
+msgstr "औपचारिक इंग्रजी names"
+
+msgid "Country names language:"
+msgstr "देश names भाषा:"
+
+msgid "Localize country names"
+msgstr "स्थानिकीकरण करा देश names"
+
+msgid "Use the selected-language country names as country values. The selected-language names are also kept as aliases."
+msgstr "Use selected-language देश names as देश मूल्यs. Names are also kept as उपनावे."
+
+msgid "Keep country in settings field"
+msgstr "ठेवा देश in स्थळे फील्ड"
+
+msgid "Keep the country in parentheses in the Settings field while also writing it to the Countries field."
+msgstr "ठेवा देश in parentheses in स्थळे फील्ड and also write it to देश फील्ड."
+
+msgid "Keep region in settings field"
+msgstr "ठेवा प्रदेश in स्थळे फील्ड"
+
+msgid "Keep region or subdivision values such as states, provinces, and countries-in-Regions mappings in the Settings field."
+msgstr "ठेवा प्रदेश or subdivision मूल्यs in स्थळे फील्ड."
+
+msgid "Write \"Empty\" when Goodreads has no value"
+msgstr "Write \"रिक्त\" when Goodreads has no मूल्य"
+
+msgid " seconds"
+msgstr " सेकंद"
+
+msgid "Time between queries:"
+msgstr "क्वेरींमधील वेळ:"
+
+msgid "Max. Books/Job:"
+msgstr "कमाल पुस्तके/काम:"
+
+msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list."
+msgstr "देश table. जोडा one canonical देश per row, optional ISO country code, and उपनावे as a comma-separated list."
+
+msgid "Add"
+msgstr "जोडा"
+
+msgid "Remove"
+msgstr "काढून टाका"
+
+msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries."
+msgstr "प्रदेश table. Each प्रदेश is preserved in स्थळे and mapped to the selected देश in देश."
+
+msgid "Values listed here are automatically removed if Goodreads returns them exactly."
+msgstr "मूल्यs listed here are automatically removed if Goodreads returns them exactly."
+
+msgid "Add Value"
+msgstr "जोडा मूल्य"
+
+msgid "Remove Value"
+msgstr "काढा मूल्य"
+
+msgid "Restore defaults"
+msgstr "डिफॉल्ट पुनर्स्थापित करा"
+
+msgid "Do not import"
+msgstr "आयात करू नका"
+
+msgid "Tags"
+msgstr "टॅग"
+
+msgid "Country"
+msgstr "देश"
+
+msgid "ISO"
+msgstr "ISO"
+
+msgid "Aliases"
+msgstr "उपनावे"
+
+msgid "Value"
+msgstr "मूल्य"
+
+msgid "If Goodreads does not provide a value, store the text \"Empty\" in any selected custom field."
+msgstr "If Goodreads does not provide a मूल्य, store \"रिक्त\" in any selected custom फील्ड."
+
+msgid "This option is only available when Characters, Settings, or Countries uses a custom field."
+msgstr "This option is only available when पात्रे, स्थळे, or देश uses a custom फील्ड."
+
+msgid "Add a country first."
+msgstr "जोडा देश first."
+
+msgid "Add Country"
+msgstr "जोडा देश"
+
+msgid "Country name:"
+msgstr "देश name:"
+
+msgid "Add Regions Country"
+msgstr "जोडा देश प्रदेश"
+
+msgid "Country name cannot be empty."
+msgstr "देश name cannot be empty."
+
+msgid "Country name must be unique."
+msgstr "देश name must be unique."
+
+msgid "Country row {} uses a duplicate country name."
+msgstr "देश row {} uses a duplicate देश name."
+
+msgid "Country row {} uses a duplicate ISO country code."
+msgstr "देश row {} uses a duplicate ISO देश code."
+
+msgid "Run Goodreads character and settings"
+msgstr "Run Goodreads पात्रे फील्ड and स्थळे फील्ड"
+
+msgid "Goodreads character and settings Plugin"
+msgstr "Goodreads पात्रे फील्ड and स्थळे फील्ड Plugin"
+
+msgid "Import"
+msgstr "आयात करू नका"
+
+msgid "Customize plugin..."
+msgstr "Customize plugin..."
+
+msgid "About"
+msgstr "About"
+
+msgid "About Goodreads character and settings"
+msgstr "About Goodreads पात्रे फील्ड and स्थळे फील्ड"
+
+msgid "Plugin that imports character and settings data from Goodreads and writes it to custom fields"
+msgstr "Plugin that imports character and settings data from Goodreads and writes it to custom fields"

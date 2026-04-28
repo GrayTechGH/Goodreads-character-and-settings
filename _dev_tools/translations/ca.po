@@ -1,0 +1,174 @@
+# Goodreads Character and Settings plugin translations
+# This file was generated from plugin UI gettext strings.
+msgid ""
+msgstr ""
+"Project-Id-Version: Goodreads Character and Settings 1.0.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-28 00:00+0000\n"
+"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Goodreads Character and Settings conversion script\n"
+
+msgid "Main"
+msgstr "Inici"
+
+msgid "Countries"
+msgstr "països"
+
+msgid "Regions"
+msgstr "regions"
+
+msgid "Autodelete"
+msgstr "supressió automàtica"
+
+msgid "Select the character and settings fields"
+msgstr "selecciona personatges and llocs camps"
+
+msgid "Characters field:"
+msgstr "personatges camp:"
+
+msgid "Settings field:"
+msgstr "llocs camp:"
+
+msgid "Countries field:"
+msgstr "països camp:"
+
+msgid "Active calibre language"
+msgstr "actiu calibre idioma"
+
+msgid "English short names"
+msgstr "curts anglès names"
+
+msgid "English formal names"
+msgstr "formals anglès names"
+
+msgid "Country names language:"
+msgstr "països names idioma:"
+
+msgid "Localize country names"
+msgstr "localitza països names"
+
+msgid "Use the selected-language country names as country values. The selected-language names are also kept as aliases."
+msgstr "Use selected-language països names as país valors. Names are also kept as àlies."
+
+msgid "Keep country in settings field"
+msgstr "conserva país in llocs camp"
+
+msgid "Keep the country in parentheses in the Settings field while also writing it to the Countries field."
+msgstr "conserva país in parentheses in llocs camp and also write it to països camp."
+
+msgid "Keep region in settings field"
+msgstr "conserva regió in llocs camp"
+
+msgid "Keep region or subdivision values such as states, provinces, and countries-in-Regions mappings in the Settings field."
+msgstr "conserva regió or subdivision valors in llocs camp."
+
+msgid "Write \"Empty\" when Goodreads has no value"
+msgstr "Write \"Buit\" when Goodreads has no valor"
+
+msgid " seconds"
+msgstr " segons"
+
+msgid "Time between queries:"
+msgstr "temps entre consultes:"
+
+msgid "Max. Books/Job:"
+msgstr "màx. llibres/tasca:"
+
+msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list."
+msgstr "països table. afegeix one canonical país per row, optional ISO country code, and àlies as a comma-separated list."
+
+msgid "Add"
+msgstr "Afegeix"
+
+msgid "Remove"
+msgstr "Suprimeix"
+
+msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries."
+msgstr "regions table. Each regió is preserved in llocs and mapped to the selected país in països."
+
+msgid "Values listed here are automatically removed if Goodreads returns them exactly."
+msgstr "valors listed here are automatically removed if Goodreads returns them exactly."
+
+msgid "Add Value"
+msgstr "afegeix valor"
+
+msgid "Remove Value"
+msgstr "elimina valor"
+
+msgid "Restore defaults"
+msgstr "Restaura els valors predeterminats"
+
+msgid "Do not import"
+msgstr "no importis"
+
+msgid "Tags"
+msgstr "Etiquetes"
+
+msgid "Country"
+msgstr "país"
+
+msgid "ISO"
+msgstr "ISO"
+
+msgid "Aliases"
+msgstr "àlies"
+
+msgid "Value"
+msgstr "Valor"
+
+msgid "If Goodreads does not provide a value, store the text \"Empty\" in any selected custom field."
+msgstr "If Goodreads does not provide a valor, store \"Buit\" in any selected custom camp."
+
+msgid "This option is only available when Characters, Settings, or Countries uses a custom field."
+msgstr "This option is only available when personatges, llocs, or països uses a custom camp."
+
+msgid "Add a country first."
+msgstr "afegeix país first."
+
+msgid "Add Country"
+msgstr "afegeix país"
+
+msgid "Country name:"
+msgstr "país name:"
+
+msgid "Add Regions Country"
+msgstr "afegeix país regions"
+
+msgid "Country name cannot be empty."
+msgstr "país name cannot be empty."
+
+msgid "Country name must be unique."
+msgstr "país name must be unique."
+
+msgid "Country row {} uses a duplicate country name."
+msgstr "país row {} uses a duplicate país name."
+
+msgid "Country row {} uses a duplicate ISO country code."
+msgstr "país row {} uses a duplicate ISO país code."
+
+msgid "Run Goodreads character and settings"
+msgstr "Run Goodreads personatges camp and llocs camp"
+
+msgid "Goodreads character and settings Plugin"
+msgstr "Goodreads personatges camp and llocs camp Plugin"
+
+msgid "Import"
+msgstr "no importis"
+
+msgid "Customize plugin..."
+msgstr "Customize plugin..."
+
+msgid "About"
+msgstr "About"
+
+msgid "About Goodreads character and settings"
+msgstr "About Goodreads personatges camp and llocs camp"
+
+msgid "Plugin that imports character and settings data from Goodreads and writes it to custom fields"
+msgstr "Plugin that imports character and settings data from Goodreads and writes it to custom fields"

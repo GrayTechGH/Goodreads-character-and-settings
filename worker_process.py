@@ -6,30 +6,36 @@ __license__   = 'GPL v3'
 __copyright__ = '2026, GrayTechGH'
 __docformat__ = 'restructuredtext en'
 
+try:
+    load_translations()
+except NameError:
+    pass
+
+try:
+    _
+except NameError:
+    def _(text):
+        return text
+
 import time
-from urllib.error import HTTPError, URLError
-from urllib.request import Request, urlopen
+
+from calibre import browser
 
 from calibre_plugins.Goodreads_character_and_settings import common
 
 
 GOODREADS_BASE_URL = 'https://www.goodreads.com'
-GOODREADS_USER_AGENT = (
-    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
-    '(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
-)
 
 
 def fetch_goodreads_page(goodreads_id, timeout=30):
     url = '{}/book/show/{}'.format(GOODREADS_BASE_URL, goodreads_id)
-    request = Request(url, headers={'User-Agent': GOODREADS_USER_AGENT})
     try:
-        response = urlopen(request, timeout=timeout)
+        br = browser()
+        br.set_handle_robots(False)
+        response = br.open(url, timeout=timeout)
         raw = response.read()
-    except HTTPError as err:
-        raise RuntimeError('HTTP error {} while fetching {}'.format(err.code, url))
-    except URLError as err:
-        raise RuntimeError('Network error while fetching {}: {}'.format(url, err))
+    except Exception as err:
+        raise RuntimeError(_('Error while fetching {}: {}').format(url, err))
 
     return raw.decode('utf-8', errors='replace')
 
@@ -127,7 +133,7 @@ def process_goodreads_batch(books, options, notification=lambda *_args: None):
         try:
             notification(
                 float(index + 1) / float(total),
-                book.get('title', 'Processing Goodreads book'),
+                book.get('title', _('Processing Goodreads book')),
             )
         except Exception:
             pass

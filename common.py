@@ -6,35 +6,62 @@ __license__   = 'GPL v3'
 __copyright__ = '2026, GrayTechGH'
 __docformat__ = 'restructuredtext en'
 
+try:
+    load_translations()
+except NameError:
+    pass
+
+try:
+    _
+except NameError:
+    def _(text):
+        return text
+
 import json
 import os
 import re
+from fnmatch import fnmatchcase
 from html import unescape
 
-from calibre_plugins.Goodreads_character_and_settings.config import FIELD_NONE, prefs
+try:
+    from bs4 import BeautifulSoup
+except Exception:
+    BeautifulSoup = None
+
 from calibre_plugins.Goodreads_character_and_settings.settings_data import (
     ensure_user_json_files,
-    plugin_data_dir,
     load_user_autodelete_values,
     load_user_country_data,
     load_user_region_data,
+    plugin_data_dir,
 )
 
 
+FIELD_NONE = 'none'
 _SKIP_WRITE = object()
 _LAST_EXTRACTION_DEBUG = {}
 _COUNTRY_VARIANT_LOOKUP = None
 _COUNTRY_VARIANT_PATTERNS = None
 _COUNTRY_VARIANT_SOURCE = ''
 _AUTODELETE_VALUES = None
+_AUTODELETE_PATTERNS = None
 
 
 def reset_runtime_caches():
-    global _COUNTRY_VARIANT_LOOKUP, _COUNTRY_VARIANT_PATTERNS, _COUNTRY_VARIANT_SOURCE, _AUTODELETE_VALUES
+    global _COUNTRY_VARIANT_LOOKUP, _COUNTRY_VARIANT_PATTERNS, _COUNTRY_VARIANT_SOURCE, _AUTODELETE_VALUES, _AUTODELETE_PATTERNS
     _COUNTRY_VARIANT_LOOKUP = None
     _COUNTRY_VARIANT_PATTERNS = None
     _COUNTRY_VARIANT_SOURCE = ''
     _AUTODELETE_VALUES = None
+    _AUTODELETE_PATTERNS = None
+
+
+def debug_pref(name):
+    try:
+        from calibre_plugins.Goodreads_character_and_settings.config import prefs
+        return prefs.get(name)
+    except Exception:
+        return False
 
 
 def merge_unique_values(existing_values, new_values):
@@ -140,16 +167,24 @@ def load_country_variant_data():
 
 
 def load_autodelete_values():
-    global _AUTODELETE_VALUES
-    if _AUTODELETE_VALUES is not None:
-        return _AUTODELETE_VALUES
+    global _AUTODELETE_VALUES, _AUTODELETE_PATTERNS
+    if _AUTODELETE_VALUES is not None and _AUTODELETE_PATTERNS is not None:
+        return _AUTODELETE_VALUES, _AUTODELETE_PATTERNS
     try:
         ensure_user_json_files()
-        _AUTODELETE_VALUES = {
-            cleanup_value(value).lower()
-            for value in load_user_autodelete_values()
-            if cleanup_value(value)
-        }
+        exact_values = set()
+        wildcard_patterns = []
+        for value in load_user_autodelete_values():
+            cleaned = cleanup_value(value)
+            if not cleaned:
+                continue
+            lowered = cleaned.casefold()
+            if '*' in lowered:
+                wildcard_patterns.append(lowered)
+            else:
+                exact_values.add(lowered)
+        _AUTODELETE_VALUES = exact_values
+        _AUTODELETE_PATTERNS = wildcard_patterns
     except Exception as err:
         print(
             'Goodreads character and settings: failed to load autodelete values: {}'.format(
@@ -158,7 +193,20 @@ def load_autodelete_values():
             flush=True,
         )
         _AUTODELETE_VALUES = set()
-    return _AUTODELETE_VALUES
+        _AUTODELETE_PATTERNS = []
+    return _AUTODELETE_VALUES, _AUTODELETE_PATTERNS
+
+
+def should_autodelete_value(value, exact_values=None, wildcard_patterns=None):
+    cleaned = cleanup_value(value)
+    if not cleaned:
+        return False
+    lowered = cleaned.casefold()
+    if exact_values is None or wildcard_patterns is None:
+        exact_values, wildcard_patterns = load_autodelete_values()
+    if lowered in exact_values:
+        return True
+    return any(fnmatchcase(lowered, pattern) for pattern in wildcard_patterns)
 
 
 def collect_country_variants(canonical_country, variants):
@@ -291,7 +339,7 @@ def build_field_updates(existing_fields, field_specs, extracted_values, write_em
         if incoming_values:
             working_values = merge_unique_values(working_values, incoming_values)
         elif not spec.get('is_tags') and write_empty_to_custom_fields:
-            working_values = merge_unique_values(working_values, ['Empty'])
+            working_values = merge_unique_values(working_values, [_('Empty')])
         else:
             continue
 
@@ -334,36 +382,28 @@ def extract_goodreads_values(html, label):
     values = []
     labels = expand_label_aliases(label)
     debug_entries = []
-    autodelete_values = load_autodelete_values()
+    autodelete_values, autodelete_patterns = load_autodelete_values()
 
     for candidate in labels:
-        json_values = extract_values_from_json(candidate, html)
-        state_values = extract_values_from_embedded_state(candidate, html)
-        detail_values = extract_values_from_detail_section(candidate, html)
-        html_values = extract_values_from_html_block(candidate, html)
+        # Goodreads stores character and place entities in the React hydration payload.
+        next_data_values = extract_values_from_next_data(candidate, html)
 
-        values.extend(json_values)
-        values.extend(state_values)
-        values.extend(detail_values)
-        values.extend(html_values)
+        values.extend(next_data_values)
 
-        if prefs.get('debug_character_sources') and label.lower() == 'characters':
-            debug_entries.extend(build_debug_entries('json', candidate, json_values))
-            debug_entries.extend(build_debug_entries('state', candidate, state_values))
-            debug_entries.extend(build_debug_entries('detail', candidate, detail_values))
-            debug_entries.extend(build_debug_entries('html', candidate, html_values))
+        if debug_pref('debug_character_sources') and label.lower() == 'characters':
+            debug_entries.extend(build_debug_entries('next_data', candidate, next_data_values))
 
     deduped = []
     seen = set()
     for value in values:
         for normalized in normalize_extracted_value(value):
-            if normalized.lower() in autodelete_values:
+            if should_autodelete_value(normalized, autodelete_values, autodelete_patterns):
                 continue
             if normalized and normalized not in seen:
                 seen.add(normalized)
                 deduped.append(normalized)
 
-    if prefs.get('debug_character_sources') and label.lower() == 'characters':
+    if debug_pref('debug_character_sources') and label.lower() == 'characters':
         _LAST_EXTRACTION_DEBUG[label.lower()] = debug_entries
 
     return deduped
@@ -388,165 +428,22 @@ def expand_label_aliases(label):
     return deduped
 
 
-def extract_values_from_json(label, html):
-    values = []
-    for script_match in re.finditer(
-        r'<script[^>]*type="application/ld\+json"[^>]*>(?P<body>.*?)</script>',
-        html,
-        flags=re.IGNORECASE | re.DOTALL,
-    ):
-        try:
-            payload = json.loads(unescape(script_match.group('body')))
-        except Exception:
-            continue
-        values.extend(find_label_values_in_json(payload, label.lower(), label))
-    return values
+def extract_values_from_next_data(label, html):
+    soup = parse_goodreads_html(html)
+    if soup is None:
+        return []
 
+    script_node = soup.find('script', attrs={'id': '__NEXT_DATA__'})
+    if script_node is None:
+        return []
 
-def extract_values_from_embedded_state(label, html):
-    values = []
-    for candidate_html in iter_embedded_state_variants(html):
-        key_names = [label.lower()]
-        if label.lower() == 'characters':
-            key_names.append('characters')
-        elif label.lower() in ('setting', 'settings', 'places'):
-            key_names.append('places')
+    raw_payload = script_node.string or script_node.get_text() or ''
+    try:
+        payload = json.loads(raw_payload)
+    except Exception:
+        return []
 
-        for key_name in key_names:
-            values.extend(
-                extract_keyed_values_from_embedded_state(
-                    candidate_html,
-                    key_name,
-                    label,
-                )
-            )
-
-        pattern = r'"name"\s*:\s*"{0}"'.format(re.escape(label))
-        for match in re.finditer(pattern, candidate_html, flags=re.IGNORECASE):
-            tail = candidate_html[match.end():match.end() + 12000]
-            raw_values = extract_values_payload_from_tail(tail)
-            if raw_values is not None:
-                values.extend(extract_structured_values(raw_values, label))
-    return values
-
-
-def iter_embedded_state_variants(html):
-    variants = []
-    candidates = [
-        html,
-        unescape(html),
-        html.replace('\\"', '"'),
-        unescape(html).replace('\\"', '"'),
-    ]
-    seen = set()
-    for candidate in candidates:
-        if candidate not in seen:
-            seen.add(candidate)
-            variants.append(candidate)
-    return variants
-
-
-def extract_values_payload_from_tail(tail):
-    string_match = re.search(
-        r'"values"\s*:\s*"(?P<value>(?:\\.|[^"])*)"',
-        tail,
-        flags=re.IGNORECASE | re.DOTALL,
-    )
-    if string_match:
-        raw_value = string_match.group('value')
-        return try_parse_json_string('"{}"'.format(raw_value))
-
-    direct_match = re.search(
-        r'"values"\s*:\s*(?P<value>\[.*?\]|\{.*?\})',
-        tail,
-        flags=re.IGNORECASE | re.DOTALL,
-    )
-    if direct_match:
-        raw_value = direct_match.group('value')
-        return try_parse_json_string(raw_value)
-
-    return None
-
-
-def extract_keyed_values_from_embedded_state(html, key_name, label):
-    values = []
-    pattern = r'"{0}"\s*:'.format(re.escape(key_name))
-    for match in re.finditer(pattern, html, flags=re.IGNORECASE):
-        tail = html[match.end():]
-        raw_values, consumed = extract_bracketed_json_payload(tail)
-        if raw_values is None:
-            continue
-        values.extend(extract_structured_values(raw_values, label))
-        if consumed:
-            tail = tail[consumed:]
-    return values
-
-
-def extract_bracketed_json_payload(text):
-    start = None
-    opening = ''
-    for index, char in enumerate(text):
-        if char in '[{':
-            start = index
-            opening = char
-            break
-        if char not in ' \t\r\n:':
-            return None, 0
-    if start is None:
-        return None, 0
-
-    closing = ']' if opening == '[' else '}'
-    depth = 0
-    in_string = False
-    escape = False
-
-    for index in range(start, len(text)):
-        char = text[index]
-        if in_string:
-            if escape:
-                escape = False
-            elif char == '\\':
-                escape = True
-            elif char == '"':
-                in_string = False
-            continue
-
-        if char == '"':
-            in_string = True
-        elif char == opening:
-            depth += 1
-        elif char == closing:
-            depth -= 1
-            if depth == 0:
-                payload = text[start:index + 1]
-                return try_parse_json_string(payload), index + 1
-
-    return None, 0
-
-
-def find_label_values_in_json(node, label, original_label):
-    matches = []
-    if isinstance(node, dict):
-        lower_keys = {str(key).lower(): key for key in node}
-        name_key = lower_keys.get('name')
-        values_key = lower_keys.get('values')
-        if name_key is not None and values_key is not None:
-            name = cleanup_value(node.get(name_key))
-            if name and name.lower() == label:
-                matches.extend(extract_structured_values(node.get(values_key), original_label))
-
-        for value in node.values():
-            matches.extend(find_label_values_in_json(value, label, original_label))
-    elif isinstance(node, list):
-        for value in node:
-            matches.extend(find_label_values_in_json(value, label, original_label))
-    return matches
-
-
-def extract_structured_values(node, label):
-    allowed_types = get_allowed_entity_types(label)
-    values = extract_entity_values(node, allowed_types)
-    return values
+    return extract_entity_values(payload, get_allowed_entity_types(label))
 
 
 def get_allowed_entity_types(label):
@@ -565,12 +462,6 @@ def extract_entity_values(node, allowed_types):
             values.extend(extract_entity_values(item, allowed_types))
         return values
 
-    if isinstance(node, str):
-        parsed = try_parse_json_string(node)
-        if parsed is not None:
-            return extract_entity_values(parsed, allowed_types)
-        return values
-
     if not isinstance(node, dict):
         return values
 
@@ -584,10 +475,6 @@ def extract_entity_values(node, allowed_types):
     for child in node.values():
         if isinstance(child, (dict, list)):
             values.extend(extract_entity_values(child, allowed_types))
-        elif isinstance(child, str):
-            parsed = try_parse_json_string(child)
-            if parsed is not None:
-                values.extend(extract_entity_values(parsed, allowed_types))
     return values
 
 
@@ -606,28 +493,6 @@ def entity_matches_allowed_link(node, allowed_types):
     if 'places' in allowed_types or 'place' in allowed_types or 'setting' in allowed_types:
         return href_matches_label(url, 'Places')
     return True
-
-
-def flatten_json_values(node):
-    values = []
-    if isinstance(node, list):
-        for item in node:
-            values.extend(flatten_json_values(item))
-    elif isinstance(node, dict):
-        formatted = format_json_value_object(node)
-        if formatted:
-            values.append(formatted)
-        else:
-            for key in ('name', 'text', 'value'):
-                if key in node:
-                    values.extend(flatten_json_values(node[key]))
-    elif isinstance(node, str):
-        parsed = try_parse_json_string(node)
-        if parsed is not None:
-            values.extend(flatten_json_values(parsed))
-        else:
-            values.append(node)
-    return values
 
 
 def format_json_value_object(node):
@@ -650,101 +515,8 @@ def format_json_value_object(node):
 
 
 def normalize_extracted_value(value):
-    parsed = try_parse_json_string(value) if isinstance(value, str) else None
-    if parsed is not None:
-        normalized = []
-        for item in flatten_json_values(parsed):
-            cleaned = cleanup_value(item)
-            if cleaned:
-                normalized.append(cleaned)
-        return normalized
-
     cleaned = cleanup_value(value)
     return [cleaned] if cleaned else []
-
-
-def extract_values_from_detail_section(label, html):
-    label_match = re.search(
-        r'>\s*{}\s*<'.format(re.escape(label)),
-        html,
-        flags=re.IGNORECASE,
-    )
-    if not label_match:
-        return []
-
-    tail = html[label_match.end():label_match.end() + 12000]
-    stop_labels = [
-        'Characters', 'Setting', 'Literary awards', 'Awards', 'Places',
-        'Book details & editions', 'This edition', 'Lists with This Book',
-        'Readers also enjoyed', 'Community Reviews', 'Genres',
-    ]
-    stop_patterns = [
-        r'>\s*{}\s*<'.format(re.escape(stop_label))
-        for stop_label in stop_labels
-        if stop_label.lower() != label.lower()
-    ]
-    stop_match = re.search('|'.join(stop_patterns), tail, flags=re.IGNORECASE)
-    if stop_match:
-        tail = tail[:stop_match.start()]
-
-    values = []
-    for anchor_match in re.finditer(
-        r'<a\b[^>]*href="(?P<href>[^"]*)"[^>]*>(?P<text>.*?)</a>',
-        tail,
-        flags=re.IGNORECASE | re.DOTALL,
-    ):
-        href = anchor_match.group('href') or ''
-        if not href_matches_label(href, label):
-            continue
-        text = cleanup_value(anchor_match.group('text'))
-        if not text:
-            continue
-        if text.lower() in ('show more', 'show less'):
-            continue
-        values.append(text)
-    return values
-
-
-def extract_values_from_html_block(label, html):
-    label_pattern = r'(?:>\s*{0}\s*<|>\s*{0}\s*:?\s*<)'.format(
-        re.escape(label)
-    )
-    match = re.search(label_pattern, html, flags=re.IGNORECASE)
-    if not match:
-        return []
-
-    block = html[match.start():match.start() + 4000]
-    stop_match = re.search(
-        r'(?:>\s*(?:Genres|Series|About the author|Lists with This Book|Book details & editions|Readers also enjoyed|Community Reviews)\s*<)',
-        block,
-        flags=re.IGNORECASE,
-    )
-    if stop_match:
-        block = block[:stop_match.start()]
-
-    values = []
-    for anchor_match in re.finditer(
-        r'<a\b[^>]*href="(?P<href>[^"]*)"[^>]*>(?P<text>.*?)</a>',
-        block,
-        flags=re.IGNORECASE | re.DOTALL,
-    ):
-        href = anchor_match.group('href') or ''
-        if not href_matches_label(href, label):
-            continue
-        text = strip_tags(anchor_match.group('text'))
-        if text and text.lower() != label.lower():
-            values.append(text)
-
-    if values:
-        return values
-
-    if get_allowed_entity_types(label):
-        return []
-
-    text = strip_tags(block)
-    text = re.sub(r'\b{}\b'.format(re.escape(label)), '', text, flags=re.IGNORECASE)
-    parts = [cleanup_value(part) for part in re.split(r'[\n|]+', text)]
-    return [part for part in parts if part]
 
 
 def format_settings(settings, keep_country_in_settings=True, keep_region_in_settings=True):
@@ -805,36 +577,10 @@ def build_preview_message(characters, settings, countries):
     )
 
 
-def build_debug_message(html):
-    labels = ('Characters', 'Setting', 'Settings', 'Places')
-    lines = ['Debug:']
-
-    for label in labels:
-        json_values = extract_values_from_json(label, html)
-        state_values = extract_values_from_embedded_state(label, html)
-        detail_values = extract_values_from_detail_section(label, html)
-        html_values = extract_values_from_html_block(label, html)
-        marker_found = has_label_marker(html, label)
-        json_count = len(extract_normalized_values(json_values))
-        state_count = len(extract_normalized_values(state_values))
-        detail_count = len(extract_normalized_values(detail_values))
-        html_count = len(extract_normalized_values(html_values))
-        lines.append(
-            '{}: markers={} json={} state={} detail={} html={}'.format(
-                label,
-                'yes' if marker_found else 'no',
-                json_count,
-                state_count,
-                detail_count,
-                html_count,
-            )
-        )
-        if marker_found and not any((json_count, state_count, detail_count, html_count)):
-            snippet = extract_marker_snippet(html, label)
-            if snippet:
-                lines.append('  snippet={}'.format(snippet))
-
-    return '\n'.join(lines)
+def parse_goodreads_html(html):
+    if BeautifulSoup is None:
+        return None
+    return BeautifulSoup(html or '', 'html.parser')
 
 
 def build_debug_entries(source_name, candidate_label, values):
@@ -870,61 +616,5 @@ def cleanup_value(value):
     return value.strip(' ,;:-')
 
 
-def has_label_marker(html, label):
-    return bool(
-        re.search(r'>\s*{}\s*<'.format(re.escape(label)), html, flags=re.IGNORECASE)
-        or re.search(r'"\s*{}\s*"'.format(re.escape(label)), html, flags=re.IGNORECASE)
-    )
-
-
-def extract_normalized_values(values):
-    normalized = []
-    for value in values:
-        normalized.extend(normalize_extracted_value(value))
-    return normalized
-
-
-def extract_marker_snippet(html, label, radius=180):
-    patterns = [
-        r'>\s*{}\s*<'.format(re.escape(label)),
-        r'"\s*{}\s*"'.format(re.escape(label)),
-    ]
-    for pattern in patterns:
-        match = re.search(pattern, html, flags=re.IGNORECASE)
-        if not match:
-            continue
-        start = max(0, match.start() - radius)
-        end = min(len(html), match.end() + radius)
-        snippet = html[start:end]
-        snippet = snippet.replace('\n', ' ').replace('\r', ' ')
-        snippet = re.sub(r'\s+', ' ', snippet)
-        return snippet[:240]
-    return ''
-
-
 def strip_tags(text):
     return re.sub(r'<[^>]+>', ' ', text or '')
-
-
-def try_parse_json_string(value):
-    if not isinstance(value, str):
-        return None
-    text = value.strip()
-    if not text:
-        return None
-
-    current = text
-    for _ in range(3):
-        stripped = current.strip()
-        if not stripped:
-            return None
-        if stripped[0] not in '[{"':
-            return None
-        try:
-            parsed = json.loads(stripped)
-        except Exception:
-            return None
-        if not isinstance(parsed, str):
-            return parsed
-        current = unescape(parsed)
-    return None

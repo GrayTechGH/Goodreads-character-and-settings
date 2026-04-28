@@ -1,0 +1,174 @@
+# Goodreads Character and Settings plugin translations
+# This file was generated from plugin UI gettext strings.
+msgid ""
+msgstr ""
+"Project-Id-Version: Goodreads Character and Settings 1.0.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-28 00:00+0000\n"
+"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
+"Language-Team: \n"
+"Language: sl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Goodreads Character and Settings conversion script\n"
+
+msgid "Main"
+msgstr "Glavni meni"
+
+msgid "Countries"
+msgstr "države"
+
+msgid "Regions"
+msgstr "regije"
+
+msgid "Autodelete"
+msgstr "samodejno brisanje"
+
+msgid "Select the character and settings fields"
+msgstr "izberi liki and kraji poljes"
+
+msgid "Characters field:"
+msgstr "liki polje:"
+
+msgid "Settings field:"
+msgstr "kraji polje:"
+
+msgid "Countries field:"
+msgstr "države polje:"
+
+msgid "Active calibre language"
+msgstr "aktiven calibre jezik"
+
+msgid "English short names"
+msgstr "kratka angleška names"
+
+msgid "English formal names"
+msgstr "uradna angleška names"
+
+msgid "Country names language:"
+msgstr "države names jezik:"
+
+msgid "Localize country names"
+msgstr "lokaliziraj države names"
+
+msgid "Use the selected-language country names as country values. The selected-language names are also kept as aliases."
+msgstr "Use selected-language države names as država vrednosts. Names are also kept as vzdevki."
+
+msgid "Keep country in settings field"
+msgstr "ohrani država in kraji polje"
+
+msgid "Keep the country in parentheses in the Settings field while also writing it to the Countries field."
+msgstr "ohrani država in parentheses in kraji polje and also write it to države polje."
+
+msgid "Keep region in settings field"
+msgstr "ohrani regija in kraji polje"
+
+msgid "Keep region or subdivision values such as states, provinces, and countries-in-Regions mappings in the Settings field."
+msgstr "ohrani regija or subdivision vrednosts in kraji polje."
+
+msgid "Write \"Empty\" when Goodreads has no value"
+msgstr "Write \"Prazno\" when Goodreads has no vrednost"
+
+msgid " seconds"
+msgstr " sekund"
+
+msgid "Time between queries:"
+msgstr "čas med poizvedbami:"
+
+msgid "Max. Books/Job:"
+msgstr "najv. knjig/opravilo:"
+
+msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list."
+msgstr "države table. dodaj one canonical država per row, optional ISO country code, and vzdevki as a comma-separated list."
+
+msgid "Add"
+msgstr "Add"
+
+msgid "Remove"
+msgstr "Odstrani"
+
+msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries."
+msgstr "regije table. Each regija is preserved in kraji and mapped to the selected država in države."
+
+msgid "Values listed here are automatically removed if Goodreads returns them exactly."
+msgstr "vrednosts listed here are automatically removed if Goodreads returns them exactly."
+
+msgid "Add Value"
+msgstr "dodaj vrednost"
+
+msgid "Remove Value"
+msgstr "odstrani vrednost"
+
+msgid "Restore defaults"
+msgstr "Obnovi privzeto"
+
+msgid "Do not import"
+msgstr "ne uvozi"
+
+msgid "Tags"
+msgstr "Značke"
+
+msgid "Country"
+msgstr "država"
+
+msgid "ISO"
+msgstr "ISO"
+
+msgid "Aliases"
+msgstr "vzdevki"
+
+msgid "Value"
+msgstr "Vrednost"
+
+msgid "If Goodreads does not provide a value, store the text \"Empty\" in any selected custom field."
+msgstr "If Goodreads does not provide a vrednost, store \"Prazno\" in any selected custom polje."
+
+msgid "This option is only available when Characters, Settings, or Countries uses a custom field."
+msgstr "This option is only available when liki, kraji, or države uses a custom polje."
+
+msgid "Add a country first."
+msgstr "dodaj država first."
+
+msgid "Add Country"
+msgstr "dodaj država"
+
+msgid "Country name:"
+msgstr "država name:"
+
+msgid "Add Regions Country"
+msgstr "dodaj država regije"
+
+msgid "Country name cannot be empty."
+msgstr "država name cannot be empty."
+
+msgid "Country name must be unique."
+msgstr "država name must be unique."
+
+msgid "Country row {} uses a duplicate country name."
+msgstr "država row {} uses a duplicate država name."
+
+msgid "Country row {} uses a duplicate ISO country code."
+msgstr "država row {} uses a duplicate ISO država code."
+
+msgid "Run Goodreads character and settings"
+msgstr "Run Goodreads liki polje and kraji polje"
+
+msgid "Goodreads character and settings Plugin"
+msgstr "Goodreads liki polje and kraji polje Plugin"
+
+msgid "Import"
+msgstr "ne uvozi"
+
+msgid "Customize plugin..."
+msgstr "Customize plugin..."
+
+msgid "About"
+msgstr "About"
+
+msgid "About Goodreads character and settings"
+msgstr "About Goodreads liki polje and kraji polje"
+
+msgid "Plugin that imports character and settings data from Goodreads and writes it to custom fields"
+msgstr "Plugin that imports character and settings data from Goodreads and writes it to custom fields"

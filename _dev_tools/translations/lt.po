@@ -1,0 +1,174 @@
+# Goodreads Character and Settings plugin translations
+# This file was generated from plugin UI gettext strings.
+msgid ""
+msgstr ""
+"Project-Id-Version: Goodreads Character and Settings 1.0.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-28 00:00+0000\n"
+"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
+"Language-Team: \n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Goodreads Character and Settings conversion script\n"
+
+msgid "Main"
+msgstr "Pagrindinis"
+
+msgid "Countries"
+msgstr "šalys"
+
+msgid "Regions"
+msgstr "regionai"
+
+msgid "Autodelete"
+msgstr "automatinis šalinimas"
+
+msgid "Select the character and settings fields"
+msgstr "pasirinkti veikėjai and vietos laukass"
+
+msgid "Characters field:"
+msgstr "veikėjai laukas:"
+
+msgid "Settings field:"
+msgstr "vietos laukas:"
+
+msgid "Countries field:"
+msgstr "šalys laukas:"
+
+msgid "Active calibre language"
+msgstr "aktyvi calibre kalba"
+
+msgid "English short names"
+msgstr "trumpi anglų names"
+
+msgid "English formal names"
+msgstr "oficialūs anglų names"
+
+msgid "Country names language:"
+msgstr "šalys names kalba:"
+
+msgid "Localize country names"
+msgstr "lokalizuoti šalys names"
+
+msgid "Use the selected-language country names as country values. The selected-language names are also kept as aliases."
+msgstr "Use selected-language šalys names as šalis reikšmės. Names are also kept as alternatyvūs vardai."
+
+msgid "Keep country in settings field"
+msgstr "palikti šalis in vietos laukas"
+
+msgid "Keep the country in parentheses in the Settings field while also writing it to the Countries field."
+msgstr "palikti šalis in parentheses in vietos laukas and also write it to šalys laukas."
+
+msgid "Keep region in settings field"
+msgstr "palikti regionas in vietos laukas"
+
+msgid "Keep region or subdivision values such as states, provinces, and countries-in-Regions mappings in the Settings field."
+msgstr "palikti regionas or subdivision reikšmės in vietos laukas."
+
+msgid "Write \"Empty\" when Goodreads has no value"
+msgstr "Write \"Tuščia\" when Goodreads has no reikšmė"
+
+msgid " seconds"
+msgstr " sekundės"
+
+msgid "Time between queries:"
+msgstr "laikas tarp užklausų:"
+
+msgid "Max. Books/Job:"
+msgstr "maks. knygų/užduotis:"
+
+msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list."
+msgstr "šalys table. pridėti one canonical šalis per row, optional ISO country code, and alternatyvūs vardai as a comma-separated list."
+
+msgid "Add"
+msgstr "Pridėti"
+
+msgid "Remove"
+msgstr "Pašalinti"
+
+msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries."
+msgstr "regionai table. Each regionas is preserved in vietos and mapped to the selected šalis in šalys."
+
+msgid "Values listed here are automatically removed if Goodreads returns them exactly."
+msgstr "reikšmės listed here are automatically removed if Goodreads returns them exactly."
+
+msgid "Add Value"
+msgstr "pridėti reikšmė"
+
+msgid "Remove Value"
+msgstr "pašalinti reikšmė"
+
+msgid "Restore defaults"
+msgstr "Restore defaults"
+
+msgid "Do not import"
+msgstr "neimportuoti"
+
+msgid "Tags"
+msgstr "Žymės"
+
+msgid "Country"
+msgstr "šalis"
+
+msgid "ISO"
+msgstr "ISO"
+
+msgid "Aliases"
+msgstr "alternatyvūs vardai"
+
+msgid "Value"
+msgstr "Reikšmė"
+
+msgid "If Goodreads does not provide a value, store the text \"Empty\" in any selected custom field."
+msgstr "If Goodreads does not provide a reikšmė, store \"Tuščia\" in any selected custom laukas."
+
+msgid "This option is only available when Characters, Settings, or Countries uses a custom field."
+msgstr "This option is only available when veikėjai, vietos, or šalys uses a custom laukas."
+
+msgid "Add a country first."
+msgstr "pridėti šalis first."
+
+msgid "Add Country"
+msgstr "pridėti šalis"
+
+msgid "Country name:"
+msgstr "šalis name:"
+
+msgid "Add Regions Country"
+msgstr "pridėti šalis regionai"
+
+msgid "Country name cannot be empty."
+msgstr "šalis name cannot be empty."
+
+msgid "Country name must be unique."
+msgstr "šalis name must be unique."
+
+msgid "Country row {} uses a duplicate country name."
+msgstr "šalis row {} uses a duplicate šalis name."
+
+msgid "Country row {} uses a duplicate ISO country code."
+msgstr "šalis row {} uses a duplicate ISO šalis code."
+
+msgid "Run Goodreads character and settings"
+msgstr "Run Goodreads veikėjai laukas and vietos laukas"
+
+msgid "Goodreads character and settings Plugin"
+msgstr "Goodreads veikėjai laukas and vietos laukas Plugin"
+
+msgid "Import"
+msgstr "neimportuoti"
+
+msgid "Customize plugin..."
+msgstr "Customize plugin..."
+
+msgid "About"
+msgstr "About"
+
+msgid "About Goodreads character and settings"
+msgstr "About Goodreads veikėjai laukas and vietos laukas"
+
+msgid "Plugin that imports character and settings data from Goodreads and writes it to custom fields"
+msgstr "Plugin that imports character and settings data from Goodreads and writes it to custom fields"

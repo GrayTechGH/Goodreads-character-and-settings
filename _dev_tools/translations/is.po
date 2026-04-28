@@ -1,0 +1,174 @@
+# Goodreads Character and Settings plugin translations
+# This file was generated from plugin UI gettext strings.
+msgid ""
+msgstr ""
+"Project-Id-Version: Goodreads Character and Settings 1.0.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-28 00:00+0000\n"
+"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
+"Language-Team: \n"
+"Language: is\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Goodreads Character and Settings conversion script\n"
+
+msgid "Main"
+msgstr "Megin"
+
+msgid "Countries"
+msgstr "lönd"
+
+msgid "Regions"
+msgstr "svæði"
+
+msgid "Autodelete"
+msgstr "sjálfvirk eyðing"
+
+msgid "Select the character and settings fields"
+msgstr "velja persónur and staðir reiturs"
+
+msgid "Characters field:"
+msgstr "persónur reitur:"
+
+msgid "Settings field:"
+msgstr "staðir reitur:"
+
+msgid "Countries field:"
+msgstr "lönd reitur:"
+
+msgid "Active calibre language"
+msgstr "virkt calibre tungumál"
+
+msgid "English short names"
+msgstr "stutt ensk names"
+
+msgid "English formal names"
+msgstr "formleg ensk names"
+
+msgid "Country names language:"
+msgstr "lönd names tungumál:"
+
+msgid "Localize country names"
+msgstr "staðfæra lönd names"
+
+msgid "Use the selected-language country names as country values. The selected-language names are also kept as aliases."
+msgstr "Use selected-language lönd names as land gildis. Names are also kept as samheiti."
+
+msgid "Keep country in settings field"
+msgstr "halda land in staðir reitur"
+
+msgid "Keep the country in parentheses in the Settings field while also writing it to the Countries field."
+msgstr "halda land in parentheses in staðir reitur and also write it to lönd reitur."
+
+msgid "Keep region in settings field"
+msgstr "halda svæði in staðir reitur"
+
+msgid "Keep region or subdivision values such as states, provinces, and countries-in-Regions mappings in the Settings field."
+msgstr "halda svæði or subdivision gildis in staðir reitur."
+
+msgid "Write \"Empty\" when Goodreads has no value"
+msgstr "Write \"Tómt\" when Goodreads has no gildi"
+
+msgid " seconds"
+msgstr " sekúndur"
+
+msgid "Time between queries:"
+msgstr "tími milli fyrirspurna:"
+
+msgid "Max. Books/Job:"
+msgstr "hámark bækur/verk:"
+
+msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list."
+msgstr "lönd table. bæta við one canonical land per row, optional ISO country code, and samheiti as a comma-separated list."
+
+msgid "Add"
+msgstr "Bæta við"
+
+msgid "Remove"
+msgstr "Fjarlægja"
+
+msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries."
+msgstr "svæði table. Each svæði is preserved in staðir and mapped to the selected land in lönd."
+
+msgid "Values listed here are automatically removed if Goodreads returns them exactly."
+msgstr "gildis listed here are automatically removed if Goodreads returns them exactly."
+
+msgid "Add Value"
+msgstr "bæta við gildi"
+
+msgid "Remove Value"
+msgstr "fjarlægja gildi"
+
+msgid "Restore defaults"
+msgstr "Restore defaults"
+
+msgid "Do not import"
+msgstr "ekki flytja inn"
+
+msgid "Tags"
+msgstr "Merki"
+
+msgid "Country"
+msgstr "land"
+
+msgid "ISO"
+msgstr "ISO"
+
+msgid "Aliases"
+msgstr "samheiti"
+
+msgid "Value"
+msgstr "Gildi"
+
+msgid "If Goodreads does not provide a value, store the text \"Empty\" in any selected custom field."
+msgstr "If Goodreads does not provide a gildi, store \"Tómt\" in any selected custom reitur."
+
+msgid "This option is only available when Characters, Settings, or Countries uses a custom field."
+msgstr "This option is only available when persónur, staðir, or lönd uses a custom reitur."
+
+msgid "Add a country first."
+msgstr "bæta við land first."
+
+msgid "Add Country"
+msgstr "bæta við land"
+
+msgid "Country name:"
+msgstr "land name:"
+
+msgid "Add Regions Country"
+msgstr "bæta við land svæði"
+
+msgid "Country name cannot be empty."
+msgstr "land name cannot be empty."
+
+msgid "Country name must be unique."
+msgstr "land name must be unique."
+
+msgid "Country row {} uses a duplicate country name."
+msgstr "land row {} uses a duplicate land name."
+
+msgid "Country row {} uses a duplicate ISO country code."
+msgstr "land row {} uses a duplicate ISO land code."
+
+msgid "Run Goodreads character and settings"
+msgstr "Run Goodreads persónur reitur and staðir reitur"
+
+msgid "Goodreads character and settings Plugin"
+msgstr "Goodreads persónur reitur and staðir reitur Plugin"
+
+msgid "Import"
+msgstr "ekki flytja inn"
+
+msgid "Customize plugin..."
+msgstr "Customize plugin..."
+
+msgid "About"
+msgstr "About"
+
+msgid "About Goodreads character and settings"
+msgstr "About Goodreads persónur reitur and staðir reitur"
+
+msgid "Plugin that imports character and settings data from Goodreads and writes it to custom fields"
+msgstr "Plugin that imports character and settings data from Goodreads and writes it to custom fields"

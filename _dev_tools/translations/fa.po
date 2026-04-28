@@ -1,0 +1,174 @@
+# Goodreads Character and Settings plugin translations
+# This file was generated from plugin UI gettext strings.
+msgid ""
+msgstr ""
+"Project-Id-Version: Goodreads Character and Settings 1.0.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-28 00:00+0000\n"
+"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
+"Language-Team: \n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Goodreads Character and Settings conversion script\n"
+
+msgid "Main"
+msgstr "اصلی"
+
+msgid "Countries"
+msgstr "کشورها"
+
+msgid "Regions"
+msgstr "ناحیه‌ها"
+
+msgid "Autodelete"
+msgstr "حذف خودکار"
+
+msgid "Select the character and settings fields"
+msgstr "انتخاب شخصیت‌ها and مکان‌ها فیلدs"
+
+msgid "Characters field:"
+msgstr "شخصیت‌ها فیلد:"
+
+msgid "Settings field:"
+msgstr "مکان‌ها فیلد:"
+
+msgid "Countries field:"
+msgstr "کشورها فیلد:"
+
+msgid "Active calibre language"
+msgstr "فعال calibre زبان"
+
+msgid "English short names"
+msgstr "کوتاه انگلیسی names"
+
+msgid "English formal names"
+msgstr "رسمی انگلیسی names"
+
+msgid "Country names language:"
+msgstr "کشورها names زبان:"
+
+msgid "Localize country names"
+msgstr "بومی‌سازی کشورها names"
+
+msgid "Use the selected-language country names as country values. The selected-language names are also kept as aliases."
+msgstr "Use selected-language کشورها names as کشور مقدارs. Names are also kept as نام‌های مستعار."
+
+msgid "Keep country in settings field"
+msgstr "نگه داشتن کشور in مکان‌ها فیلد"
+
+msgid "Keep the country in parentheses in the Settings field while also writing it to the Countries field."
+msgstr "نگه داشتن کشور in parentheses in مکان‌ها فیلد and also write it to کشورها فیلد."
+
+msgid "Keep region in settings field"
+msgstr "نگه داشتن ناحیه in مکان‌ها فیلد"
+
+msgid "Keep region or subdivision values such as states, provinces, and countries-in-Regions mappings in the Settings field."
+msgstr "نگه داشتن ناحیه or subdivision مقدارs in مکان‌ها فیلد."
+
+msgid "Write \"Empty\" when Goodreads has no value"
+msgstr "Write \"خالی\" when Goodreads has no مقدار"
+
+msgid " seconds"
+msgstr " ثانیه"
+
+msgid "Time between queries:"
+msgstr "زمان بین پرس‌وجوها:"
+
+msgid "Max. Books/Job:"
+msgstr "حداکثر کتاب/کار:"
+
+msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list."
+msgstr "کشورها table. افزودن one canonical کشور per row, optional ISO country code, and نام‌های مستعار as a comma-separated list."
+
+msgid "Add"
+msgstr "Add"
+
+msgid "Remove"
+msgstr "حذف"
+
+msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries."
+msgstr "ناحیه‌ها table. Each ناحیه is preserved in مکان‌ها and mapped to the selected کشور in کشورها."
+
+msgid "Values listed here are automatically removed if Goodreads returns them exactly."
+msgstr "مقدارs listed here are automatically removed if Goodreads returns them exactly."
+
+msgid "Add Value"
+msgstr "افزودن مقدار"
+
+msgid "Remove Value"
+msgstr "حذف مقدار"
+
+msgid "Restore defaults"
+msgstr "Restore defaults"
+
+msgid "Do not import"
+msgstr "وارد نکن"
+
+msgid "Tags"
+msgstr "برچسب‌ها"
+
+msgid "Country"
+msgstr "کشور"
+
+msgid "ISO"
+msgstr "ISO"
+
+msgid "Aliases"
+msgstr "نام‌های مستعار"
+
+msgid "Value"
+msgstr "مقدار"
+
+msgid "If Goodreads does not provide a value, store the text \"Empty\" in any selected custom field."
+msgstr "If Goodreads does not provide a مقدار, store \"خالی\" in any selected custom فیلد."
+
+msgid "This option is only available when Characters, Settings, or Countries uses a custom field."
+msgstr "This option is only available when شخصیت‌ها, مکان‌ها, or کشورها uses a custom فیلد."
+
+msgid "Add a country first."
+msgstr "افزودن کشور first."
+
+msgid "Add Country"
+msgstr "افزودن کشور"
+
+msgid "Country name:"
+msgstr "کشور name:"
+
+msgid "Add Regions Country"
+msgstr "افزودن کشور ناحیه‌ها"
+
+msgid "Country name cannot be empty."
+msgstr "کشور name cannot be empty."
+
+msgid "Country name must be unique."
+msgstr "کشور name must be unique."
+
+msgid "Country row {} uses a duplicate country name."
+msgstr "کشور row {} uses a duplicate کشور name."
+
+msgid "Country row {} uses a duplicate ISO country code."
+msgstr "کشور row {} uses a duplicate ISO کشور code."
+
+msgid "Run Goodreads character and settings"
+msgstr "Run Goodreads شخصیت‌ها فیلد and مکان‌ها فیلد"
+
+msgid "Goodreads character and settings Plugin"
+msgstr "Goodreads شخصیت‌ها فیلد and مکان‌ها فیلد Plugin"
+
+msgid "Import"
+msgstr "وارد نکن"
+
+msgid "Customize plugin..."
+msgstr "Customize plugin..."
+
+msgid "About"
+msgstr "About"
+
+msgid "About Goodreads character and settings"
+msgstr "About Goodreads شخصیت‌ها فیلد and مکان‌ها فیلد"
+
+msgid "Plugin that imports character and settings data from Goodreads and writes it to custom fields"
+msgstr "Plugin that imports character and settings data from Goodreads and writes it to custom fields"

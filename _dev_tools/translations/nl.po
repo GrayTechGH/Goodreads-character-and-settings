@@ -1,0 +1,174 @@
+# Goodreads Character and Settings plugin translations
+# This file was generated from plugin UI gettext strings.
+msgid ""
+msgstr ""
+"Project-Id-Version: Goodreads Character and Settings 1.0.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-28 00:00+0000\n"
+"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Goodreads Character and Settings conversion script\n"
+
+msgid "Main"
+msgstr "Hoofdgeheugen"
+
+msgid "Countries"
+msgstr "landen"
+
+msgid "Regions"
+msgstr "regio’s"
+
+msgid "Autodelete"
+msgstr "automatisch verwijderen"
+
+msgid "Select the character and settings fields"
+msgstr "selecteer personages and locaties velds"
+
+msgid "Characters field:"
+msgstr "personages veld:"
+
+msgid "Settings field:"
+msgstr "locaties veld:"
+
+msgid "Countries field:"
+msgstr "landen veld:"
+
+msgid "Active calibre language"
+msgstr "actieve calibre taal"
+
+msgid "English short names"
+msgstr "korte Engelse names"
+
+msgid "English formal names"
+msgstr "formele Engelse names"
+
+msgid "Country names language:"
+msgstr "landen names taal:"
+
+msgid "Localize country names"
+msgstr "lokaliseren landen names"
+
+msgid "Use the selected-language country names as country values. The selected-language names are also kept as aliases."
+msgstr "Use selected-language landen names as land waardes. Names are also kept as aliassen."
+
+msgid "Keep country in settings field"
+msgstr "behouden land in locaties veld"
+
+msgid "Keep the country in parentheses in the Settings field while also writing it to the Countries field."
+msgstr "behouden land in parentheses in locaties veld and also write it to landen veld."
+
+msgid "Keep region in settings field"
+msgstr "behouden regio in locaties veld"
+
+msgid "Keep region or subdivision values such as states, provinces, and countries-in-Regions mappings in the Settings field."
+msgstr "behouden regio or subdivision waardes in locaties veld."
+
+msgid "Write \"Empty\" when Goodreads has no value"
+msgstr "Write \"Leeg\" when Goodreads has no waarde"
+
+msgid " seconds"
+msgstr " seconden"
+
+msgid "Time between queries:"
+msgstr "tijd tussen zoekopdrachten:"
+
+msgid "Max. Books/Job:"
+msgstr "max. boeken/taak:"
+
+msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list."
+msgstr "landen table. toevoegen one canonical land per row, optional ISO country code, and aliassen as a comma-separated list."
+
+msgid "Add"
+msgstr "Voeg toe"
+
+msgid "Remove"
+msgstr "Verwijderen"
+
+msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries."
+msgstr "regio’s table. Each regio is preserved in locaties and mapped to the selected land in landen."
+
+msgid "Values listed here are automatically removed if Goodreads returns them exactly."
+msgstr "waardes listed here are automatically removed if Goodreads returns them exactly."
+
+msgid "Add Value"
+msgstr "toevoegen waarde"
+
+msgid "Remove Value"
+msgstr "verwijderen waarde"
+
+msgid "Restore defaults"
+msgstr "Herstel standaard instellingen"
+
+msgid "Do not import"
+msgstr "niet importeren"
+
+msgid "Tags"
+msgstr "Labels"
+
+msgid "Country"
+msgstr "land"
+
+msgid "ISO"
+msgstr "ISO"
+
+msgid "Aliases"
+msgstr "aliassen"
+
+msgid "Value"
+msgstr "Waarde"
+
+msgid "If Goodreads does not provide a value, store the text \"Empty\" in any selected custom field."
+msgstr "If Goodreads does not provide a waarde, store \"Leeg\" in any selected custom veld."
+
+msgid "This option is only available when Characters, Settings, or Countries uses a custom field."
+msgstr "This option is only available when personages, locaties, or landen uses a custom veld."
+
+msgid "Add a country first."
+msgstr "toevoegen land first."
+
+msgid "Add Country"
+msgstr "toevoegen land"
+
+msgid "Country name:"
+msgstr "land name:"
+
+msgid "Add Regions Country"
+msgstr "toevoegen land regio’s"
+
+msgid "Country name cannot be empty."
+msgstr "land name cannot be empty."
+
+msgid "Country name must be unique."
+msgstr "land name must be unique."
+
+msgid "Country row {} uses a duplicate country name."
+msgstr "land row {} uses a duplicate land name."
+
+msgid "Country row {} uses a duplicate ISO country code."
+msgstr "land row {} uses a duplicate ISO land code."
+
+msgid "Run Goodreads character and settings"
+msgstr "Run Goodreads personages veld and locaties veld"
+
+msgid "Goodreads character and settings Plugin"
+msgstr "Goodreads personages veld and locaties veld Plugin"
+
+msgid "Import"
+msgstr "niet importeren"
+
+msgid "Customize plugin..."
+msgstr "Customize plugin..."
+
+msgid "About"
+msgstr "About"
+
+msgid "About Goodreads character and settings"
+msgstr "About Goodreads personages veld and locaties veld"
+
+msgid "Plugin that imports character and settings data from Goodreads and writes it to custom fields"
+msgstr "Plugin that imports character and settings data from Goodreads and writes it to custom fields"

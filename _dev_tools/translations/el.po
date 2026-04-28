@@ -1,0 +1,174 @@
+# Goodreads Character and Settings plugin translations
+# This file was generated from plugin UI gettext strings.
+msgid ""
+msgstr ""
+"Project-Id-Version: Goodreads Character and Settings 1.0.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-28 00:00+0000\n"
+"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
+"Language-Team: \n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Goodreads Character and Settings conversion script\n"
+
+msgid "Main"
+msgstr "Κύρια μνήμη"
+
+msgid "Countries"
+msgstr "χώρες"
+
+msgid "Regions"
+msgstr "περιοχές"
+
+msgid "Autodelete"
+msgstr "αυτόματη διαγραφή"
+
+msgid "Select the character and settings fields"
+msgstr "επιλογή χαρακτήρες and τοποθεσίες πεδίοs"
+
+msgid "Characters field:"
+msgstr "χαρακτήρες πεδίο:"
+
+msgid "Settings field:"
+msgstr "τοποθεσίες πεδίο:"
+
+msgid "Countries field:"
+msgstr "χώρες πεδίο:"
+
+msgid "Active calibre language"
+msgstr "ενεργή calibre γλώσσα"
+
+msgid "English short names"
+msgstr "σύντομα αγγλικά names"
+
+msgid "English formal names"
+msgstr "επίσημα αγγλικά names"
+
+msgid "Country names language:"
+msgstr "χώρες names γλώσσα:"
+
+msgid "Localize country names"
+msgstr "τοπικοποίηση χώρες names"
+
+msgid "Use the selected-language country names as country values. The selected-language names are also kept as aliases."
+msgstr "Use selected-language χώρες names as χώρα τιμήs. Names are also kept as ψευδώνυμα."
+
+msgid "Keep country in settings field"
+msgstr "διατήρηση χώρα in τοποθεσίες πεδίο"
+
+msgid "Keep the country in parentheses in the Settings field while also writing it to the Countries field."
+msgstr "διατήρηση χώρα in parentheses in τοποθεσίες πεδίο and also write it to χώρες πεδίο."
+
+msgid "Keep region in settings field"
+msgstr "διατήρηση περιοχή in τοποθεσίες πεδίο"
+
+msgid "Keep region or subdivision values such as states, provinces, and countries-in-Regions mappings in the Settings field."
+msgstr "διατήρηση περιοχή or subdivision τιμήs in τοποθεσίες πεδίο."
+
+msgid "Write \"Empty\" when Goodreads has no value"
+msgstr "Write \"Κενό\" when Goodreads has no τιμή"
+
+msgid " seconds"
+msgstr " δευτερόλεπτα"
+
+msgid "Time between queries:"
+msgstr "χρόνος μεταξύ ερωτημάτων:"
+
+msgid "Max. Books/Job:"
+msgstr "μέγ. βιβλία/εργασία:"
+
+msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list."
+msgstr "χώρες table. προσθήκη one canonical χώρα per row, optional ISO country code, and ψευδώνυμα as a comma-separated list."
+
+msgid "Add"
+msgstr "Προσθήκη"
+
+msgid "Remove"
+msgstr "Αφαίρεση"
+
+msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries."
+msgstr "περιοχές table. Each περιοχή is preserved in τοποθεσίες and mapped to the selected χώρα in χώρες."
+
+msgid "Values listed here are automatically removed if Goodreads returns them exactly."
+msgstr "τιμήs listed here are automatically removed if Goodreads returns them exactly."
+
+msgid "Add Value"
+msgstr "προσθήκη τιμή"
+
+msgid "Remove Value"
+msgstr "αφαίρεση τιμή"
+
+msgid "Restore defaults"
+msgstr "Επαναφορά προεπιλογών"
+
+msgid "Do not import"
+msgstr "να μην εισαχθεί"
+
+msgid "Tags"
+msgstr "Ετικέτες"
+
+msgid "Country"
+msgstr "χώρα"
+
+msgid "ISO"
+msgstr "ISO"
+
+msgid "Aliases"
+msgstr "ψευδώνυμα"
+
+msgid "Value"
+msgstr "Τιμή"
+
+msgid "If Goodreads does not provide a value, store the text \"Empty\" in any selected custom field."
+msgstr "If Goodreads does not provide a τιμή, store \"Κενό\" in any selected custom πεδίο."
+
+msgid "This option is only available when Characters, Settings, or Countries uses a custom field."
+msgstr "This option is only available when χαρακτήρες, τοποθεσίες, or χώρες uses a custom πεδίο."
+
+msgid "Add a country first."
+msgstr "προσθήκη χώρα first."
+
+msgid "Add Country"
+msgstr "προσθήκη χώρα"
+
+msgid "Country name:"
+msgstr "χώρα name:"
+
+msgid "Add Regions Country"
+msgstr "προσθήκη χώρα περιοχές"
+
+msgid "Country name cannot be empty."
+msgstr "χώρα name cannot be empty."
+
+msgid "Country name must be unique."
+msgstr "χώρα name must be unique."
+
+msgid "Country row {} uses a duplicate country name."
+msgstr "χώρα row {} uses a duplicate χώρα name."
+
+msgid "Country row {} uses a duplicate ISO country code."
+msgstr "χώρα row {} uses a duplicate ISO χώρα code."
+
+msgid "Run Goodreads character and settings"
+msgstr "Run Goodreads χαρακτήρες πεδίο and τοποθεσίες πεδίο"
+
+msgid "Goodreads character and settings Plugin"
+msgstr "Goodreads χαρακτήρες πεδίο and τοποθεσίες πεδίο Plugin"
+
+msgid "Import"
+msgstr "να μην εισαχθεί"
+
+msgid "Customize plugin..."
+msgstr "Customize plugin..."
+
+msgid "About"
+msgstr "About"
+
+msgid "About Goodreads character and settings"
+msgstr "About Goodreads χαρακτήρες πεδίο and τοποθεσίες πεδίο"
+
+msgid "Plugin that imports character and settings data from Goodreads and writes it to custom fields"
+msgstr "Plugin that imports character and settings data from Goodreads and writes it to custom fields"

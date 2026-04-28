@@ -6,11 +6,22 @@ __license__   = 'GPL v3'
 __copyright__ = '2026, GrayTechGH'
 __docformat__ = 'restructuredtext en'
 
+try:
+    load_translations()
+except NameError:
+    pass
+
+try:
+    _
+except NameError:
+    def _(text):
+        return text
+
 # The class that all Interface Action plugin wrappers must inherit from
 from calibre.customize import InterfaceActionBase
 
 
-class InterfacePluginDemo(InterfaceActionBase):
+class GoodreadsCharacterSettingsPlugin(InterfaceActionBase):
     '''
     This class is a simple wrapper that provides information about the actual
     plugin class. The actual interface plugin class is called InterfacePlugin
@@ -21,11 +32,10 @@ class InterfacePluginDemo(InterfaceActionBase):
     calibre utilities to run without needing to load the GUI libraries.
     '''
     name                = 'Goodreads character and settings'
-    description         = 'Plugin that imports character and settings data from Goodreads and writes it to custom fields'
+    description         = _('Plugin that imports character and settings data from Goodreads and writes it to custom fields')
     supported_platforms = ['windows', 'osx', 'linux']
     author              = 'GrayTechGH'
-    version             = (1, 0, 0)
-    release_status      = 'Release Candidate 1'
+    version             = (1, 0, 3)
     minimum_calibre_version = (0, 7, 53)
 
     #: This field defines the GUI plugin class that contains all the code

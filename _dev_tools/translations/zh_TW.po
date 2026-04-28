@@ -1,0 +1,174 @@
+# Goodreads Character and Settings plugin translations
+# This file was generated from plugin UI gettext strings.
+msgid ""
+msgstr ""
+"Project-Id-Version: Goodreads Character and Settings 1.0.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-28 00:00+0000\n"
+"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Goodreads Character and Settings conversion script\n"
+
+msgid "Main"
+msgstr "主記憶體"
+
+msgid "Countries"
+msgstr "国家/地区"
+
+msgid "Regions"
+msgstr "地区"
+
+msgid "Autodelete"
+msgstr "自动删除"
+
+msgid "Select the character and settings fields"
+msgstr "选择人物和地点字段"
+
+msgid "Characters field:"
+msgstr "人物字段："
+
+msgid "Settings field:"
+msgstr "地点字段："
+
+msgid "Countries field:"
+msgstr "国家/地区字段："
+
+msgid "Active calibre language"
+msgstr "当前 calibre 语言"
+
+msgid "English short names"
+msgstr "英语简称"
+
+msgid "English formal names"
+msgstr "英语正式名称"
+
+msgid "Country names language:"
+msgstr "国家/地区名称语言："
+
+msgid "Localize country names"
+msgstr "本地化国家/地区名称"
+
+msgid "Use the selected-language country names as country values. The selected-language names are also kept as aliases."
+msgstr "使用所选语言的国家/地区名称作为国家/地区值。这些名称也会保留为别名。"
+
+msgid "Keep country in settings field"
+msgstr "在地点字段中保留国家/地区"
+
+msgid "Keep the country in parentheses in the Settings field while also writing it to the Countries field."
+msgstr "将国家/地区写入国家/地区字段，同时在地点字段的括号中保留它。"
+
+msgid "Keep region in settings field"
+msgstr "在地点字段中保留地区"
+
+msgid "Keep region or subdivision values such as states, provinces, and countries-in-Regions mappings in the Settings field."
+msgstr "在地点字段中保留地区或细分值，例如州、省，以及“地区”映射中的国家。"
+
+msgid "Write \"Empty\" when Goodreads has no value"
+msgstr "当 Goodreads 没有值时写入“Empty”"
+
+msgid " seconds"
+msgstr " 秒"
+
+msgid "Time between queries:"
+msgstr "查询间隔："
+
+msgid "Max. Books/Job:"
+msgstr "每个任务最多书籍数："
+
+msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list."
+msgstr "国家/地区表。每行添加一个规范国家/地区，可选 ISO 国家代码，以及用逗号分隔的别名列表。"
+
+msgid "Add"
+msgstr "加入"
+
+msgid "Remove"
+msgstr "移除"
+
+msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries."
+msgstr "地区表。每个地区都会保留在地点中，并映射到国家/地区中选定的国家/地区。"
+
+msgid "Values listed here are automatically removed if Goodreads returns them exactly."
+msgstr "如果 Goodreads 返回的值与此处列出的值完全一致，这些值会自动移除。"
+
+msgid "Add Value"
+msgstr "添加值"
+
+msgid "Remove Value"
+msgstr "移除值"
+
+msgid "Restore defaults"
+msgstr "還原為預設值"
+
+msgid "Do not import"
+msgstr "不导入"
+
+msgid "Tags"
+msgstr "標籤"
+
+msgid "Country"
+msgstr "国家/地区"
+
+msgid "ISO"
+msgstr "ISO"
+
+msgid "Aliases"
+msgstr "别名"
+
+msgid "Value"
+msgstr "數值"
+
+msgid "If Goodreads does not provide a value, store the text \"Empty\" in any selected custom field."
+msgstr "如果 Goodreads 未提供值，则在所有选定的自定义字段中存储文本“Empty”。"
+
+msgid "This option is only available when Characters, Settings, or Countries uses a custom field."
+msgstr "仅当人物、地点或国家/地区使用自定义字段时，此选项才可用。"
+
+msgid "Add a country first."
+msgstr "请先添加一个国家/地区。"
+
+msgid "Add Country"
+msgstr "添加国家/地区"
+
+msgid "Country name:"
+msgstr "国家/地区名称："
+
+msgid "Add Regions Country"
+msgstr "添加带地区的国家/地区"
+
+msgid "Country name cannot be empty."
+msgstr "国家/地区名称不能为空。"
+
+msgid "Country name must be unique."
+msgstr "国家/地区名称必须唯一。"
+
+msgid "Country row {} uses a duplicate country name."
+msgstr "国家/地区第 {} 行使用了重复的名称。"
+
+msgid "Country row {} uses a duplicate ISO country code."
+msgstr "国家/地区第 {} 行使用了重复的 ISO 国家代码。"
+
+msgid "Run Goodreads character and settings"
+msgstr "執行 Goodreads 人物和地點"
+
+msgid "Goodreads character and settings Plugin"
+msgstr "Goodreads 人物和地點外掛"
+
+msgid "Import"
+msgstr "匯入"
+
+msgid "Customize plugin..."
+msgstr "自訂外掛..."
+
+msgid "About"
+msgstr "關於"
+
+msgid "About Goodreads character and settings"
+msgstr "關於 Goodreads 人物和地點"
+
+msgid "Plugin that imports character and settings data from Goodreads and writes it to custom fields"
+msgstr "Plugin that imports character and settings data from Goodreads and writes it to custom fields"
