@@ -18,7 +18,6 @@ except NameError:
         return text
 
 import time
-from urllib.error import HTTPError, URLError
 
 from calibre import browser
 
@@ -35,10 +34,8 @@ def fetch_goodreads_page(goodreads_id, timeout=30):
         br.set_handle_robots(False)
         response = br.open(url, timeout=timeout)
         raw = response.read()
-    except HTTPError as err:
-        raise RuntimeError(_('HTTP error {} while fetching {}').format(err.code, url))
-    except URLError as err:
-        raise RuntimeError(_('Network error while fetching {}: {}').format(url, err))
+    except Exception as err:
+        raise RuntimeError(_('Error while fetching {}: {}').format(url, err))
 
     return raw.decode('utf-8', errors='replace')
 
