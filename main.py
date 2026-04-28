@@ -6,6 +6,17 @@ __license__   = 'GPL v3'
 __copyright__ = '2026, GrayTechGH'
 __docformat__ = 'restructuredtext en'
 
+try:
+    load_translations()
+except NameError:
+    pass
+
+try:
+    _
+except NameError:
+    def _(text):
+        return text
+
 from calibre.gui2 import Dispatcher
 
 from calibre_plugins.Goodreads_character_and_settings.common import cleanup_value
@@ -26,7 +37,7 @@ class GoodreadsPreviewRunner(object):
     def run_for_selection(self):
         selected_books = self.get_selected_books()
         if not selected_books:
-            self.show_status('No books selected.')
+            self.show_status(_('No books selected.'))
             self.finish()
             return
 
@@ -36,7 +47,7 @@ class GoodreadsPreviewRunner(object):
         ]
 
         if not books_with_ids:
-            self.show_status('No selected books have a Goodreads id.')
+            self.show_status(_('No selected books have a Goodreads id.'))
             self.finish()
             return
 
@@ -62,8 +73,8 @@ class GoodreadsPreviewRunner(object):
 
         for index, batch in enumerate(batches, 1):
             description = (
-                'Import Goodreads character and settings '
-                '(job {} of {})'.format(index, len(batches))
+                _('Import Goodreads character and settings '
+                  '(job {} of {})').format(index, len(batches))
             )
             job = self.gui.job_manager.run_job(
                 Dispatcher(self.batch_job_finished),
@@ -78,7 +89,7 @@ class GoodreadsPreviewRunner(object):
             self.active_jobs[job] = len(batch)
 
         self.show_status(
-            'Starting Goodreads character and settings for {} book(s) in {} job(s).'.format(
+            _('Starting Goodreads character and settings for {} book(s) in {} job(s).').format(
                 len(books_with_ids),
                 len(batches),
             )
@@ -106,7 +117,7 @@ class GoodreadsPreviewRunner(object):
             identifiers = get_metadata_identifiers(mi)
             books.append({
                 'book_id': book_id,
-                'title': mi.title or 'Unknown Title',
+                'title': mi.title or _('Unknown Title'),
                 'author': format_authors(getattr(mi, 'authors', None)),
                 'goodreads_id': clean_goodreads_id(identifiers.get('goodreads')),
                 'existing_fields': self.get_existing_destination_values(db, mi),
@@ -252,7 +263,7 @@ class GoodreadsPreviewRunner(object):
                 )
         if self.completed_jobs >= self.pending_jobs:
             self.show_status(
-                'Goodreads character and settings updated {} book(s); {} failed.'.format(
+                _('Goodreads character and settings updated {} book(s); {} failed.').format(
                     self.updated_count,
                     self.failed_count,
                 ),
@@ -326,5 +337,5 @@ def clean_goodreads_id(value):
 
 def format_authors(authors):
     if not authors:
-        return 'Unknown Author'
+        return _('Unknown Author')
     return ' & '.join(authors)

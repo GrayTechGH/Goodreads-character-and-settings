@@ -6,6 +6,17 @@ __license__   = 'GPL v3'
 __copyright__ = '2026, GrayTechGH'
 __docformat__ = 'restructuredtext en'
 
+try:
+    load_translations()
+except NameError:
+    pass
+
+try:
+    _
+except NameError:
+    def _(text):
+        return text
+
 import time
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
@@ -27,9 +38,9 @@ def fetch_goodreads_page(goodreads_id, timeout=30):
         response = urlopen(request, timeout=timeout)
         raw = response.read()
     except HTTPError as err:
-        raise RuntimeError('HTTP error {} while fetching {}'.format(err.code, url))
+        raise RuntimeError(_('HTTP error {} while fetching {}').format(err.code, url))
     except URLError as err:
-        raise RuntimeError('Network error while fetching {}: {}'.format(url, err))
+        raise RuntimeError(_('Network error while fetching {}: {}').format(url, err))
 
     return raw.decode('utf-8', errors='replace')
 
@@ -127,7 +138,7 @@ def process_goodreads_batch(books, options, notification=lambda *_args: None):
         try:
             notification(
                 float(index + 1) / float(total),
-                book.get('title', 'Processing Goodreads book'),
+                book.get('title', _('Processing Goodreads book')),
             )
         except Exception:
             pass

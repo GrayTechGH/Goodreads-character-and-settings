@@ -6,35 +6,126 @@ __license__   = 'GPL v3'
 __copyright__ = '2026, GrayTechGH'
 __docformat__ = 'restructuredtext en'
 
+try:
+    load_translations()
+except NameError:
+    pass
+
+try:
+    _
+except NameError:
+    def _(text):
+        return text
+
 import json
 import os
 import re
+import sys
+from fnmatch import fnmatchcase
 from html import unescape
 
-from calibre_plugins.Goodreads_character_and_settings.config import FIELD_NONE, prefs
 from calibre_plugins.Goodreads_character_and_settings.settings_data import (
+    active_language_code,
     ensure_user_json_files,
-    plugin_data_dir,
     load_user_autodelete_values,
     load_user_country_data,
     load_user_region_data,
+    plugin_data_dir,
+    read_bundled_plugin_ui_translations,
 )
 
 
+FIELD_NONE = 'none'
 _SKIP_WRITE = object()
 _LAST_EXTRACTION_DEBUG = {}
 _COUNTRY_VARIANT_LOOKUP = None
 _COUNTRY_VARIANT_PATTERNS = None
 _COUNTRY_VARIANT_SOURCE = ''
 _AUTODELETE_VALUES = None
+_AUTODELETE_PATTERNS = None
+_PLUGIN_UI_TRANSLATIONS = None
+_PLUGIN_UI_TRANSLATION_DEBUG_MESSAGES = set()
 
 
 def reset_runtime_caches():
-    global _COUNTRY_VARIANT_LOOKUP, _COUNTRY_VARIANT_PATTERNS, _COUNTRY_VARIANT_SOURCE, _AUTODELETE_VALUES
+    global _COUNTRY_VARIANT_LOOKUP, _COUNTRY_VARIANT_PATTERNS, _COUNTRY_VARIANT_SOURCE, _AUTODELETE_VALUES, _AUTODELETE_PATTERNS
     _COUNTRY_VARIANT_LOOKUP = None
     _COUNTRY_VARIANT_PATTERNS = None
     _COUNTRY_VARIANT_SOURCE = ''
     _AUTODELETE_VALUES = None
+    _AUTODELETE_PATTERNS = None
+    _PLUGIN_UI_TRANSLATION_DEBUG_MESSAGES.clear()
+
+
+def plugin_ui_translations():
+    global _PLUGIN_UI_TRANSLATIONS
+    if _PLUGIN_UI_TRANSLATIONS is not None:
+        return _PLUGIN_UI_TRANSLATIONS
+    try:
+        payload = read_bundled_plugin_ui_translations()
+        translations = payload.get('translations', {}) if isinstance(payload, dict) else {}
+        _PLUGIN_UI_TRANSLATIONS = translations if isinstance(translations, dict) else {}
+    except Exception:
+        _PLUGIN_UI_TRANSLATIONS = {}
+    return _PLUGIN_UI_TRANSLATIONS
+
+
+def plugin_ui_text(text, native_translate=None):
+    if callable(native_translate):
+        translated = native_translate(text)
+        if translated != text:
+            return translated
+    language = active_language_code()
+    translations = plugin_ui_translations()
+    language_translations = translations.get(language)
+    if not language_translations:
+        base_language = language.split('_', 1)[0]
+        language_translations = translations.get(base_language, {})
+        if not language_translations:
+            log_plugin_ui_translation_debug(
+                'missing_language:{}'.format(language),
+                'Goodreads character and settings: no plugin UI translations for language {!r}'.format(language),
+            )
+            return text
+    if text not in language_translations:
+        log_plugin_ui_translation_debug(
+            'missing_text:{}:{}'.format(language, text),
+            'Goodreads character and settings: no plugin UI translation for {!r} in language {!r}'.format(
+                text,
+                language,
+            ),
+        )
+    return language_translations.get(text, text)
+
+
+def log_plugin_ui_translation_debug(key, message):
+    if not is_running_under_calibre_debug():
+        return
+    if key in _PLUGIN_UI_TRANSLATION_DEBUG_MESSAGES:
+        return
+    _PLUGIN_UI_TRANSLATION_DEBUG_MESSAGES.add(key)
+    print(message, flush=True)
+
+
+def is_running_under_calibre_debug():
+    candidates = [sys.argv[0], sys.executable] + list(sys.argv[1:])
+    for candidate in candidates:
+        executable = os.path.basename(str(candidate or '')).lower()
+        if executable in ('calibre-debug', 'calibre-debug.exe'):
+            return True
+    try:
+        from calibre.constants import DEBUG
+        return bool(DEBUG)
+    except Exception:
+        return False
+
+
+def debug_pref(name):
+    try:
+        from calibre_plugins.Goodreads_character_and_settings.config import prefs
+        return prefs.get(name)
+    except Exception:
+        return False
 
 
 def merge_unique_values(existing_values, new_values):
@@ -140,16 +231,24 @@ def load_country_variant_data():
 
 
 def load_autodelete_values():
-    global _AUTODELETE_VALUES
-    if _AUTODELETE_VALUES is not None:
-        return _AUTODELETE_VALUES
+    global _AUTODELETE_VALUES, _AUTODELETE_PATTERNS
+    if _AUTODELETE_VALUES is not None and _AUTODELETE_PATTERNS is not None:
+        return _AUTODELETE_VALUES, _AUTODELETE_PATTERNS
     try:
         ensure_user_json_files()
-        _AUTODELETE_VALUES = {
-            cleanup_value(value).lower()
-            for value in load_user_autodelete_values()
-            if cleanup_value(value)
-        }
+        exact_values = set()
+        wildcard_patterns = []
+        for value in load_user_autodelete_values():
+            cleaned = cleanup_value(value)
+            if not cleaned:
+                continue
+            lowered = cleaned.casefold()
+            if '*' in lowered:
+                wildcard_patterns.append(lowered)
+            else:
+                exact_values.add(lowered)
+        _AUTODELETE_VALUES = exact_values
+        _AUTODELETE_PATTERNS = wildcard_patterns
     except Exception as err:
         print(
             'Goodreads character and settings: failed to load autodelete values: {}'.format(
@@ -158,7 +257,20 @@ def load_autodelete_values():
             flush=True,
         )
         _AUTODELETE_VALUES = set()
-    return _AUTODELETE_VALUES
+        _AUTODELETE_PATTERNS = []
+    return _AUTODELETE_VALUES, _AUTODELETE_PATTERNS
+
+
+def should_autodelete_value(value, exact_values=None, wildcard_patterns=None):
+    cleaned = cleanup_value(value)
+    if not cleaned:
+        return False
+    lowered = cleaned.casefold()
+    if exact_values is None or wildcard_patterns is None:
+        exact_values, wildcard_patterns = load_autodelete_values()
+    if lowered in exact_values:
+        return True
+    return any(fnmatchcase(lowered, pattern) for pattern in wildcard_patterns)
 
 
 def collect_country_variants(canonical_country, variants):
@@ -291,7 +403,7 @@ def build_field_updates(existing_fields, field_specs, extracted_values, write_em
         if incoming_values:
             working_values = merge_unique_values(working_values, incoming_values)
         elif not spec.get('is_tags') and write_empty_to_custom_fields:
-            working_values = merge_unique_values(working_values, ['Empty'])
+            working_values = merge_unique_values(working_values, [_('Empty')])
         else:
             continue
 
@@ -334,7 +446,7 @@ def extract_goodreads_values(html, label):
     values = []
     labels = expand_label_aliases(label)
     debug_entries = []
-    autodelete_values = load_autodelete_values()
+    autodelete_values, autodelete_patterns = load_autodelete_values()
 
     for candidate in labels:
         json_values = extract_values_from_json(candidate, html)
@@ -347,7 +459,7 @@ def extract_goodreads_values(html, label):
         values.extend(detail_values)
         values.extend(html_values)
 
-        if prefs.get('debug_character_sources') and label.lower() == 'characters':
+        if debug_pref('debug_character_sources') and label.lower() == 'characters':
             debug_entries.extend(build_debug_entries('json', candidate, json_values))
             debug_entries.extend(build_debug_entries('state', candidate, state_values))
             debug_entries.extend(build_debug_entries('detail', candidate, detail_values))
@@ -357,13 +469,13 @@ def extract_goodreads_values(html, label):
     seen = set()
     for value in values:
         for normalized in normalize_extracted_value(value):
-            if normalized.lower() in autodelete_values:
+            if should_autodelete_value(normalized, autodelete_values, autodelete_patterns):
                 continue
             if normalized and normalized not in seen:
                 seen.add(normalized)
                 deduped.append(normalized)
 
-    if prefs.get('debug_character_sources') and label.lower() == 'characters':
+    if debug_pref('debug_character_sources') and label.lower() == 'characters':
         _LAST_EXTRACTION_DEBUG[label.lower()] = debug_entries
 
     return deduped
