@@ -5,7 +5,6 @@
 from __future__ import print_function
 
 import importlib.util
-import io
 import json
 import os
 import sys
@@ -13,7 +12,6 @@ import tempfile
 import types
 import unittest
 import zipfile
-from contextlib import redirect_stdout
 
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -76,13 +74,13 @@ class PluginSmokeTests(unittest.TestCase):
     def test_resource_validator_passes_with_current_json_files(self):
         """All bundled JSON resources should pass the development validator."""
         validator = load_module(
-            'dev_tools.validate_resources',
-            os.path.join(ROOT, 'dev_tools', 'validate_resources.py'),
+            '_dev_tools.validate_resources',
+            os.path.join(ROOT, '_dev_tools', 'validate_resources.py'),
         )
         self.assertEqual(0, validator.main())
 
     def test_plugin_zip_excludes_development_helpers(self):
-        """The release zip should not include dev_tools or standalone debug helpers."""
+        """The release zip should not include _dev_tools or standalone debug helpers."""
         zip_path = os.path.join(ROOT, 'Goodreads-character-and-settings.zip')
         self.assertTrue(os.path.exists(zip_path), 'Expected plugin zip to exist at {}'.format(zip_path))
 
@@ -90,8 +88,8 @@ class PluginSmokeTests(unittest.TestCase):
             names = set(zf.namelist())
 
         self.assertFalse(
-            any(name.startswith('dev_tools/') for name in names),
-            'Release zip must not include dev_tools/',
+            any(name.startswith('_dev_tools/') for name in names),
+            'Release zip must not include _dev_tools/',
         )
         self.assertNotIn(
             'debug_supported_languages.py',
@@ -101,9 +99,19 @@ class PluginSmokeTests(unittest.TestCase):
         for required in (
             'resources/default_country_names.json',
             'resources/default_country_regions.json',
-            'resources/plugin_ui_translations.json',
+            'translations/fr.mo',
+            'translations/ar.mo',
+            'translations/en.mo',
         ):
             self.assertIn(required, names, 'Release zip is missing {}'.format(required))
+
+    def test_translation_validator_passes_with_current_catalogs(self):
+        """Generated gettext catalogs should have matching source and runtime coverage."""
+        validator = load_module(
+            '_dev_tools.validate_translations',
+            os.path.join(ROOT, '_dev_tools', 'validate_translations.py'),
+        )
+        self.assertEqual(0, validator.main())
 
     def test_falkland_islands_short_name_keeps_malvinas_as_alias(self):
         """FK should display as Falkland Islands while still matching the ISO formal name."""
@@ -146,113 +154,6 @@ class PluginSmokeTests(unittest.TestCase):
                 payload.get('schema_version'),
                 '{} should carry the current schema version'.format(path),
             )
-
-    def test_plugin_ui_text_prefers_calibre_translation_then_json_fallback(self):
-        """Plugin UI text should use native Calibre text first, then plugin JSON by language."""
-        common = load_module(
-            PLUGIN_PACKAGE + '.common',
-            os.path.join(ROOT, 'common.py'),
-        )
-        common._PLUGIN_UI_TRANSLATIONS = {
-            'fr': {
-                'About': 'À propos',
-                'Customize plugin...': "Personnaliser l'extension...",
-            }
-        }
-        common.active_language_code = lambda: 'fr_CA'
-        common.is_running_under_calibre_debug = lambda: False
-
-        self.assertEqual(
-            'Natif',
-            common.plugin_ui_text('About', lambda text: 'Natif' if text == 'About' else text),
-        )
-        self.assertEqual('À propos', common.plugin_ui_text('About'))
-        self.assertEqual('Untranslated', common.plugin_ui_text('Untranslated'))
-
-    def test_plugin_ui_translation_debug_reports_missing_language_once(self):
-        """Missing plugin UI language maps should be visible in debug output without log spam."""
-        common = load_module(
-            PLUGIN_PACKAGE + '.common',
-            os.path.join(ROOT, 'common.py'),
-        )
-        common._PLUGIN_UI_TRANSLATIONS = {'en': {'About': 'About'}}
-        common._PLUGIN_UI_TRANSLATION_DEBUG_MESSAGES.clear()
-        common.active_language_code = lambda: 'zz_ZZ'
-        common.is_running_under_calibre_debug = lambda: True
-
-        output = io.StringIO()
-        with redirect_stdout(output):
-            self.assertEqual('About', common.plugin_ui_text('About'))
-            self.assertEqual('About', common.plugin_ui_text('About'))
-
-        self.assertEqual(
-            1,
-            output.getvalue().count("no plugin UI translations for language 'zz_ZZ'"),
-            'Missing language debug output should be printed once per session.',
-        )
-
-    def test_plugin_ui_translation_debug_reports_missing_text_once(self):
-        """Missing plugin UI strings should be visible in debug output without log spam."""
-        common = load_module(
-            PLUGIN_PACKAGE + '.common',
-            os.path.join(ROOT, 'common.py'),
-        )
-        common._PLUGIN_UI_TRANSLATIONS = {'fr': {'About': 'À propos'}}
-        common._PLUGIN_UI_TRANSLATION_DEBUG_MESSAGES.clear()
-        common.active_language_code = lambda: 'fr'
-        common.is_running_under_calibre_debug = lambda: True
-
-        output = io.StringIO()
-        with redirect_stdout(output):
-            self.assertEqual('Customize plugin...', common.plugin_ui_text('Customize plugin...'))
-            self.assertEqual('Customize plugin...', common.plugin_ui_text('Customize plugin...'))
-
-        self.assertEqual(
-            1,
-            output.getvalue().count("no plugin UI translation for 'Customize plugin...' in language 'fr'"),
-            'Missing text debug output should be printed once per session.',
-        )
-
-    def test_plugin_ui_translation_debug_is_quiet_outside_calibre_debug(self):
-        """Missing plugin UI translations should not print outside calibre-debug."""
-        common = load_module(
-            PLUGIN_PACKAGE + '.common',
-            os.path.join(ROOT, 'common.py'),
-        )
-        common._PLUGIN_UI_TRANSLATIONS = {'en': {'About': 'About'}}
-        common._PLUGIN_UI_TRANSLATION_DEBUG_MESSAGES.clear()
-        common.active_language_code = lambda: 'zz_ZZ'
-        common.is_running_under_calibre_debug = lambda: False
-
-        output = io.StringIO()
-        with redirect_stdout(output):
-            self.assertEqual('About', common.plugin_ui_text('About'))
-
-        self.assertEqual('', output.getvalue())
-
-    def test_calibre_debug_detection_checks_executable_and_arguments(self):
-        """calibre-debug detection should work from executable names or argv entries."""
-        common = load_module(
-            PLUGIN_PACKAGE + '.common',
-            os.path.join(ROOT, 'common.py'),
-        )
-        original_argv = list(sys.argv)
-        original_executable = sys.executable
-        try:
-            sys.argv = ['calibre-debug.exe', '-g']
-            sys.executable = 'python.exe'
-            self.assertTrue(common.is_running_under_calibre_debug())
-
-            sys.argv = ['python.exe', 'calibre-debug']
-            sys.executable = 'python.exe'
-            self.assertTrue(common.is_running_under_calibre_debug())
-
-            sys.argv = ['calibre.exe']
-            sys.executable = 'python.exe'
-            self.assertFalse(common.is_running_under_calibre_debug())
-        finally:
-            sys.argv = original_argv
-            sys.executable = original_executable
 
     def test_common_value_helpers_keep_lists_clean_and_predictable(self):
         """Common value cleanup should remove markup, whitespace noise, and duplicate values."""

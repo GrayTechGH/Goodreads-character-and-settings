@@ -1,0 +1,174 @@
+# Goodreads Character and Settings plugin translations
+# This file was generated from plugin UI gettext strings.
+msgid ""
+msgstr ""
+"Project-Id-Version: Goodreads Character and Settings 1.0.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-28 00:00+0000\n"
+"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Goodreads Character and Settings conversion script\n"
+
+msgid "Main"
+msgstr "Fő memória"
+
+msgid "Countries"
+msgstr "országok"
+
+msgid "Regions"
+msgstr "régiók"
+
+msgid "Autodelete"
+msgstr "automatikus törlés"
+
+msgid "Select the character and settings fields"
+msgstr "kiválasztás szereplők and helyszínek mezős"
+
+msgid "Characters field:"
+msgstr "szereplők mező:"
+
+msgid "Settings field:"
+msgstr "helyszínek mező:"
+
+msgid "Countries field:"
+msgstr "országok mező:"
+
+msgid "Active calibre language"
+msgstr "aktív calibre nyelv"
+
+msgid "English short names"
+msgstr "rövid angol names"
+
+msgid "English formal names"
+msgstr "hivatalos angol names"
+
+msgid "Country names language:"
+msgstr "országok names nyelv:"
+
+msgid "Localize country names"
+msgstr "honosítás országok names"
+
+msgid "Use the selected-language country names as country values. The selected-language names are also kept as aliases."
+msgstr "Use selected-language országok names as ország értéks. Names are also kept as álnevek."
+
+msgid "Keep country in settings field"
+msgstr "megtartás ország in helyszínek mező"
+
+msgid "Keep the country in parentheses in the Settings field while also writing it to the Countries field."
+msgstr "megtartás ország in parentheses in helyszínek mező and also write it to országok mező."
+
+msgid "Keep region in settings field"
+msgstr "megtartás régió in helyszínek mező"
+
+msgid "Keep region or subdivision values such as states, provinces, and countries-in-Regions mappings in the Settings field."
+msgstr "megtartás régió or subdivision értéks in helyszínek mező."
+
+msgid "Write \"Empty\" when Goodreads has no value"
+msgstr "Write \"Üres\" when Goodreads has no érték"
+
+msgid " seconds"
+msgstr " másodperc"
+
+msgid "Time between queries:"
+msgstr "lekérdezések közti idő:"
+
+msgid "Max. Books/Job:"
+msgstr "max. könyv/feladat:"
+
+msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list."
+msgstr "országok table. hozzáadás one canonical ország per row, optional ISO country code, and álnevek as a comma-separated list."
+
+msgid "Add"
+msgstr "Hozzáad"
+
+msgid "Remove"
+msgstr "Eltávolítás"
+
+msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries."
+msgstr "régiók table. Each régió is preserved in helyszínek and mapped to the selected ország in országok."
+
+msgid "Values listed here are automatically removed if Goodreads returns them exactly."
+msgstr "értéks listed here are automatically removed if Goodreads returns them exactly."
+
+msgid "Add Value"
+msgstr "hozzáadás érték"
+
+msgid "Remove Value"
+msgstr "eltávolítás érték"
+
+msgid "Restore defaults"
+msgstr "Alapértelmezések visszaállítása"
+
+msgid "Do not import"
+msgstr "ne importálja"
+
+msgid "Tags"
+msgstr "Címke"
+
+msgid "Country"
+msgstr "ország"
+
+msgid "ISO"
+msgstr "ISO"
+
+msgid "Aliases"
+msgstr "álnevek"
+
+msgid "Value"
+msgstr "Érték"
+
+msgid "If Goodreads does not provide a value, store the text \"Empty\" in any selected custom field."
+msgstr "If Goodreads does not provide a érték, store \"Üres\" in any selected custom mező."
+
+msgid "This option is only available when Characters, Settings, or Countries uses a custom field."
+msgstr "This option is only available when szereplők, helyszínek, or országok uses a custom mező."
+
+msgid "Add a country first."
+msgstr "hozzáadás ország first."
+
+msgid "Add Country"
+msgstr "hozzáadás ország"
+
+msgid "Country name:"
+msgstr "ország name:"
+
+msgid "Add Regions Country"
+msgstr "hozzáadás ország régiók"
+
+msgid "Country name cannot be empty."
+msgstr "ország name cannot be empty."
+
+msgid "Country name must be unique."
+msgstr "ország name must be unique."
+
+msgid "Country row {} uses a duplicate country name."
+msgstr "ország row {} uses a duplicate ország name."
+
+msgid "Country row {} uses a duplicate ISO country code."
+msgstr "ország row {} uses a duplicate ISO ország code."
+
+msgid "Run Goodreads character and settings"
+msgstr "Run Goodreads szereplők mező and helyszínek mező"
+
+msgid "Goodreads character and settings Plugin"
+msgstr "Goodreads szereplők mező and helyszínek mező Plugin"
+
+msgid "Import"
+msgstr "ne importálja"
+
+msgid "Customize plugin..."
+msgstr "Customize plugin..."
+
+msgid "About"
+msgstr "About"
+
+msgid "About Goodreads character and settings"
+msgstr "About Goodreads szereplők mező and helyszínek mező"
+
+msgid "Plugin that imports character and settings data from Goodreads and writes it to custom fields"
+msgstr "Plugin that imports character and settings data from Goodreads and writes it to custom fields"

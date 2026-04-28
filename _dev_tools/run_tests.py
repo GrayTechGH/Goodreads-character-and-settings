@@ -13,7 +13,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 def main():
-    tests_dir = os.path.join(ROOT, 'dev_tools', 'tests')
+    tests_dir = os.path.join(ROOT, '_dev_tools', 'tests')
     suite = unittest.defaultTestLoader.discover(tests_dir, pattern='test_*.py')
     result = unittest.TextTestRunner(verbosity=2).run(suite)
     return 0 if result.wasSuccessful() else 1

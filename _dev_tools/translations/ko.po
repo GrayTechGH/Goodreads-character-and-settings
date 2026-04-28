@@ -1,0 +1,174 @@
+# Goodreads Character and Settings plugin translations
+# This file was generated from plugin UI gettext strings.
+msgid ""
+msgstr ""
+"Project-Id-Version: Goodreads Character and Settings 1.0.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-28 00:00+0000\n"
+"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
+"Language-Team: \n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Goodreads Character and Settings conversion script\n"
+
+msgid "Main"
+msgstr "주"
+
+msgid "Countries"
+msgstr "국가"
+
+msgid "Regions"
+msgstr "지역"
+
+msgid "Autodelete"
+msgstr "자동 삭제"
+
+msgid "Select the character and settings fields"
+msgstr "선택 등장인물 and 장소 필드s"
+
+msgid "Characters field:"
+msgstr "등장인물 필드:"
+
+msgid "Settings field:"
+msgstr "장소 필드:"
+
+msgid "Countries field:"
+msgstr "국가 필드:"
+
+msgid "Active calibre language"
+msgstr "활성 calibre 언어"
+
+msgid "English short names"
+msgstr "짧은 영어 names"
+
+msgid "English formal names"
+msgstr "공식 영어 names"
+
+msgid "Country names language:"
+msgstr "국가 names 언어:"
+
+msgid "Localize country names"
+msgstr "현지화 국가 names"
+
+msgid "Use the selected-language country names as country values. The selected-language names are also kept as aliases."
+msgstr "Use selected-language 국가 names as 국가 값s. Names are also kept as 별칭."
+
+msgid "Keep country in settings field"
+msgstr "유지 국가 in 장소 필드"
+
+msgid "Keep the country in parentheses in the Settings field while also writing it to the Countries field."
+msgstr "유지 국가 in parentheses in 장소 필드 and also write it to 국가 필드."
+
+msgid "Keep region in settings field"
+msgstr "유지 지역 in 장소 필드"
+
+msgid "Keep region or subdivision values such as states, provinces, and countries-in-Regions mappings in the Settings field."
+msgstr "유지 지역 or subdivision 값s in 장소 필드."
+
+msgid "Write \"Empty\" when Goodreads has no value"
+msgstr "Write \"비어 있음\" when Goodreads has no 값"
+
+msgid " seconds"
+msgstr "초"
+
+msgid "Time between queries:"
+msgstr "쿼리 사이 시간:"
+
+msgid "Max. Books/Job:"
+msgstr "작업당 최대 책 수:"
+
+msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list."
+msgstr "국가 table. 추가 one canonical 국가 per row, optional ISO country code, and 별칭 as a comma-separated list."
+
+msgid "Add"
+msgstr "추가하기"
+
+msgid "Remove"
+msgstr "제거"
+
+msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries."
+msgstr "지역 table. Each 지역 is preserved in 장소 and mapped to the selected 국가 in 국가."
+
+msgid "Values listed here are automatically removed if Goodreads returns them exactly."
+msgstr "값s listed here are automatically removed if Goodreads returns them exactly."
+
+msgid "Add Value"
+msgstr "추가 값"
+
+msgid "Remove Value"
+msgstr "제거 값"
+
+msgid "Restore defaults"
+msgstr "기본값 복원"
+
+msgid "Do not import"
+msgstr "가져오지 않음"
+
+msgid "Tags"
+msgstr "태그"
+
+msgid "Country"
+msgstr "국가"
+
+msgid "ISO"
+msgstr "ISO"
+
+msgid "Aliases"
+msgstr "별칭"
+
+msgid "Value"
+msgstr "값"
+
+msgid "If Goodreads does not provide a value, store the text \"Empty\" in any selected custom field."
+msgstr "If Goodreads does not provide a 값, store \"비어 있음\" in any selected custom 필드."
+
+msgid "This option is only available when Characters, Settings, or Countries uses a custom field."
+msgstr "This option is only available when 등장인물, 장소, or 국가 uses a custom 필드."
+
+msgid "Add a country first."
+msgstr "추가 국가 first."
+
+msgid "Add Country"
+msgstr "추가 국가"
+
+msgid "Country name:"
+msgstr "국가 name:"
+
+msgid "Add Regions Country"
+msgstr "추가 국가 지역"
+
+msgid "Country name cannot be empty."
+msgstr "국가 name cannot be empty."
+
+msgid "Country name must be unique."
+msgstr "국가 name must be unique."
+
+msgid "Country row {} uses a duplicate country name."
+msgstr "국가 row {} uses a duplicate 국가 name."
+
+msgid "Country row {} uses a duplicate ISO country code."
+msgstr "국가 row {} uses a duplicate ISO 국가 code."
+
+msgid "Run Goodreads character and settings"
+msgstr "Run Goodreads 등장인물 필드 and 장소 필드"
+
+msgid "Goodreads character and settings Plugin"
+msgstr "Goodreads 등장인물 필드 and 장소 필드 Plugin"
+
+msgid "Import"
+msgstr "가져오지 않음"
+
+msgid "Customize plugin..."
+msgstr "Customize plugin..."
+
+msgid "About"
+msgstr "About"
+
+msgid "About Goodreads character and settings"
+msgstr "About Goodreads 등장인물 필드 and 장소 필드"
+
+msgid "Plugin that imports character and settings data from Goodreads and writes it to custom fields"
+msgstr "Plugin that imports character and settings data from Goodreads and writes it to custom fields"

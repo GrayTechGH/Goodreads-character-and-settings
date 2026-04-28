@@ -1,0 +1,174 @@
+# Goodreads Character and Settings plugin translation template
+# This file was generated from plugin UI gettext strings.
+msgid ""
+msgstr ""
+"Project-Id-Version: Goodreads Character and Settings 1.0.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-28 00:00+0000\n"
+"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Goodreads Character and Settings conversion script\n"
+
+msgid "Main"
+msgstr ""
+
+msgid "Countries"
+msgstr ""
+
+msgid "Regions"
+msgstr ""
+
+msgid "Autodelete"
+msgstr ""
+
+msgid "Select the character and settings fields"
+msgstr ""
+
+msgid "Characters field:"
+msgstr ""
+
+msgid "Settings field:"
+msgstr ""
+
+msgid "Countries field:"
+msgstr ""
+
+msgid "Active calibre language"
+msgstr ""
+
+msgid "English short names"
+msgstr ""
+
+msgid "English formal names"
+msgstr ""
+
+msgid "Country names language:"
+msgstr ""
+
+msgid "Localize country names"
+msgstr ""
+
+msgid "Use the selected-language country names as country values. The selected-language names are also kept as aliases."
+msgstr ""
+
+msgid "Keep country in settings field"
+msgstr ""
+
+msgid "Keep the country in parentheses in the Settings field while also writing it to the Countries field."
+msgstr ""
+
+msgid "Keep region in settings field"
+msgstr ""
+
+msgid "Keep region or subdivision values such as states, provinces, and countries-in-Regions mappings in the Settings field."
+msgstr ""
+
+msgid "Write \"Empty\" when Goodreads has no value"
+msgstr ""
+
+msgid " seconds"
+msgstr ""
+
+msgid "Time between queries:"
+msgstr ""
+
+msgid "Max. Books/Job:"
+msgstr ""
+
+msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list."
+msgstr ""
+
+msgid "Add"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries."
+msgstr ""
+
+msgid "Values listed here are automatically removed if Goodreads returns them exactly."
+msgstr ""
+
+msgid "Add Value"
+msgstr ""
+
+msgid "Remove Value"
+msgstr ""
+
+msgid "Restore defaults"
+msgstr ""
+
+msgid "Do not import"
+msgstr ""
+
+msgid "Tags"
+msgstr ""
+
+msgid "Country"
+msgstr ""
+
+msgid "ISO"
+msgstr ""
+
+msgid "Aliases"
+msgstr ""
+
+msgid "Value"
+msgstr ""
+
+msgid "If Goodreads does not provide a value, store the text \"Empty\" in any selected custom field."
+msgstr ""
+
+msgid "This option is only available when Characters, Settings, or Countries uses a custom field."
+msgstr ""
+
+msgid "Add a country first."
+msgstr ""
+
+msgid "Add Country"
+msgstr ""
+
+msgid "Country name:"
+msgstr ""
+
+msgid "Add Regions Country"
+msgstr ""
+
+msgid "Country name cannot be empty."
+msgstr ""
+
+msgid "Country name must be unique."
+msgstr ""
+
+msgid "Country row {} uses a duplicate country name."
+msgstr ""
+
+msgid "Country row {} uses a duplicate ISO country code."
+msgstr ""
+
+msgid "Run Goodreads character and settings"
+msgstr ""
+
+msgid "Goodreads character and settings Plugin"
+msgstr ""
+
+msgid "Import"
+msgstr ""
+
+msgid "Customize plugin..."
+msgstr ""
+
+msgid "About"
+msgstr ""
+
+msgid "About Goodreads character and settings"
+msgstr ""
+
+msgid "Plugin that imports character and settings data from Goodreads and writes it to custom fields"
+msgstr ""

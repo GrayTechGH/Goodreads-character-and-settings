@@ -37,8 +37,6 @@ from qt.core import (
 )
 
 from calibre.utils.config import JSONConfig
-from calibre_plugins.Goodreads_character_and_settings.common import plugin_ui_text
-
 from calibre_plugins.Goodreads_character_and_settings.settings_data import (
     COUNTRY_NAME_LANGUAGE_AUTO,
     COUNTRY_NAME_LANGUAGE_ENGLISH_FORMAL,
@@ -63,10 +61,6 @@ prefs = JSONConfig('plugins/Goodreads_character_and_settings')
 
 FIELD_TAGS = 'tags'
 FIELD_NONE = 'none'
-
-
-def ui_text(text):
-    return plugin_ui_text(text, _)
 
 
 prefs.defaults['character_field'] = FIELD_NONE
@@ -107,10 +101,10 @@ class ConfigWidget(QWidget):
         self.regions_tab = QWidget(self)
         self.autodelete_tab = QWidget(self)
 
-        self.tabs.addTab(self.main_tab, ui_text('Main'))
-        self.tabs.addTab(self.countries_tab, ui_text('Countries'))
-        self.tabs.addTab(self.regions_tab, ui_text('Regions'))
-        self.tabs.addTab(self.autodelete_tab, ui_text('Autodelete'))
+        self.tabs.addTab(self.main_tab, _('Main'))
+        self.tabs.addTab(self.countries_tab, _('Countries'))
+        self.tabs.addTab(self.regions_tab, _('Regions'))
+        self.tabs.addTab(self.autodelete_tab, _('Autodelete'))
 
         self.build_main_tab()
         self.build_countries_tab()
@@ -128,7 +122,7 @@ class ConfigWidget(QWidget):
         layout = QVBoxLayout()
         self.main_tab.setLayout(layout)
 
-        description = QLabel(ui_text('Select the character and settings fields'))
+        description = QLabel(_('Select the character and settings fields'))
         description.setWordWrap(True)
         layout.addWidget(description)
 
@@ -136,22 +130,22 @@ class ConfigWidget(QWidget):
         layout.addLayout(self.form)
 
         self.character_field = self.create_field_combo()
-        self.form.addRow(ui_text('Characters field:'), self.character_field)
+        self.form.addRow(_('Characters field:'), self.character_field)
 
         self.settings_field = self.create_field_combo()
-        self.form.addRow(ui_text('Settings field:'), self.settings_field)
+        self.form.addRow(_('Settings field:'), self.settings_field)
 
         self.countries_field = self.create_field_combo()
-        self.form.addRow(ui_text('Countries field:'), self.countries_field)
+        self.form.addRow(_('Countries field:'), self.countries_field)
 
         self.country_name_language = QComboBox(self)
-        self.country_name_language.addItem(ui_text('Active calibre language'), COUNTRY_NAME_LANGUAGE_AUTO)
+        self.country_name_language.addItem(_('Active calibre language'), COUNTRY_NAME_LANGUAGE_AUTO)
         self.country_name_language.addItem(
-            ui_text('English short names'),
+            _('English short names'),
             COUNTRY_NAME_LANGUAGE_ENGLISH_SHORT,
         )
         self.country_name_language.addItem(
-            ui_text('English formal names'),
+            _('English formal names'),
             COUNTRY_NAME_LANGUAGE_ENGLISH_FORMAL,
         )
         for language in country_name_language_options():
@@ -161,39 +155,39 @@ class ConfigWidget(QWidget):
                 country_name_language_display_name(language),
                 language,
             )
-        self.form.addRow(ui_text('Country names language:'), self.country_name_language)
+        self.form.addRow(_('Country names language:'), self.country_name_language)
 
-        self.localize_country_names = QCheckBox(ui_text('Localize country names'))
+        self.localize_country_names = QCheckBox(_('Localize country names'))
         self.localize_country_names.setToolTip(
-            ui_text('Use the selected-language country names as country values. '
+            _('Use the selected-language country names as country values. '
                     'The selected-language names are also kept as aliases.')
         )
         self.form.addRow('', self.localize_country_names)
 
         self.include_country_with_location = QCheckBox(
-            ui_text('Keep country in settings field')
+            _('Keep country in settings field')
         )
         self.include_country_with_location.setChecked(
             prefs['include_country_with_location']
         )
         self.include_country_with_location.setToolTip(
-            ui_text('Keep the country in parentheses in the Settings field while also writing it to the Countries field.')
+            _('Keep the country in parentheses in the Settings field while also writing it to the Countries field.')
         )
         self.form.addRow('', self.include_country_with_location)
 
         self.keep_region_in_settings = QCheckBox(
-            ui_text('Keep region in settings field')
+            _('Keep region in settings field')
         )
         self.keep_region_in_settings.setChecked(
             prefs['keep_region_in_settings']
         )
         self.keep_region_in_settings.setToolTip(
-            ui_text('Keep region or subdivision values such as states, provinces, and countries-in-Regions mappings in the Settings field.')
+            _('Keep region or subdivision values such as states, provinces, and countries-in-Regions mappings in the Settings field.')
         )
         self.form.addRow('', self.keep_region_in_settings)
 
         self.write_empty_to_custom_fields = QCheckBox(
-            ui_text('Write "Empty" when Goodreads has no value')
+            _('Write "Empty" when Goodreads has no value')
         )
         self.write_empty_to_custom_fields.setChecked(
             prefs['write_empty_to_custom_fields']
@@ -203,15 +197,15 @@ class ConfigWidget(QWidget):
         self.query_interval_seconds = QSpinBox(self)
         self.query_interval_seconds.setMinimum(1)
         self.query_interval_seconds.setMaximum(3600)
-        self.query_interval_seconds.setSuffix(ui_text(' seconds'))
+        self.query_interval_seconds.setSuffix(_(' seconds'))
         self.query_interval_seconds.setValue(prefs['query_interval_seconds'])
-        self.form.addRow(ui_text('Time between queries:'), self.query_interval_seconds)
+        self.form.addRow(_('Time between queries:'), self.query_interval_seconds)
 
         self.max_books_per_job = QSpinBox(self)
         self.max_books_per_job.setMinimum(1)
         self.max_books_per_job.setMaximum(100000)
         self.max_books_per_job.setValue(prefs['max_books_per_job'])
-        self.form.addRow(ui_text('Max. Books/Job:'), self.max_books_per_job)
+        self.form.addRow(_('Max. Books/Job:'), self.max_books_per_job)
 
         self.character_field.currentIndexChanged.connect(
             self.update_empty_option_state
@@ -236,14 +230,14 @@ class ConfigWidget(QWidget):
         self.countries_tab.setLayout(layout)
 
         description = QLabel(
-            ui_text('Countries table. Add one canonical country per row, optional ISO '
+            _('Countries table. Add one canonical country per row, optional ISO '
                     'country code, and any aliases as a comma-separated list.')
         )
         description.setWordWrap(True)
         layout.addWidget(description)
 
         self.countries_table = QTableWidget(0, 3, self)
-        self.countries_table.setHorizontalHeaderLabels([ui_text('Country'), ui_text('ISO'), ui_text('Aliases')])
+        self.countries_table.setHorizontalHeaderLabels([_('Country'), _('ISO'), _('Aliases')])
         self.countries_table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self.countries_table.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
         self.countries_table.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
@@ -267,14 +261,14 @@ class ConfigWidget(QWidget):
         self.regions_tab.setLayout(layout)
 
         description = QLabel(
-            ui_text('Regions table. Each region is preserved in Settings and mapped to '
+            _('Regions table. Each region is preserved in Settings and mapped to '
                     'the selected country in Countries.')
         )
         description.setWordWrap(True)
         layout.addWidget(description)
 
         self.regions_table = QTableWidget(0, 2, self)
-        self.regions_table.setHorizontalHeaderLabels([ui_text('Country'), ui_text('Regions')])
+        self.regions_table.setHorizontalHeaderLabels([_('Country'), _('Regions')])
         self.regions_table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self.regions_table.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
         self.regions_table.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
@@ -297,14 +291,14 @@ class ConfigWidget(QWidget):
         self.autodelete_tab.setLayout(layout)
 
         description = QLabel(
-            ui_text('Values listed here are automatically removed if Goodreads returns '
+            _('Values listed here are automatically removed if Goodreads returns '
                     'them exactly.')
         )
         description.setWordWrap(True)
         layout.addWidget(description)
 
         self.autodelete_table = QTableWidget(0, 1, self)
-        self.autodelete_table.setHorizontalHeaderLabels([ui_text('Value')])
+        self.autodelete_table.setHorizontalHeaderLabels([_('Value')])
         self.autodelete_table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self.autodelete_table.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
         self.autodelete_table.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
@@ -312,8 +306,8 @@ class ConfigWidget(QWidget):
         layout.addWidget(self.autodelete_table)
 
         buttons = QHBoxLayout()
-        self.add_autodelete_button = QPushButton(ui_text('Add Value'), self)
-        self.remove_autodelete_button = QPushButton(ui_text('Remove Value'), self)
+        self.add_autodelete_button = QPushButton(_('Add Value'), self)
+        self.remove_autodelete_button = QPushButton(_('Remove Value'), self)
         self.add_autodelete_button.clicked.connect(self.add_autodelete_row)
         self.remove_autodelete_button.clicked.connect(self.remove_autodelete_row)
         buttons.addWidget(self.add_autodelete_button)
@@ -331,7 +325,7 @@ class ConfigWidget(QWidget):
 
     def create_field_combo(self):
         combo = QComboBox(self)
-        combo.addItem(ui_text('Do not import'), FIELD_NONE)
+        combo.addItem(_('Do not import'), FIELD_NONE)
         combo.addItem(_('Tags'), FIELD_TAGS)
         for lookup_name, display_name in self.custom_fields:
             combo.addItem(display_name, lookup_name)
@@ -363,13 +357,13 @@ class ConfigWidget(QWidget):
         self.write_empty_to_custom_fields.setEnabled(enabled)
         if enabled:
             self.write_empty_to_custom_fields.setToolTip(
-                ui_text('If Goodreads does not provide a value, store the text "Empty" '
+                _('If Goodreads does not provide a value, store the text "Empty" '
                         'in any selected custom field.')
             )
         else:
             self.write_empty_to_custom_fields.setChecked(False)
             self.write_empty_to_custom_fields.setToolTip(
-                ui_text('This option is only available when Characters, Settings, or '
+                _('This option is only available when Characters, Settings, or '
                         'Countries uses a custom field.')
             )
 
@@ -510,7 +504,7 @@ class ConfigWidget(QWidget):
     def prompt_for_existing_country(self, title, label):
         countries = self.current_country_records()
         if not countries:
-            QMessageBox.warning(self, title, ui_text('Add a country first.'))
+            QMessageBox.warning(self, title, _('Add a country first.'))
             return ''
         labels = [
             '{} ({})'.format(item['country'], item['iso']) if item['iso'] else item['country']
@@ -537,10 +531,10 @@ class ConfigWidget(QWidget):
                 return ''
             country = str(value).strip()
             if not country:
-                QMessageBox.warning(self, title, ui_text('Country name cannot be empty.'))
+                QMessageBox.warning(self, title, _('Country name cannot be empty.'))
                 continue
             if country.lower() in existing:
-                QMessageBox.warning(self, title, ui_text('Country name must be unique.'))
+                QMessageBox.warning(self, title, _('Country name must be unique.'))
                 continue
             return country
 
@@ -560,8 +554,8 @@ class ConfigWidget(QWidget):
     def add_country_row(self, country='', iso='', aliases='', refresh_region_combos=True, activate_row=True):
         if not country:
             country = self.prompt_for_unique_country(
-                ui_text('Add Country'),
-                ui_text('Country name:'),
+                _('Add Country'),
+                _('Country name:'),
                 self.current_country_names(),
             )
             if not country:
@@ -594,8 +588,8 @@ class ConfigWidget(QWidget):
         iso = normalize_country_code(iso)
         if not country_key:
             country_key = self.prompt_for_existing_country(
-                ui_text('Add Regions Country'),
-                ui_text('Country name:'),
+                _('Add Regions Country'),
+                _('Country name:'),
             )
             if not country_key:
                 return
@@ -730,16 +724,16 @@ class ConfigWidget(QWidget):
             if country_key in seen_names:
                 QMessageBox.warning(
                     self,
-                    ui_text('Countries'),
-                    ui_text('Country row {} uses a duplicate country name.').format(row),
+                    _('Countries'),
+                    _('Country row {} uses a duplicate country name.').format(row),
                 )
                 return False
             seen_names.add(country_key)
             if item.get('iso') and item['iso'] in seen_codes:
                 QMessageBox.warning(
                     self,
-                    ui_text('Countries'),
-                    ui_text('Country row {} uses a duplicate ISO country code.').format(row),
+                    _('Countries'),
+                    _('Country row {} uses a duplicate ISO country code.').format(row),
                 )
                 return False
             if item.get('iso'):

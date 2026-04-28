@@ -1,0 +1,174 @@
+# Goodreads Character and Settings plugin translations
+# This file was generated from plugin UI gettext strings.
+msgid ""
+msgstr ""
+"Project-Id-Version: Goodreads Character and Settings 1.0.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-28 00:00+0000\n"
+"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
+"Language-Team: \n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Goodreads Character and Settings conversion script\n"
+
+msgid "Main"
+msgstr "ראשי"
+
+msgid "Countries"
+msgstr "מדינות"
+
+msgid "Regions"
+msgstr "אזורים"
+
+msgid "Autodelete"
+msgstr "מחיקה אוטומטית"
+
+msgid "Select the character and settings fields"
+msgstr "בחר דמויות and מקומות שדהs"
+
+msgid "Characters field:"
+msgstr "דמויות שדה:"
+
+msgid "Settings field:"
+msgstr "מקומות שדה:"
+
+msgid "Countries field:"
+msgstr "מדינות שדה:"
+
+msgid "Active calibre language"
+msgstr "פעילה calibre שפה"
+
+msgid "English short names"
+msgstr "קצרים אנגלית names"
+
+msgid "English formal names"
+msgstr "רשמיים אנגלית names"
+
+msgid "Country names language:"
+msgstr "מדינות names שפה:"
+
+msgid "Localize country names"
+msgstr "התאם לשפה מדינות names"
+
+msgid "Use the selected-language country names as country values. The selected-language names are also kept as aliases."
+msgstr "Use selected-language מדינות names as מדינה ערךs. Names are also kept as כינויים."
+
+msgid "Keep country in settings field"
+msgstr "שמור מדינה in מקומות שדה"
+
+msgid "Keep the country in parentheses in the Settings field while also writing it to the Countries field."
+msgstr "שמור מדינה in parentheses in מקומות שדה and also write it to מדינות שדה."
+
+msgid "Keep region in settings field"
+msgstr "שמור אזור in מקומות שדה"
+
+msgid "Keep region or subdivision values such as states, provinces, and countries-in-Regions mappings in the Settings field."
+msgstr "שמור אזור or subdivision ערךs in מקומות שדה."
+
+msgid "Write \"Empty\" when Goodreads has no value"
+msgstr "Write \"ריק\" when Goodreads has no ערך"
+
+msgid " seconds"
+msgstr " שניות"
+
+msgid "Time between queries:"
+msgstr "זמן בין שאילתות:"
+
+msgid "Max. Books/Job:"
+msgstr "מקס. ספרים/משימה:"
+
+msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list."
+msgstr "מדינות table. הוסף one canonical מדינה per row, optional ISO country code, and כינויים as a comma-separated list."
+
+msgid "Add"
+msgstr "Add"
+
+msgid "Remove"
+msgstr "הסר"
+
+msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries."
+msgstr "אזורים table. Each אזור is preserved in מקומות and mapped to the selected מדינה in מדינות."
+
+msgid "Values listed here are automatically removed if Goodreads returns them exactly."
+msgstr "ערךs listed here are automatically removed if Goodreads returns them exactly."
+
+msgid "Add Value"
+msgstr "הוסף ערך"
+
+msgid "Remove Value"
+msgstr "הסר ערך"
+
+msgid "Restore defaults"
+msgstr "Restore defaults"
+
+msgid "Do not import"
+msgstr "אל תייבא"
+
+msgid "Tags"
+msgstr "תגיות"
+
+msgid "Country"
+msgstr "מדינה"
+
+msgid "ISO"
+msgstr "ISO"
+
+msgid "Aliases"
+msgstr "כינויים"
+
+msgid "Value"
+msgstr "ערך"
+
+msgid "If Goodreads does not provide a value, store the text \"Empty\" in any selected custom field."
+msgstr "If Goodreads does not provide a ערך, store \"ריק\" in any selected custom שדה."
+
+msgid "This option is only available when Characters, Settings, or Countries uses a custom field."
+msgstr "This option is only available when דמויות, מקומות, or מדינות uses a custom שדה."
+
+msgid "Add a country first."
+msgstr "הוסף מדינה first."
+
+msgid "Add Country"
+msgstr "הוסף מדינה"
+
+msgid "Country name:"
+msgstr "מדינה name:"
+
+msgid "Add Regions Country"
+msgstr "הוסף מדינה אזורים"
+
+msgid "Country name cannot be empty."
+msgstr "מדינה name cannot be empty."
+
+msgid "Country name must be unique."
+msgstr "מדינה name must be unique."
+
+msgid "Country row {} uses a duplicate country name."
+msgstr "מדינה row {} uses a duplicate מדינה name."
+
+msgid "Country row {} uses a duplicate ISO country code."
+msgstr "מדינה row {} uses a duplicate ISO מדינה code."
+
+msgid "Run Goodreads character and settings"
+msgstr "Run Goodreads דמויות שדה and מקומות שדה"
+
+msgid "Goodreads character and settings Plugin"
+msgstr "Goodreads דמויות שדה and מקומות שדה Plugin"
+
+msgid "Import"
+msgstr "אל תייבא"
+
+msgid "Customize plugin..."
+msgstr "Customize plugin..."
+
+msgid "About"
+msgstr "About"
+
+msgid "About Goodreads character and settings"
+msgstr "About Goodreads דמויות שדה and מקומות שדה"
+
+msgid "Plugin that imports character and settings data from Goodreads and writes it to custom fields"
+msgstr "Plugin that imports character and settings data from Goodreads and writes it to custom fields"

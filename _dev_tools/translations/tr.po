@@ -1,0 +1,174 @@
+# Goodreads Character and Settings plugin translations
+# This file was generated from plugin UI gettext strings.
+msgid ""
+msgstr ""
+"Project-Id-Version: Goodreads Character and Settings 1.0.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-28 00:00+0000\n"
+"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
+"Language-Team: \n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Goodreads Character and Settings conversion script\n"
+
+msgid "Main"
+msgstr "Ana"
+
+msgid "Countries"
+msgstr "ülkeler"
+
+msgid "Regions"
+msgstr "bölgeler"
+
+msgid "Autodelete"
+msgstr "otomatik silme"
+
+msgid "Select the character and settings fields"
+msgstr "seç karakterler and mekanlar alans"
+
+msgid "Characters field:"
+msgstr "karakterler alan:"
+
+msgid "Settings field:"
+msgstr "mekanlar alan:"
+
+msgid "Countries field:"
+msgstr "ülkeler alan:"
+
+msgid "Active calibre language"
+msgstr "etkin calibre dil"
+
+msgid "English short names"
+msgstr "kısa İngilizce names"
+
+msgid "English formal names"
+msgstr "resmi İngilizce names"
+
+msgid "Country names language:"
+msgstr "ülkeler names dil:"
+
+msgid "Localize country names"
+msgstr "yerelleştir ülkeler names"
+
+msgid "Use the selected-language country names as country values. The selected-language names are also kept as aliases."
+msgstr "Use selected-language ülkeler names as ülke değers. Names are also kept as takma adlar."
+
+msgid "Keep country in settings field"
+msgstr "koru ülke in mekanlar alan"
+
+msgid "Keep the country in parentheses in the Settings field while also writing it to the Countries field."
+msgstr "koru ülke in parentheses in mekanlar alan and also write it to ülkeler alan."
+
+msgid "Keep region in settings field"
+msgstr "koru bölge in mekanlar alan"
+
+msgid "Keep region or subdivision values such as states, provinces, and countries-in-Regions mappings in the Settings field."
+msgstr "koru bölge or subdivision değers in mekanlar alan."
+
+msgid "Write \"Empty\" when Goodreads has no value"
+msgstr "Write \"Boş\" when Goodreads has no değer"
+
+msgid " seconds"
+msgstr " saniye"
+
+msgid "Time between queries:"
+msgstr "sorgular arası süre:"
+
+msgid "Max. Books/Job:"
+msgstr "maks. kitap/iş:"
+
+msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list."
+msgstr "ülkeler table. ekle one canonical ülke per row, optional ISO country code, and takma adlar as a comma-separated list."
+
+msgid "Add"
+msgstr "Ekle"
+
+msgid "Remove"
+msgstr "Temizle"
+
+msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries."
+msgstr "bölgeler table. Each bölge is preserved in mekanlar and mapped to the selected ülke in ülkeler."
+
+msgid "Values listed here are automatically removed if Goodreads returns them exactly."
+msgstr "değers listed here are automatically removed if Goodreads returns them exactly."
+
+msgid "Add Value"
+msgstr "ekle değer"
+
+msgid "Remove Value"
+msgstr "kaldır değer"
+
+msgid "Restore defaults"
+msgstr "Varsayılanları geri yükle"
+
+msgid "Do not import"
+msgstr "içe aktarma"
+
+msgid "Tags"
+msgstr "Etiketler"
+
+msgid "Country"
+msgstr "ülke"
+
+msgid "ISO"
+msgstr "ISO"
+
+msgid "Aliases"
+msgstr "takma adlar"
+
+msgid "Value"
+msgstr "Değer"
+
+msgid "If Goodreads does not provide a value, store the text \"Empty\" in any selected custom field."
+msgstr "If Goodreads does not provide a değer, store \"Boş\" in any selected custom alan."
+
+msgid "This option is only available when Characters, Settings, or Countries uses a custom field."
+msgstr "This option is only available when karakterler, mekanlar, or ülkeler uses a custom alan."
+
+msgid "Add a country first."
+msgstr "ekle ülke first."
+
+msgid "Add Country"
+msgstr "ekle ülke"
+
+msgid "Country name:"
+msgstr "ülke name:"
+
+msgid "Add Regions Country"
+msgstr "ekle ülke bölgeler"
+
+msgid "Country name cannot be empty."
+msgstr "ülke name cannot be empty."
+
+msgid "Country name must be unique."
+msgstr "ülke name must be unique."
+
+msgid "Country row {} uses a duplicate country name."
+msgstr "ülke row {} uses a duplicate ülke name."
+
+msgid "Country row {} uses a duplicate ISO country code."
+msgstr "ülke row {} uses a duplicate ISO ülke code."
+
+msgid "Run Goodreads character and settings"
+msgstr "Run Goodreads karakterler alan and mekanlar alan"
+
+msgid "Goodreads character and settings Plugin"
+msgstr "Goodreads karakterler alan and mekanlar alan Plugin"
+
+msgid "Import"
+msgstr "içe aktarma"
+
+msgid "Customize plugin..."
+msgstr "Customize plugin..."
+
+msgid "About"
+msgstr "About"
+
+msgid "About Goodreads character and settings"
+msgstr "About Goodreads karakterler alan and mekanlar alan"
+
+msgid "Plugin that imports character and settings data from Goodreads and writes it to custom fields"
+msgstr "Plugin that imports character and settings data from Goodreads and writes it to custom fields"

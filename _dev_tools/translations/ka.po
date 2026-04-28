@@ -1,0 +1,174 @@
+# Goodreads Character and Settings plugin translations
+# This file was generated from plugin UI gettext strings.
+msgid ""
+msgstr ""
+"Project-Id-Version: Goodreads Character and Settings 1.0.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-28 00:00+0000\n"
+"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
+"Language-Team: \n"
+"Language: ka\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Goodreads Character and Settings conversion script\n"
+
+msgid "Main"
+msgstr "მთავარი"
+
+msgid "Countries"
+msgstr "ქვეყნები"
+
+msgid "Regions"
+msgstr "რეგიონები"
+
+msgid "Autodelete"
+msgstr "ავტომატური წაშლა"
+
+msgid "Select the character and settings fields"
+msgstr "არჩევა პერსონაჟები and ადგილები ველიs"
+
+msgid "Characters field:"
+msgstr "პერსონაჟები ველი:"
+
+msgid "Settings field:"
+msgstr "ადგილები ველი:"
+
+msgid "Countries field:"
+msgstr "ქვეყნები ველი:"
+
+msgid "Active calibre language"
+msgstr "აქტიური calibre ენა"
+
+msgid "English short names"
+msgstr "მოკლე ინგლისური names"
+
+msgid "English formal names"
+msgstr "ოფიციალური ინგლისური names"
+
+msgid "Country names language:"
+msgstr "ქვეყნები names ენა:"
+
+msgid "Localize country names"
+msgstr "ლოკალიზება ქვეყნები names"
+
+msgid "Use the selected-language country names as country values. The selected-language names are also kept as aliases."
+msgstr "Use selected-language ქვეყნები names as ქვეყანა მნიშვნელობაs. Names are also kept as ალიასები."
+
+msgid "Keep country in settings field"
+msgstr "შენარჩუნება ქვეყანა in ადგილები ველი"
+
+msgid "Keep the country in parentheses in the Settings field while also writing it to the Countries field."
+msgstr "შენარჩუნება ქვეყანა in parentheses in ადგილები ველი and also write it to ქვეყნები ველი."
+
+msgid "Keep region in settings field"
+msgstr "შენარჩუნება რეგიონი in ადგილები ველი"
+
+msgid "Keep region or subdivision values such as states, provinces, and countries-in-Regions mappings in the Settings field."
+msgstr "შენარჩუნება რეგიონი or subdivision მნიშვნელობაs in ადგილები ველი."
+
+msgid "Write \"Empty\" when Goodreads has no value"
+msgstr "Write \"ცარიელი\" when Goodreads has no მნიშვნელობა"
+
+msgid " seconds"
+msgstr " წამი"
+
+msgid "Time between queries:"
+msgstr "დრო მოთხოვნებს შორის:"
+
+msgid "Max. Books/Job:"
+msgstr "მაქს. წიგნი/ამოცანა:"
+
+msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list."
+msgstr "ქვეყნები table. დამატება one canonical ქვეყანა per row, optional ISO country code, and ალიასები as a comma-separated list."
+
+msgid "Add"
+msgstr "დამატება"
+
+msgid "Remove"
+msgstr "ზონის ამოღება"
+
+msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries."
+msgstr "რეგიონები table. Each რეგიონი is preserved in ადგილები and mapped to the selected ქვეყანა in ქვეყნები."
+
+msgid "Values listed here are automatically removed if Goodreads returns them exactly."
+msgstr "მნიშვნელობაs listed here are automatically removed if Goodreads returns them exactly."
+
+msgid "Add Value"
+msgstr "დამატება მნიშვნელობა"
+
+msgid "Remove Value"
+msgstr "წაშლა მნიშვნელობა"
+
+msgid "Restore defaults"
+msgstr "ნაგულისხმები მნიშვნელობების აღდგენა"
+
+msgid "Do not import"
+msgstr "არ შემოიტანო"
+
+msgid "Tags"
+msgstr "ჭდეები"
+
+msgid "Country"
+msgstr "ქვეყანა"
+
+msgid "ISO"
+msgstr "ISO"
+
+msgid "Aliases"
+msgstr "ალიასები"
+
+msgid "Value"
+msgstr "მნიშვნელობა"
+
+msgid "If Goodreads does not provide a value, store the text \"Empty\" in any selected custom field."
+msgstr "If Goodreads does not provide a მნიშვნელობა, store \"ცარიელი\" in any selected custom ველი."
+
+msgid "This option is only available when Characters, Settings, or Countries uses a custom field."
+msgstr "This option is only available when პერსონაჟები, ადგილები, or ქვეყნები uses a custom ველი."
+
+msgid "Add a country first."
+msgstr "დამატება ქვეყანა first."
+
+msgid "Add Country"
+msgstr "დამატება ქვეყანა"
+
+msgid "Country name:"
+msgstr "ქვეყანა name:"
+
+msgid "Add Regions Country"
+msgstr "დამატება ქვეყანა რეგიონები"
+
+msgid "Country name cannot be empty."
+msgstr "ქვეყანა name cannot be empty."
+
+msgid "Country name must be unique."
+msgstr "ქვეყანა name must be unique."
+
+msgid "Country row {} uses a duplicate country name."
+msgstr "ქვეყანა row {} uses a duplicate ქვეყანა name."
+
+msgid "Country row {} uses a duplicate ISO country code."
+msgstr "ქვეყანა row {} uses a duplicate ISO ქვეყანა code."
+
+msgid "Run Goodreads character and settings"
+msgstr "Run Goodreads პერსონაჟები ველი and ადგილები ველი"
+
+msgid "Goodreads character and settings Plugin"
+msgstr "Goodreads პერსონაჟები ველი and ადგილები ველი Plugin"
+
+msgid "Import"
+msgstr "არ შემოიტანო"
+
+msgid "Customize plugin..."
+msgstr "Customize plugin..."
+
+msgid "About"
+msgstr "About"
+
+msgid "About Goodreads character and settings"
+msgstr "About Goodreads პერსონაჟები ველი and ადგილები ველი"
+
+msgid "Plugin that imports character and settings data from Goodreads and writes it to custom fields"
+msgstr "Plugin that imports character and settings data from Goodreads and writes it to custom fields"

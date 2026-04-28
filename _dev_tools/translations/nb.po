@@ -1,0 +1,174 @@
+# Goodreads Character and Settings plugin translations
+# This file was generated from plugin UI gettext strings.
+msgid ""
+msgstr ""
+"Project-Id-Version: Goodreads Character and Settings 1.0.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-28 00:00+0000\n"
+"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
+"Language-Team: \n"
+"Language: nb\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Goodreads Character and Settings conversion script\n"
+
+msgid "Main"
+msgstr "Hovedvalg"
+
+msgid "Countries"
+msgstr "land"
+
+msgid "Regions"
+msgstr "regioner"
+
+msgid "Autodelete"
+msgstr "autosletting"
+
+msgid "Select the character and settings fields"
+msgstr "velg figurer and steder felts"
+
+msgid "Characters field:"
+msgstr "figurer felt:"
+
+msgid "Settings field:"
+msgstr "steder felt:"
+
+msgid "Countries field:"
+msgstr "land felt:"
+
+msgid "Active calibre language"
+msgstr "aktivt calibre språk"
+
+msgid "English short names"
+msgstr "korte engelske names"
+
+msgid "English formal names"
+msgstr "formelle engelske names"
+
+msgid "Country names language:"
+msgstr "land names språk:"
+
+msgid "Localize country names"
+msgstr "lokaliser land names"
+
+msgid "Use the selected-language country names as country values. The selected-language names are also kept as aliases."
+msgstr "Use selected-language land names as land verdis. Names are also kept as aliaser."
+
+msgid "Keep country in settings field"
+msgstr "behold land in steder felt"
+
+msgid "Keep the country in parentheses in the Settings field while also writing it to the Countries field."
+msgstr "behold land in parentheses in steder felt and also write it to land felt."
+
+msgid "Keep region in settings field"
+msgstr "behold region in steder felt"
+
+msgid "Keep region or subdivision values such as states, provinces, and countries-in-Regions mappings in the Settings field."
+msgstr "behold region or subdivision verdis in steder felt."
+
+msgid "Write \"Empty\" when Goodreads has no value"
+msgstr "Write \"Tom\" when Goodreads has no verdi"
+
+msgid " seconds"
+msgstr " sekunder"
+
+msgid "Time between queries:"
+msgstr "tid mellom spørringer:"
+
+msgid "Max. Books/Job:"
+msgstr "maks. bøker/jobb:"
+
+msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list."
+msgstr "land table. legg til one canonical land per row, optional ISO country code, and aliaser as a comma-separated list."
+
+msgid "Add"
+msgstr "Legg til"
+
+msgid "Remove"
+msgstr "Fjern"
+
+msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries."
+msgstr "regioner table. Each region is preserved in steder and mapped to the selected land in land."
+
+msgid "Values listed here are automatically removed if Goodreads returns them exactly."
+msgstr "verdis listed here are automatically removed if Goodreads returns them exactly."
+
+msgid "Add Value"
+msgstr "legg til verdi"
+
+msgid "Remove Value"
+msgstr "fjern verdi"
+
+msgid "Restore defaults"
+msgstr "Tilbakestill til standardverdier"
+
+msgid "Do not import"
+msgstr "ikke importer"
+
+msgid "Tags"
+msgstr "Nøkkelord"
+
+msgid "Country"
+msgstr "land"
+
+msgid "ISO"
+msgstr "ISO"
+
+msgid "Aliases"
+msgstr "aliaser"
+
+msgid "Value"
+msgstr "Verdi"
+
+msgid "If Goodreads does not provide a value, store the text \"Empty\" in any selected custom field."
+msgstr "If Goodreads does not provide a verdi, store \"Tom\" in any selected custom felt."
+
+msgid "This option is only available when Characters, Settings, or Countries uses a custom field."
+msgstr "This option is only available when figurer, steder, or land uses a custom felt."
+
+msgid "Add a country first."
+msgstr "legg til land first."
+
+msgid "Add Country"
+msgstr "legg til land"
+
+msgid "Country name:"
+msgstr "land name:"
+
+msgid "Add Regions Country"
+msgstr "legg til land regioner"
+
+msgid "Country name cannot be empty."
+msgstr "land name cannot be empty."
+
+msgid "Country name must be unique."
+msgstr "land name must be unique."
+
+msgid "Country row {} uses a duplicate country name."
+msgstr "land row {} uses a duplicate land name."
+
+msgid "Country row {} uses a duplicate ISO country code."
+msgstr "land row {} uses a duplicate ISO land code."
+
+msgid "Run Goodreads character and settings"
+msgstr "Run Goodreads figurer felt and steder felt"
+
+msgid "Goodreads character and settings Plugin"
+msgstr "Goodreads figurer felt and steder felt Plugin"
+
+msgid "Import"
+msgstr "ikke importer"
+
+msgid "Customize plugin..."
+msgstr "Customize plugin..."
+
+msgid "About"
+msgstr "About"
+
+msgid "About Goodreads character and settings"
+msgstr "About Goodreads figurer felt and steder felt"
+
+msgid "Plugin that imports character and settings data from Goodreads and writes it to custom fields"
+msgstr "Plugin that imports character and settings data from Goodreads and writes it to custom fields"

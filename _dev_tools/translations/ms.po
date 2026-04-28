@@ -1,0 +1,174 @@
+# Goodreads Character and Settings plugin translations
+# This file was generated from plugin UI gettext strings.
+msgid ""
+msgstr ""
+"Project-Id-Version: Goodreads Character and Settings 1.0.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-28 00:00+0000\n"
+"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
+"Language-Team: \n"
+"Language: ms\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Goodreads Character and Settings conversion script\n"
+
+msgid "Main"
+msgstr "Utama"
+
+msgid "Countries"
+msgstr "negara"
+
+msgid "Regions"
+msgstr "rantau"
+
+msgid "Autodelete"
+msgstr "padam automatik"
+
+msgid "Select the character and settings fields"
+msgstr "pilih watak and lokasi medans"
+
+msgid "Characters field:"
+msgstr "watak medan:"
+
+msgid "Settings field:"
+msgstr "lokasi medan:"
+
+msgid "Countries field:"
+msgstr "negara medan:"
+
+msgid "Active calibre language"
+msgstr "aktif calibre bahasa"
+
+msgid "English short names"
+msgstr "pendek Inggeris names"
+
+msgid "English formal names"
+msgstr "rasmi Inggeris names"
+
+msgid "Country names language:"
+msgstr "negara names bahasa:"
+
+msgid "Localize country names"
+msgstr "setempatkan negara names"
+
+msgid "Use the selected-language country names as country values. The selected-language names are also kept as aliases."
+msgstr "Use selected-language negara names as negara nilais. Names are also kept as alias."
+
+msgid "Keep country in settings field"
+msgstr "kekalkan negara in lokasi medan"
+
+msgid "Keep the country in parentheses in the Settings field while also writing it to the Countries field."
+msgstr "kekalkan negara in parentheses in lokasi medan and also write it to negara medan."
+
+msgid "Keep region in settings field"
+msgstr "kekalkan rantau in lokasi medan"
+
+msgid "Keep region or subdivision values such as states, provinces, and countries-in-Regions mappings in the Settings field."
+msgstr "kekalkan rantau or subdivision nilais in lokasi medan."
+
+msgid "Write \"Empty\" when Goodreads has no value"
+msgstr "Write \"Kosong\" when Goodreads has no nilai"
+
+msgid " seconds"
+msgstr " saat"
+
+msgid "Time between queries:"
+msgstr "masa antara pertanyaan:"
+
+msgid "Max. Books/Job:"
+msgstr "maks. buku/tugas:"
+
+msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list."
+msgstr "negara table. tambah one canonical negara per row, optional ISO country code, and alias as a comma-separated list."
+
+msgid "Add"
+msgstr "Tambah"
+
+msgid "Remove"
+msgstr "Buang"
+
+msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries."
+msgstr "rantau table. Each rantau is preserved in lokasi and mapped to the selected negara in negara."
+
+msgid "Values listed here are automatically removed if Goodreads returns them exactly."
+msgstr "nilais listed here are automatically removed if Goodreads returns them exactly."
+
+msgid "Add Value"
+msgstr "tambah nilai"
+
+msgid "Remove Value"
+msgstr "buang nilai"
+
+msgid "Restore defaults"
+msgstr "Restore defaults"
+
+msgid "Do not import"
+msgstr "jangan import"
+
+msgid "Tags"
+msgstr "Tag"
+
+msgid "Country"
+msgstr "negara"
+
+msgid "ISO"
+msgstr "ISO"
+
+msgid "Aliases"
+msgstr "alias"
+
+msgid "Value"
+msgstr "Nilai"
+
+msgid "If Goodreads does not provide a value, store the text \"Empty\" in any selected custom field."
+msgstr "If Goodreads does not provide a nilai, store \"Kosong\" in any selected custom medan."
+
+msgid "This option is only available when Characters, Settings, or Countries uses a custom field."
+msgstr "This option is only available when watak, lokasi, or negara uses a custom medan."
+
+msgid "Add a country first."
+msgstr "tambah negara first."
+
+msgid "Add Country"
+msgstr "tambah negara"
+
+msgid "Country name:"
+msgstr "negara name:"
+
+msgid "Add Regions Country"
+msgstr "tambah negara rantau"
+
+msgid "Country name cannot be empty."
+msgstr "negara name cannot be empty."
+
+msgid "Country name must be unique."
+msgstr "negara name must be unique."
+
+msgid "Country row {} uses a duplicate country name."
+msgstr "negara row {} uses a duplicate negara name."
+
+msgid "Country row {} uses a duplicate ISO country code."
+msgstr "negara row {} uses a duplicate ISO negara code."
+
+msgid "Run Goodreads character and settings"
+msgstr "Run Goodreads watak medan and lokasi medan"
+
+msgid "Goodreads character and settings Plugin"
+msgstr "Goodreads watak medan and lokasi medan Plugin"
+
+msgid "Import"
+msgstr "jangan import"
+
+msgid "Customize plugin..."
+msgstr "Customize plugin..."
+
+msgid "About"
+msgstr "About"
+
+msgid "About Goodreads character and settings"
+msgstr "About Goodreads watak medan and lokasi medan"
+
+msgid "Plugin that imports character and settings data from Goodreads and writes it to custom fields"
+msgstr "Plugin that imports character and settings data from Goodreads and writes it to custom fields"

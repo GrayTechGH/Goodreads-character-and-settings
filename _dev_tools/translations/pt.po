@@ -1,0 +1,174 @@
+# Goodreads Character and Settings plugin translations
+# This file was generated from plugin UI gettext strings.
+msgid ""
+msgstr ""
+"Project-Id-Version: Goodreads Character and Settings 1.0.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-28 00:00+0000\n"
+"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
+"Language-Team: \n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Goodreads Character and Settings conversion script\n"
+
+msgid "Main"
+msgstr "Principal"
+
+msgid "Countries"
+msgstr "Países"
+
+msgid "Regions"
+msgstr "Regiões"
+
+msgid "Autodelete"
+msgstr "Exclusão automática"
+
+msgid "Select the character and settings fields"
+msgstr "Selecione os campos de personagens e locais"
+
+msgid "Characters field:"
+msgstr "Campo de personagens:"
+
+msgid "Settings field:"
+msgstr "Campo de locais:"
+
+msgid "Countries field:"
+msgstr "Campo de países:"
+
+msgid "Active calibre language"
+msgstr "Idioma ativo do calibre"
+
+msgid "English short names"
+msgstr "Nomes curtos em inglês"
+
+msgid "English formal names"
+msgstr "Nomes formais em inglês"
+
+msgid "Country names language:"
+msgstr "Idioma dos nomes de países:"
+
+msgid "Localize country names"
+msgstr "Localizar nomes de países"
+
+msgid "Use the selected-language country names as country values. The selected-language names are also kept as aliases."
+msgstr "Use os nomes de países do idioma selecionado como valores de país. Esses nomes também são mantidos como aliases."
+
+msgid "Keep country in settings field"
+msgstr "Manter país no campo de locais"
+
+msgid "Keep the country in parentheses in the Settings field while also writing it to the Countries field."
+msgstr "Manter o país entre parênteses no campo de locais e também escrevê-lo no campo de países."
+
+msgid "Keep region in settings field"
+msgstr "Manter região no campo de locais"
+
+msgid "Keep region or subdivision values such as states, provinces, and countries-in-Regions mappings in the Settings field."
+msgstr "Manter no campo de locais valores de regiões ou subdivisões, como estados, províncias e países mapeados em Regiões."
+
+msgid "Write \"Empty\" when Goodreads has no value"
+msgstr "Escrever \"Empty\" quando o Goodreads não tiver valor"
+
+msgid " seconds"
+msgstr " segundos"
+
+msgid "Time between queries:"
+msgstr "Tempo entre consultas:"
+
+msgid "Max. Books/Job:"
+msgstr "Máx. livros/tarefa:"
+
+msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list."
+msgstr "Tabela de países. Adicione um país canônico por linha, um código ISO opcional e quaisquer aliases como uma lista separada por vírgulas."
+
+msgid "Add"
+msgstr "Adicionar"
+
+msgid "Remove"
+msgstr "Remover"
+
+msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries."
+msgstr "Tabela de regiões. Cada região é preservada em Locais e mapeada para o país selecionado em Países."
+
+msgid "Values listed here are automatically removed if Goodreads returns them exactly."
+msgstr "Os valores listados aqui são removidos automaticamente se o Goodreads os retornar exatamente."
+
+msgid "Add Value"
+msgstr "Adicionar valor"
+
+msgid "Remove Value"
+msgstr "Remover valor"
+
+msgid "Restore defaults"
+msgstr "Repor predefinições"
+
+msgid "Do not import"
+msgstr "Não importar"
+
+msgid "Tags"
+msgstr "Etiquetas"
+
+msgid "Country"
+msgstr "País"
+
+msgid "ISO"
+msgstr "ISO"
+
+msgid "Aliases"
+msgstr "Aliases"
+
+msgid "Value"
+msgstr "Valor"
+
+msgid "If Goodreads does not provide a value, store the text \"Empty\" in any selected custom field."
+msgstr "Se o Goodreads não fornecer um valor, armazene o texto \"Empty\" em qualquer campo personalizado selecionado."
+
+msgid "This option is only available when Characters, Settings, or Countries uses a custom field."
+msgstr "Esta opção só está disponível quando Personagens, Locais ou Países usa um campo personalizado."
+
+msgid "Add a country first."
+msgstr "Adicione um país primeiro."
+
+msgid "Add Country"
+msgstr "Adicionar país"
+
+msgid "Country name:"
+msgstr "Nome do país:"
+
+msgid "Add Regions Country"
+msgstr "Adicionar país com regiões"
+
+msgid "Country name cannot be empty."
+msgstr "O nome do país não pode estar vazio."
+
+msgid "Country name must be unique."
+msgstr "O nome do país deve ser único."
+
+msgid "Country row {} uses a duplicate country name."
+msgstr "A linha de país {} usa um nome de país duplicado."
+
+msgid "Country row {} uses a duplicate ISO country code."
+msgstr "A linha de país {} usa um código ISO de país duplicado."
+
+msgid "Run Goodreads character and settings"
+msgstr "Executar personagens e locais do Goodreads"
+
+msgid "Goodreads character and settings Plugin"
+msgstr "Plugin Personagens e locais do Goodreads"
+
+msgid "Import"
+msgstr "Importar"
+
+msgid "Customize plugin..."
+msgstr "Personalizar plugin..."
+
+msgid "About"
+msgstr "Sobre"
+
+msgid "About Goodreads character and settings"
+msgstr "Sobre Personagens e locais do Goodreads"
+
+msgid "Plugin that imports character and settings data from Goodreads and writes it to custom fields"
+msgstr "Plugin that imports character and settings data from Goodreads and writes it to custom fields"

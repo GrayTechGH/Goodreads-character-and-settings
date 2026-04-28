@@ -1,0 +1,174 @@
+# Goodreads Character and Settings plugin translations
+# This file was generated from plugin UI gettext strings.
+msgid ""
+msgstr ""
+"Project-Id-Version: Goodreads Character and Settings 1.0.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-28 00:00+0000\n"
+"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
+"Language-Team: \n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Goodreads Character and Settings conversion script\n"
+
+msgid "Main"
+msgstr "Principal"
+
+msgid "Countries"
+msgstr "țări"
+
+msgid "Regions"
+msgstr "regiuni"
+
+msgid "Autodelete"
+msgstr "ștergere automată"
+
+msgid "Select the character and settings fields"
+msgstr "selectează personaje and locuri câmps"
+
+msgid "Characters field:"
+msgstr "personaje câmp:"
+
+msgid "Settings field:"
+msgstr "locuri câmp:"
+
+msgid "Countries field:"
+msgstr "țări câmp:"
+
+msgid "Active calibre language"
+msgstr "activă calibre limbă"
+
+msgid "English short names"
+msgstr "scurte engleză names"
+
+msgid "English formal names"
+msgstr "formale engleză names"
+
+msgid "Country names language:"
+msgstr "țări names limbă:"
+
+msgid "Localize country names"
+msgstr "localizează țări names"
+
+msgid "Use the selected-language country names as country values. The selected-language names are also kept as aliases."
+msgstr "Use selected-language țări names as țară valoares. Names are also kept as aliasuri."
+
+msgid "Keep country in settings field"
+msgstr "păstrează țară in locuri câmp"
+
+msgid "Keep the country in parentheses in the Settings field while also writing it to the Countries field."
+msgstr "păstrează țară in parentheses in locuri câmp and also write it to țări câmp."
+
+msgid "Keep region in settings field"
+msgstr "păstrează regiune in locuri câmp"
+
+msgid "Keep region or subdivision values such as states, provinces, and countries-in-Regions mappings in the Settings field."
+msgstr "păstrează regiune or subdivision valoares in locuri câmp."
+
+msgid "Write \"Empty\" when Goodreads has no value"
+msgstr "Write \"Gol\" when Goodreads has no valoare"
+
+msgid " seconds"
+msgstr " secunde"
+
+msgid "Time between queries:"
+msgstr "timp între interogări:"
+
+msgid "Max. Books/Job:"
+msgstr "max. cărți/sarcină:"
+
+msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list."
+msgstr "țări table. adaugă one canonical țară per row, optional ISO country code, and aliasuri as a comma-separated list."
+
+msgid "Add"
+msgstr "Adaugă"
+
+msgid "Remove"
+msgstr "Șterge "
+
+msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries."
+msgstr "regiuni table. Each regiune is preserved in locuri and mapped to the selected țară in țări."
+
+msgid "Values listed here are automatically removed if Goodreads returns them exactly."
+msgstr "valoares listed here are automatically removed if Goodreads returns them exactly."
+
+msgid "Add Value"
+msgstr "adaugă valoare"
+
+msgid "Remove Value"
+msgstr "elimină valoare"
+
+msgid "Restore defaults"
+msgstr "Restore defaults"
+
+msgid "Do not import"
+msgstr "nu importa"
+
+msgid "Tags"
+msgstr "Etichete"
+
+msgid "Country"
+msgstr "țară"
+
+msgid "ISO"
+msgstr "ISO"
+
+msgid "Aliases"
+msgstr "aliasuri"
+
+msgid "Value"
+msgstr "Valoare"
+
+msgid "If Goodreads does not provide a value, store the text \"Empty\" in any selected custom field."
+msgstr "If Goodreads does not provide a valoare, store \"Gol\" in any selected custom câmp."
+
+msgid "This option is only available when Characters, Settings, or Countries uses a custom field."
+msgstr "This option is only available when personaje, locuri, or țări uses a custom câmp."
+
+msgid "Add a country first."
+msgstr "adaugă țară first."
+
+msgid "Add Country"
+msgstr "adaugă țară"
+
+msgid "Country name:"
+msgstr "țară name:"
+
+msgid "Add Regions Country"
+msgstr "adaugă țară regiuni"
+
+msgid "Country name cannot be empty."
+msgstr "țară name cannot be empty."
+
+msgid "Country name must be unique."
+msgstr "țară name must be unique."
+
+msgid "Country row {} uses a duplicate country name."
+msgstr "țară row {} uses a duplicate țară name."
+
+msgid "Country row {} uses a duplicate ISO country code."
+msgstr "țară row {} uses a duplicate ISO țară code."
+
+msgid "Run Goodreads character and settings"
+msgstr "Run Goodreads personaje câmp and locuri câmp"
+
+msgid "Goodreads character and settings Plugin"
+msgstr "Goodreads personaje câmp and locuri câmp Plugin"
+
+msgid "Import"
+msgstr "nu importa"
+
+msgid "Customize plugin..."
+msgstr "Customize plugin..."
+
+msgid "About"
+msgstr "About"
+
+msgid "About Goodreads character and settings"
+msgstr "About Goodreads personaje câmp and locuri câmp"
+
+msgid "Plugin that imports character and settings data from Goodreads and writes it to custom fields"
+msgstr "Plugin that imports character and settings data from Goodreads and writes it to custom fields"

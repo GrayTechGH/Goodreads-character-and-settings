@@ -1,0 +1,174 @@
+# Goodreads Character and Settings plugin translations
+# This file was generated from plugin UI gettext strings.
+msgid ""
+msgstr ""
+"Project-Id-Version: Goodreads Character and Settings 1.0.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-28 00:00+0000\n"
+"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
+"Language-Team: \n"
+"Language: et\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Goodreads Character and Settings conversion script\n"
+
+msgid "Main"
+msgstr "Peamine"
+
+msgid "Countries"
+msgstr "riigid"
+
+msgid "Regions"
+msgstr "piirkonnad"
+
+msgid "Autodelete"
+msgstr "automaatne kustutamine"
+
+msgid "Select the character and settings fields"
+msgstr "vali tegelased and asukohad välis"
+
+msgid "Characters field:"
+msgstr "tegelased väli:"
+
+msgid "Settings field:"
+msgstr "asukohad väli:"
+
+msgid "Countries field:"
+msgstr "riigid väli:"
+
+msgid "Active calibre language"
+msgstr "aktiivne calibre keel"
+
+msgid "English short names"
+msgstr "lühikesed inglise names"
+
+msgid "English formal names"
+msgstr "ametlikud inglise names"
+
+msgid "Country names language:"
+msgstr "riigid names keel:"
+
+msgid "Localize country names"
+msgstr "lokaliseeri riigid names"
+
+msgid "Use the selected-language country names as country values. The selected-language names are also kept as aliases."
+msgstr "Use selected-language riigid names as riik väärtuss. Names are also kept as aliased."
+
+msgid "Keep country in settings field"
+msgstr "säilita riik in asukohad väli"
+
+msgid "Keep the country in parentheses in the Settings field while also writing it to the Countries field."
+msgstr "säilita riik in parentheses in asukohad väli and also write it to riigid väli."
+
+msgid "Keep region in settings field"
+msgstr "säilita piirkond in asukohad väli"
+
+msgid "Keep region or subdivision values such as states, provinces, and countries-in-Regions mappings in the Settings field."
+msgstr "säilita piirkond or subdivision väärtuss in asukohad väli."
+
+msgid "Write \"Empty\" when Goodreads has no value"
+msgstr "Write \"Tühi\" when Goodreads has no väärtus"
+
+msgid " seconds"
+msgstr " sekundit"
+
+msgid "Time between queries:"
+msgstr "aeg päringute vahel:"
+
+msgid "Max. Books/Job:"
+msgstr "max raamatut/töö:"
+
+msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list."
+msgstr "riigid table. lisa one canonical riik per row, optional ISO country code, and aliased as a comma-separated list."
+
+msgid "Add"
+msgstr "Lisa"
+
+msgid "Remove"
+msgstr "Eemalda"
+
+msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries."
+msgstr "piirkonnad table. Each piirkond is preserved in asukohad and mapped to the selected riik in riigid."
+
+msgid "Values listed here are automatically removed if Goodreads returns them exactly."
+msgstr "väärtuss listed here are automatically removed if Goodreads returns them exactly."
+
+msgid "Add Value"
+msgstr "lisa väärtus"
+
+msgid "Remove Value"
+msgstr "eemalda väärtus"
+
+msgid "Restore defaults"
+msgstr "Taasta vaikimisi sätted"
+
+msgid "Do not import"
+msgstr "ära impordi"
+
+msgid "Tags"
+msgstr "Sildid"
+
+msgid "Country"
+msgstr "riik"
+
+msgid "ISO"
+msgstr "ISO"
+
+msgid "Aliases"
+msgstr "aliased"
+
+msgid "Value"
+msgstr "Väärtus"
+
+msgid "If Goodreads does not provide a value, store the text \"Empty\" in any selected custom field."
+msgstr "If Goodreads does not provide a väärtus, store \"Tühi\" in any selected custom väli."
+
+msgid "This option is only available when Characters, Settings, or Countries uses a custom field."
+msgstr "This option is only available when tegelased, asukohad, or riigid uses a custom väli."
+
+msgid "Add a country first."
+msgstr "lisa riik first."
+
+msgid "Add Country"
+msgstr "lisa riik"
+
+msgid "Country name:"
+msgstr "riik name:"
+
+msgid "Add Regions Country"
+msgstr "lisa riik piirkonnad"
+
+msgid "Country name cannot be empty."
+msgstr "riik name cannot be empty."
+
+msgid "Country name must be unique."
+msgstr "riik name must be unique."
+
+msgid "Country row {} uses a duplicate country name."
+msgstr "riik row {} uses a duplicate riik name."
+
+msgid "Country row {} uses a duplicate ISO country code."
+msgstr "riik row {} uses a duplicate ISO riik code."
+
+msgid "Run Goodreads character and settings"
+msgstr "Run Goodreads tegelased väli and asukohad väli"
+
+msgid "Goodreads character and settings Plugin"
+msgstr "Goodreads tegelased väli and asukohad väli Plugin"
+
+msgid "Import"
+msgstr "ära impordi"
+
+msgid "Customize plugin..."
+msgstr "Customize plugin..."
+
+msgid "About"
+msgstr "About"
+
+msgid "About Goodreads character and settings"
+msgstr "About Goodreads tegelased väli and asukohad väli"
+
+msgid "Plugin that imports character and settings data from Goodreads and writes it to custom fields"
+msgstr "Plugin that imports character and settings data from Goodreads and writes it to custom fields"

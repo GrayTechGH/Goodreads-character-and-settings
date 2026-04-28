@@ -1,0 +1,174 @@
+# Goodreads Character and Settings plugin translations
+# This file was generated from plugin UI gettext strings.
+msgid ""
+msgstr ""
+"Project-Id-Version: Goodreads Character and Settings 1.0.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-28 00:00+0000\n"
+"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
+"Language-Team: \n"
+"Language: ta\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Goodreads Character and Settings conversion script\n"
+
+msgid "Main"
+msgstr "முக்கிய"
+
+msgid "Countries"
+msgstr "நாடுகள்"
+
+msgid "Regions"
+msgstr "பகுதிகள்"
+
+msgid "Autodelete"
+msgstr "தானியங்கி நீக்கம்"
+
+msgid "Select the character and settings fields"
+msgstr "தேர்ந்தெடு பாத்திரங்கள் and இடங்கள் புலம்s"
+
+msgid "Characters field:"
+msgstr "பாத்திரங்கள் புலம்:"
+
+msgid "Settings field:"
+msgstr "இடங்கள் புலம்:"
+
+msgid "Countries field:"
+msgstr "நாடுகள் புலம்:"
+
+msgid "Active calibre language"
+msgstr "செயலில் calibre மொழி"
+
+msgid "English short names"
+msgstr "குறுகிய ஆங்கில names"
+
+msgid "English formal names"
+msgstr "அதிகாரப்பூர்வ ஆங்கில names"
+
+msgid "Country names language:"
+msgstr "நாடுகள் names மொழி:"
+
+msgid "Localize country names"
+msgstr "உள்ளூர்மயமாக்கு நாடுகள் names"
+
+msgid "Use the selected-language country names as country values. The selected-language names are also kept as aliases."
+msgstr "Use selected-language நாடுகள் names as நாடு மதிப்புs. Names are also kept as மாற்றுப் பெயர்கள்."
+
+msgid "Keep country in settings field"
+msgstr "வைத்திரு நாடு in இடங்கள் புலம்"
+
+msgid "Keep the country in parentheses in the Settings field while also writing it to the Countries field."
+msgstr "வைத்திரு நாடு in parentheses in இடங்கள் புலம் and also write it to நாடுகள் புலம்."
+
+msgid "Keep region in settings field"
+msgstr "வைத்திரு பகுதி in இடங்கள் புலம்"
+
+msgid "Keep region or subdivision values such as states, provinces, and countries-in-Regions mappings in the Settings field."
+msgstr "வைத்திரு பகுதி or subdivision மதிப்புs in இடங்கள் புலம்."
+
+msgid "Write \"Empty\" when Goodreads has no value"
+msgstr "Write \"காலி\" when Goodreads has no மதிப்பு"
+
+msgid " seconds"
+msgstr " விநாடிகள்"
+
+msgid "Time between queries:"
+msgstr "வினவல்களுக்கிடையிலான நேரம்:"
+
+msgid "Max. Books/Job:"
+msgstr "அதிகபட்ச புத்தகங்கள்/வேலை:"
+
+msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list."
+msgstr "நாடுகள் table. சேர் one canonical நாடு per row, optional ISO country code, and மாற்றுப் பெயர்கள் as a comma-separated list."
+
+msgid "Add"
+msgstr "சேர்"
+
+msgid "Remove"
+msgstr "அகற்று"
+
+msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries."
+msgstr "பகுதிகள் table. Each பகுதி is preserved in இடங்கள் and mapped to the selected நாடு in நாடுகள்."
+
+msgid "Values listed here are automatically removed if Goodreads returns them exactly."
+msgstr "மதிப்புs listed here are automatically removed if Goodreads returns them exactly."
+
+msgid "Add Value"
+msgstr "சேர் மதிப்பு"
+
+msgid "Remove Value"
+msgstr "அகற்று மதிப்பு"
+
+msgid "Restore defaults"
+msgstr "இயல்புநிலைகளை மீட்டெடு"
+
+msgid "Do not import"
+msgstr "இறக்குமதி செய்ய வேண்டாம்"
+
+msgid "Tags"
+msgstr "குறிச்சொற்கள்"
+
+msgid "Country"
+msgstr "நாடு"
+
+msgid "ISO"
+msgstr "ISO"
+
+msgid "Aliases"
+msgstr "மாற்றுப் பெயர்கள்"
+
+msgid "Value"
+msgstr "மதிப்பு"
+
+msgid "If Goodreads does not provide a value, store the text \"Empty\" in any selected custom field."
+msgstr "If Goodreads does not provide a மதிப்பு, store \"காலி\" in any selected custom புலம்."
+
+msgid "This option is only available when Characters, Settings, or Countries uses a custom field."
+msgstr "This option is only available when பாத்திரங்கள், இடங்கள், or நாடுகள் uses a custom புலம்."
+
+msgid "Add a country first."
+msgstr "சேர் நாடு first."
+
+msgid "Add Country"
+msgstr "சேர் நாடு"
+
+msgid "Country name:"
+msgstr "நாடு name:"
+
+msgid "Add Regions Country"
+msgstr "சேர் நாடு பகுதிகள்"
+
+msgid "Country name cannot be empty."
+msgstr "நாடு name cannot be empty."
+
+msgid "Country name must be unique."
+msgstr "நாடு name must be unique."
+
+msgid "Country row {} uses a duplicate country name."
+msgstr "நாடு row {} uses a duplicate நாடு name."
+
+msgid "Country row {} uses a duplicate ISO country code."
+msgstr "நாடு row {} uses a duplicate ISO நாடு code."
+
+msgid "Run Goodreads character and settings"
+msgstr "Run Goodreads பாத்திரங்கள் புலம் and இடங்கள் புலம்"
+
+msgid "Goodreads character and settings Plugin"
+msgstr "Goodreads பாத்திரங்கள் புலம் and இடங்கள் புலம் Plugin"
+
+msgid "Import"
+msgstr "இறக்குமதி செய்ய வேண்டாம்"
+
+msgid "Customize plugin..."
+msgstr "Customize plugin..."
+
+msgid "About"
+msgstr "About"
+
+msgid "About Goodreads character and settings"
+msgstr "About Goodreads பாத்திரங்கள் புலம் and இடங்கள் புலம்"
+
+msgid "Plugin that imports character and settings data from Goodreads and writes it to custom fields"
+msgstr "Plugin that imports character and settings data from Goodreads and writes it to custom fields"

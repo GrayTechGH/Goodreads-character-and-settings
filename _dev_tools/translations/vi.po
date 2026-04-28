@@ -1,0 +1,174 @@
+# Goodreads Character and Settings plugin translations
+# This file was generated from plugin UI gettext strings.
+msgid ""
+msgstr ""
+"Project-Id-Version: Goodreads Character and Settings 1.0.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-28 00:00+0000\n"
+"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Goodreads Character and Settings conversion script\n"
+
+msgid "Main"
+msgstr "Chính"
+
+msgid "Countries"
+msgstr "quốc gia"
+
+msgid "Regions"
+msgstr "vùng"
+
+msgid "Autodelete"
+msgstr "tự động xóa"
+
+msgid "Select the character and settings fields"
+msgstr "chọn nhân vật and địa điểm trườngs"
+
+msgid "Characters field:"
+msgstr "nhân vật trường:"
+
+msgid "Settings field:"
+msgstr "địa điểm trường:"
+
+msgid "Countries field:"
+msgstr "quốc gia trường:"
+
+msgid "Active calibre language"
+msgstr "đang hoạt động calibre ngôn ngữ"
+
+msgid "English short names"
+msgstr "ngắn tiếng Anh names"
+
+msgid "English formal names"
+msgstr "chính thức tiếng Anh names"
+
+msgid "Country names language:"
+msgstr "quốc gia names ngôn ngữ:"
+
+msgid "Localize country names"
+msgstr "bản địa hóa quốc gia names"
+
+msgid "Use the selected-language country names as country values. The selected-language names are also kept as aliases."
+msgstr "Use selected-language quốc gia names as quốc gia giá trịs. Names are also kept as bí danh."
+
+msgid "Keep country in settings field"
+msgstr "giữ quốc gia in địa điểm trường"
+
+msgid "Keep the country in parentheses in the Settings field while also writing it to the Countries field."
+msgstr "giữ quốc gia in parentheses in địa điểm trường and also write it to quốc gia trường."
+
+msgid "Keep region in settings field"
+msgstr "giữ vùng in địa điểm trường"
+
+msgid "Keep region or subdivision values such as states, provinces, and countries-in-Regions mappings in the Settings field."
+msgstr "giữ vùng or subdivision giá trịs in địa điểm trường."
+
+msgid "Write \"Empty\" when Goodreads has no value"
+msgstr "Write \"Trống\" when Goodreads has no giá trị"
+
+msgid " seconds"
+msgstr " giây"
+
+msgid "Time between queries:"
+msgstr "thời gian giữa truy vấn:"
+
+msgid "Max. Books/Job:"
+msgstr "tối đa sách/tác vụ:"
+
+msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list."
+msgstr "quốc gia table. thêm one canonical quốc gia per row, optional ISO country code, and bí danh as a comma-separated list."
+
+msgid "Add"
+msgstr "Add"
+
+msgid "Remove"
+msgstr "Bỏ"
+
+msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries."
+msgstr "vùng table. Each vùng is preserved in địa điểm and mapped to the selected quốc gia in quốc gia."
+
+msgid "Values listed here are automatically removed if Goodreads returns them exactly."
+msgstr "giá trịs listed here are automatically removed if Goodreads returns them exactly."
+
+msgid "Add Value"
+msgstr "thêm giá trị"
+
+msgid "Remove Value"
+msgstr "xóa giá trị"
+
+msgid "Restore defaults"
+msgstr "Về mặc định"
+
+msgid "Do not import"
+msgstr "không nhập"
+
+msgid "Tags"
+msgstr "Từ khóa"
+
+msgid "Country"
+msgstr "quốc gia"
+
+msgid "ISO"
+msgstr "ISO"
+
+msgid "Aliases"
+msgstr "bí danh"
+
+msgid "Value"
+msgstr "Value"
+
+msgid "If Goodreads does not provide a value, store the text \"Empty\" in any selected custom field."
+msgstr "If Goodreads does not provide a giá trị, store \"Trống\" in any selected custom trường."
+
+msgid "This option is only available when Characters, Settings, or Countries uses a custom field."
+msgstr "This option is only available when nhân vật, địa điểm, or quốc gia uses a custom trường."
+
+msgid "Add a country first."
+msgstr "thêm quốc gia first."
+
+msgid "Add Country"
+msgstr "thêm quốc gia"
+
+msgid "Country name:"
+msgstr "quốc gia name:"
+
+msgid "Add Regions Country"
+msgstr "thêm quốc gia vùng"
+
+msgid "Country name cannot be empty."
+msgstr "quốc gia name cannot be empty."
+
+msgid "Country name must be unique."
+msgstr "quốc gia name must be unique."
+
+msgid "Country row {} uses a duplicate country name."
+msgstr "quốc gia row {} uses a duplicate quốc gia name."
+
+msgid "Country row {} uses a duplicate ISO country code."
+msgstr "quốc gia row {} uses a duplicate ISO quốc gia code."
+
+msgid "Run Goodreads character and settings"
+msgstr "Run Goodreads nhân vật trường and địa điểm trường"
+
+msgid "Goodreads character and settings Plugin"
+msgstr "Goodreads nhân vật trường and địa điểm trường Plugin"
+
+msgid "Import"
+msgstr "không nhập"
+
+msgid "Customize plugin..."
+msgstr "Customize plugin..."
+
+msgid "About"
+msgstr "About"
+
+msgid "About Goodreads character and settings"
+msgstr "About Goodreads nhân vật trường and địa điểm trường"
+
+msgid "Plugin that imports character and settings data from Goodreads and writes it to custom fields"
+msgstr "Plugin that imports character and settings data from Goodreads and writes it to custom fields"

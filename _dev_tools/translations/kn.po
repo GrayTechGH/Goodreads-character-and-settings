@@ -1,0 +1,174 @@
+# Goodreads Character and Settings plugin translations
+# This file was generated from plugin UI gettext strings.
+msgid ""
+msgstr ""
+"Project-Id-Version: Goodreads Character and Settings 1.0.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-28 00:00+0000\n"
+"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
+"Language-Team: \n"
+"Language: kn\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Goodreads Character and Settings conversion script\n"
+
+msgid "Main"
+msgstr "ಮುಖ್ಯ"
+
+msgid "Countries"
+msgstr "ದೇಶಗಳು"
+
+msgid "Regions"
+msgstr "ಪ್ರದೇಶಗಳು"
+
+msgid "Autodelete"
+msgstr "ಸ್ವಯಂ ಅಳಿಕೆ"
+
+msgid "Select the character and settings fields"
+msgstr "ಆಯ್ಕೆಮಾಡಿ ಪಾತ್ರಗಳು and ಸ್ಥಳಗಳು ಕ್ಷೇತ್ರs"
+
+msgid "Characters field:"
+msgstr "ಪಾತ್ರಗಳು ಕ್ಷೇತ್ರ:"
+
+msgid "Settings field:"
+msgstr "ಸ್ಥಳಗಳು ಕ್ಷೇತ್ರ:"
+
+msgid "Countries field:"
+msgstr "ದೇಶಗಳು ಕ್ಷೇತ್ರ:"
+
+msgid "Active calibre language"
+msgstr "ಸಕ್ರಿಯ calibre ಭಾಷೆ"
+
+msgid "English short names"
+msgstr "ಸಣ್ಣ ಇಂಗ್ಲಿಷ್ names"
+
+msgid "English formal names"
+msgstr "ಔಪಚಾರಿಕ ಇಂಗ್ಲಿಷ್ names"
+
+msgid "Country names language:"
+msgstr "ದೇಶಗಳು names ಭಾಷೆ:"
+
+msgid "Localize country names"
+msgstr "ಸ್ಥಳೀಕರಿಸಿ ದೇಶಗಳು names"
+
+msgid "Use the selected-language country names as country values. The selected-language names are also kept as aliases."
+msgstr "Use selected-language ದೇಶಗಳು names as ದೇಶ ಮೌಲ್ಯs. Names are also kept as ಉಪನಾಮಗಳು."
+
+msgid "Keep country in settings field"
+msgstr "ಉಳಿಸಿ ದೇಶ in ಸ್ಥಳಗಳು ಕ್ಷೇತ್ರ"
+
+msgid "Keep the country in parentheses in the Settings field while also writing it to the Countries field."
+msgstr "ಉಳಿಸಿ ದೇಶ in parentheses in ಸ್ಥಳಗಳು ಕ್ಷೇತ್ರ and also write it to ದೇಶಗಳು ಕ್ಷೇತ್ರ."
+
+msgid "Keep region in settings field"
+msgstr "ಉಳಿಸಿ ಪ್ರದೇಶ in ಸ್ಥಳಗಳು ಕ್ಷೇತ್ರ"
+
+msgid "Keep region or subdivision values such as states, provinces, and countries-in-Regions mappings in the Settings field."
+msgstr "ಉಳಿಸಿ ಪ್ರದೇಶ or subdivision ಮೌಲ್ಯs in ಸ್ಥಳಗಳು ಕ್ಷೇತ್ರ."
+
+msgid "Write \"Empty\" when Goodreads has no value"
+msgstr "Write \"ಖಾಲಿ\" when Goodreads has no ಮೌಲ್ಯ"
+
+msgid " seconds"
+msgstr " ಸೆಕೆಂಡುಗಳು"
+
+msgid "Time between queries:"
+msgstr "ಪ್ರಶ್ನೆಗಳ ನಡುವಿನ ಸಮಯ:"
+
+msgid "Max. Books/Job:"
+msgstr "ಗರಿಷ್ಠ ಪುಸ್ತಕಗಳು/ಕೆಲಸ:"
+
+msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list."
+msgstr "ದೇಶಗಳು table. ಸೇರಿಸಿ one canonical ದೇಶ per row, optional ISO country code, and ಉಪನಾಮಗಳು as a comma-separated list."
+
+msgid "Add"
+msgstr "ಸೇರಿಸಿ"
+
+msgid "Remove"
+msgstr "ತೆಗೆದುಹಾಕಿ"
+
+msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries."
+msgstr "ಪ್ರದೇಶಗಳು table. Each ಪ್ರದೇಶ is preserved in ಸ್ಥಳಗಳು and mapped to the selected ದೇಶ in ದೇಶಗಳು."
+
+msgid "Values listed here are automatically removed if Goodreads returns them exactly."
+msgstr "ಮೌಲ್ಯs listed here are automatically removed if Goodreads returns them exactly."
+
+msgid "Add Value"
+msgstr "ಸೇರಿಸಿ ಮೌಲ್ಯ"
+
+msgid "Remove Value"
+msgstr "ತೆಗೆದುಹಾಕಿ ಮೌಲ್ಯ"
+
+msgid "Restore defaults"
+msgstr "ಪೂರ್ವನಿಗದಿಗಳನ್ನು ಮರುಸ್ಥಾಪಿಸಿ"
+
+msgid "Do not import"
+msgstr "ಆಮದು ಮಾಡಬೇಡಿ"
+
+msgid "Tags"
+msgstr "ಸೂಚಕಗಳು"
+
+msgid "Country"
+msgstr "ದೇಶ"
+
+msgid "ISO"
+msgstr "ISO"
+
+msgid "Aliases"
+msgstr "ಉಪನಾಮಗಳು"
+
+msgid "Value"
+msgstr "Value"
+
+msgid "If Goodreads does not provide a value, store the text \"Empty\" in any selected custom field."
+msgstr "If Goodreads does not provide a ಮೌಲ್ಯ, store \"ಖಾಲಿ\" in any selected custom ಕ್ಷೇತ್ರ."
+
+msgid "This option is only available when Characters, Settings, or Countries uses a custom field."
+msgstr "This option is only available when ಪಾತ್ರಗಳು, ಸ್ಥಳಗಳು, or ದೇಶಗಳು uses a custom ಕ್ಷೇತ್ರ."
+
+msgid "Add a country first."
+msgstr "ಸೇರಿಸಿ ದೇಶ first."
+
+msgid "Add Country"
+msgstr "ಸೇರಿಸಿ ದೇಶ"
+
+msgid "Country name:"
+msgstr "ದೇಶ name:"
+
+msgid "Add Regions Country"
+msgstr "ಸೇರಿಸಿ ದೇಶ ಪ್ರದೇಶಗಳು"
+
+msgid "Country name cannot be empty."
+msgstr "ದೇಶ name cannot be empty."
+
+msgid "Country name must be unique."
+msgstr "ದೇಶ name must be unique."
+
+msgid "Country row {} uses a duplicate country name."
+msgstr "ದೇಶ row {} uses a duplicate ದೇಶ name."
+
+msgid "Country row {} uses a duplicate ISO country code."
+msgstr "ದೇಶ row {} uses a duplicate ISO ದೇಶ code."
+
+msgid "Run Goodreads character and settings"
+msgstr "Run Goodreads ಪಾತ್ರಗಳು ಕ್ಷೇತ್ರ and ಸ್ಥಳಗಳು ಕ್ಷೇತ್ರ"
+
+msgid "Goodreads character and settings Plugin"
+msgstr "Goodreads ಪಾತ್ರಗಳು ಕ್ಷೇತ್ರ and ಸ್ಥಳಗಳು ಕ್ಷೇತ್ರ Plugin"
+
+msgid "Import"
+msgstr "ಆಮದು ಮಾಡಬೇಡಿ"
+
+msgid "Customize plugin..."
+msgstr "Customize plugin..."
+
+msgid "About"
+msgstr "About"
+
+msgid "About Goodreads character and settings"
+msgstr "About Goodreads ಪಾತ್ರಗಳು ಕ್ಷೇತ್ರ and ಸ್ಥಳಗಳು ಕ್ಷೇತ್ರ"
+
+msgid "Plugin that imports character and settings data from Goodreads and writes it to custom fields"
+msgstr "Plugin that imports character and settings data from Goodreads and writes it to custom fields"

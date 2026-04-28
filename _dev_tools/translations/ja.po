@@ -1,0 +1,174 @@
+# Goodreads Character and Settings plugin translations
+# This file was generated from plugin UI gettext strings.
+msgid ""
+msgstr ""
+"Project-Id-Version: Goodreads Character and Settings 1.0.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-28 00:00+0000\n"
+"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
+"Language-Team: \n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Goodreads Character and Settings conversion script\n"
+
+msgid "Main"
+msgstr "主メモリ"
+
+msgid "Countries"
+msgstr "国"
+
+msgid "Regions"
+msgstr "地域"
+
+msgid "Autodelete"
+msgstr "自動削除"
+
+msgid "Select the character and settings fields"
+msgstr "登場人物と場所のフィールドを選択"
+
+msgid "Characters field:"
+msgstr "登場人物フィールド:"
+
+msgid "Settings field:"
+msgstr "場所フィールド:"
+
+msgid "Countries field:"
+msgstr "国フィールド:"
+
+msgid "Active calibre language"
+msgstr "現在の calibre 言語"
+
+msgid "English short names"
+msgstr "英語の短縮名"
+
+msgid "English formal names"
+msgstr "英語の正式名称"
+
+msgid "Country names language:"
+msgstr "国名の言語:"
+
+msgid "Localize country names"
+msgstr "国名をローカライズ"
+
+msgid "Use the selected-language country names as country values. The selected-language names are also kept as aliases."
+msgstr "選択した言語の国名を国の値として使用します。これらの名前は別名としても保持されます。"
+
+msgid "Keep country in settings field"
+msgstr "場所フィールドに国を残す"
+
+msgid "Keep the country in parentheses in the Settings field while also writing it to the Countries field."
+msgstr "国フィールドにも書き込みつつ、場所フィールドの括弧内にも国を残します。"
+
+msgid "Keep region in settings field"
+msgstr "場所フィールドに地域を残す"
+
+msgid "Keep region or subdivision values such as states, provinces, and countries-in-Regions mappings in the Settings field."
+msgstr "州、省、地域に割り当てた国などの地域または下位区分の値を場所フィールドに残します。"
+
+msgid "Write \"Empty\" when Goodreads has no value"
+msgstr "Goodreads に値がない場合は \"Empty\" を書き込む"
+
+msgid " seconds"
+msgstr " 秒"
+
+msgid "Time between queries:"
+msgstr "クエリ間隔:"
+
+msgid "Max. Books/Job:"
+msgstr "最大冊数/ジョブ:"
+
+msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list."
+msgstr "国テーブル。1 行に 1 つの標準国名、任意の ISO 国コード、別名をカンマ区切りリストで追加します。"
+
+msgid "Add"
+msgstr "追加"
+
+msgid "Remove"
+msgstr "削除"
+
+msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries."
+msgstr "地域テーブル。各地域は場所に保持され、国で選択された国に割り当てられます。"
+
+msgid "Values listed here are automatically removed if Goodreads returns them exactly."
+msgstr "ここに一覧された値は、Goodreads が完全に一致して返した場合に自動的に削除されます。"
+
+msgid "Add Value"
+msgstr "値を追加"
+
+msgid "Remove Value"
+msgstr "値を削除"
+
+msgid "Restore defaults"
+msgstr "デフォルトに戻す"
+
+msgid "Do not import"
+msgstr "インポートしない"
+
+msgid "Tags"
+msgstr "タグ"
+
+msgid "Country"
+msgstr "国"
+
+msgid "ISO"
+msgstr "ISO"
+
+msgid "Aliases"
+msgstr "別名"
+
+msgid "Value"
+msgstr "値"
+
+msgid "If Goodreads does not provide a value, store the text \"Empty\" in any selected custom field."
+msgstr "Goodreads が値を提供しない場合、選択したカスタムフィールドにテキスト \"Empty\" を保存します。"
+
+msgid "This option is only available when Characters, Settings, or Countries uses a custom field."
+msgstr "このオプションは、登場人物、場所、または国がカスタムフィールドを使用している場合にのみ利用できます。"
+
+msgid "Add a country first."
+msgstr "先に国を追加してください。"
+
+msgid "Add Country"
+msgstr "国を追加"
+
+msgid "Country name:"
+msgstr "国名:"
+
+msgid "Add Regions Country"
+msgstr "地域付きの国を追加"
+
+msgid "Country name cannot be empty."
+msgstr "国名は空にできません。"
+
+msgid "Country name must be unique."
+msgstr "国名は一意である必要があります。"
+
+msgid "Country row {} uses a duplicate country name."
+msgstr "国の行 {} で重複した国名が使われています。"
+
+msgid "Country row {} uses a duplicate ISO country code."
+msgstr "国の行 {} で重複した ISO 国コードが使われています。"
+
+msgid "Run Goodreads character and settings"
+msgstr "Goodreads 登場人物と場所を実行"
+
+msgid "Goodreads character and settings Plugin"
+msgstr "Goodreads 登場人物と場所プラグイン"
+
+msgid "Import"
+msgstr "インポート"
+
+msgid "Customize plugin..."
+msgstr "プラグインをカスタマイズ..."
+
+msgid "About"
+msgstr "バージョン情報"
+
+msgid "About Goodreads character and settings"
+msgstr "Goodreads 登場人物と場所について"
+
+msgid "Plugin that imports character and settings data from Goodreads and writes it to custom fields"
+msgstr "Plugin that imports character and settings data from Goodreads and writes it to custom fields"

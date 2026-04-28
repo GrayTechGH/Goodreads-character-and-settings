@@ -29,27 +29,23 @@ from qt.core import QMenu, QMessageBox, Qt, QToolButton
 
 from calibre.gui2.actions import InterfaceAction
 from calibre_plugins.Goodreads_character_and_settings.about import build_about_text
-from calibre_plugins.Goodreads_character_and_settings.common import plugin_ui_text, reset_runtime_caches
+from calibre_plugins.Goodreads_character_and_settings.common import reset_runtime_caches
 from calibre_plugins.Goodreads_character_and_settings.database_update import update_database_from_version
 from calibre_plugins.Goodreads_character_and_settings.main import GoodreadsPreviewRunner
 
 
-def ui_text(text):
-    return plugin_ui_text(text, _)
-
-
 class InterfacePlugin(InterfaceAction):
 
-    name = ui_text('Goodreads character and settings')
+    name = 'Goodreads character and settings'
     popup_type = QToolButton.MenuButtonPopup
 
-    action_spec = (ui_text('Goodreads C&&S'), None,
-            ui_text('Run Goodreads character and settings'), 'Ctrl+Shift+F1')
+    action_spec = ('Goodreads C&&S', None,
+            _('Run Goodreads character and settings'), 'Ctrl+Shift+F1')
 
     def genesis(self):
         self.current_runner = None
         update_database_from_version()
-        icon = get_icons('images/gr_cs_icon.png', ui_text('Goodreads character and settings Plugin'))
+        icon = get_icons('images/gr_cs_icon.png', _('Goodreads character and settings Plugin'))
 
         # The qaction is automatically created from the action_spec defined
         # above
@@ -58,13 +54,13 @@ class InterfacePlugin(InterfaceAction):
         self.menu = QMenu(self.gui)
         self.qaction.setMenu(self.menu)
 
-        self.import_action = self.menu.addAction(ui_text('Import'))
+        self.import_action = self.menu.addAction(_('Import'))
         self.import_action.triggered.connect(self.import_books)
 
-        self.config_action = self.menu.addAction(ui_text('Customize plugin...'))
+        self.config_action = self.menu.addAction(_('Customize plugin...'))
         self.config_action.triggered.connect(self.show_config)
 
-        self.about_action = self.menu.addAction(ui_text('About'))
+        self.about_action = self.menu.addAction(_('About'))
         self.about_action.triggered.connect(self.show_about)
 
     def import_books(self):
@@ -79,7 +75,7 @@ class InterfacePlugin(InterfaceAction):
 
     def show_about(self):
         dialog = QMessageBox(self.gui)
-        dialog.setWindowTitle(ui_text('About Goodreads character and settings'))
+        dialog.setWindowTitle(_('About Goodreads character and settings'))
         dialog.setTextFormat(Qt.TextFormat.RichText)
         dialog.setTextInteractionFlags(Qt.TextInteractionFlag.TextBrowserInteraction)
         dialog.setText(build_about_text())

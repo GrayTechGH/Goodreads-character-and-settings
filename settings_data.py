@@ -19,7 +19,6 @@ REGIONS_FILE = 'regions.json'
 AUTODELETE_FILE = 'autodelete.json'
 COUNTRY_NAMES_FILE = 'default_country_names.json'
 COUNTRY_REGIONS_FILE = 'default_country_regions.json'
-PLUGIN_UI_TRANSLATIONS_FILE = 'plugin_ui_translations.json'
 COUNTRY_NAME_LANGUAGE_AUTO = 'auto'
 COUNTRY_NAME_LANGUAGE_ENGLISH_SHORT = 'en_short'
 COUNTRY_NAME_LANGUAGE_ENGLISH_FORMAL = 'en_formal'
@@ -86,10 +85,6 @@ def _read_bundled_country_regions():
 
 def _read_bundled_country_names():
     return _read_bundled_json_resource(COUNTRY_NAMES_FILE)
-
-
-def read_bundled_plugin_ui_translations():
-    return _read_bundled_json_resource(PLUGIN_UI_TRANSLATIONS_FILE)
 
 
 def normalize_country_code(value):

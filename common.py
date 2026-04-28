@@ -20,7 +20,6 @@ except NameError:
 import json
 import os
 import re
-import sys
 from fnmatch import fnmatchcase
 from html import unescape
 
@@ -30,13 +29,11 @@ except Exception:
     BeautifulSoup = None
 
 from calibre_plugins.Goodreads_character_and_settings.settings_data import (
-    active_language_code,
     ensure_user_json_files,
     load_user_autodelete_values,
     load_user_country_data,
     load_user_region_data,
     plugin_data_dir,
-    read_bundled_plugin_ui_translations,
 )
 
 
@@ -48,8 +45,6 @@ _COUNTRY_VARIANT_PATTERNS = None
 _COUNTRY_VARIANT_SOURCE = ''
 _AUTODELETE_VALUES = None
 _AUTODELETE_PATTERNS = None
-_PLUGIN_UI_TRANSLATIONS = None
-_PLUGIN_UI_TRANSLATION_DEBUG_MESSAGES = set()
 
 
 def reset_runtime_caches():
@@ -59,70 +54,6 @@ def reset_runtime_caches():
     _COUNTRY_VARIANT_SOURCE = ''
     _AUTODELETE_VALUES = None
     _AUTODELETE_PATTERNS = None
-    _PLUGIN_UI_TRANSLATION_DEBUG_MESSAGES.clear()
-
-
-def plugin_ui_translations():
-    global _PLUGIN_UI_TRANSLATIONS
-    if _PLUGIN_UI_TRANSLATIONS is not None:
-        return _PLUGIN_UI_TRANSLATIONS
-    try:
-        payload = read_bundled_plugin_ui_translations()
-        translations = payload.get('translations', {}) if isinstance(payload, dict) else {}
-        _PLUGIN_UI_TRANSLATIONS = translations if isinstance(translations, dict) else {}
-    except Exception:
-        _PLUGIN_UI_TRANSLATIONS = {}
-    return _PLUGIN_UI_TRANSLATIONS
-
-
-def plugin_ui_text(text, native_translate=None):
-    if callable(native_translate):
-        translated = native_translate(text)
-        if translated != text:
-            return translated
-    language = active_language_code()
-    translations = plugin_ui_translations()
-    language_translations = translations.get(language)
-    if not language_translations:
-        base_language = language.split('_', 1)[0]
-        language_translations = translations.get(base_language, {})
-        if not language_translations:
-            log_plugin_ui_translation_debug(
-                'missing_language:{}'.format(language),
-                'Goodreads character and settings: no plugin UI translations for language {!r}'.format(language),
-            )
-            return text
-    if text not in language_translations:
-        log_plugin_ui_translation_debug(
-            'missing_text:{}:{}'.format(language, text),
-            'Goodreads character and settings: no plugin UI translation for {!r} in language {!r}'.format(
-                text,
-                language,
-            ),
-        )
-    return language_translations.get(text, text)
-
-
-def log_plugin_ui_translation_debug(key, message):
-    if not is_running_under_calibre_debug():
-        return
-    if key in _PLUGIN_UI_TRANSLATION_DEBUG_MESSAGES:
-        return
-    _PLUGIN_UI_TRANSLATION_DEBUG_MESSAGES.add(key)
-    print(message, flush=True)
-
-
-def is_running_under_calibre_debug():
-    candidates = [sys.argv[0], sys.executable] + list(sys.argv[1:])
-    for candidate in candidates:
-        executable = os.path.basename(str(candidate or '')).lower()
-        if executable in ('calibre-debug', 'calibre-debug.exe'):
-            return True
-    try:
-        from calibre.constants import DEBUG
-        return bool(DEBUG)
-    except Exception:
-        return False
 
 
 def debug_pref(name):

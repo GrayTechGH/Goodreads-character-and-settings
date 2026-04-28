@@ -31,11 +31,11 @@ class GoodreadsCharacterSettingsPlugin(InterfaceActionBase):
     The reason for having two classes is that it allows the command line
     calibre utilities to run without needing to load the GUI libraries.
     '''
-    name                = _('Goodreads character and settings')
+    name                = 'Goodreads character and settings'
     description         = _('Plugin that imports character and settings data from Goodreads and writes it to custom fields')
     supported_platforms = ['windows', 'osx', 'linux']
     author              = 'GrayTechGH'
-    version             = (1, 0, 2)
+    version             = (1, 0, 3)
     minimum_calibre_version = (0, 7, 53)
 
     #: This field defines the GUI plugin class that contains all the code

@@ -112,55 +112,10 @@ def validate_country_regions(country_codes, errors):
                 seen.add(region)
 
 
-def validate_plugin_ui_translations(country_language_codes, errors):
-    payload = read_json('plugin_ui_translations.json')
-
-    languages = payload.get('languages')
-    translations = payload.get('translations')
-    quality = payload.get('translation_quality')
-    require(isinstance(languages, list), 'plugin_ui_translations.json: languages must be a list', errors)
-    require(isinstance(translations, dict), 'plugin_ui_translations.json: translations must be an object', errors)
-    require(isinstance(quality, dict), 'plugin_ui_translations.json: translation_quality must be an object', errors)
-    if not isinstance(languages, list) or not isinstance(translations, dict):
-        return
-
-    translation_language_codes = set(translations)
-    require(len(set(languages)) == len(languages),
-            'plugin_ui_translations.json: languages contains duplicate codes', errors)
-    require(set(languages) == translation_language_codes,
-            'plugin_ui_translations.json: languages and translations language codes differ', errors)
-    require(translation_language_codes == country_language_codes,
-            'plugin_ui_translations.json: language coverage differs from default_country_names.json', errors)
-    require('en' in translations, 'plugin_ui_translations.json: missing English translations', errors)
-
-    english_keys = set(translations.get('en', {}))
-    require(bool(english_keys), 'plugin_ui_translations.json: English translation map is empty', errors)
-
-    for language_code, translation_map in sorted(translations.items()):
-        path = 'plugin_ui_translations.json: {}'.format(language_code)
-        require(isinstance(translation_map, dict), '{} translation map must be an object'.format(path), errors)
-        if not isinstance(translation_map, dict):
-            continue
-
-        translation_keys = set(translation_map)
-        require(translation_keys == english_keys,
-                '{} translation keys differ from English'.format(path), errors)
-        for key, value in sorted(translation_map.items()):
-            require(isinstance(key, str) and bool(key.strip()),
-                    '{} translation keys must be non-empty strings'.format(path), errors)
-            require(isinstance(value, str) and bool(value.strip()),
-                    '{} value for {!r} must be a non-empty string'.format(path, key), errors)
-
-    if isinstance(quality, dict):
-        require(set(quality) == translation_language_codes,
-                'plugin_ui_translations.json: translation_quality language codes differ from translations', errors)
-
-
 def main():
     errors = []
     language_codes, country_codes = validate_country_names(errors)
     validate_country_regions(country_codes, errors)
-    validate_plugin_ui_translations(language_codes, errors)
 
     if errors:
         print('Resource validation failed:')

@@ -1,0 +1,174 @@
+# Goodreads Character and Settings plugin translations
+# This file was generated from plugin UI gettext strings.
+msgid ""
+msgstr ""
+"Project-Id-Version: Goodreads Character and Settings 1.0.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-28 00:00+0000\n"
+"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
+"Language-Team: \n"
+"Language: eu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Goodreads Character and Settings conversion script\n"
+
+msgid "Main"
+msgstr "Nagusia"
+
+msgid "Countries"
+msgstr "herrialdeak"
+
+msgid "Regions"
+msgstr "eskualdeak"
+
+msgid "Autodelete"
+msgstr "auto-ezabatzea"
+
+msgid "Select the character and settings fields"
+msgstr "hautatu pertsonaiak and lekuak eremuas"
+
+msgid "Characters field:"
+msgstr "pertsonaiak eremua:"
+
+msgid "Settings field:"
+msgstr "lekuak eremua:"
+
+msgid "Countries field:"
+msgstr "herrialdeak eremua:"
+
+msgid "Active calibre language"
+msgstr "aktibo calibre hizkuntza"
+
+msgid "English short names"
+msgstr "labur ingelesezko names"
+
+msgid "English formal names"
+msgstr "formal ingelesezko names"
+
+msgid "Country names language:"
+msgstr "herrialdeak names hizkuntza:"
+
+msgid "Localize country names"
+msgstr "lokalizatu herrialdeak names"
+
+msgid "Use the selected-language country names as country values. The selected-language names are also kept as aliases."
+msgstr "Use selected-language herrialdeak names as herrialdea balioas. Names are also kept as aliasak."
+
+msgid "Keep country in settings field"
+msgstr "mantendu herrialdea in lekuak eremua"
+
+msgid "Keep the country in parentheses in the Settings field while also writing it to the Countries field."
+msgstr "mantendu herrialdea in parentheses in lekuak eremua and also write it to herrialdeak eremua."
+
+msgid "Keep region in settings field"
+msgstr "mantendu eskualdea in lekuak eremua"
+
+msgid "Keep region or subdivision values such as states, provinces, and countries-in-Regions mappings in the Settings field."
+msgstr "mantendu eskualdea or subdivision balioas in lekuak eremua."
+
+msgid "Write \"Empty\" when Goodreads has no value"
+msgstr "Write \"Hutsik\" when Goodreads has no balioa"
+
+msgid " seconds"
+msgstr " segundo"
+
+msgid "Time between queries:"
+msgstr "kontsulten arteko denbora:"
+
+msgid "Max. Books/Job:"
+msgstr "geh. liburu/lan:"
+
+msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list."
+msgstr "herrialdeak table. gehitu one canonical herrialdea per row, optional ISO country code, and aliasak as a comma-separated list."
+
+msgid "Add"
+msgstr "Gehitu"
+
+msgid "Remove"
+msgstr "Kendu"
+
+msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries."
+msgstr "eskualdeak table. Each eskualdea is preserved in lekuak and mapped to the selected herrialdea in herrialdeak."
+
+msgid "Values listed here are automatically removed if Goodreads returns them exactly."
+msgstr "balioas listed here are automatically removed if Goodreads returns them exactly."
+
+msgid "Add Value"
+msgstr "gehitu balioa"
+
+msgid "Remove Value"
+msgstr "kendu balioa"
+
+msgid "Restore defaults"
+msgstr "Berrezarri &lehenetsiak"
+
+msgid "Do not import"
+msgstr "ez inportatu"
+
+msgid "Tags"
+msgstr "Etiketak"
+
+msgid "Country"
+msgstr "herrialdea"
+
+msgid "ISO"
+msgstr "ISO"
+
+msgid "Aliases"
+msgstr "aliasak"
+
+msgid "Value"
+msgstr "Balioa"
+
+msgid "If Goodreads does not provide a value, store the text \"Empty\" in any selected custom field."
+msgstr "If Goodreads does not provide a balioa, store \"Hutsik\" in any selected custom eremua."
+
+msgid "This option is only available when Characters, Settings, or Countries uses a custom field."
+msgstr "This option is only available when pertsonaiak, lekuak, or herrialdeak uses a custom eremua."
+
+msgid "Add a country first."
+msgstr "gehitu herrialdea first."
+
+msgid "Add Country"
+msgstr "gehitu herrialdea"
+
+msgid "Country name:"
+msgstr "herrialdea name:"
+
+msgid "Add Regions Country"
+msgstr "gehitu herrialdea eskualdeak"
+
+msgid "Country name cannot be empty."
+msgstr "herrialdea name cannot be empty."
+
+msgid "Country name must be unique."
+msgstr "herrialdea name must be unique."
+
+msgid "Country row {} uses a duplicate country name."
+msgstr "herrialdea row {} uses a duplicate herrialdea name."
+
+msgid "Country row {} uses a duplicate ISO country code."
+msgstr "herrialdea row {} uses a duplicate ISO herrialdea code."
+
+msgid "Run Goodreads character and settings"
+msgstr "Run Goodreads pertsonaiak eremua and lekuak eremua"
+
+msgid "Goodreads character and settings Plugin"
+msgstr "Goodreads pertsonaiak eremua and lekuak eremua Plugin"
+
+msgid "Import"
+msgstr "ez inportatu"
+
+msgid "Customize plugin..."
+msgstr "Customize plugin..."
+
+msgid "About"
+msgstr "About"
+
+msgid "About Goodreads character and settings"
+msgstr "About Goodreads pertsonaiak eremua and lekuak eremua"
+
+msgid "Plugin that imports character and settings data from Goodreads and writes it to custom fields"
+msgstr "Plugin that imports character and settings data from Goodreads and writes it to custom fields"
