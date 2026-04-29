@@ -35,7 +35,7 @@ class GoodreadsCharacterSettingsPlugin(InterfaceActionBase):
     description         = _('Plugin that imports character and settings data from Goodreads and writes it to custom fields')
     supported_platforms = ['windows', 'osx', 'linux']
     author              = 'GrayTechGH'
-    version             = (1, 1, 0)
+    version             = (1, 0, 3)
     minimum_calibre_version = (0, 7, 53)
 
     #: This field defines the GUI plugin class that contains all the code
