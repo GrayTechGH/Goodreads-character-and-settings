@@ -77,6 +77,14 @@ def merge_unique_values(existing_values, new_values):
     return merged
 
 
+def remove_empty_marker(values):
+    empty_marker = cleanup_value(_('Empty')).casefold()
+    return [
+        value for value in values or []
+        if cleanup_value(value).casefold() != empty_marker
+    ]
+
+
 def normalize_values_for_field(values, spec):
     normalized = []
     seen = set()
@@ -337,6 +345,8 @@ def build_field_updates(existing_fields, field_specs, extracted_values, write_em
         working_values = list(current_normalized)
 
         if incoming_values:
+            if write_empty_to_custom_fields:
+                working_values = remove_empty_marker(working_values)
             working_values = merge_unique_values(working_values, incoming_values)
         elif not spec.get('is_tags') and write_empty_to_custom_fields:
             working_values = merge_unique_values(working_values, [_('Empty')])

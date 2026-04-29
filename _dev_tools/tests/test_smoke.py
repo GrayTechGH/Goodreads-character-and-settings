@@ -168,6 +168,41 @@ class PluginSmokeTests(unittest.TestCase):
             common.merge_unique_values([' London ', 'Paris'], ['london', 'Paris']),
         )
 
+    def test_empty_marker_is_replaced_only_when_write_empty_option_is_enabled(self):
+        """Real Goodreads values should replace Empty only when that option owns the marker."""
+        common = load_module(
+            PLUGIN_PACKAGE + '.common',
+            os.path.join(ROOT, 'common.py'),
+        )
+        field_specs = {
+            'settings_field': {
+                'field_name': '#settings',
+                'is_tags': False,
+                'is_multiple': True,
+            },
+        }
+        existing_fields = {'#settings': ['Empty']}
+        extracted_values = {'settings_field': ['London']}
+
+        self.assertEqual(
+            {'#settings': ['London']},
+            common.build_field_updates(
+                existing_fields,
+                field_specs,
+                extracted_values,
+                write_empty_to_custom_fields=True,
+            ),
+        )
+        self.assertEqual(
+            {'#settings': ['Empty', 'London']},
+            common.build_field_updates(
+                existing_fields,
+                field_specs,
+                extracted_values,
+                write_empty_to_custom_fields=False,
+            ),
+        )
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
