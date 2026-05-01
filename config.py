@@ -17,33 +17,48 @@ except NameError:
     def _(text):
         return text
 
+import re
+
 from qt.core import (
     QAbstractItemView,
+    QAbstractScrollArea,
     QCheckBox,
     QComboBox,
+    QDialog,
+    QDialogButtonBox,
     QFormLayout,
     QHBoxLayout,
     QHeaderView,
     QInputDialog,
     QLabel,
+    QLineEdit,
     QMessageBox,
     QPushButton,
+    QSize,
     QSpinBox,
     QTabWidget,
     QTableWidget,
     QTableWidgetItem,
     QVBoxLayout,
     QWidget,
+    Qt,
 )
 
 from calibre.utils.config import JSONConfig
 from calibre_plugins.Goodreads_character_and_settings.settings_data import (
+    AUTODELETE_MODE_LITERAL,
+    AUTODELETE_MODE_REGEX,
+    AUTODELETE_MODE_WILDCARD,
+    AUTODELETE_SCOPE_BOTH,
+    AUTODELETE_SCOPE_CHARACTERS,
+    AUTODELETE_SCOPE_SETTINGS,
     COUNTRY_NAME_LANGUAGE_AUTO,
     COUNTRY_NAME_LANGUAGE_ENGLISH_FORMAL,
     COUNTRY_NAME_LANGUAGE_ENGLISH_SHORT,
     COUNTRY_NAME_MODE_ALIAS,
     COUNTRY_NAME_MODE_COUNTRY,
     build_default_user_data,
+    consume_user_json_repair_flag,
     country_name_language_display_name,
     country_name_language_options,
     ensure_user_json_files,
@@ -61,6 +76,21 @@ prefs = JSONConfig('plugins/Goodreads_character_and_settings')
 
 FIELD_TAGS = 'tags'
 FIELD_NONE = 'none'
+CONFIG_DIALOG_DEFAULT_SIZE = QSize(900, 640)
+CONFIG_DIALOG_MINIMUM_SIZE = QSize(640, 460)
+AUTODELETE_RULE_DIALOG_DEFAULT_SIZE = QSize(560, 220)
+AUTODELETE_RULE_DIALOG_MINIMUM_SIZE = QSize(440, 180)
+AUTODELETE_COLUMN_DEFAULT_WIDTHS = [70, 0, 90, 100, 120]
+AUTODELETE_MODES = (
+    (AUTODELETE_MODE_LITERAL, _('Literal')),
+    (AUTODELETE_MODE_WILDCARD, _('Wildcard')),
+    (AUTODELETE_MODE_REGEX, _('Regex')),
+)
+AUTODELETE_SCOPES = (
+    (AUTODELETE_SCOPE_SETTINGS, _('Settings')),
+    (AUTODELETE_SCOPE_CHARACTERS, _('Characters')),
+    (AUTODELETE_SCOPE_BOTH, _('Both')),
+)
 
 
 prefs.defaults['character_field'] = FIELD_NONE
@@ -76,12 +106,16 @@ prefs.defaults['debug_character_sources'] = False
 prefs.defaults['debug_settings_pipeline'] = False
 prefs.defaults['country_name_language'] = COUNTRY_NAME_LANGUAGE_AUTO
 prefs.defaults['country_name_mode'] = COUNTRY_NAME_MODE_ALIAS
+prefs.defaults['autodelete_column_widths'] = AUTODELETE_COLUMN_DEFAULT_WIDTHS
 
 
 class ConfigWidget(QWidget):
+    validate_before_accept = True
 
     def __init__(self, custom_fields=None):
         QWidget.__init__(self)
+        self.setMinimumSize(CONFIG_DIALOG_MINIMUM_SIZE)
+        self.resize(CONFIG_DIALOG_DEFAULT_SIZE)
 
         self.custom_fields = custom_fields or []
         ensure_user_json_files()
@@ -105,6 +139,7 @@ class ConfigWidget(QWidget):
         self.tabs.addTab(self.countries_tab, _('Countries'))
         self.tabs.addTab(self.regions_tab, _('Regions'))
         self.tabs.addTab(self.autodelete_tab, _('Autodelete'))
+        self.tabs.currentChanged.connect(self.update_restore_defaults_button)
 
         self.build_main_tab()
         self.build_countries_tab()
@@ -113,10 +148,23 @@ class ConfigWidget(QWidget):
         self.build_footer()
 
         self.load_main_settings()
-        self.load_country_rows(load_user_country_data())
-        self.load_region_rows(load_user_region_data())
-        self.load_autodelete_rows(load_user_autodelete_values())
+        country_data = load_user_country_data()
+        self._countries_dirty = consume_user_json_repair_flag('countries')
+        self.load_country_rows(country_data)
+
+        region_data = load_user_region_data()
+        self._regions_dirty = consume_user_json_repair_flag('regions')
+        if self.load_region_rows(region_data):
+            self._regions_dirty = True
+
+        autodelete_data = load_user_autodelete_values()
+        self._autodelete_dirty = consume_user_json_repair_flag('autodelete')
+        self.load_autodelete_rows(autodelete_data)
         self.update_empty_option_state()
+        self.update_restore_defaults_button()
+
+    def sizeHint(self):
+        return CONFIG_DIALOG_DEFAULT_SIZE
 
     def build_main_tab(self):
         layout = QVBoxLayout()
@@ -239,7 +287,11 @@ class ConfigWidget(QWidget):
         self.countries_table = QTableWidget(0, 3, self)
         self.countries_table.setHorizontalHeaderLabels([_('Country'), _('ISO'), _('Aliases')])
         self.countries_table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
-        self.countries_table.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
+        self.countries_table.setSelectionMode(QAbstractItemView.SelectionMode.ExtendedSelection)
+        self.countries_table.setSizeAdjustPolicy(QAbstractScrollArea.SizeAdjustPolicy.AdjustIgnored)
+        self.countries_table.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+        self.countries_table.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+        self.countries_table.verticalHeader().setVisible(False)
         self.countries_table.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
         self.countries_table.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeMode.ResizeToContents)
         self.countries_table.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeMode.Stretch)
@@ -270,7 +322,11 @@ class ConfigWidget(QWidget):
         self.regions_table = QTableWidget(0, 2, self)
         self.regions_table.setHorizontalHeaderLabels([_('Country'), _('Regions')])
         self.regions_table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
-        self.regions_table.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
+        self.regions_table.setSelectionMode(QAbstractItemView.SelectionMode.ExtendedSelection)
+        self.regions_table.setSizeAdjustPolicy(QAbstractScrollArea.SizeAdjustPolicy.AdjustIgnored)
+        self.regions_table.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+        self.regions_table.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+        self.regions_table.verticalHeader().setVisible(False)
         self.regions_table.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
         self.regions_table.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeMode.Stretch)
         self.regions_table.itemChanged.connect(self.regions_table_item_changed)
@@ -292,25 +348,48 @@ class ConfigWidget(QWidget):
 
         description = QLabel(
             _('Values listed here are automatically removed if Goodreads returns '
-                    'them exactly.')
+                    'matching Characters or Settings values.')
         )
         description.setWordWrap(True)
         layout.addWidget(description)
 
-        self.autodelete_table = QTableWidget(0, 1, self)
-        self.autodelete_table.setHorizontalHeaderLabels([_('Value')])
+        self.autodelete_table = QTableWidget(0, 5, self)
+        self.autodelete_table.setHorizontalHeaderLabels([
+            _('Enabled'),
+            _('Match'),
+            _('Mode'),
+            _('Columns'),
+            _('Case'),
+        ])
         self.autodelete_table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
-        self.autodelete_table.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
-        self.autodelete_table.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
+        self.autodelete_table.setSelectionMode(QAbstractItemView.SelectionMode.ExtendedSelection)
+        self.autodelete_table.setSizeAdjustPolicy(QAbstractScrollArea.SizeAdjustPolicy.AdjustIgnored)
+        self.autodelete_table.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+        self.autodelete_table.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+        self.autodelete_table.verticalHeader().setVisible(False)
+        self.autodelete_table.setColumnWidth(0, 70)
+        self.autodelete_table.setColumnWidth(2, 90)
+        self.autodelete_table.setColumnWidth(3, 100)
+        self.autodelete_table.setColumnWidth(4, 120)
+        self.autodelete_table.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.Interactive)
+        self.autodelete_table.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeMode.Stretch)
+        self.autodelete_table.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeMode.Interactive)
+        self.autodelete_table.horizontalHeader().setSectionResizeMode(3, QHeaderView.ResizeMode.Interactive)
+        self.autodelete_table.horizontalHeader().setSectionResizeMode(4, QHeaderView.ResizeMode.Interactive)
+        self.restore_autodelete_column_widths()
         self.autodelete_table.itemChanged.connect(self.autodelete_table_item_changed)
+        self.autodelete_table.doubleClicked.connect(self.edit_autodelete_row)
         layout.addWidget(self.autodelete_table)
 
         buttons = QHBoxLayout()
-        self.add_autodelete_button = QPushButton(_('Add Value'), self)
-        self.remove_autodelete_button = QPushButton(_('Remove Value'), self)
+        self.add_autodelete_button = QPushButton(_('Add'), self)
+        self.edit_autodelete_button = QPushButton(_('Edit'), self)
+        self.remove_autodelete_button = QPushButton(_('Remove'), self)
         self.add_autodelete_button.clicked.connect(self.add_autodelete_row)
+        self.edit_autodelete_button.clicked.connect(self.edit_autodelete_row)
         self.remove_autodelete_button.clicked.connect(self.remove_autodelete_row)
         buttons.addWidget(self.add_autodelete_button)
+        buttons.addWidget(self.edit_autodelete_button)
         buttons.addWidget(self.remove_autodelete_button)
         buttons.addStretch(1)
         layout.addLayout(buttons)
@@ -322,6 +401,11 @@ class ConfigWidget(QWidget):
         footer.addWidget(self.restore_defaults_button)
         footer.addStretch(1)
         self.l.addLayout(footer)
+
+    def update_restore_defaults_button(self, *_args):
+        self.restore_defaults_button.setVisible(
+            self.tabs.currentWidget() is not self.autodelete_tab
+        )
 
     def create_field_combo(self):
         combo = QComboBox(self)
@@ -439,6 +523,76 @@ class ConfigWidget(QWidget):
     def autodelete_table_item_changed(self, _item):
         if not self._loading_tables:
             self._autodelete_dirty = True
+
+    def selected_table_rows(self, table):
+        return sorted(
+            {index.row() for index in table.selectionModel().selectedRows()},
+            reverse=True,
+        )
+
+    def country_keys_for_rows(self, rows):
+        keys = set()
+        for row in rows:
+            country_item = self.countries_table.item(row, 0)
+            iso_item = self.countries_table.item(row, 1)
+            country = str(country_item.text() if country_item else '').strip()
+            iso = normalize_country_code(iso_item.text() if iso_item else '')
+            key = self.country_record_key(country, iso)
+            if key:
+                keys.add(key)
+        return keys
+
+    def region_rows_for_country_keys(self, country_keys):
+        rows = []
+        for row in range(self.regions_table.rowCount()):
+            combo = self.regions_table.cellWidget(row, 0)
+            country_key = str(combo.currentData() if combo is not None else '')
+            if country_key in country_keys:
+                rows.append(row)
+        return sorted(rows, reverse=True)
+
+    def confirm_remove_country_region_mappings(self, country_count, region_count):
+        if region_count <= 0:
+            return True
+        if country_count == 1:
+            message = _(
+                'Removing this country will also remove its region mappings. Continue?'
+            )
+        else:
+            message = _(
+                'Removing these countries will also remove their region mappings. Continue?'
+            )
+        result = QMessageBox.question(
+            self,
+            _('Countries'),
+            message,
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+            QMessageBox.StandardButton.No,
+        )
+        return result == QMessageBox.StandardButton.Yes
+
+    def restore_autodelete_column_widths(self):
+        widths = prefs.get('autodelete_column_widths', AUTODELETE_COLUMN_DEFAULT_WIDTHS)
+        if not isinstance(widths, list):
+            widths = AUTODELETE_COLUMN_DEFAULT_WIDTHS
+        for column, width in enumerate(widths[:self.autodelete_table.columnCount()]):
+            if column == 1:
+                continue
+            try:
+                width = int(width)
+            except Exception:
+                continue
+            if width > 0:
+                self.autodelete_table.setColumnWidth(column, width)
+
+    def current_autodelete_column_widths(self):
+        widths = []
+        for column in range(self.autodelete_table.columnCount()):
+            if column == 1:
+                widths.append(0)
+            else:
+                widths.append(self.autodelete_table.columnWidth(column))
+        return widths
 
     def current_country_names(self):
         names = []
@@ -576,12 +730,23 @@ class ConfigWidget(QWidget):
             self._countries_dirty = True
 
     def remove_country_row(self):
-        row = self.countries_table.currentRow()
-        if row >= 0:
-            self.countries_table.removeRow(row)
+        rows = self.selected_table_rows(self.countries_table)
+        if not rows and self.countries_table.currentRow() >= 0:
+            rows = [self.countries_table.currentRow()]
+        if rows:
+            country_keys = self.country_keys_for_rows(rows)
+            region_rows = self.region_rows_for_country_keys(country_keys)
+            if not self.confirm_remove_country_region_mappings(len(rows), len(region_rows)):
+                return
+            for row in region_rows:
+                self.regions_table.removeRow(row)
+            for row in rows:
+                self.countries_table.removeRow(row)
             self.refresh_region_country_combos()
             if not self._loading_tables:
                 self._countries_dirty = True
+                if region_rows:
+                    self._regions_dirty = True
 
     def add_region_row(self, country_key='', country='', region='', iso=''):
         country_key = str(country_key or '')
@@ -612,23 +777,218 @@ class ConfigWidget(QWidget):
             self._regions_dirty = True
 
     def remove_region_row(self):
-        row = self.regions_table.currentRow()
-        if row >= 0:
-            self.regions_table.removeRow(row)
+        rows = self.selected_table_rows(self.regions_table)
+        if not rows and self.regions_table.currentRow() >= 0:
+            rows = [self.regions_table.currentRow()]
+        if rows:
+            for row in rows:
+                self.regions_table.removeRow(row)
             if not self._loading_tables:
                 self._regions_dirty = True
 
-    def add_autodelete_row(self, value=''):
+    def autodelete_mode_label(self, mode):
+        for value, label in AUTODELETE_MODES:
+            if value == mode:
+                return label
+        return _('Literal')
+
+    def autodelete_scope_label(self, scope):
+        for value, label in AUTODELETE_SCOPES:
+            if value == scope:
+                return label
+        return _('Both')
+
+    def set_checkable_table_item(self, table, row, column, checked):
+        item = QTableWidgetItem('')
+        item.setFlags(
+            Qt.ItemFlag.ItemIsEnabled
+            | Qt.ItemFlag.ItemIsSelectable
+            | Qt.ItemFlag.ItemIsUserCheckable
+        )
+        item.setCheckState(
+            Qt.CheckState.Checked if checked else Qt.CheckState.Unchecked
+        )
+        table.setItem(row, column, item)
+
+    def set_readonly_table_text(self, table, row, column, value):
+        item = QTableWidgetItem(str(value or ''))
+        item.setFlags(Qt.ItemFlag.ItemIsEnabled | Qt.ItemFlag.ItemIsSelectable)
+        table.setItem(row, column, item)
+
+    def autodelete_rule_from_dialog(self, existing=None):
+        existing = existing or {}
+        dialog = QDialog(self)
+        dialog.setMinimumSize(AUTODELETE_RULE_DIALOG_MINIMUM_SIZE)
+        dialog.resize(AUTODELETE_RULE_DIALOG_DEFAULT_SIZE)
+        dialog.setWindowTitle(
+            _('Edit auto-delete rule') if existing.get('pattern') else _('Add auto-delete rule')
+        )
+        layout = QVBoxLayout(dialog)
+        form = QFormLayout()
+        form.setFieldGrowthPolicy(QFormLayout.FieldGrowthPolicy.AllNonFixedFieldsGrow)
+        layout.addLayout(form)
+
+        pattern = QLineEdit(dialog)
+        pattern.setText(existing.get('pattern', ''))
+        form.addRow(_('Match:'), pattern)
+
+        mode = QComboBox(dialog)
+        for value, label in AUTODELETE_MODES:
+            mode.addItem(label, value)
+        mode.setMaximumWidth(180)
+        mode_index = mode.findData(existing.get('mode', AUTODELETE_MODE_LITERAL))
+        mode.setCurrentIndex(mode_index if mode_index >= 0 else 0)
+        form.addRow(_('Match mode:'), mode)
+
+        scope = QComboBox(dialog)
+        for value, label in AUTODELETE_SCOPES:
+            scope.addItem(label, value)
+        scope.setMaximumWidth(180)
+        scope_index = scope.findData(existing.get('scope', AUTODELETE_SCOPE_SETTINGS))
+        scope.setCurrentIndex(scope_index if scope_index >= 0 else 0)
+        form.addRow(_('Columns:'), scope)
+
+        case_sensitive = QCheckBox(_('Case sensitive'), dialog)
+        case_sensitive.setChecked(bool(existing.get('case_sensitive', False)))
+        form.addRow('', case_sensitive)
+
+        buttons = QDialogButtonBox(
+            QDialogButtonBox.StandardButton.Ok
+            | QDialogButtonBox.StandardButton.Cancel,
+            dialog,
+        )
+        buttons.accepted.connect(dialog.accept)
+        buttons.rejected.connect(dialog.reject)
+        layout.addWidget(buttons)
+
+        while dialog.exec() == QDialog.DialogCode.Accepted:
+            value = str(pattern.text() or '').strip()
+            if not value:
+                QMessageBox.warning(dialog, dialog.windowTitle(), _('Match cannot be empty.'))
+                continue
+            if mode.currentData() == AUTODELETE_MODE_REGEX:
+                try:
+                    re.compile(value)
+                except re.error as err:
+                    QMessageBox.warning(
+                        dialog,
+                        dialog.windowTitle(),
+                        _('Invalid regular expression: {}').format(err),
+                    )
+                    continue
+            return {
+                'enabled': bool(existing.get('enabled', True)),
+                'pattern': value,
+                'mode': mode.currentData(),
+                'scope': scope.currentData(),
+                'case_sensitive': case_sensitive.isChecked(),
+            }
+        return None
+
+    def autodelete_rule_for_row(self, row):
+        enabled_item = self.autodelete_table.item(row, 0)
+        pattern_item = self.autodelete_table.item(row, 1)
+        mode_item = self.autodelete_table.item(row, 2)
+        scope_item = self.autodelete_table.item(row, 3)
+        case_item = self.autodelete_table.item(row, 4)
+        pattern = str(pattern_item.text() if pattern_item else '').strip()
+        if not pattern:
+            return None
+        return {
+            'enabled': (
+                enabled_item is None
+                or enabled_item.checkState() == Qt.CheckState.Checked
+            ),
+            'pattern': pattern,
+            'mode': mode_item.data(Qt.ItemDataRole.UserRole) if mode_item else AUTODELETE_MODE_LITERAL,
+            'scope': scope_item.data(Qt.ItemDataRole.UserRole) if scope_item else AUTODELETE_SCOPE_BOTH,
+            'case_sensitive': (
+                case_item is not None
+                and case_item.checkState() == Qt.CheckState.Checked
+            ),
+        }
+
+    def add_autodelete_row(self, rule=None):
+        if not isinstance(rule, dict):
+            starting_rule = {
+                'enabled': True,
+                'pattern': rule if isinstance(rule, str) else '',
+                'mode': AUTODELETE_MODE_LITERAL,
+                'scope': AUTODELETE_SCOPE_SETTINGS,
+                'case_sensitive': False,
+            }
+            rule = self.autodelete_rule_from_dialog(starting_rule)
+            if not rule:
+                return
         row = self.autodelete_table.rowCount()
         self.autodelete_table.insertRow(row)
-        self.set_table_text(self.autodelete_table, row, 0, value)
+        self.set_checkable_table_item(
+            self.autodelete_table,
+            row,
+            0,
+            bool(rule.get('enabled', True)),
+        )
+        self.set_readonly_table_text(self.autodelete_table, row, 1, rule.get('pattern', ''))
+        mode_item = QTableWidgetItem(self.autodelete_mode_label(rule.get('mode')))
+        mode_item.setFlags(Qt.ItemFlag.ItemIsEnabled | Qt.ItemFlag.ItemIsSelectable)
+        mode_item.setData(Qt.ItemDataRole.UserRole, rule.get('mode', AUTODELETE_MODE_LITERAL))
+        self.autodelete_table.setItem(row, 2, mode_item)
+        scope_item = QTableWidgetItem(self.autodelete_scope_label(rule.get('scope')))
+        scope_item.setFlags(Qt.ItemFlag.ItemIsEnabled | Qt.ItemFlag.ItemIsSelectable)
+        scope_item.setData(Qt.ItemDataRole.UserRole, rule.get('scope', AUTODELETE_SCOPE_BOTH))
+        self.autodelete_table.setItem(row, 3, scope_item)
+        self.set_checkable_table_item(
+            self.autodelete_table,
+            row,
+            4,
+            bool(rule.get('case_sensitive', False)),
+        )
+        self.autodelete_table.setCurrentCell(row, 1)
+        self.autodelete_table.selectRow(row)
+        if not self._loading_tables:
+            self._autodelete_dirty = True
+
+    def edit_autodelete_row(self, *_args):
+        row = self.autodelete_table.currentRow()
+        if row < 0:
+            return
+        existing = self.autodelete_rule_for_row(row)
+        if not existing:
+            return
+        updated = self.autodelete_rule_from_dialog(existing)
+        if not updated:
+            return
+        self.autodelete_table.blockSignals(True)
+        enabled_item = self.autodelete_table.item(row, 0)
+        if enabled_item is not None:
+            enabled_item.setCheckState(
+                Qt.CheckState.Checked if updated.get('enabled', True) else Qt.CheckState.Unchecked
+            )
+        self.set_readonly_table_text(self.autodelete_table, row, 1, updated.get('pattern', ''))
+        mode_item = QTableWidgetItem(self.autodelete_mode_label(updated.get('mode')))
+        mode_item.setFlags(Qt.ItemFlag.ItemIsEnabled | Qt.ItemFlag.ItemIsSelectable)
+        mode_item.setData(Qt.ItemDataRole.UserRole, updated.get('mode', AUTODELETE_MODE_LITERAL))
+        self.autodelete_table.setItem(row, 2, mode_item)
+        scope_item = QTableWidgetItem(self.autodelete_scope_label(updated.get('scope')))
+        scope_item.setFlags(Qt.ItemFlag.ItemIsEnabled | Qt.ItemFlag.ItemIsSelectable)
+        scope_item.setData(Qt.ItemDataRole.UserRole, updated.get('scope', AUTODELETE_SCOPE_BOTH))
+        self.autodelete_table.setItem(row, 3, scope_item)
+        case_item = self.autodelete_table.item(row, 4)
+        if case_item is not None:
+            case_item.setCheckState(
+                Qt.CheckState.Checked if updated.get('case_sensitive', False) else Qt.CheckState.Unchecked
+            )
+        self.autodelete_table.blockSignals(False)
         if not self._loading_tables:
             self._autodelete_dirty = True
 
     def remove_autodelete_row(self):
-        row = self.autodelete_table.currentRow()
-        if row >= 0:
-            self.autodelete_table.removeRow(row)
+        rows = self.selected_table_rows(self.autodelete_table)
+        if not rows and self.autodelete_table.currentRow() >= 0:
+            rows = [self.autodelete_table.currentRow()]
+        if rows:
+            for row in rows:
+                self.autodelete_table.removeRow(row)
             if not self._loading_tables:
                 self._autodelete_dirty = True
 
@@ -655,6 +1015,11 @@ class ConfigWidget(QWidget):
         self.regions_table.blockSignals(True)
         self.regions_table.setUpdatesEnabled(False)
         self.regions_table.setRowCount(0)
+        valid_country_keys = {
+            item['key']
+            for item in self.current_country_records()
+        }
+        skipped_orphan_regions = False
         grouped = {}
         for item in regions:
             iso = normalize_country_code(item.get('iso', ''))
@@ -663,6 +1028,9 @@ class ConfigWidget(QWidget):
             if not country or not region:
                 continue
             country_key = self.country_record_key(country, iso)
+            if country_key not in valid_country_keys:
+                skipped_orphan_regions = True
+                continue
             grouped.setdefault(country_key, {
                 'country': country,
                 'iso': iso,
@@ -681,6 +1049,7 @@ class ConfigWidget(QWidget):
         self.regions_table.blockSignals(False)
         self.regions_table.setUpdatesEnabled(True)
         self._loading_tables = False
+        return skipped_orphan_regions
 
     def load_autodelete_rows(self, values):
         self._loading_tables = True
@@ -719,25 +1088,51 @@ class ConfigWidget(QWidget):
     def validate_country_rows(self):
         seen_codes = set()
         seen_names = set()
-        for row, item in enumerate(self.collect_country_rows(), start=1):
-            country_key = item.get('country', '').casefold()
-            if country_key in seen_names:
+        for row in range(self.countries_table.rowCount()):
+            country_item = self.countries_table.item(row, 0)
+            iso_item = self.countries_table.item(row, 1)
+            country = str(country_item.text() if country_item else '').strip()
+            iso = normalize_country_code(iso_item.text() if iso_item else '')
+            row_number = row + 1
+
+            if not country:
+                if country_item is None:
+                    country_item = QTableWidgetItem('')
+                    self.countries_table.setItem(row, 0, country_item)
+                self.countries_table.setCurrentCell(row, 0)
+                self.countries_table.selectRow(row)
                 QMessageBox.warning(
                     self,
                     _('Countries'),
-                    _('Country row {} uses a duplicate country name.').format(row),
+                    _('Country cannot be left blank.'),
+                )
+                self.countries_table.setFocus()
+                self.countries_table.setCurrentCell(row, 0)
+                self.countries_table.editItem(country_item)
+                return False
+
+            country_key = country.casefold()
+            if country_key in seen_names:
+                self.countries_table.setCurrentCell(row, 0)
+                self.countries_table.selectRow(row)
+                QMessageBox.warning(
+                    self,
+                    _('Countries'),
+                    _('Country row {} uses a duplicate country name.').format(row_number),
                 )
                 return False
             seen_names.add(country_key)
-            if item.get('iso') and item['iso'] in seen_codes:
+            if iso and iso in seen_codes:
+                self.countries_table.setCurrentCell(row, 1)
+                self.countries_table.selectRow(row)
                 QMessageBox.warning(
                     self,
                     _('Countries'),
-                    _('Country row {} uses a duplicate ISO country code.').format(row),
+                    _('Country row {} uses a duplicate ISO country code.').format(row_number),
                 )
                 return False
-            if item.get('iso'):
-                seen_codes.add(item['iso'])
+            if iso:
+                seen_codes.add(iso)
         return True
 
     def collect_region_rows(self):
@@ -766,13 +1161,12 @@ class ConfigWidget(QWidget):
         return regions
 
     def collect_autodelete_rows(self):
-        values = []
+        rules = []
         for row in range(self.autodelete_table.rowCount()):
-            item = self.autodelete_table.item(row, 0)
-            value = str(item.text() if item else '').strip()
-            if value:
-                values.append(value)
-        return values
+            rule = self.autodelete_rule_for_row(row)
+            if rule:
+                rules.append(rule)
+        return rules
 
     def restore_user_json_defaults(self):
         defaults = build_default_user_data(
@@ -781,7 +1175,6 @@ class ConfigWidget(QWidget):
         )
         countries = list(defaults.get('countries', []) or [])
         regions = list(defaults.get('regions', []) or [])
-        autodelete = list(defaults.get('autodelete', []) or [])
         current_tab = self.tabs.currentWidget()
 
         if current_tab is self.countries_tab:
@@ -804,17 +1197,18 @@ class ConfigWidget(QWidget):
             return
 
         if current_tab is self.autodelete_tab:
-            self.load_autodelete_rows(autodelete)
-            self._autodelete_dirty = True
+            QMessageBox.information(
+                self,
+                _('Autodelete'),
+                _('Auto-delete rules do not have defaults to restore.'),
+            )
             return
 
         self.load_country_rows(countries)
         self.load_region_rows(regions)
-        self.load_autodelete_rows(autodelete)
 
         self._countries_dirty = True
         self._regions_dirty = True
-        self._autodelete_dirty = True
 
     def save_settings(self):
         prefs['character_field'] = self.character_field.currentData()
@@ -833,6 +1227,7 @@ class ConfigWidget(QWidget):
         prefs['country_name_mode'] = self.current_country_name_mode()
         prefs['query_interval_seconds'] = self.query_interval_seconds.value()
         prefs['max_books_per_job'] = self.max_books_per_job.value()
+        prefs['autodelete_column_widths'] = self.current_autodelete_column_widths()
 
         if self._countries_dirty:
             save_user_country_data(self.collect_country_rows())

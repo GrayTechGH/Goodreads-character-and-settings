@@ -29,6 +29,12 @@ except Exception:
     BeautifulSoup = None
 
 from calibre_plugins.Goodreads_character_and_settings.settings_data import (
+    AUTODELETE_MODE_LITERAL,
+    AUTODELETE_MODE_REGEX,
+    AUTODELETE_MODE_WILDCARD,
+    AUTODELETE_SCOPE_BOTH,
+    AUTODELETE_SCOPE_CHARACTERS,
+    AUTODELETE_SCOPE_SETTINGS,
     ensure_user_json_files,
     load_user_autodelete_values,
     load_user_country_data,
@@ -43,17 +49,15 @@ _LAST_EXTRACTION_DEBUG = {}
 _COUNTRY_VARIANT_LOOKUP = None
 _COUNTRY_VARIANT_PATTERNS = None
 _COUNTRY_VARIANT_SOURCE = ''
-_AUTODELETE_VALUES = None
-_AUTODELETE_PATTERNS = None
+_AUTODELETE_RULES = None
 
 
 def reset_runtime_caches():
-    global _COUNTRY_VARIANT_LOOKUP, _COUNTRY_VARIANT_PATTERNS, _COUNTRY_VARIANT_SOURCE, _AUTODELETE_VALUES, _AUTODELETE_PATTERNS
+    global _COUNTRY_VARIANT_LOOKUP, _COUNTRY_VARIANT_PATTERNS, _COUNTRY_VARIANT_SOURCE, _AUTODELETE_RULES
     _COUNTRY_VARIANT_LOOKUP = None
     _COUNTRY_VARIANT_PATTERNS = None
     _COUNTRY_VARIANT_SOURCE = ''
-    _AUTODELETE_VALUES = None
-    _AUTODELETE_PATTERNS = None
+    _AUTODELETE_RULES = None
 
 
 def debug_pref(name):
@@ -167,24 +171,20 @@ def load_country_variant_data():
 
 
 def load_autodelete_values():
-    global _AUTODELETE_VALUES, _AUTODELETE_PATTERNS
-    if _AUTODELETE_VALUES is not None and _AUTODELETE_PATTERNS is not None:
-        return _AUTODELETE_VALUES, _AUTODELETE_PATTERNS
+    global _AUTODELETE_RULES
+    if _AUTODELETE_RULES is not None:
+        return _AUTODELETE_RULES
     try:
         ensure_user_json_files()
-        exact_values = set()
-        wildcard_patterns = []
-        for value in load_user_autodelete_values():
-            cleaned = cleanup_value(value)
+        rules = []
+        for rule in load_user_autodelete_values():
+            cleaned = cleanup_value(rule.get('pattern', ''))
             if not cleaned:
                 continue
-            lowered = cleaned.casefold()
-            if '*' in lowered:
-                wildcard_patterns.append(lowered)
-            else:
-                exact_values.add(lowered)
-        _AUTODELETE_VALUES = exact_values
-        _AUTODELETE_PATTERNS = wildcard_patterns
+            normalized_rule = dict(rule)
+            normalized_rule['pattern'] = cleaned
+            rules.append(normalized_rule)
+        _AUTODELETE_RULES = rules
     except Exception as err:
         print(
             'Goodreads character and settings: failed to load autodelete values: {}'.format(
@@ -192,21 +192,57 @@ def load_autodelete_values():
             ),
             flush=True,
         )
-        _AUTODELETE_VALUES = set()
-        _AUTODELETE_PATTERNS = []
-    return _AUTODELETE_VALUES, _AUTODELETE_PATTERNS
+        _AUTODELETE_RULES = []
+    return _AUTODELETE_RULES
 
 
-def should_autodelete_value(value, exact_values=None, wildcard_patterns=None):
+def autodelete_scope_matches(rule, label):
+    scope = rule.get('scope') or AUTODELETE_SCOPE_BOTH
+    label = str(label or '').casefold()
+    if scope == AUTODELETE_SCOPE_BOTH:
+        return True
+    if scope == AUTODELETE_SCOPE_CHARACTERS:
+        return label in ('character', 'characters')
+    if scope == AUTODELETE_SCOPE_SETTINGS:
+        return label in ('place', 'places', 'setting', 'settings')
+    return True
+
+
+def should_autodelete_value(value, rules=None, label=''):
     cleaned = cleanup_value(value)
     if not cleaned:
         return False
-    lowered = cleaned.casefold()
-    if exact_values is None or wildcard_patterns is None:
-        exact_values, wildcard_patterns = load_autodelete_values()
-    if lowered in exact_values:
-        return True
-    return any(fnmatchcase(lowered, pattern) for pattern in wildcard_patterns)
+    if rules is None:
+        rules = load_autodelete_values()
+    for rule in rules:
+        if not rule.get('enabled', True):
+            continue
+        if not autodelete_scope_matches(rule, label):
+            continue
+        pattern = cleanup_value(rule.get('pattern', ''))
+        if not pattern:
+            continue
+        mode = rule.get('mode') or AUTODELETE_MODE_LITERAL
+        if rule.get('case_sensitive', False):
+            candidate = cleaned
+            match_pattern = pattern
+            regex_flags = 0
+        else:
+            candidate = cleaned.casefold()
+            match_pattern = pattern.casefold()
+            regex_flags = re.IGNORECASE
+        if mode == AUTODELETE_MODE_WILDCARD:
+            if fnmatchcase(candidate, match_pattern):
+                return True
+        elif mode == AUTODELETE_MODE_REGEX:
+            try:
+                if re.search(pattern, cleaned, regex_flags):
+                    return True
+            except re.error:
+                continue
+        elif candidate == match_pattern:
+            return True
+    return False
 
 
 def collect_country_variants(canonical_country, variants):
@@ -322,6 +358,7 @@ def build_field_updates(existing_fields, field_specs, extracted_values, write_em
         for field_name, values in (existing_fields or {}).items()
     }
     updates = {}
+    autodelete_rules = load_autodelete_values()
 
     for pref_name in ('character_field', 'settings_field', 'countries_field'):
         spec = field_specs.get(pref_name, {})
@@ -330,6 +367,16 @@ def build_field_updates(existing_fields, field_specs, extracted_values, write_em
             continue
 
         incoming_values = extracted_values.get(pref_name, []) or []
+        if pref_name == 'character_field':
+            incoming_values = [
+                value for value in incoming_values
+                if not should_autodelete_value(value, autodelete_rules, 'Characters')
+            ]
+        elif pref_name == 'settings_field':
+            incoming_values = [
+                value for value in incoming_values
+                if not should_autodelete_value(value, autodelete_rules, 'Settings')
+            ]
         current_normalized = normalize_values_for_field(
             current_values.get(field_name, []),
             spec,
@@ -382,7 +429,7 @@ def extract_goodreads_values(html, label):
     values = []
     labels = expand_label_aliases(label)
     debug_entries = []
-    autodelete_values, autodelete_patterns = load_autodelete_values()
+    autodelete_rules = load_autodelete_values()
 
     for candidate in labels:
         # Goodreads stores character and place entities in the React hydration payload.
@@ -397,7 +444,7 @@ def extract_goodreads_values(html, label):
     seen = set()
     for value in values:
         for normalized in normalize_extracted_value(value):
-            if should_autodelete_value(normalized, autodelete_values, autodelete_patterns):
+            if should_autodelete_value(normalized, autodelete_rules, label):
                 continue
             if normalized and normalized not in seen:
                 seen.add(normalized)
