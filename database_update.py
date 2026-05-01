@@ -73,6 +73,20 @@ def read_json_file(path, default):
         return json.load(f)
 
 
+def safely_read_json_file(path, default):
+    try:
+        return read_json_file(path, default), True
+    except Exception as err:
+        print(
+            'Goodreads character and settings: failed to read {}: {}'.format(
+                path,
+                err,
+            ),
+            flush=True,
+        )
+        return default, False
+
+
 def payload_schema_version(payload):
     if not isinstance(payload, dict):
         return LEGACY_USER_DATABASE_SCHEMA_VERSION
@@ -91,7 +105,11 @@ def user_database_versions():
     )
     for name, path in paths:
         if os.path.exists(path):
-            versions[name] = payload_schema_version(read_json_file(path, {}))
+            payload, ok = safely_read_json_file(path, {})
+            versions[name] = (
+                payload_schema_version(payload)
+                if ok else USER_DATABASE_SCHEMA_VERSION
+            )
         else:
             versions[name] = 0
     return versions
@@ -231,27 +249,31 @@ def normalize_legacy_region_rows(payload):
 
 
 def migrate_user_country_region_files():
+    # TODO: Remove v1 user JSON migration support after May 2027.
     if not os.path.exists(plugin_data_dir()):
         os.makedirs(plugin_data_dir())
 
     if os.path.exists(countries_json_path()):
-        save_user_country_data(
-            normalize_legacy_country_rows(
-                read_json_file(countries_json_path(), {'countries': []})
+        payload, ok = safely_read_json_file(countries_json_path(), {'countries': []})
+        if ok:
+            save_user_country_data(
+                normalize_legacy_country_rows(payload),
+                infer_missing_iso=True,
             )
-        )
 
     if os.path.exists(regions_json_path()):
-        save_user_region_data(
-            normalize_legacy_region_rows(
-                read_json_file(regions_json_path(), {'regions': []})
+        payload, ok = safely_read_json_file(regions_json_path(), {'regions': []})
+        if ok:
+            save_user_region_data(
+                normalize_legacy_region_rows(payload),
+                infer_missing_iso=True,
             )
-        )
 
     if os.path.exists(autodelete_json_path()):
-        payload = read_json_file(autodelete_json_path(), {'values': []})
-        values = payload.get('values', []) if isinstance(payload, dict) else payload
-        save_user_autodelete_values(values)
+        payload, ok = safely_read_json_file(autodelete_json_path(), {'values': []})
+        if ok:
+            values = payload.get('values', []) if isinstance(payload, dict) else payload
+            save_user_autodelete_values(values)
 
 
 def update_database_from_version(from_version=None, to_version=None):

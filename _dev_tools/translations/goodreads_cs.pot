@@ -172,3 +172,120 @@ msgstr ""
 
 msgid "Plugin that imports character and settings data from Goodreads and writes it to custom fields"
 msgstr ""
+
+msgid "Literal"
+msgstr ""
+
+msgid "Wildcard"
+msgstr ""
+
+msgid "Regex"
+msgstr ""
+
+msgid "Both"
+msgstr ""
+
+msgid "Characters"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Values listed here are automatically removed if Goodreads returns matching Characters or Settings values."
+msgstr ""
+
+msgid "Enabled"
+msgstr ""
+
+msgid "Match"
+msgstr ""
+
+msgid "Mode"
+msgstr ""
+
+msgid "Columns"
+msgstr ""
+
+msgid "Case"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Removing this country will also remove its region mappings. Continue?"
+msgstr ""
+
+msgid "Removing these countries will also remove their region mappings. Continue?"
+msgstr ""
+
+msgid "Edit auto-delete rule"
+msgstr ""
+
+msgid "Add auto-delete rule"
+msgstr ""
+
+msgid "Match:"
+msgstr ""
+
+msgid "Match mode:"
+msgstr ""
+
+msgid "Columns:"
+msgstr ""
+
+msgid "Case sensitive"
+msgstr ""
+
+msgid "Match cannot be empty."
+msgstr ""
+
+msgid "Invalid regular expression: {}"
+msgstr ""
+
+msgid "Country cannot be left blank."
+msgstr ""
+
+msgid "Auto-delete rules do not have defaults to restore."
+msgstr ""
+
+msgid "Version {}"
+msgstr ""
+
+msgid "Plugin-specific translations are machine-generated and may be imperfect. If you spot a mistake, corrections are welcome via {github} or the {mobileread}."
+msgstr ""
+
+msgid "Created by {}"
+msgstr ""
+
+msgid "Requires calibre >= {}"
+msgstr ""
+
+msgid "Empty"
+msgstr ""
+
+msgid "No books selected."
+msgstr ""
+
+msgid "No selected books have a Goodreads id."
+msgstr ""
+
+msgid "Import Goodreads character and settings (job {} of {})"
+msgstr ""
+
+msgid "Starting Goodreads character and settings for {} book(s) in {} job(s)."
+msgstr ""
+
+msgid "Unknown Title"
+msgstr ""
+
+msgid "Goodreads character and settings updated {} book(s); {} failed."
+msgstr ""
+
+msgid "Unknown Author"
+msgstr ""
+
+msgid "Error while fetching {}: {}"
+msgstr ""
+
+msgid "Processing Goodreads book"
+msgstr ""

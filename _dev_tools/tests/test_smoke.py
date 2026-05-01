@@ -4,6 +4,7 @@
 
 from __future__ import print_function
 
+from gettext import GNUTranslations
 import importlib.util
 import json
 import os
@@ -113,6 +114,29 @@ class PluginSmokeTests(unittest.TestCase):
         )
         self.assertEqual(0, validator.main())
 
+    def test_new_autodelete_strings_do_not_fall_back_to_english(self):
+        """New auto-delete UI strings should not show English fallback text."""
+        keys = (
+            'Edit auto-delete rule',
+            'Add auto-delete rule',
+            'Match mode:',
+            'Columns:',
+            'Case sensitive',
+        )
+        translations_dir = os.path.join(ROOT, 'translations')
+        for filename in sorted(os.listdir(translations_dir)):
+            if not filename.endswith('.mo') or filename == 'en.mo':
+                continue
+            translation_path = os.path.join(translations_dir, filename)
+            with open(translation_path, 'rb') as f:
+                translations = GNUTranslations(f)
+            for key in keys:
+                self.assertNotEqual(
+                    key,
+                    translations.gettext(key),
+                    '{} falls back to English in {}'.format(key, filename),
+                )
+
     def test_falkland_islands_short_name_keeps_malvinas_as_alias(self):
         """FK should display as Falkland Islands while still matching the ISO formal name."""
         data = self.settings_data.build_default_user_data(
@@ -155,6 +179,38 @@ class PluginSmokeTests(unittest.TestCase):
                 '{} should carry the current schema version'.format(path),
             )
 
+    def test_malformed_user_json_falls_back_and_marks_file_for_repair(self):
+        """Malformed user JSON should not crash loaders and should be repairable on OK."""
+        self.settings_data.ensure_user_json_files(force_reset=True)
+        with open(self.settings_data.countries_json_path(), 'w', encoding='utf-8') as f:
+            f.write('{not valid json')
+
+        countries = self.settings_data.load_user_country_data()
+
+        self.assertTrue(countries)
+        self.assertTrue(self.settings_data.consume_user_json_repair_flag('countries'))
+
+    def test_iso_inference_is_only_for_pre_v2_country_schema(self):
+        """Missing ISO codes should only be inferred while migrating unlabeled/v1 data."""
+        self.settings_data.ensure_user_json_files(force_reset=True)
+        with open(self.settings_data.countries_json_path(), 'w', encoding='utf-8') as f:
+            json.dump({
+                'schema_version': 2,
+                'countries': [{'country': 'United States', 'aliases': []}],
+            }, f)
+
+        countries = self.settings_data.load_user_country_data()
+        self.assertEqual('', countries[0]['iso'])
+
+        with open(self.settings_data.countries_json_path(), 'w', encoding='utf-8') as f:
+            json.dump({
+                'schema_version': 1,
+                'countries': [{'country': 'United States', 'aliases': []}],
+            }, f)
+
+        countries = self.settings_data.load_user_country_data()
+        self.assertEqual('US', countries[0]['iso'])
+
     def test_common_value_helpers_keep_lists_clean_and_predictable(self):
         """Common value cleanup should remove markup, whitespace noise, and duplicate values."""
         common = load_module(
@@ -166,6 +222,130 @@ class PluginSmokeTests(unittest.TestCase):
         self.assertEqual(
             ['London', 'Paris'],
             common.merge_unique_values([' London ', 'Paris'], ['london', 'Paris']),
+        )
+
+    def test_autodelete_legacy_values_migrate_to_wildcard_contains_rules(self):
+        """Old string auto-delete entries should keep contains-style behavior."""
+        self.settings_data.ensure_user_json_files(force_reset=True)
+        with open(self.settings_data.autodelete_json_path(), 'w', encoding='utf-8') as f:
+            json.dump({'schema_version': 2, 'values': ['London', '*Paris']}, f)
+
+        self.assertEqual(
+            [
+                {
+                    'pattern': '*London*',
+                    'mode': self.settings_data.AUTODELETE_MODE_WILDCARD,
+                    'scope': self.settings_data.AUTODELETE_SCOPE_BOTH,
+                    'case_sensitive': False,
+                    'enabled': True,
+                },
+                {
+                    'pattern': '*Paris',
+                    'mode': self.settings_data.AUTODELETE_MODE_WILDCARD,
+                    'scope': self.settings_data.AUTODELETE_SCOPE_BOTH,
+                    'case_sensitive': False,
+                    'enabled': True,
+                },
+            ],
+            self.settings_data.load_user_autodelete_values(),
+        )
+
+    def test_autodelete_rules_support_modes_scope_and_case_sensitivity(self):
+        """Auto-delete matching should honor literal, wildcard, regex, scope, and case settings."""
+        common = load_module(
+            PLUGIN_PACKAGE + '.common',
+            os.path.join(ROOT, 'common.py'),
+        )
+        rules = [
+            {
+                'enabled': True,
+                'pattern': 'London',
+                'mode': self.settings_data.AUTODELETE_MODE_LITERAL,
+                'scope': self.settings_data.AUTODELETE_SCOPE_BOTH,
+                'case_sensitive': False,
+            },
+            {
+                'enabled': True,
+                'pattern': '*York*',
+                'mode': self.settings_data.AUTODELETE_MODE_WILDCARD,
+                'scope': self.settings_data.AUTODELETE_SCOPE_SETTINGS,
+                'case_sensitive': False,
+            },
+            {
+                'enabled': True,
+                'pattern': '^Sir ',
+                'mode': self.settings_data.AUTODELETE_MODE_REGEX,
+                'scope': self.settings_data.AUTODELETE_SCOPE_CHARACTERS,
+                'case_sensitive': True,
+            },
+        ]
+
+        self.assertTrue(common.should_autodelete_value('london', rules, 'Characters'))
+        self.assertFalse(common.should_autodelete_value('Old London', rules, 'Characters'))
+        self.assertTrue(common.should_autodelete_value('New York City', rules, 'Settings'))
+        self.assertFalse(common.should_autodelete_value('New York City', rules, 'Characters'))
+        self.assertTrue(common.should_autodelete_value('Sir Kay', rules, 'Characters'))
+        self.assertFalse(common.should_autodelete_value('sir Kay', rules, 'Characters'))
+
+    def test_autodelete_filters_imported_settings_values_before_merge(self):
+        """Auto-delete should filter new settings values without deleting existing field data."""
+        common = load_module(
+            PLUGIN_PACKAGE + '.common',
+            os.path.join(ROOT, 'common.py'),
+        )
+        common.reset_runtime_caches()
+        self.settings_data.ensure_user_json_files(force_reset=True)
+        self.settings_data.save_user_autodelete_values([
+            {
+                'enabled': True,
+                'pattern': 'Hogwarts School of Witchcraft and Wizardry',
+                'mode': self.settings_data.AUTODELETE_MODE_LITERAL,
+                'scope': self.settings_data.AUTODELETE_SCOPE_SETTINGS,
+                'case_sensitive': False,
+            },
+        ])
+        field_specs = {
+            'settings_field': {
+                'field_name': '#settings',
+                'is_tags': False,
+                'is_multiple': True,
+            },
+        }
+        existing_fields = {
+            '#settings': [
+                'Hogwarts School of Witchcraft and Wizardry',
+                'Hogwarts School of Witchcraft and Wizardry, Scotland',
+            ],
+        }
+        extracted_values = {
+            'settings_field': [
+                'Hogwarts School of Witchcraft and Wizardry',
+                'England, Hogwarts School of Witchcraft and Wizardry',
+            ],
+        }
+
+        self.assertEqual(
+            {
+                '#settings': [
+                    'England, Hogwarts School of Witchcraft and Wizardry',
+                    'Hogwarts School of Witchcraft and Wizardry',
+                    'Hogwarts School of Witchcraft and Wizardry, Scotland',
+                ],
+            },
+            common.build_field_updates(existing_fields, field_specs, extracted_values),
+        )
+
+        self.assertEqual(
+            {
+                '#settings': [
+                    'England, Hogwarts School of Witchcraft and Wizardry',
+                ],
+            },
+            common.build_field_updates(
+                {'#settings': []},
+                field_specs,
+                extracted_values,
+            ),
         )
 
     def test_empty_marker_is_replaced_only_when_write_empty_option_is_enabled(self):

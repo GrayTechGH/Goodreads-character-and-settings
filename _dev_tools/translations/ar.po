@@ -172,3 +172,120 @@ msgstr "حول شخصيات وأماكن Goodreads"
 
 msgid "Plugin that imports character and settings data from Goodreads and writes it to custom fields"
 msgstr "Plugin that imports character and settings data from Goodreads and writes it to custom fields"
+
+msgid "Literal"
+msgstr "حرفي"
+
+msgid "Wildcard"
+msgstr "حرف بدل"
+
+msgid "Regex"
+msgstr "تعبير نمطي"
+
+msgid "Both"
+msgstr "Both"
+
+msgid "Characters"
+msgstr "Characters"
+
+msgid "Settings"
+msgstr "الإعدادات"
+
+msgid "Values listed here are automatically removed if Goodreads returns matching Characters or Settings values."
+msgstr "Values listed here are automatically removed if Goodreads returns matching Characters or Settings values."
+
+msgid "Enabled"
+msgstr "Enabled"
+
+msgid "Match"
+msgstr "Match"
+
+msgid "Mode"
+msgstr "Mode"
+
+msgid "Columns"
+msgstr "Columns"
+
+msgid "Case"
+msgstr "Case"
+
+msgid "Edit"
+msgstr "Edit"
+
+msgid "Removing this country will also remove its region mappings. Continue?"
+msgstr "Removing this country will also remove its region mappings. Continue?"
+
+msgid "Removing these countries will also remove their region mappings. Continue?"
+msgstr "Removing these countries will also remove their region mappings. Continue?"
+
+msgid "Edit auto-delete rule"
+msgstr "تحرير قاعدة الحذف التلقائي"
+
+msgid "Add auto-delete rule"
+msgstr "إضافة قاعدة حذف تلقائي"
+
+msgid "Match:"
+msgstr "Match:"
+
+msgid "Match mode:"
+msgstr "وضع المطابقة:"
+
+msgid "Columns:"
+msgstr "الأعمدة:"
+
+msgid "Case sensitive"
+msgstr "حساس لحالة الأحرف"
+
+msgid "Match cannot be empty."
+msgstr "Match cannot be empty."
+
+msgid "Invalid regular expression: {}"
+msgstr "Invalid regular expression: {}"
+
+msgid "Country cannot be left blank."
+msgstr "Country cannot be left blank."
+
+msgid "Auto-delete rules do not have defaults to restore."
+msgstr "Auto-delete rules do not have defaults to restore."
+
+msgid "Version {}"
+msgstr "Version {}"
+
+msgid "Plugin-specific translations are machine-generated and may be imperfect. If you spot a mistake, corrections are welcome via {github} or the {mobileread}."
+msgstr "Plugin-specific translations are machine-generated and may be imperfect. If you spot a mistake, corrections are welcome via {github} or the {mobileread}."
+
+msgid "Created by {}"
+msgstr "Created by {}"
+
+msgid "Requires calibre >= {}"
+msgstr "Requires calibre >= {}"
+
+msgid "Empty"
+msgstr "Empty"
+
+msgid "No books selected."
+msgstr "No books selected."
+
+msgid "No selected books have a Goodreads id."
+msgstr "No selected books have a Goodreads id."
+
+msgid "Import Goodreads character and settings (job {} of {})"
+msgstr "Import Goodreads character and settings (job {} of {})"
+
+msgid "Starting Goodreads character and settings for {} book(s) in {} job(s)."
+msgstr "Starting Goodreads character and settings for {} book(s) in {} job(s)."
+
+msgid "Unknown Title"
+msgstr "Unknown Title"
+
+msgid "Goodreads character and settings updated {} book(s); {} failed."
+msgstr "Goodreads character and settings updated {} book(s); {} failed."
+
+msgid "Unknown Author"
+msgstr "Unknown Author"
+
+msgid "Error while fetching {}: {}"
+msgstr "Error while fetching {}: {}"
+
+msgid "Processing Goodreads book"
+msgstr "Processing Goodreads book"
