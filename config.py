@@ -265,7 +265,7 @@ class ConfigWidget(QWidget):
             self.update_empty_option_state
         )
         self.country_name_language.currentIndexChanged.connect(
-            self.country_name_language_changed
+            self.country_name_options_changed
         )
         self.localize_country_names.stateChanged.connect(
             self.country_name_options_changed
@@ -461,14 +461,6 @@ class ConfigWidget(QWidget):
             return
         self.apply_selected_country_names_to_table()
 
-    def country_name_language_changed(self, *_args):
-        if self._loading_tables:
-            return
-        if self.localize_country_names.isChecked():
-            self.localize_country_names.setChecked(False)
-            return
-        self.apply_selected_country_names_to_table()
-
     def apply_selected_country_names_to_table(self):
         defaults = build_default_user_data(
             country_name_language=self.country_name_language.currentData(),
@@ -495,9 +487,7 @@ class ConfigWidget(QWidget):
             current_country = str(country_item.text() if country_item else '').strip()
             if current_country == country:
                 continue
-            self.add_country_alias(row, current_country)
             self.set_table_text(self.countries_table, row, 0, country)
-            self.add_country_alias(row, country)
             changed = True
         self.countries_table.blockSignals(False)
         self._loading_tables = False
@@ -714,22 +704,6 @@ class ConfigWidget(QWidget):
     def set_table_text(self, table, row, column, value):
         item = QTableWidgetItem(value)
         table.setItem(row, column, item)
-
-    def add_country_alias(self, row, value):
-        value = str(value or '').strip()
-        if not value:
-            return
-        aliases_item = self.countries_table.item(row, 2)
-        aliases = [
-            part.strip()
-            for part in str(aliases_item.text() if aliases_item else '').split(',')
-            if part.strip()
-        ]
-        seen = {alias.casefold() for alias in aliases}
-        if value.casefold() in seen:
-            return
-        aliases.append(value)
-        self.set_table_text(self.countries_table, row, 2, ', '.join(aliases))
 
     def add_country_row(self, country='', iso='', aliases='', refresh_region_combos=True, activate_row=True):
         if not country:
