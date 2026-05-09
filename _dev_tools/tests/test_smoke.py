@@ -40,13 +40,21 @@ def install_fake_calibre_modules(config_dir):
     localization.available_translations = lambda: ['en', 'fr', 'de']
     localization.countrycode_to_name = lambda code: code
     localization.get_language = lambda code: code
+    config = types.ModuleType('calibre.utils.config')
+    config.tweaks = {
+        'per_language_title_sort_articles': {
+            'eng': (r'A\s+', r'The\s+', r'An\s+'),
+        },
+    }
 
     utils = sys.modules.setdefault('calibre.utils', types.ModuleType('calibre.utils'))
     utils.localization = localization
+    utils.config = config
     calibre.constants = constants
     calibre.utils = utils
 
     sys.modules['calibre.constants'] = constants
+    sys.modules['calibre.utils.config'] = config
     sys.modules['calibre.utils.localization'] = localization
 
 
@@ -223,6 +231,23 @@ class PluginSmokeTests(unittest.TestCase):
             ['London', 'Paris'],
             common.merge_unique_values([' London ', 'Paris'], ['london', 'Paris']),
         )
+
+    def test_article_only_setting_is_blank_after_country_removal(self):
+        """A title-sort article left behind by country stripping is not a setting."""
+        common = load_module(
+            PLUGIN_PACKAGE + '.common',
+            os.path.join(ROOT, 'common.py'),
+        )
+        common.reset_runtime_caches()
+
+        settings, countries = common.format_settings(
+            ['The United States'],
+            keep_country_in_settings=False,
+            keep_region_in_settings=False,
+        )
+
+        self.assertEqual([], settings)
+        self.assertEqual(['United States'], countries)
 
 
 if __name__ == '__main__':

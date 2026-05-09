@@ -50,14 +50,16 @@ _COUNTRY_VARIANT_LOOKUP = None
 _COUNTRY_VARIANT_PATTERNS = None
 _COUNTRY_VARIANT_SOURCE = ''
 _AUTODELETE_RULES = None
+_TITLE_SORT_ARTICLE_PATTERNS = None
 
 
 def reset_runtime_caches():
-    global _COUNTRY_VARIANT_LOOKUP, _COUNTRY_VARIANT_PATTERNS, _COUNTRY_VARIANT_SOURCE, _AUTODELETE_RULES
+    global _COUNTRY_VARIANT_LOOKUP, _COUNTRY_VARIANT_PATTERNS, _COUNTRY_VARIANT_SOURCE, _AUTODELETE_RULES, _TITLE_SORT_ARTICLE_PATTERNS
     _COUNTRY_VARIANT_LOOKUP = None
     _COUNTRY_VARIANT_PATTERNS = None
     _COUNTRY_VARIANT_SOURCE = ''
     _AUTODELETE_RULES = None
+    _TITLE_SORT_ARTICLE_PATTERNS = None
 
 
 def debug_pref(name):
@@ -352,6 +354,49 @@ def strip_trailing_country_annotation(value, canonical_country):
     return cleanup_setting_place(place)
 
 
+def load_title_sort_article_patterns():
+    global _TITLE_SORT_ARTICLE_PATTERNS
+    if _TITLE_SORT_ARTICLE_PATTERNS is not None:
+        return _TITLE_SORT_ARTICLE_PATTERNS
+
+    article_groups = None
+    try:
+        from calibre.utils.config import tweaks
+        article_groups = tweaks.get('per_language_title_sort_articles')
+    except Exception:
+        article_groups = None
+
+    if not article_groups:
+        article_groups = {
+            'eng': (r'A\s+', r'The\s+', r'An\s+'),
+        }
+
+    patterns = []
+    for articles in article_groups.values():
+        for article in articles or ():
+            if article:
+                patterns.append(article)
+    _TITLE_SORT_ARTICLE_PATTERNS = tuple(patterns)
+    return _TITLE_SORT_ARTICLE_PATTERNS
+
+
+def is_title_sort_article_only(value):
+    cleaned = cleanup_value(value)
+    if not cleaned:
+        return False
+    candidate = cleaned + ' '
+    for pattern in load_title_sort_article_patterns():
+        try:
+            if (
+                re.fullmatch(pattern, cleaned, re.IGNORECASE)
+                or re.fullmatch(pattern, candidate, re.IGNORECASE)
+            ):
+                return True
+        except re.error:
+            continue
+    return False
+
+
 def build_field_updates(existing_fields, field_specs, extracted_values, write_empty_to_custom_fields=False):
     current_values = {
         field_name: list(values or [])
@@ -579,6 +624,8 @@ def format_settings(settings, keep_country_in_settings=True, keep_region_in_sett
         place_name, display_country, canonical_country = split_setting_value(value)
         if canonical_country:
             base_place = strip_trailing_country_annotation(place_name, canonical_country)
+            if is_title_sort_article_only(base_place):
+                base_place = ''
             region = display_country if keep_region_in_settings else ''
             if region:
                 if base_place:
@@ -600,6 +647,8 @@ def format_settings(settings, keep_country_in_settings=True, keep_region_in_sett
             continue
 
         place = cleanup_setting_place(value)
+        if is_title_sort_article_only(place):
+            continue
         whole_value_country = canonicalize_country_name(place)
         if whole_value_country:
             if whole_value_country['canonical_country'] not in seen_countries:
