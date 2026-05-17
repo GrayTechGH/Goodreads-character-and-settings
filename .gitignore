@@ -9,3 +9,5 @@ __pycache__/
 *.pyo
 *.pyd
 Goodreads-character-and-settings.zip
+
+_docs/
