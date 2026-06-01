@@ -40,7 +40,7 @@ class InterfacePlugin(InterfaceAction):
     popup_type = QToolButton.MenuButtonPopup
 
     action_spec = ('Goodreads C&&S', None,
-            _('Run Goodreads character and settings'), None)
+            _('Run Goodreads character and settings'), 'Ctrl+Shift+F1')
 
     def genesis(self):
         self.current_runner = None
