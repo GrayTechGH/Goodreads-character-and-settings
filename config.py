@@ -74,6 +74,7 @@ prefs.defaults['max_books_per_job'] = 5
 prefs.defaults['debug_preview'] = False
 prefs.defaults['debug_character_sources'] = False
 prefs.defaults['debug_settings_pipeline'] = False
+prefs.defaults['debug_simulated_error'] = ''
 prefs.defaults['country_name_language'] = COUNTRY_NAME_LANGUAGE_AUTO
 prefs.defaults['country_name_mode'] = COUNTRY_NAME_MODE_ALIAS
 
@@ -833,7 +834,6 @@ class ConfigWidget(QWidget):
         prefs['country_name_mode'] = self.current_country_name_mode()
         prefs['query_interval_seconds'] = self.query_interval_seconds.value()
         prefs['max_books_per_job'] = self.max_books_per_job.value()
-
         if self._countries_dirty:
             save_user_country_data(self.collect_country_rows())
         if self._regions_dirty:
