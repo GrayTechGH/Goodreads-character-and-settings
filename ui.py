@@ -25,12 +25,14 @@ except NameError:
         return text
 
 # The class that all interface action plugins must inherit from
-from qt.core import QMenu, QMessageBox, Qt, QToolButton
+from qt.core import QApplication, QDialog, QMenu, QMessageBox, Qt, QToolButton
 
 from calibre.gui2.actions import InterfaceAction
 from calibre_plugins.Goodreads_character_and_settings.about import build_about_text
 from calibre_plugins.Goodreads_character_and_settings.common import reset_runtime_caches
+from calibre_plugins.Goodreads_character_and_settings.config import prefs
 from calibre_plugins.Goodreads_character_and_settings.database_update import update_database_from_version
+from calibre_plugins.Goodreads_character_and_settings.debug import GoodreadsDebugDialog
 from calibre_plugins.Goodreads_character_and_settings.main import GoodreadsPreviewRunner
 
 
@@ -39,13 +41,13 @@ class InterfacePlugin(InterfaceAction):
     name = 'Goodreads character and settings'
     popup_type = QToolButton.MenuButtonPopup
 
-    action_spec = ('Goodreads C&&S', None,
-            _('Run Goodreads character and settings'), 'Ctrl+Shift+F1')
+    action_spec = ('Goodreads CS', None,
+            _('Run Goodreads character and settings'), None)
 
     def genesis(self):
         self.current_runner = None
         update_database_from_version()
-        icon = get_icons('images/gr_cs_icon.png', _('Goodreads character and settings Plugin'))
+        icon = get_icons('images/gr_cs_icon.png', _('Goodreads CS'))
 
         # The qaction is automatically created from the action_spec defined
         # above
@@ -64,6 +66,9 @@ class InterfacePlugin(InterfaceAction):
         self.about_action.triggered.connect(self.show_about)
 
     def import_books(self):
+        if self.ctrl_shift_pressed():
+            self.show_debug_dialog()
+            return
         self.current_runner = GoodreadsPreviewRunner(
             self.gui,
             finished_callback=self.clear_current_runner,
@@ -72,6 +77,19 @@ class InterfacePlugin(InterfaceAction):
 
     def clear_current_runner(self):
         self.current_runner = None
+
+    def ctrl_shift_pressed(self):
+        modifiers = QApplication.keyboardModifiers()
+        return (
+            bool(modifiers & Qt.KeyboardModifier.ControlModifier)
+            and bool(modifiers & Qt.KeyboardModifier.ShiftModifier)
+        )
+
+    def show_debug_dialog(self):
+        dialog = GoodreadsDebugDialog(self.gui)
+        if dialog.exec() != QDialog.DialogCode.Accepted:
+            return
+        prefs['debug_simulated_error'] = dialog.simulated_error.currentData()
 
     def show_about(self):
         dialog = QMessageBox(self.gui)

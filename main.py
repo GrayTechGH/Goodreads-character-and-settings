@@ -18,6 +18,7 @@ except NameError:
         return text
 
 from calibre.gui2 import Dispatcher
+from qt.core import QMessageBox
 
 from calibre_plugins.Goodreads_character_and_settings.common import cleanup_value
 from calibre_plugins.Goodreads_character_and_settings.config import FIELD_NONE, FIELD_TAGS, prefs
@@ -33,6 +34,7 @@ class GoodreadsPreviewRunner(object):
         self.completed_jobs = 0
         self.updated_count = 0
         self.failed_count = 0
+        self.failure_details = []
 
     def run_for_selection(self):
         selected_books = self.get_selected_books()
@@ -58,6 +60,7 @@ class GoodreadsPreviewRunner(object):
         self.completed_jobs = 0
         self.updated_count = 0
         self.failed_count = 0
+        self.failure_details = []
 
         worker_options = {
             'query_interval_seconds': prefs['query_interval_seconds'],
@@ -65,6 +68,7 @@ class GoodreadsPreviewRunner(object):
             'keep_region_in_settings': prefs['keep_region_in_settings'],
             'debug_character_sources': prefs['debug_character_sources'],
             'debug_settings_pipeline': prefs['debug_settings_pipeline'],
+            'debug_simulated_error': prefs['debug_simulated_error'],
             'write_empty_to_custom_fields': prefs['write_empty_to_custom_fields'],
             'field_specs': self.build_field_specs(),
             'retry_attempts': 3,
@@ -222,12 +226,42 @@ class GoodreadsPreviewRunner(object):
         if status_bar is not None and hasattr(status_bar, 'show_message'):
             status_bar.show_message(message, timeout)
 
+    def record_failure(self, title, error):
+        title = cleanup_value(title) or _('Unknown Title')
+        error = cleanup_value(error) or _('Unknown Goodreads error.')
+        self.failure_details.append((title, error))
+
+    def show_failure_details(self):
+        if not self.failure_details:
+            return
+
+        limit = 10
+        lines = [
+            '{}: {}'.format(title, error)
+            for title, error in self.failure_details[:limit]
+        ]
+        remaining = len(self.failure_details) - len(lines)
+        if remaining:
+            lines.append(_('{} additional book(s) failed.').format(remaining))
+
+        QMessageBox.warning(
+            self.gui,
+            _('Goodreads import errors'),
+            _('Some books could not be updated. Their existing values were left unchanged.\n\n{}').format(
+                '\n'.join(lines)
+            ),
+        )
+
     def batch_job_finished(self, job):
         batch_size = self.active_jobs.pop(job, 0)
         self.completed_jobs += 1
 
         if job.failed:
             self.failed_count += batch_size
+            self.record_failure(
+                _('Background job'),
+                _('The Goodreads job ended before it could return results.'),
+            )
         else:
             updates_by_field = {}
             batch_updated_book_ids = set()
@@ -235,6 +269,7 @@ class GoodreadsPreviewRunner(object):
             for result in job.result or []:
                 if result.get('error'):
                     self.failed_count += 1
+                    self.record_failure(result.get('title'), result.get('error'))
                     continue
                 try:
                     for field_name, payload in result.get('field_updates', {}).items():
@@ -253,8 +288,9 @@ class GoodreadsPreviewRunner(object):
                             result['debug_settings'],
                         ), flush=True)
                     self.updated_count += 1
-                except Exception:
+                except Exception as err:
                     self.failed_count += 1
+                    self.record_failure(result.get('title'), err)
             if updates_by_field:
                 self.apply_field_updates(updates_by_field)
                 self.refresh_gui(
@@ -269,6 +305,7 @@ class GoodreadsPreviewRunner(object):
                 ),
                 timeout=7000,
             )
+            self.show_failure_details()
             self.finish()
 
     def finish(self):

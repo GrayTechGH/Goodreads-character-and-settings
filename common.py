@@ -49,16 +49,18 @@ _LAST_EXTRACTION_DEBUG = {}
 _COUNTRY_VARIANT_LOOKUP = None
 _COUNTRY_VARIANT_PATTERNS = None
 _COUNTRY_VARIANT_SOURCE = ''
-_AUTODELETE_RULES = None
+_AUTODELETE_VALUES = None
+_AUTODELETE_PATTERNS = None
 _TITLE_SORT_ARTICLE_PATTERNS = None
 
 
 def reset_runtime_caches():
-    global _COUNTRY_VARIANT_LOOKUP, _COUNTRY_VARIANT_PATTERNS, _COUNTRY_VARIANT_SOURCE, _AUTODELETE_RULES, _TITLE_SORT_ARTICLE_PATTERNS
+    global _COUNTRY_VARIANT_LOOKUP, _COUNTRY_VARIANT_PATTERNS, _COUNTRY_VARIANT_SOURCE, _AUTODELETE_VALUES, _AUTODELETE_PATTERNS, _TITLE_SORT_ARTICLE_PATTERNS
     _COUNTRY_VARIANT_LOOKUP = None
     _COUNTRY_VARIANT_PATTERNS = None
     _COUNTRY_VARIANT_SOURCE = ''
-    _AUTODELETE_RULES = None
+    _AUTODELETE_VALUES = None
+    _AUTODELETE_PATTERNS = None
     _TITLE_SORT_ARTICLE_PATTERNS = None
 
 
@@ -81,6 +83,14 @@ def merge_unique_values(existing_values, new_values):
                 seen.add(lookup_key)
                 merged.append(cleaned)
     return merged
+
+
+def remove_empty_marker(values):
+    empty_marker = cleanup_value(_('Empty')).casefold()
+    return [
+        value for value in values or []
+        if cleanup_value(value).casefold() != empty_marker
+    ]
 
 
 def normalize_values_for_field(values, spec):
@@ -364,7 +374,7 @@ def load_title_sort_article_patterns():
         from calibre.utils.config import tweaks
         article_groups = tweaks.get('per_language_title_sort_articles')
     except Exception:
-        article_groups = None
+        pass
 
     if not article_groups:
         article_groups = {
@@ -373,9 +383,7 @@ def load_title_sort_article_patterns():
 
     patterns = []
     for articles in article_groups.values():
-        for article in articles or ():
-            if article:
-                patterns.append(article)
+        patterns.extend(article for article in (articles or ()) if article)
     _TITLE_SORT_ARTICLE_PATTERNS = tuple(patterns)
     return _TITLE_SORT_ARTICLE_PATTERNS
 
@@ -384,12 +392,12 @@ def is_title_sort_article_only(value):
     cleaned = cleanup_value(value)
     if not cleaned:
         return False
-    candidate = cleaned + ' '
+
     for pattern in load_title_sort_article_patterns():
         try:
             if (
                 re.fullmatch(pattern, cleaned, re.IGNORECASE)
-                or re.fullmatch(pattern, candidate, re.IGNORECASE)
+                or re.fullmatch(pattern, cleaned + ' ', re.IGNORECASE)
             ):
                 return True
         except re.error:
@@ -429,6 +437,8 @@ def build_field_updates(existing_fields, field_specs, extracted_values, write_em
         working_values = list(current_normalized)
 
         if incoming_values:
+            if write_empty_to_custom_fields:
+                working_values = remove_empty_marker(working_values)
             working_values = merge_unique_values(working_values, incoming_values)
         elif not spec.get('is_tags') and write_empty_to_custom_fields:
             working_values = merge_unique_values(working_values, [_('Empty')])
@@ -521,21 +531,45 @@ def expand_label_aliases(label):
 
 
 def extract_values_from_next_data(label, html):
+    payload = get_goodreads_next_data_payload(html)
+    return extract_entity_values(payload, get_allowed_entity_types(label))
+
+
+def get_goodreads_next_data_payload(html):
     soup = parse_goodreads_html(html)
     if soup is None:
-        return []
+        return {}
 
     script_node = soup.find('script', attrs={'id': '__NEXT_DATA__'})
     if script_node is None:
-        return []
+        return {}
 
     raw_payload = script_node.string or script_node.get_text() or ''
     try:
-        payload = json.loads(raw_payload)
+        return json.loads(raw_payload)
     except Exception:
-        return []
+        return {}
 
-    return extract_entity_values(payload, get_allowed_entity_types(label))
+
+def has_goodreads_book_data(html):
+    return goodreads_payload_has_book_data(get_goodreads_next_data_payload(html))
+
+
+def goodreads_payload_has_book_data(payload):
+    try:
+        apollo_state = payload['props']['pageProps']['apolloState']
+    except (KeyError, TypeError):
+        return False
+
+    if not isinstance(apollo_state, dict):
+        return False
+
+    for key, value in apollo_state.items():
+        if not str(key).startswith('Book:') or not isinstance(value, dict):
+            continue
+        if cleanup_value(value.get('title') or value.get('titleComplete')):
+            return True
+    return False
 
 
 def get_allowed_entity_types(label):
