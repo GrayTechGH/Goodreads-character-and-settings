@@ -24,7 +24,19 @@ COUNTRY_NAME_LANGUAGE_ENGLISH_SHORT = 'en_short'
 COUNTRY_NAME_LANGUAGE_ENGLISH_FORMAL = 'en_formal'
 COUNTRY_NAME_MODE_ALIAS = 'alias'
 COUNTRY_NAME_MODE_COUNTRY = 'country'
-USER_DATABASE_SCHEMA_VERSION = 2
+AUTODELETE_MODE_LITERAL = 'literal'
+AUTODELETE_MODE_WILDCARD = 'wildcard'
+AUTODELETE_MODE_REGEX = 'regex'
+AUTODELETE_SCOPE_BOTH = 'both'
+AUTODELETE_SCOPE_CHARACTERS = 'characters'
+AUTODELETE_SCOPE_SETTINGS = 'settings'
+USER_DATABASE_SCHEMA_VERSION = 3
+COUNTRY_ISO_SCHEMA_VERSION = 2
+_USER_JSON_REPAIR_FLAGS = {
+    'countries': False,
+    'regions': False,
+    'autodelete': False,
+}
 
 
 def plugin_data_dir():
@@ -125,9 +137,32 @@ def infer_country_iso(country, aliases=None):
     return ''
 
 
-def _normalize_country_record(country, aliases, iso=''):
+def mark_user_json_for_repair(name):
+    if name in _USER_JSON_REPAIR_FLAGS:
+        _USER_JSON_REPAIR_FLAGS[name] = True
+
+
+def consume_user_json_repair_flag(name):
+    repaired = bool(_USER_JSON_REPAIR_FLAGS.get(name, False))
+    if name in _USER_JSON_REPAIR_FLAGS:
+        _USER_JSON_REPAIR_FLAGS[name] = False
+    return repaired
+
+
+def payload_schema_version(payload):
+    if not isinstance(payload, dict):
+        return 1
+    try:
+        return int(payload.get('schema_version') or 1)
+    except Exception:
+        return 1
+
+
+def _normalize_country_record(country, aliases, iso='', infer_missing_iso=False):
     country = str(country or '').strip()
-    iso = normalize_country_code(iso) or infer_country_iso(country, aliases)
+    iso = normalize_country_code(iso)
+    if infer_missing_iso and not iso:
+        iso = infer_country_iso(country, aliases)
     cleaned_aliases = []
     seen = set()
     if country:
@@ -149,12 +184,46 @@ def _normalize_country_record(country, aliases, iso=''):
     }
 
 
-def _normalize_region_record(country, region, iso=''):
+def _normalize_region_record(country, region, iso='', infer_missing_iso=False):
     country = str(country or '').strip()
+    iso = normalize_country_code(iso)
+    if infer_missing_iso and not iso:
+        iso = infer_country_iso(country)
     return {
         'country': country,
-        'iso': normalize_country_code(iso) or infer_country_iso(country),
+        'iso': iso,
         'region': str(region or '').strip(),
+    }
+
+
+def _normalize_autodelete_rule(item):
+    if isinstance(item, dict):
+        pattern = str(item.get('pattern') or item.get('value') or '').strip()
+        mode = str(item.get('mode') or AUTODELETE_MODE_LITERAL).strip().lower()
+        scope = str(item.get('scope') or AUTODELETE_SCOPE_BOTH).strip().lower()
+        case_sensitive = bool(item.get('case_sensitive', False))
+        enabled = bool(item.get('enabled', True))
+    else:
+        value = str(item or '').strip()
+        pattern = value if '*' in value else '*{}*'.format(value)
+        mode = AUTODELETE_MODE_WILDCARD
+        scope = AUTODELETE_SCOPE_BOTH
+        case_sensitive = False
+        enabled = True
+
+    if not pattern:
+        return None
+    if mode not in (AUTODELETE_MODE_LITERAL, AUTODELETE_MODE_WILDCARD, AUTODELETE_MODE_REGEX):
+        mode = AUTODELETE_MODE_LITERAL
+    if scope not in (AUTODELETE_SCOPE_BOTH, AUTODELETE_SCOPE_CHARACTERS, AUTODELETE_SCOPE_SETTINGS):
+        scope = AUTODELETE_SCOPE_BOTH
+
+    return {
+        'pattern': pattern,
+        'mode': mode,
+        'scope': scope,
+        'case_sensitive': case_sensitive,
+        'enabled': enabled,
     }
 
 
@@ -284,11 +353,23 @@ def _write_json(path, payload):
         json.dump(payload, f, ensure_ascii=False, indent=2, sort_keys=False)
 
 
-def _read_json(path, default):
+def _read_json(path, default, repair_key=None):
     if not os.path.exists(path):
         return default
-    with open(path, 'r', encoding='utf-8') as f:
-        return json.load(f)
+    try:
+        with open(path, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except Exception as err:
+        if repair_key:
+            mark_user_json_for_repair(repair_key)
+        print(
+            'Goodreads character and settings: failed to read {}: {}'.format(
+                path,
+                err,
+            ),
+            flush=True,
+        )
+        return default
 
 
 def ensure_user_json_files(force_reset=False):
@@ -316,7 +397,15 @@ def ensure_user_json_files(force_reset=False):
 
 def load_user_country_data():
     ensure_user_json_files()
-    payload = _read_json(countries_json_path(), {'countries': []})
+    default_payload = {
+        'schema_version': USER_DATABASE_SCHEMA_VERSION,
+        'countries': build_default_user_data()['countries'],
+    }
+    payload = _read_json(countries_json_path(), default_payload, 'countries')
+    if not isinstance(payload, dict):
+        mark_user_json_for_repair('countries')
+        payload = {'schema_version': 1, 'countries': payload if isinstance(payload, list) else []}
+    infer_missing_iso = payload_schema_version(payload) < COUNTRY_ISO_SCHEMA_VERSION
     countries = []
     for item in payload.get('countries', []) or []:
         if isinstance(item, dict):
@@ -324,51 +413,96 @@ def load_user_country_data():
             iso = item.get('iso', '')
             aliases = list(item.get('aliases', []) or [])
         else:
+            mark_user_json_for_repair('countries')
             continue
         if not country:
+            mark_user_json_for_repair('countries')
             continue
-        countries.append(_normalize_country_record(country, aliases, iso))
+        country_record = _normalize_country_record(
+            country,
+            aliases,
+            iso,
+            infer_missing_iso=infer_missing_iso,
+        )
+        if country_record != item:
+            mark_user_json_for_repair('countries')
+        countries.append(country_record)
     countries.sort(key=lambda entry: entry['country'].lower())
     return countries
 
 
 def load_user_region_data():
     ensure_user_json_files()
-    payload = _read_json(regions_json_path(), {'regions': []})
+    default_payload = {
+        'schema_version': USER_DATABASE_SCHEMA_VERSION,
+        'regions': build_default_user_data()['regions'],
+    }
+    payload = _read_json(regions_json_path(), default_payload, 'regions')
+    if not isinstance(payload, dict):
+        mark_user_json_for_repair('regions')
+        payload = {'schema_version': 1, 'regions': payload if isinstance(payload, list) else []}
+    infer_missing_iso = payload_schema_version(payload) < COUNTRY_ISO_SCHEMA_VERSION
     regions = []
     for item in payload.get('regions', []) or []:
         if not isinstance(item, dict):
+            mark_user_json_for_repair('regions')
             continue
         region = _normalize_region_record(
             item.get('country'),
             item.get('region'),
             item.get('iso', ''),
+            infer_missing_iso=infer_missing_iso,
         )
         if region['country'] and region['region']:
+            if region != item:
+                mark_user_json_for_repair('regions')
             regions.append(region)
+        else:
+            mark_user_json_for_repair('regions')
     regions.sort(key=lambda entry: (entry['iso'], entry['country'].lower(), entry['region'].lower()))
     return regions
 
 
 def load_user_autodelete_values():
     ensure_user_json_files()
-    payload = _read_json(autodelete_json_path(), {'values': []})
-    values = []
+    payload = _read_json(
+        autodelete_json_path(),
+        {'schema_version': USER_DATABASE_SCHEMA_VERSION, 'rules': []},
+        'autodelete',
+    )
+    if not isinstance(payload, dict):
+        mark_user_json_for_repair('autodelete')
+        payload = {'schema_version': 1, 'values': payload if isinstance(payload, list) else []}
+    values = payload.get('rules')
+    if values is None:
+        values = payload.get('values', [])
+        if values:
+            mark_user_json_for_repair('autodelete')
+    rules = []
     seen = set()
-    for item in payload.get('values', []) or []:
-        value = str(item or '').strip()
-        if not value:
+    for item in values or []:
+        rule = _normalize_autodelete_rule(item)
+        if not rule:
+            mark_user_json_for_repair('autodelete')
             continue
-        lowered = value.lower()
-        if lowered in seen:
+        key = (
+            rule['pattern'].casefold(),
+            rule['mode'],
+            rule['scope'],
+            rule['case_sensitive'],
+        )
+        if key in seen:
+            mark_user_json_for_repair('autodelete')
             continue
-        seen.add(lowered)
-        values.append(value)
-    values.sort(key=lambda item: item.lower())
-    return values
+        seen.add(key)
+        if not isinstance(item, dict) or rule != item:
+            mark_user_json_for_repair('autodelete')
+        rules.append(rule)
+    rules.sort(key=lambda item: (item['pattern'].casefold(), item['mode'], item['scope']))
+    return rules
 
 
-def save_user_country_data(countries):
+def save_user_country_data(countries, infer_missing_iso=False):
     ensure_user_json_files()
     normalized = []
     for item in countries or []:
@@ -381,6 +515,7 @@ def save_user_country_data(countries):
             country,
             item.get('aliases', []),
             item.get('iso', ''),
+            infer_missing_iso=infer_missing_iso,
         ))
     normalized.sort(key=lambda entry: entry['country'].lower())
     _write_json(countries_json_path(), {
@@ -389,7 +524,7 @@ def save_user_country_data(countries):
     })
 
 
-def save_user_region_data(regions):
+def save_user_region_data(regions, infer_missing_iso=False):
     ensure_user_json_files()
     normalized = []
     seen = set()
@@ -400,6 +535,7 @@ def save_user_region_data(regions):
             item.get('country'),
             item.get('region'),
             item.get('iso', ''),
+            infer_missing_iso=infer_missing_iso,
         )
         if not region['country'] or not region['region']:
             continue
@@ -421,16 +557,21 @@ def save_user_autodelete_values(values):
     normalized = []
     seen = set()
     for item in values or []:
-        value = str(item or '').strip()
-        if not value:
+        rule = _normalize_autodelete_rule(item)
+        if not rule:
             continue
-        lowered = value.lower()
-        if lowered in seen:
+        key = (
+            rule['pattern'].casefold(),
+            rule['mode'],
+            rule['scope'],
+            rule['case_sensitive'],
+        )
+        if key in seen:
             continue
-        seen.add(lowered)
-        normalized.append(value)
-    normalized.sort(key=lambda item: item.lower())
+        seen.add(key)
+        normalized.append(rule)
+    normalized.sort(key=lambda item: (item['pattern'].casefold(), item['mode'], item['scope']))
     _write_json(autodelete_json_path(), {
         'schema_version': USER_DATABASE_SCHEMA_VERSION,
-        'values': normalized,
+        'rules': normalized,
     })
