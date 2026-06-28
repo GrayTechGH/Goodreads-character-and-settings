@@ -80,8 +80,8 @@ msgstr "Tiempo entre consultas:"
 msgid "Max. Books/Job:"
 msgstr "Máx. libros/tarea:"
 
-msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list."
-msgstr "Tabla de países. Añada un país canónico por fila, un código ISO opcional y cualquier alias como lista separada por comas."
+msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list. Enclose aliases containing commas in double quotes."
+msgstr "Tabla de países. Añada un país canónico por fila, un código ISO opcional y cualquier alias como lista separada por comas. Enclose aliases containing commas in double quotes."
 
 msgid "Add"
 msgstr "Añadir"
@@ -89,8 +89,8 @@ msgstr "Añadir"
 msgid "Remove"
 msgstr "Eliminar"
 
-msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries."
-msgstr "Tabla de regiones. Cada región se conserva en Lugares y se asigna al país seleccionado en Países."
+msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries. Enclose region names containing commas in double quotes."
+msgstr "Tabla de regiones. Cada región se conserva en Lugares y se asigna al país seleccionado en Países. Enclose region names containing commas in double quotes."
 
 msgid "Values listed here are automatically removed if Goodreads returns them exactly."
 msgstr "Los valores indicados aquí se eliminan automáticamente si Goodreads los devuelve exactamente."
@@ -289,3 +289,9 @@ msgstr "Error while fetching {}: {}"
 
 msgid "Processing Goodreads book"
 msgstr "Processing Goodreads book"
+
+msgid "Country row {} has invalid comma-separated aliases. Use double quotes around aliases containing commas."
+msgstr "Country row {} has invalid comma-separated aliases. Use double quotes around aliases containing commas."
+
+msgid "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
+msgstr "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."

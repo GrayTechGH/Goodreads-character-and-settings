@@ -80,8 +80,8 @@ msgstr "クエリ間隔:"
 msgid "Max. Books/Job:"
 msgstr "最大冊数/ジョブ:"
 
-msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list."
-msgstr "国テーブル。1 行に 1 つの標準国名、任意の ISO 国コード、別名をカンマ区切りリストで追加します。"
+msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list. Enclose aliases containing commas in double quotes."
+msgstr "国テーブル。1 行に 1 つの標準国名、任意の ISO 国コード、別名をカンマ区切りリストで追加します。 Enclose aliases containing commas in double quotes."
 
 msgid "Add"
 msgstr "追加"
@@ -89,8 +89,8 @@ msgstr "追加"
 msgid "Remove"
 msgstr "削除"
 
-msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries."
-msgstr "地域テーブル。各地域は場所に保持され、国で選択された国に割り当てられます。"
+msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries. Enclose region names containing commas in double quotes."
+msgstr "地域テーブル。各地域は場所に保持され、国で選択された国に割り当てられます。 Enclose region names containing commas in double quotes."
 
 msgid "Values listed here are automatically removed if Goodreads returns them exactly."
 msgstr "ここに一覧された値は、Goodreads が完全に一致して返した場合に自動的に削除されます。"
@@ -289,3 +289,9 @@ msgstr "Error while fetching {}: {}"
 
 msgid "Processing Goodreads book"
 msgstr "Processing Goodreads book"
+
+msgid "Country row {} has invalid comma-separated aliases. Use double quotes around aliases containing commas."
+msgstr "Country row {} has invalid comma-separated aliases. Use double quotes around aliases containing commas."
+
+msgid "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
+msgstr "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."

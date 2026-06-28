@@ -80,8 +80,8 @@ msgstr "쿼리 사이 시간:"
 msgid "Max. Books/Job:"
 msgstr "작업당 최대 책 수:"
 
-msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list."
-msgstr "국가 table. 추가 one canonical 국가 per row, optional ISO country code, and 별칭 as a comma-separated list."
+msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list. Enclose aliases containing commas in double quotes."
+msgstr "국가 table. 추가 one canonical 국가 per row, optional ISO country code, and 별칭 as a comma-separated list. Enclose aliases containing commas in double quotes."
 
 msgid "Add"
 msgstr "추가하기"
@@ -89,8 +89,8 @@ msgstr "추가하기"
 msgid "Remove"
 msgstr "제거"
 
-msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries."
-msgstr "지역 table. Each 지역 is preserved in 장소 and mapped to the selected 국가 in 국가."
+msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries. Enclose region names containing commas in double quotes."
+msgstr "지역 table. Each 지역 is preserved in 장소 and mapped to the selected 국가 in 국가. Enclose region names containing commas in double quotes."
 
 msgid "Values listed here are automatically removed if Goodreads returns them exactly."
 msgstr "값s listed here are automatically removed if Goodreads returns them exactly."
@@ -289,3 +289,9 @@ msgstr "Error while fetching {}: {}"
 
 msgid "Processing Goodreads book"
 msgstr "Processing Goodreads book"
+
+msgid "Country row {} has invalid comma-separated aliases. Use double quotes around aliases containing commas."
+msgstr "Country row {} has invalid comma-separated aliases. Use double quotes around aliases containing commas."
+
+msgid "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
+msgstr "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."

@@ -80,7 +80,7 @@ msgstr ""
 msgid "Max. Books/Job:"
 msgstr ""
 
-msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list."
+msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list. Enclose aliases containing commas in double quotes."
 msgstr ""
 
 msgid "Add"
@@ -89,7 +89,7 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries."
+msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries. Enclose region names containing commas in double quotes."
 msgstr ""
 
 msgid "Values listed here are automatically removed if Goodreads returns them exactly."
@@ -150,6 +150,12 @@ msgid "Country row {} uses a duplicate country name."
 msgstr ""
 
 msgid "Country row {} uses a duplicate ISO country code."
+msgstr ""
+
+msgid "Country row {} has invalid comma-separated aliases. Use double quotes around aliases containing commas."
+msgstr ""
+
+msgid "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
 msgstr ""
 
 msgid "Run Goodreads character and settings"

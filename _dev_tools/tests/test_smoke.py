@@ -168,6 +168,71 @@ class PluginSmokeTests(unittest.TestCase):
         self.assertIn('United States', united_states['aliases'])
         self.assertIn('United States of America', united_states['aliases'])
 
+    def test_csv_lists_preserve_comma_containing_aliases_and_regions(self):
+        """Configuration list cells use strict CSV quoting without breaking legacy lists."""
+        parse = self.settings_data.parse_csv_list
+        format_values = self.settings_data.format_csv_list
+
+        self.assertEqual(['London', 'Paris'], parse('London, Paris'))
+        values = ['South Korea', 'Korea, Republic of', 'A "quoted" name']
+        self.assertEqual(values, parse(format_values(values)))
+        self.assertIn('"Korea, Republic of"', format_values(values))
+        self.assertEqual(
+            ['Washington, D.C.', 'Maryland'],
+            parse(format_values(['Washington, D.C.', 'Maryland'])),
+        )
+
+    def test_default_south_korea_aliases_round_trip_through_csv(self):
+        """The ISO formal South Korea alias with a comma must not be split on save."""
+        data = self.settings_data.build_default_user_data(
+            country_name_language=self.settings_data.COUNTRY_NAME_LANGUAGE_ENGLISH_SHORT,
+            country_name_mode=self.settings_data.COUNTRY_NAME_MODE_ALIAS,
+        )
+        south_korea = next(country for country in data['countries'] if country['iso'] == 'KR')
+        rendered = self.settings_data.format_csv_list(south_korea['aliases'])
+
+        self.assertIn('"Korea, Republic of"', rendered)
+        self.assertEqual(south_korea['aliases'], self.settings_data.parse_csv_list(rendered))
+
+    def test_all_generated_comma_aliases_round_trip_through_csv(self):
+        """Every localized/default alias with a comma remains one editable value."""
+        country_names = self.settings_data._read_bundled_country_names()
+        languages = country_names['languages']
+        modes = (
+            self.settings_data.COUNTRY_NAME_MODE_ALIAS,
+            self.settings_data.COUNTRY_NAME_MODE_COUNTRY,
+        )
+        comma_alias_count = 0
+
+        for language in languages:
+            for mode in modes:
+                data = self.settings_data.build_default_user_data(
+                    country_name_language=language,
+                    country_name_mode=mode,
+                )
+                for country in data['countries']:
+                    comma_aliases = [
+                        alias for alias in country['aliases'] if ',' in alias
+                    ]
+                    if not comma_aliases:
+                        continue
+                    comma_alias_count += len(comma_aliases)
+                    rendered = self.settings_data.format_csv_list(country['aliases'])
+                    self.assertEqual(
+                        country['aliases'],
+                        self.settings_data.parse_csv_list(rendered),
+                        '{} / {} / {}'.format(language, mode, country['iso']),
+                    )
+                    for alias in comma_aliases:
+                        self.assertIn('"{}"'.format(alias), rendered)
+
+        self.assertGreater(comma_alias_count, 0)
+
+    def test_csv_lists_reject_unterminated_quotes(self):
+        """Malformed quoted configuration values should be rejected before saving."""
+        with self.assertRaises(ValueError):
+            self.settings_data.parse_csv_list('South Korea, "Korea, Republic of')
+
     def test_ensure_user_json_files_writes_human_editable_defaults(self):
         """First-run setup should create readable user JSON files with schema versions."""
         self.settings_data.ensure_user_json_files(force_reset=True)
@@ -243,6 +308,20 @@ class PluginSmokeTests(unittest.TestCase):
         self.assertFalse(common.goodreads_payload_has_book_data({
             'props': {'pageProps': {'apolloState': {}}},
         }))
+
+    def test_autodelete_rule_cache_initializes_and_resets(self):
+        """Auto-delete cache lookup must not fail before the first book is processed."""
+        common = load_module(
+            PLUGIN_PACKAGE + '.common',
+            os.path.join(ROOT, 'common.py'),
+        )
+        common.reset_runtime_caches()
+
+        self.assertEqual([], common.load_autodelete_values())
+        common._AUTODELETE_RULES = [{'pattern': 'cached'}]
+        common.reset_runtime_caches()
+        self.assertIsNone(common._AUTODELETE_RULES)
+        self.assertEqual([], common.load_autodelete_values())
 
     def test_article_only_setting_is_blank_after_country_removal(self):
         """A title-sort article left by country stripping is not a setting."""

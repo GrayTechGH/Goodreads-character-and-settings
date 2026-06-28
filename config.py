@@ -62,10 +62,12 @@ from calibre_plugins.Goodreads_character_and_settings.settings_data import (
     country_name_language_display_name,
     country_name_language_options,
     ensure_user_json_files,
+    format_csv_list,
     load_user_autodelete_values,
     load_user_country_data,
     load_user_region_data,
     normalize_country_code,
+    parse_csv_list,
     save_user_autodelete_values,
     save_user_country_data,
     save_user_region_data,
@@ -280,7 +282,8 @@ class ConfigWidget(QWidget):
 
         description = QLabel(
             _('Countries table. Add one canonical country per row, optional ISO '
-                    'country code, and any aliases as a comma-separated list.')
+                    'country code, and any aliases as a comma-separated list. '
+                    'Enclose aliases containing commas in double quotes.')
         )
         description.setWordWrap(True)
         layout.addWidget(description)
@@ -315,7 +318,8 @@ class ConfigWidget(QWidget):
 
         description = QLabel(
             _('Regions table. Each region is preserved in Settings and mapped to '
-                    'the selected country in Countries.')
+                    'the selected country in Countries. Enclose region names '
+                    'containing commas in double quotes.')
         )
         description.setWordWrap(True)
         layout.addWidget(description)
@@ -1002,7 +1006,7 @@ class ConfigWidget(QWidget):
             self.add_country_row(
                 item.get('country', ''),
                 item.get('iso', ''),
-                ', '.join(item.get('aliases', []) or []),
+                format_csv_list(item.get('aliases', []) or []),
                 refresh_region_combos=False,
                 activate_row=False,
             )
@@ -1046,7 +1050,12 @@ class ConfigWidget(QWidget):
                     continue
                 seen.add(lowered)
                 unique_regions.append(region)
-            self.add_region_row(country_key, group['country'], ', '.join(unique_regions), group['iso'])
+            self.add_region_row(
+                country_key,
+                group['country'],
+                format_csv_list(unique_regions),
+                group['iso'],
+            )
         self.regions_table.blockSignals(False)
         self.regions_table.setUpdatesEnabled(True)
         self._loading_tables = False
@@ -1074,11 +1083,7 @@ class ConfigWidget(QWidget):
             aliases_text = str(aliases_item.text() if aliases_item else '').strip()
             if not country:
                 continue
-            aliases = [
-                part.strip()
-                for part in aliases_text.split(',')
-                if part.strip()
-            ]
+            aliases = parse_csv_list(aliases_text)
             countries.append({
                 'country': country,
                 'iso': iso,
@@ -1136,6 +1141,50 @@ class ConfigWidget(QWidget):
                 seen_codes.add(iso)
         return True
 
+    def validate_csv_list_cell(self, table, row, column, text, title, message):
+        try:
+            parse_csv_list(text)
+        except ValueError:
+            item = table.item(row, column)
+            table.setCurrentCell(row, column)
+            table.selectRow(row)
+            QMessageBox.warning(self, title, message.format(row + 1))
+            table.setFocus()
+            if item is not None:
+                table.editItem(item)
+            return False
+        return True
+
+    def validate_csv_list_rows(self):
+        for row in range(self.countries_table.rowCount()):
+            aliases_item = self.countries_table.item(row, 2)
+            aliases_text = str(aliases_item.text() if aliases_item else '').strip()
+            if not self.validate_csv_list_cell(
+                self.countries_table,
+                row,
+                2,
+                aliases_text,
+                _('Countries'),
+                _('Country row {} has invalid comma-separated aliases. '
+                  'Use double quotes around aliases containing commas.'),
+            ):
+                return False
+
+        for row in range(self.regions_table.rowCount()):
+            region_item = self.regions_table.item(row, 1)
+            regions_text = str(region_item.text() if region_item else '').strip()
+            if not self.validate_csv_list_cell(
+                self.regions_table,
+                row,
+                1,
+                regions_text,
+                _('Regions'),
+                _('Regions row {} has invalid comma-separated values. '
+                  'Use double quotes around values containing commas.'),
+            ):
+                return False
+        return True
+
     def collect_region_rows(self):
         regions = []
         valid_countries = {
@@ -1153,7 +1202,7 @@ class ConfigWidget(QWidget):
             country_record = valid_countries.get(country_key)
             if not country_record:
                 continue
-            for region in [part.strip() for part in regions_text.split(',') if part.strip()]:
+            for region in parse_csv_list(regions_text):
                 regions.append({
                     'country': country_record['country'],
                     'iso': country_record.get('iso', ''),
@@ -1185,9 +1234,8 @@ class ConfigWidget(QWidget):
 
         if current_tab is self.regions_tab:
             live_country_keys = {
-                self.country_record_key(item['country'], item.get('iso', ''))
-                for item in self.collect_country_rows()
-                if item.get('country')
+                item['key']
+                for item in self.current_country_records()
             }
             filtered_regions = [
                 item for item in regions
@@ -1241,4 +1289,4 @@ class ConfigWidget(QWidget):
         return COUNTRY_NAME_MODE_ALIAS
 
     def validate(self):
-        return self.validate_country_rows()
+        return self.validate_country_rows() and self.validate_csv_list_rows()

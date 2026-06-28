@@ -80,8 +80,8 @@ msgstr "查询间隔："
 msgid "Max. Books/Job:"
 msgstr "每个任务最多书籍数："
 
-msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list."
-msgstr "国家/地区表。每行添加一个规范国家/地区，可选 ISO 国家代码，以及用逗号分隔的别名列表。"
+msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list. Enclose aliases containing commas in double quotes."
+msgstr "国家/地区表。每行添加一个规范国家/地区，可选 ISO 国家代码，以及用逗号分隔的别名列表。 Enclose aliases containing commas in double quotes."
 
 msgid "Add"
 msgstr "添加"
@@ -89,8 +89,8 @@ msgstr "添加"
 msgid "Remove"
 msgstr "删除"
 
-msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries."
-msgstr "地区表。每个地区都会保留在地点中，并映射到国家/地区中选定的国家/地区。"
+msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries. Enclose region names containing commas in double quotes."
+msgstr "地区表。每个地区都会保留在地点中，并映射到国家/地区中选定的国家/地区。 Enclose region names containing commas in double quotes."
 
 msgid "Values listed here are automatically removed if Goodreads returns them exactly."
 msgstr "如果 Goodreads 返回的值与此处列出的值完全一致，这些值会自动移除。"
@@ -289,3 +289,9 @@ msgstr "Error while fetching {}: {}"
 
 msgid "Processing Goodreads book"
 msgstr "Processing Goodreads book"
+
+msgid "Country row {} has invalid comma-separated aliases. Use double quotes around aliases containing commas."
+msgstr "Country row {} has invalid comma-separated aliases. Use double quotes around aliases containing commas."
+
+msgid "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
+msgstr "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
