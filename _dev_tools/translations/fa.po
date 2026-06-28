@@ -80,8 +80,8 @@ msgstr "زمان بین پرس‌وجوها:"
 msgid "Max. Books/Job:"
 msgstr "حداکثر کتاب/کار:"
 
-msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list."
-msgstr "کشورها table. افزودن one canonical کشور per row, optional ISO country code, and نام‌های مستعار as a comma-separated list."
+msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list. Enclose aliases containing commas in double quotes."
+msgstr "کشورها table. افزودن one canonical کشور per row, optional ISO country code, and نام‌های مستعار as a comma-separated list. Enclose aliases containing commas in double quotes."
 
 msgid "Add"
 msgstr "Add"
@@ -89,8 +89,8 @@ msgstr "Add"
 msgid "Remove"
 msgstr "حذف"
 
-msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries."
-msgstr "ناحیه‌ها table. Each ناحیه is preserved in مکان‌ها and mapped to the selected کشور in کشورها."
+msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries. Enclose region names containing commas in double quotes."
+msgstr "ناحیه‌ها table. Each ناحیه is preserved in مکان‌ها and mapped to the selected کشور in کشورها. Enclose region names containing commas in double quotes."
 
 msgid "Values listed here are automatically removed if Goodreads returns them exactly."
 msgstr "مقدارs listed here are automatically removed if Goodreads returns them exactly."
@@ -289,3 +289,9 @@ msgstr "Error while fetching {}: {}"
 
 msgid "Processing Goodreads book"
 msgstr "Processing Goodreads book"
+
+msgid "Country row {} has invalid comma-separated aliases. Use double quotes around aliases containing commas."
+msgstr "Country row {} has invalid comma-separated aliases. Use double quotes around aliases containing commas."
+
+msgid "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
+msgstr "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."

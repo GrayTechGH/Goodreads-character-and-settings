@@ -80,8 +80,8 @@ msgstr "الوقت بين الاستعلامات:"
 msgid "Max. Books/Job:"
 msgstr "أقصى عدد كتب/مهمة:"
 
-msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list."
-msgstr "جدول البلدان. أضف بلدا معياريا واحدا في كل صف، ورمز بلد ISO اختياريا، وأي أسماء بديلة كقائمة مفصولة بفواصل."
+msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list. Enclose aliases containing commas in double quotes."
+msgstr "جدول البلدان. أضف بلدا معياريا واحدا في كل صف، ورمز بلد ISO اختياريا، وأي أسماء بديلة كقائمة مفصولة بفواصل. Enclose aliases containing commas in double quotes."
 
 msgid "Add"
 msgstr "إضافة"
@@ -89,8 +89,8 @@ msgstr "إضافة"
 msgid "Remove"
 msgstr "أزِل"
 
-msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries."
-msgstr "جدول المناطق. يتم الاحتفاظ بكل منطقة في الأماكن وربطها بالبلد المحدد في البلدان."
+msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries. Enclose region names containing commas in double quotes."
+msgstr "جدول المناطق. يتم الاحتفاظ بكل منطقة في الأماكن وربطها بالبلد المحدد في البلدان. Enclose region names containing commas in double quotes."
 
 msgid "Values listed here are automatically removed if Goodreads returns them exactly."
 msgstr "تتم إزالة القيم المدرجة هنا تلقائيا إذا أعادها Goodreads كما هي تماما."
@@ -289,3 +289,9 @@ msgstr "Error while fetching {}: {}"
 
 msgid "Processing Goodreads book"
 msgstr "Processing Goodreads book"
+
+msgid "Country row {} has invalid comma-separated aliases. Use double quotes around aliases containing commas."
+msgstr "Country row {} has invalid comma-separated aliases. Use double quotes around aliases containing commas."
+
+msgid "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
+msgstr "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."

@@ -80,8 +80,8 @@ msgstr "זמן בין שאילתות:"
 msgid "Max. Books/Job:"
 msgstr "מקס. ספרים/משימה:"
 
-msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list."
-msgstr "מדינות table. הוסף one canonical מדינה per row, optional ISO country code, and כינויים as a comma-separated list."
+msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list. Enclose aliases containing commas in double quotes."
+msgstr "מדינות table. הוסף one canonical מדינה per row, optional ISO country code, and כינויים as a comma-separated list. Enclose aliases containing commas in double quotes."
 
 msgid "Add"
 msgstr "Add"
@@ -89,8 +89,8 @@ msgstr "Add"
 msgid "Remove"
 msgstr "הסר"
 
-msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries."
-msgstr "אזורים table. Each אזור is preserved in מקומות and mapped to the selected מדינה in מדינות."
+msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries. Enclose region names containing commas in double quotes."
+msgstr "אזורים table. Each אזור is preserved in מקומות and mapped to the selected מדינה in מדינות. Enclose region names containing commas in double quotes."
 
 msgid "Values listed here are automatically removed if Goodreads returns them exactly."
 msgstr "ערךs listed here are automatically removed if Goodreads returns them exactly."
@@ -289,3 +289,9 @@ msgstr "Error while fetching {}: {}"
 
 msgid "Processing Goodreads book"
 msgstr "Processing Goodreads book"
+
+msgid "Country row {} has invalid comma-separated aliases. Use double quotes around aliases containing commas."
+msgstr "Country row {} has invalid comma-separated aliases. Use double quotes around aliases containing commas."
+
+msgid "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
+msgstr "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."

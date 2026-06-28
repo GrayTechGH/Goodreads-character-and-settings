@@ -6,6 +6,8 @@ __license__   = 'GPL v3'
 __copyright__ = '2026, GrayTechGH'
 __docformat__ = 'restructuredtext en'
 
+import csv
+import io
 import json
 import os
 import zipfile
@@ -294,6 +296,33 @@ def country_name_values(localized_entry):
         ]
         return short_name, formal_names
     return str(localized_entry or '').strip(), []
+
+
+def parse_csv_list(value):
+    """Return non-empty values from one strict, comma-delimited CSV row."""
+    text = str(value or '').strip()
+    if not text:
+        return []
+    try:
+        rows = list(csv.reader([text], skipinitialspace=True, strict=True))
+    except csv.Error as err:
+        raise ValueError('Invalid comma-separated list: {}'.format(err))
+    return [item.strip() for item in (rows[0] if rows else []) if item.strip()]
+
+
+def format_csv_list(values):
+    """Format values as one CSV row, quoting only where CSV requires it."""
+    cleaned_values = [
+        str(value or '').strip()
+        for value in values or []
+        if str(value or '').strip()
+    ]
+    if not cleaned_values:
+        return ''
+    output = io.StringIO()
+    writer = csv.writer(output, lineterminator='')
+    writer.writerow(cleaned_values)
+    return output.getvalue()
 
 
 def build_default_user_data(country_name_language=COUNTRY_NAME_LANGUAGE_AUTO, country_name_mode=COUNTRY_NAME_MODE_ALIAS):

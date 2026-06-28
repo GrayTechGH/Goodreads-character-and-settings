@@ -80,8 +80,8 @@ msgstr "čas medzi dotazmi:"
 msgid "Max. Books/Job:"
 msgstr "max. kníh/úloha:"
 
-msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list."
-msgstr "krajiny table. pridať one canonical krajina per row, optional ISO country code, and aliasy as a comma-separated list."
+msgid "Countries table. Add one canonical country per row, optional ISO country code, and any aliases as a comma-separated list. Enclose aliases containing commas in double quotes."
+msgstr "krajiny table. pridať one canonical krajina per row, optional ISO country code, and aliasy as a comma-separated list. Enclose aliases containing commas in double quotes."
 
 msgid "Add"
 msgstr "Pridať"
@@ -89,8 +89,8 @@ msgstr "Pridať"
 msgid "Remove"
 msgstr "Odstrániť"
 
-msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries."
-msgstr "regióny table. Each región is preserved in miesta and mapped to the selected krajina in krajiny."
+msgid "Regions table. Each region is preserved in Settings and mapped to the selected country in Countries. Enclose region names containing commas in double quotes."
+msgstr "regióny table. Each región is preserved in miesta and mapped to the selected krajina in krajiny. Enclose region names containing commas in double quotes."
 
 msgid "Values listed here are automatically removed if Goodreads returns them exactly."
 msgstr "hodnotas listed here are automatically removed if Goodreads returns them exactly."
@@ -289,3 +289,9 @@ msgstr "Error while fetching {}: {}"
 
 msgid "Processing Goodreads book"
 msgstr "Processing Goodreads book"
+
+msgid "Country row {} has invalid comma-separated aliases. Use double quotes around aliases containing commas."
+msgstr "Country row {} has invalid comma-separated aliases. Use double quotes around aliases containing commas."
+
+msgid "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
+msgstr "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
