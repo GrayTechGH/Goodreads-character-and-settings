@@ -1,11 +1,11 @@
 # Goodreads Character and Settings plugin translations
-# This file was generated from plugin UI gettext strings.
+# This file was maintained from plugin user-visible gettext strings.
 msgid ""
 msgstr ""
-"Project-Id-Version: Goodreads Character and Settings 1.1.1\n"
+"Project-Id-Version: Goodreads Character and Settings 1.3.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-28 00:00+0000\n"
-"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"POT-Creation-Date: 2026-11-05 00:00+0000\n"
+"PO-Revision-Date: 2026-11-05 00:00+0000\n"
 "Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
 "Language-Team: \n"
 "Language: ka\n"
@@ -295,3 +295,123 @@ msgstr "Country row {} has invalid comma-separated aliases. Use double quotes ar
 
 msgid "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
 msgstr "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
+
+msgid "Access denied (HTTP 403)"
+msgstr "წვდომა უარყოფილია (HTTP 403)"
+
+msgid "Background job"
+msgstr "ფონური დავალება"
+
+msgid "Book not found (HTTP 404)"
+msgstr "წიგნი ვერ მოიძებნა (HTTP 404)"
+
+msgid "Browser challenge (HTTP 202)"
+msgstr "ბრაუზერის შემოწმება (HTTP 202)"
+
+#, python-brace-format
+msgid "Cannot lock the Goodreads request coordinator: {}"
+msgstr "Goodreads-ის მოთხოვნების კოორდინატორის ჩაკეტვა ვერ მოხერხდა: {}"
+
+#, python-brace-format
+msgid "Cannot read Goodreads request timing: {}"
+msgstr "Goodreads-ის მოთხოვნების დროის მონაცემების წაკითხვა ვერ მოხერხდა: {}"
+
+#, python-brace-format
+msgid "Cannot save Goodreads request timing: {}"
+msgstr "Goodreads-ის მოთხოვნების დროის მონაცემების შენახვა ვერ მოხერხდა: {}"
+
+msgid "Disabled"
+msgstr "გამორთულია"
+
+msgid "Goodreads CS"
+msgstr "Goodreads CS"
+
+msgid "Goodreads Debug"
+msgstr "Goodreads-ის გამართვა"
+
+msgid "Goodreads could not find this book page."
+msgstr "Goodreads: წიგნის გვერდი ვერ მოიძებნა."
+
+msgid "Goodreads denied access to this book page."
+msgstr "Goodreads: წიგნის გვერდზე წვდომა უარყოფილია."
+
+msgid "Goodreads import errors"
+msgstr "Goodreads-ის იმპორტის შეცდომები"
+
+msgid "Goodreads is requiring a browser challenge and returned no usable book page."
+msgstr "Goodreads მოითხოვს ბრაუზერის შემოწმებას და არ დააბრუნა წიგნის გამოსადეგი გვერდი."
+
+msgid "Goodreads is temporarily rate-limiting requests."
+msgstr "Goodreads დროებით ზღუდავს მოთხოვნებს."
+
+#, python-brace-format
+msgid "Goodreads is temporarily unavailable (HTTP {})."
+msgstr "Goodreads დროებით მიუწვდომელია (HTTP {})."
+
+msgid "Goodreads redirected to a different or unidentified book page."
+msgstr "Goodreads-მა გადამისამართება მოახდინა სხვა ან დაუდგენელი წიგნის გვერდზე."
+
+msgid "Goodreads requires sign-in to access this book page."
+msgstr "Goodreads წიგნის ამ გვერდზე წვდომისთვის მოითხოვს ანგარიშში შესვლას."
+
+msgid "Goodreads returned a 200 response without usable book data."
+msgstr "Goodreads: HTTP 200 პასუხი წიგნის გამოსადეგი მონაცემების გარეშე."
+
+msgid "Goodreads returned a response without an HTTP status."
+msgstr "Goodreads: პასუხი HTTP სტატუსის გარეშე."
+
+#, python-brace-format
+msgid "Goodreads returned an unusable response (HTTP {})."
+msgstr "Goodreads: გამოუსადეგარი პასუხი (HTTP {})."
+
+msgid "Goodreads returned missing or conflicting book identity."
+msgstr "Goodreads: წიგნის იდენტიფიკაცია აკლია ან წინააღმდეგობრივია."
+
+msgid "Goodreads returned no content for this book page."
+msgstr "Goodreads: წიგნის ამ გვერდს შიგთავსი არ აქვს."
+
+msgid "Goodreads timed out while handling this request."
+msgstr "Goodreads: მოთხოვნის ლოდინის დრო ამოიწურა."
+
+msgid "Invalid Goodreads book identifier."
+msgstr "Goodreads-ის წიგნის არასწორი იდენტიფიკატორი."
+
+msgid "Invalid Goodreads request timing state (unsupported version)."
+msgstr "Goodreads-ის მოთხოვნების დროის არასწორი მდგომარეობა (მხარდაუჭერელი ვერსია)."
+
+#, python-brace-format
+msgid "Invalid Goodreads request timing state ({})."
+msgstr "Goodreads-ის მოთხოვნების დროის არასწორი მდგომარეობა ({})."
+
+#, python-brace-format
+msgid "Invalid comma-separated list: {}"
+msgstr "მძიმეებით გამოყოფილი არასწორი სია: {}"
+
+msgid "No book data (HTTP 200)"
+msgstr "წიგნის მონაცემები არ არის (HTTP 200)"
+
+msgid "Rate limited (HTTP 429)"
+msgstr "მოთხოვნების ზღვარი მიღწეულია (HTTP 429)"
+
+msgid "Simulate Goodreads error:"
+msgstr "Goodreads-ის შეცდომის სიმულაცია:"
+
+#, python-brace-format
+msgid "Some books could not be updated. Their existing values were left unchanged.\n\n{}"
+msgstr "ზოგიერთი წიგნის განახლება ვერ მოხერხდა. მათი არსებული მნიშვნელობები უცვლელი დარჩა.\n\n{}"
+
+msgid "The Goodreads job ended before it could return results."
+msgstr "Goodreads-ის დავალება შედეგების დაბრუნებამდე დასრულდა."
+
+msgid "This Goodreads book page is no longer available."
+msgstr "Goodreads-ის წიგნის ეს გვერდი აღარ არის ხელმისაწვდომი."
+
+msgid "Unknown Goodreads detail URL variant."
+msgstr "Goodreads-ის დეტალების URL-ის უცნობი ვარიანტი."
+
+msgid "Unknown Goodreads error."
+msgstr "Goodreads-ის უცნობი შეცდომა."
+
+#, python-brace-format
+msgid "{} additional book(s) failed."
+msgstr "დამატებით {} წიგნის დამუშავება ვერ მოხერხდა."

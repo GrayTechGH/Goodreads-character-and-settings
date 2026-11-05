@@ -29,20 +29,20 @@ from calibre_plugins.Goodreads_character_and_settings.fetch_policy import (
 
 
 GOODREADS_BASE_URL = 'https://www.goodreads.com'
-GOODREADS_WAF_CHALLENGE_MESSAGE = (
+GOODREADS_WAF_CHALLENGE_MESSAGE = _(
     'Goodreads is requiring a browser challenge and returned no usable book page.'
 )
-GOODREADS_MISSING_BOOK_DATA_MESSAGE = (
+GOODREADS_MISSING_BOOK_DATA_MESSAGE = _(
     'Goodreads returned a 200 response without usable book data.'
 )
 GOODREADS_HTTP_ERROR_MESSAGES = {
-    204: 'Goodreads returned no content for this book page.',
-    401: 'Goodreads requires sign-in to access this book page.',
-    403: 'Goodreads denied access to this book page.',
-    404: 'Goodreads could not find this book page.',
-    408: 'Goodreads timed out while handling this request.',
-    410: 'This Goodreads book page is no longer available.',
-    429: 'Goodreads is temporarily rate-limiting requests.',
+    204: _('Goodreads returned no content for this book page.'),
+    401: _('Goodreads requires sign-in to access this book page.'),
+    403: _('Goodreads denied access to this book page.'),
+    404: _('Goodreads could not find this book page.'),
+    408: _('Goodreads timed out while handling this request.'),
+    410: _('This Goodreads book page is no longer available.'),
+    429: _('Goodreads is temporarily rate-limiting requests.'),
 }
 RETRYABLE_HTTP_STATUS_CODES = frozenset((408, 429, 500, 502, 503, 504))
 
@@ -157,9 +157,9 @@ def goodreads_response_error(response, now=None, retry_wait=2):
 
     message = GOODREADS_HTTP_ERROR_MESSAGES.get(status_code)
     if message is None and 500 <= status_code <= 599:
-        message = 'Goodreads is temporarily unavailable (HTTP {}).'.format(status_code)
+        message = _('Goodreads is temporarily unavailable (HTTP {}).').format(status_code)
     elif message is None:
-        message = 'Goodreads returned an unusable response (HTTP {}).'.format(status_code)
+        message = _('Goodreads returned an unusable response (HTTP {}).').format(status_code)
     if status_code == 403:
         cooldown = 60
     elif status_code in (429, 503):
@@ -182,9 +182,9 @@ def random_goodreads_user_agent():
 
 def goodreads_detail_url(goodreads_id, variant='xml'):
     if variant not in ('xml', 'plain'):
-        raise ValueError('Unknown Goodreads detail URL variant.')
+        raise ValueError(_('Unknown Goodreads detail URL variant.'))
     if not str(goodreads_id).isascii() or not str(goodreads_id).isdigit() or int(goodreads_id) <= 0:
-        raise GoodreadsPageDataError('Invalid Goodreads book identifier.')
+        raise GoodreadsPageDataError(_('Invalid Goodreads book identifier.'))
     return '{}/book/show/{}{}'.format(GOODREADS_BASE_URL, goodreads_id, '.xml' if variant == 'xml' else '')
 
 
@@ -209,7 +209,7 @@ def _fetch_goodreads_response(url, timeout, clock, retry_wait):
         if response_error is not None:
             raise response_error
         if response_status_code(response) != 200:
-            raise GoodreadsPageDataError('Goodreads returned a response without an HTTP status.')
+            raise GoodreadsPageDataError(_('Goodreads returned a response without an HTTP status.'))
         final_url = response.geturl()
         raw = response.read()
     except GoodreadsFetchError:
@@ -260,11 +260,11 @@ def fetch_and_extract_goodreads_data(goodreads_id, retry_attempts=3, retry_delay
             )
             html = page['html']
             if not common.goodreads_book_url_matches_id(page['final_url'], goodreads_id):
-                raise GoodreadsPageDataError('Goodreads redirected to a different or unidentified book page.', status_code=200)
+                raise GoodreadsPageDataError(_('Goodreads redirected to a different or unidentified book page.'), status_code=200)
             if not common.has_goodreads_book_data(html):
                 raise GoodreadsPageDataError(GOODREADS_MISSING_BOOK_DATA_MESSAGE, status_code=200)
             if not common.has_goodreads_book_data(html, goodreads_id):
-                raise GoodreadsPageDataError('Goodreads returned missing or conflicting book identity.', status_code=200)
+                raise GoodreadsPageDataError(_('Goodreads returned missing or conflicting book identity.'), status_code=200)
             characters = common.extract_goodreads_values(html, 'Characters')
             settings = common.extract_goodreads_values(html, 'Setting')
             log('{}: usable book data; {} characters, {} settings'.format(label, len(characters), len(settings)))

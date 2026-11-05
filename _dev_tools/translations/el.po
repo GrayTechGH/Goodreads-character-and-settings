@@ -1,11 +1,11 @@
 # Goodreads Character and Settings plugin translations
-# This file was generated from plugin UI gettext strings.
+# This file was maintained from plugin user-visible gettext strings.
 msgid ""
 msgstr ""
-"Project-Id-Version: Goodreads Character and Settings 1.1.1\n"
+"Project-Id-Version: Goodreads Character and Settings 1.3.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-28 00:00+0000\n"
-"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"POT-Creation-Date: 2026-11-05 00:00+0000\n"
+"PO-Revision-Date: 2026-11-05 00:00+0000\n"
 "Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
 "Language-Team: \n"
 "Language: el\n"
@@ -295,3 +295,123 @@ msgstr "Country row {} has invalid comma-separated aliases. Use double quotes ar
 
 msgid "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
 msgstr "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
+
+msgid "Access denied (HTTP 403)"
+msgstr "Δεν επιτρέπεται η πρόσβαση (HTTP 403)"
+
+msgid "Background job"
+msgstr "Εργασία παρασκηνίου"
+
+msgid "Book not found (HTTP 404)"
+msgstr "Το βιβλίο δεν βρέθηκε (HTTP 404)"
+
+msgid "Browser challenge (HTTP 202)"
+msgstr "Επαλήθευση προγράμματος περιήγησης (HTTP 202)"
+
+#, python-brace-format
+msgid "Cannot lock the Goodreads request coordinator: {}"
+msgstr "Δεν είναι δυνατό το κλείδωμα του συντονιστή αιτημάτων Goodreads: {}"
+
+#, python-brace-format
+msgid "Cannot read Goodreads request timing: {}"
+msgstr "Δεν είναι δυνατή η ανάγνωση των χρόνων αιτημάτων Goodreads: {}"
+
+#, python-brace-format
+msgid "Cannot save Goodreads request timing: {}"
+msgstr "Δεν είναι δυνατή η αποθήκευση των χρόνων αιτημάτων Goodreads: {}"
+
+msgid "Disabled"
+msgstr "Απενεργοποιημένο"
+
+msgid "Goodreads CS"
+msgstr "Goodreads CS"
+
+msgid "Goodreads Debug"
+msgstr "Αποσφαλμάτωση Goodreads"
+
+msgid "Goodreads could not find this book page."
+msgstr "Goodreads: η σελίδα του βιβλίου δεν βρέθηκε."
+
+msgid "Goodreads denied access to this book page."
+msgstr "Goodreads: απορρίφθηκε η πρόσβαση στη σελίδα του βιβλίου."
+
+msgid "Goodreads import errors"
+msgstr "Σφάλματα εισαγωγής Goodreads"
+
+msgid "Goodreads is requiring a browser challenge and returned no usable book page."
+msgstr "Το Goodreads απαιτεί επαλήθευση προγράμματος περιήγησης και δεν επέστρεψε αξιοποιήσιμη σελίδα βιβλίου."
+
+msgid "Goodreads is temporarily rate-limiting requests."
+msgstr "Το Goodreads περιορίζει προσωρινά τα αιτήματα."
+
+#, python-brace-format
+msgid "Goodreads is temporarily unavailable (HTTP {})."
+msgstr "Το Goodreads είναι προσωρινά μη διαθέσιμο (HTTP {})."
+
+msgid "Goodreads redirected to a different or unidentified book page."
+msgstr "Το Goodreads ανακατεύθυνε σε σελίδα διαφορετικού ή μη αναγνωρισμένου βιβλίου."
+
+msgid "Goodreads requires sign-in to access this book page."
+msgstr "Το Goodreads απαιτεί σύνδεση για πρόσβαση σε αυτή τη σελίδα βιβλίου."
+
+msgid "Goodreads returned a 200 response without usable book data."
+msgstr "Goodreads: HTTP 200 χωρίς αξιοποιήσιμα δεδομένα βιβλίου."
+
+msgid "Goodreads returned a response without an HTTP status."
+msgstr "Goodreads: απάντηση χωρίς κατάσταση HTTP."
+
+#, python-brace-format
+msgid "Goodreads returned an unusable response (HTTP {})."
+msgstr "Goodreads: μη αξιοποιήσιμη απάντηση (HTTP {})."
+
+msgid "Goodreads returned missing or conflicting book identity."
+msgstr "Goodreads: λείπει η ταυτότητα του βιβλίου ή υπάρχουν αντικρουόμενα στοιχεία."
+
+msgid "Goodreads returned no content for this book page."
+msgstr "Goodreads: δεν υπάρχει περιεχόμενο για αυτή τη σελίδα βιβλίου."
+
+msgid "Goodreads timed out while handling this request."
+msgstr "Goodreads: έληξε το χρονικό όριο του αιτήματος."
+
+msgid "Invalid Goodreads book identifier."
+msgstr "Μη έγκυρο αναγνωριστικό βιβλίου Goodreads."
+
+msgid "Invalid Goodreads request timing state (unsupported version)."
+msgstr "Μη έγκυρη κατάσταση χρονισμού αιτημάτων Goodreads (μη υποστηριζόμενη έκδοση)."
+
+#, python-brace-format
+msgid "Invalid Goodreads request timing state ({})."
+msgstr "Μη έγκυρη κατάσταση χρονισμού αιτημάτων Goodreads ({})."
+
+#, python-brace-format
+msgid "Invalid comma-separated list: {}"
+msgstr "Μη έγκυρη λίστα με διαχωριστικό κόμμα: {}"
+
+msgid "No book data (HTTP 200)"
+msgstr "Δεν υπάρχουν δεδομένα βιβλίου (HTTP 200)"
+
+msgid "Rate limited (HTTP 429)"
+msgstr "Συμπληρώθηκε το όριο αιτημάτων (HTTP 429)"
+
+msgid "Simulate Goodreads error:"
+msgstr "Προσομοίωση σφάλματος Goodreads:"
+
+#, python-brace-format
+msgid "Some books could not be updated. Their existing values were left unchanged.\n\n{}"
+msgstr "Ορισμένα βιβλία δεν ήταν δυνατό να ενημερωθούν. Οι υπάρχουσες τιμές τους διατηρήθηκαν.\n\n{}"
+
+msgid "The Goodreads job ended before it could return results."
+msgstr "Η εργασία Goodreads τερματίστηκε πριν επιστρέψει αποτελέσματα."
+
+msgid "This Goodreads book page is no longer available."
+msgstr "Αυτή η σελίδα βιβλίου Goodreads δεν είναι πλέον διαθέσιμη."
+
+msgid "Unknown Goodreads detail URL variant."
+msgstr "Άγνωστη παραλλαγή URL λεπτομερειών Goodreads."
+
+msgid "Unknown Goodreads error."
+msgstr "Άγνωστο σφάλμα Goodreads."
+
+#, python-brace-format
+msgid "{} additional book(s) failed."
+msgstr "Απέτυχαν ακόμη {} βιβλία."

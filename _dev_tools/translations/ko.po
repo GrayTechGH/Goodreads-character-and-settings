@@ -1,11 +1,11 @@
 # Goodreads Character and Settings plugin translations
-# This file was generated from plugin UI gettext strings.
+# This file was maintained from plugin user-visible gettext strings.
 msgid ""
 msgstr ""
-"Project-Id-Version: Goodreads Character and Settings 1.1.1\n"
+"Project-Id-Version: Goodreads Character and Settings 1.3.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-28 00:00+0000\n"
-"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"POT-Creation-Date: 2026-11-05 00:00+0000\n"
+"PO-Revision-Date: 2026-11-05 00:00+0000\n"
 "Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
 "Language-Team: \n"
 "Language: ko\n"
@@ -295,3 +295,123 @@ msgstr "Country row {} has invalid comma-separated aliases. Use double quotes ar
 
 msgid "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
 msgstr "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
+
+msgid "Access denied (HTTP 403)"
+msgstr "접근 거부 (HTTP 403)"
+
+msgid "Background job"
+msgstr "백그라운드 작업"
+
+msgid "Book not found (HTTP 404)"
+msgstr "책을 찾을 수 없음 (HTTP 404)"
+
+msgid "Browser challenge (HTTP 202)"
+msgstr "브라우저 인증 (HTTP 202)"
+
+#, python-brace-format
+msgid "Cannot lock the Goodreads request coordinator: {}"
+msgstr "Goodreads 요청 조정기를 잠글 수 없습니다: {}"
+
+#, python-brace-format
+msgid "Cannot read Goodreads request timing: {}"
+msgstr "Goodreads 요청 시간 정보를 읽을 수 없습니다: {}"
+
+#, python-brace-format
+msgid "Cannot save Goodreads request timing: {}"
+msgstr "Goodreads 요청 시간 정보를 저장할 수 없습니다: {}"
+
+msgid "Disabled"
+msgstr "비활성화"
+
+msgid "Goodreads CS"
+msgstr "Goodreads CS"
+
+msgid "Goodreads Debug"
+msgstr "Goodreads 디버깅"
+
+msgid "Goodreads could not find this book page."
+msgstr "Goodreads: 책 페이지를 찾을 수 없습니다."
+
+msgid "Goodreads denied access to this book page."
+msgstr "Goodreads: 책 페이지 접근이 거부되었습니다."
+
+msgid "Goodreads import errors"
+msgstr "Goodreads 가져오기 오류"
+
+msgid "Goodreads is requiring a browser challenge and returned no usable book page."
+msgstr "Goodreads에서 브라우저 인증을 요구하여 사용 가능한 책 페이지를 반환하지 않았습니다."
+
+msgid "Goodreads is temporarily rate-limiting requests."
+msgstr "Goodreads에서 일시적으로 요청을 제한하고 있습니다."
+
+#, python-brace-format
+msgid "Goodreads is temporarily unavailable (HTTP {})."
+msgstr "Goodreads를 일시적으로 사용할 수 없습니다 (HTTP {})."
+
+msgid "Goodreads redirected to a different or unidentified book page."
+msgstr "Goodreads에서 다른 책 또는 식별할 수 없는 책 페이지로 이동했습니다."
+
+msgid "Goodreads requires sign-in to access this book page."
+msgstr "이 책 페이지에 접근하려면 Goodreads에 로그인해야 합니다."
+
+msgid "Goodreads returned a 200 response without usable book data."
+msgstr "Goodreads: HTTP 200 응답에 사용 가능한 책 데이터가 없습니다."
+
+msgid "Goodreads returned a response without an HTTP status."
+msgstr "Goodreads: 응답에 HTTP 상태가 없습니다."
+
+#, python-brace-format
+msgid "Goodreads returned an unusable response (HTTP {})."
+msgstr "Goodreads: 사용할 수 없는 응답입니다 (HTTP {})."
+
+msgid "Goodreads returned missing or conflicting book identity."
+msgstr "Goodreads: 책 식별 정보가 없거나 일치하지 않습니다."
+
+msgid "Goodreads returned no content for this book page."
+msgstr "Goodreads: 이 책 페이지에 내용이 없습니다."
+
+msgid "Goodreads timed out while handling this request."
+msgstr "Goodreads: 요청 처리 시간이 초과되었습니다."
+
+msgid "Invalid Goodreads book identifier."
+msgstr "잘못된 Goodreads 책 식별자입니다."
+
+msgid "Invalid Goodreads request timing state (unsupported version)."
+msgstr "Goodreads 요청 시간 상태가 잘못되었습니다 (지원하지 않는 버전)."
+
+#, python-brace-format
+msgid "Invalid Goodreads request timing state ({})."
+msgstr "Goodreads 요청 시간 상태가 잘못되었습니다 ({})."
+
+#, python-brace-format
+msgid "Invalid comma-separated list: {}"
+msgstr "잘못된 쉼표 구분 목록입니다: {}"
+
+msgid "No book data (HTTP 200)"
+msgstr "책 데이터 없음 (HTTP 200)"
+
+msgid "Rate limited (HTTP 429)"
+msgstr "요청 제한 (HTTP 429)"
+
+msgid "Simulate Goodreads error:"
+msgstr "Goodreads 오류 재현:"
+
+#, python-brace-format
+msgid "Some books could not be updated. Their existing values were left unchanged.\n\n{}"
+msgstr "일부 책을 업데이트하지 못했습니다. 기존 값은 변경되지 않았습니다.\n\n{}"
+
+msgid "The Goodreads job ended before it could return results."
+msgstr "Goodreads 작업이 결과를 반환하기 전에 종료되었습니다."
+
+msgid "This Goodreads book page is no longer available."
+msgstr "이 Goodreads 책 페이지는 더 이상 사용할 수 없습니다."
+
+msgid "Unknown Goodreads detail URL variant."
+msgstr "알 수 없는 Goodreads 상세 URL 형식입니다."
+
+msgid "Unknown Goodreads error."
+msgstr "알 수 없는 Goodreads 오류입니다."
+
+#, python-brace-format
+msgid "{} additional book(s) failed."
+msgstr "추가로 책 {}권의 처리가 실패했습니다."

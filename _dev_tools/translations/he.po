@@ -1,11 +1,11 @@
 # Goodreads Character and Settings plugin translations
-# This file was generated from plugin UI gettext strings.
+# This file was maintained from plugin user-visible gettext strings.
 msgid ""
 msgstr ""
-"Project-Id-Version: Goodreads Character and Settings 1.1.1\n"
+"Project-Id-Version: Goodreads Character and Settings 1.3.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-28 00:00+0000\n"
-"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"POT-Creation-Date: 2026-11-05 00:00+0000\n"
+"PO-Revision-Date: 2026-11-05 00:00+0000\n"
 "Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
 "Language-Team: \n"
 "Language: he\n"
@@ -295,3 +295,123 @@ msgstr "Country row {} has invalid comma-separated aliases. Use double quotes ar
 
 msgid "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
 msgstr "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
+
+msgid "Access denied (HTTP 403)"
+msgstr "הגישה נדחתה (HTTP 403)"
+
+msgid "Background job"
+msgstr "משימה ברקע"
+
+msgid "Book not found (HTTP 404)"
+msgstr "הספר לא נמצא (HTTP 404)"
+
+msgid "Browser challenge (HTTP 202)"
+msgstr "אימות דפדפן (HTTP 202)"
+
+#, python-brace-format
+msgid "Cannot lock the Goodreads request coordinator: {}"
+msgstr "לא ניתן לנעול את מתאם הבקשות של Goodreads: {}"
+
+#, python-brace-format
+msgid "Cannot read Goodreads request timing: {}"
+msgstr "לא ניתן לקרוא את תזמון הבקשות של Goodreads: {}"
+
+#, python-brace-format
+msgid "Cannot save Goodreads request timing: {}"
+msgstr "לא ניתן לשמור את תזמון הבקשות של Goodreads: {}"
+
+msgid "Disabled"
+msgstr "מושבת"
+
+msgid "Goodreads CS"
+msgstr "Goodreads CS"
+
+msgid "Goodreads Debug"
+msgstr "ניפוי שגיאות Goodreads"
+
+msgid "Goodreads could not find this book page."
+msgstr "Goodreads: דף הספר לא נמצא."
+
+msgid "Goodreads denied access to this book page."
+msgstr "Goodreads: הגישה לדף הספר נדחתה."
+
+msgid "Goodreads import errors"
+msgstr "שגיאות ייבוא מ-Goodreads"
+
+msgid "Goodreads is requiring a browser challenge and returned no usable book page."
+msgstr "Goodreads דורש אימות דפדפן ולא החזיר דף ספר שמיש."
+
+msgid "Goodreads is temporarily rate-limiting requests."
+msgstr "Goodreads מגביל זמנית את הבקשות."
+
+#, python-brace-format
+msgid "Goodreads is temporarily unavailable (HTTP {})."
+msgstr "Goodreads אינו זמין זמנית (HTTP {})."
+
+msgid "Goodreads redirected to a different or unidentified book page."
+msgstr "Goodreads הפנה לדף של ספר אחר או של ספר שלא זוהה."
+
+msgid "Goodreads requires sign-in to access this book page."
+msgstr "Goodreads דורש התחברות כדי לגשת לדף ספר זה."
+
+msgid "Goodreads returned a 200 response without usable book data."
+msgstr "Goodreads: תשובת HTTP 200 ללא נתוני ספר שמישים."
+
+msgid "Goodreads returned a response without an HTTP status."
+msgstr "Goodreads: תשובה ללא מצב HTTP."
+
+#, python-brace-format
+msgid "Goodreads returned an unusable response (HTTP {})."
+msgstr "Goodreads: תשובה לא שמישה (HTTP {})."
+
+msgid "Goodreads returned missing or conflicting book identity."
+msgstr "Goodreads: זהות הספר חסרה או סותרת."
+
+msgid "Goodreads returned no content for this book page."
+msgstr "Goodreads: אין תוכן לדף ספר זה."
+
+msgid "Goodreads timed out while handling this request."
+msgstr "Goodreads: תם הזמן הקצוב לטיפול בבקשה."
+
+msgid "Invalid Goodreads book identifier."
+msgstr "מזהה ספר Goodreads אינו תקין."
+
+msgid "Invalid Goodreads request timing state (unsupported version)."
+msgstr "מצב תזמון בקשות Goodreads אינו תקין (גרסה לא נתמכת)."
+
+#, python-brace-format
+msgid "Invalid Goodreads request timing state ({})."
+msgstr "מצב תזמון בקשות Goodreads אינו תקין ({})."
+
+#, python-brace-format
+msgid "Invalid comma-separated list: {}"
+msgstr "רשימה מופרדת בפסיקים אינה תקינה: {}"
+
+msgid "No book data (HTTP 200)"
+msgstr "אין נתוני ספר (HTTP 200)"
+
+msgid "Rate limited (HTTP 429)"
+msgstr "הגעת למגבלת הבקשות (HTTP 429)"
+
+msgid "Simulate Goodreads error:"
+msgstr "הדמיית שגיאת Goodreads:"
+
+#, python-brace-format
+msgid "Some books could not be updated. Their existing values were left unchanged.\n\n{}"
+msgstr "לא ניתן היה לעדכן חלק מהספרים. הערכים הקיימים שלהם לא שונו.\n\n{}"
+
+msgid "The Goodreads job ended before it could return results."
+msgstr "משימת Goodreads הסתיימה לפני החזרת התוצאות."
+
+msgid "This Goodreads book page is no longer available."
+msgstr "דף ספר זה ב-Goodreads אינו זמין עוד."
+
+msgid "Unknown Goodreads detail URL variant."
+msgstr "גרסת כתובת הפרטים של Goodreads אינה מוכרת."
+
+msgid "Unknown Goodreads error."
+msgstr "שגיאת Goodreads לא ידועה."
+
+#, python-brace-format
+msgid "{} additional book(s) failed."
+msgstr "הטיפול ב-{} ספרים נוספים נכשל."

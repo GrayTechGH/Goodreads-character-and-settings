@@ -36,7 +36,7 @@ class GoodreadsCharacterSettingsPlugin(InterfaceActionBase):
     supported_platforms = ['windows', 'osx', 'linux']
     author              = 'GrayTechGH'
     version             = (1, 3, 3)
-    minimum_calibre_version = (0, 7, 53)
+    minimum_calibre_version = (5, 40, 0)
 
     #: This field defines the GUI plugin class that contains all the code
     #: that actually does something. Its format is module_path:class_name

@@ -10,6 +10,7 @@ Plugin boundaries:
 - Keep `__init__.py` lightweight. GUI imports belong in `ui.py` or later imports from `config_widget()` so command-line Calibre utilities can inspect plugin metadata without loading Qt.
 - Use Calibre APIs where they exist: `InterfaceActionBase`, `InterfaceAction`, `JSONConfig`, `qt.core`, `calibre.browser`, and Calibre database methods.
 - Preserve the installed import name `calibre_plugins.Goodreads_character_and_settings`.
+- Minimum Calibre is 5.40.0, verified using actual isolated Windows portable runtimes at 5.0, 5.39.1, and 5.40. Keep Calibre's random Chrome user-agent helper rather than adding a custom compatibility fallback; that API sets the tested lower boundary.
 
 Goodreads extraction:
 

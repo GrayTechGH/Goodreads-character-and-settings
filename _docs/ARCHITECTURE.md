@@ -6,6 +6,7 @@
   - Defines `GoodreadsCharacterSettingsPlugin`, the Calibre `InterfaceActionBase` wrapper.
   - Keeps GUI imports out of module import time so Calibre command-line utilities can load the plugin metadata without loading Qt.
   - Exposes customization by returning `ConfigWidget` from `config.py`.
+  - Declares minimum Calibre 5.40.0, verified with that actual runtime. Earlier 5.x versions lack the required `random_common_chrome_user_agent` API; 5.0 also lacks `qt.core`.
 
 - `ui.py`
   - Defines `InterfacePlugin`, the real GUI action class named by `actual_plugin`.

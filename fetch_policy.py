@@ -8,6 +8,17 @@ attempt so a challenge cooldown is visible before another worker can request.
 __license__ = 'GPL v3'
 __copyright__ = '2026, GrayTechGH'
 
+try:
+    load_translations()
+except NameError:
+    pass
+
+try:
+    _
+except NameError:
+    def _(text):
+        return text
+
 import errno
 import hashlib
 import json
@@ -96,7 +107,7 @@ class RequestCoordinator(object):
                         waiting = True
                     self.sleep(0.1)
         except OSError as error:
-            raise FetchCoordinationError('Cannot lock the Goodreads request coordinator: {}'.format(error)) from error
+            raise FetchCoordinationError(_('Cannot lock the Goodreads request coordinator: {}').format(error)) from error
         try:
             yield
         finally:
@@ -109,9 +120,9 @@ class RequestCoordinator(object):
         except FileNotFoundError:
             return {'version': 1, 'last_start': None, 'interval': 0.0, 'cooldown_until': 0.0}
         except (OSError, ValueError) as error:
-            raise FetchCoordinationError('Cannot read Goodreads request timing: {}'.format(error)) from error
+            raise FetchCoordinationError(_('Cannot read Goodreads request timing: {}').format(error)) from error
         if not isinstance(state, dict) or type(state.get('version')) is not int or state['version'] != 1:
-            raise FetchCoordinationError('Invalid Goodreads request timing state (unsupported version).')
+            raise FetchCoordinationError(_('Invalid Goodreads request timing state (unsupported version).'))
         for key in ('last_start', 'interval', 'cooldown_until'):
             value = state.get(key)
             if key == 'last_start' and key in state and value is None:
@@ -121,7 +132,7 @@ class RequestCoordinator(object):
             except OverflowError:
                 valid = False
             if not valid:
-                raise FetchCoordinationError('Invalid Goodreads request timing state ({}).'.format(key))
+                raise FetchCoordinationError(_('Invalid Goodreads request timing state ({}).').format(key))
         return state
 
     def _save(self, state):
@@ -134,7 +145,7 @@ class RequestCoordinator(object):
                 os.fsync(target.fileno())
             os.replace(temporary, self.state_path)
         except (OSError, ValueError) as error:
-            raise FetchCoordinationError('Cannot save Goodreads request timing: {}'.format(error)) from error
+            raise FetchCoordinationError(_('Cannot save Goodreads request timing: {}').format(error)) from error
         finally:
             if temporary is not None and os.path.exists(temporary):
                 os.unlink(temporary)

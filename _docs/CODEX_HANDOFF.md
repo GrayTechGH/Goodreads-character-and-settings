@@ -27,6 +27,22 @@ If `py -3.12` is unavailable, try `.\.venv\Scripts\python.exe` with the same arg
 
 ## Current Test Shape
 
+Minimum-version verification, 2026-11-05:
+
+- Corrected `minimum_calibre_version` from the obsolete 0.7.53 declaration to **5.40.0**; plugin version remains 1.3.3. Calibre 5.0 lacks `qt.core`; 5.0 and 5.39.1 lack `random_common_chrome_user_agent`. Official tagged sources and actual isolated Windows portable runtimes confirm this boundary.
+- Calibre 5.40 passed all 59 tests, real background-job progress/failure/cancellation/lock recovery, and actual release ZIP installation, all four settings tabs, settings save/reopen, the debug dialog, random user-agent generation, and the corrected About minimum. No user library was opened. These checks do not establish visual appearance or live Goodreads access on the older runtime.
+- The rebuilt ZIP is rejected by actual Calibre 5.0 and 5.39.1 installers with the required 5.40.0 version. `_dev_tools/qa_release_runtime.py` is the repeatable installed-archive check. The test runner accepts `CALIBRE_DEBUG_EXECUTABLE`, including matching child executables, and a `QT_QPA_PLATFORM` override. Use `minimal` for the tested Qt 5 runtime; its `offscreen` QApplication initialization hung in this environment.
+- The 59-test suite and actual release ZIP settings/debug/API checks also pass on installed Calibre 9.17.0. Compilation and whitespace checks pass. The final release archive contains 63 runtime files and no downloaded compatibility runtimes or development fixtures.
+- Upstream boundary: https://github.com/kovidgoyal/calibre/blob/v5.39.1/src/calibre/utils/random_ua.py and https://github.com/kovidgoyal/calibre/blob/v5.40.0/src/calibre/utils/random_ua.py . Official portable runtime downloads: https://download.calibre-ebook.com/ .
+
+Translation follow-up, 2026-11-05:
+
+- Fetch/HTTP errors and coordinator errors use literal gettext wrappers before formatting; `fetch_policy.py` loads plugin translations using the usual fallback pattern. CSV validation and the toolbar label are covered too.
+- Added 37 previously missing messages across the template and all 47 PO/MO catalogs. Catalogs now contain 131 message IDs, including all 125 source gettext strings; existing translations and obsolete catalog entries are preserved.
+- `_dev_tools/compile_translations.py` rebuilds MO files with the standard-library compiler. `_dev_tools/validate_translations.py` now checks source coverage and owned literal UI/error boundaries, format placeholders, Unicode correctness, duplicate/fuzzy entries, and exact PO/MO parity.
+- Eight regression tests cover translation-check failure cases. The full isolated suite now passes 59 tests. Actual ZIP installs passed localization checks in German, Japanese, and Arabic; a German Calibre background job returned a localized error with no field writes.
+- The release ZIP was rebuilt from runtime files, including updated MO catalogs and excluding `.gitignore`, `_dev_tools/`, and `_docs/`. Plugin version remains 1.3.3; the verified minimum-version follow-up is recorded above.
+
 Fetch mitigation added 2026-11-04:
 
 - `worker_process.py` uses `.xml` first, one extensionless fallback, and a shared four-attempt default budget. Valid empty metadata succeeds on the first usable response.

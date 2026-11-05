@@ -1,11 +1,11 @@
 # Goodreads Character and Settings plugin translations
-# This file was generated from plugin UI gettext strings.
+# This file was maintained from plugin user-visible gettext strings.
 msgid ""
 msgstr ""
-"Project-Id-Version: Goodreads Character and Settings 1.1.1\n"
+"Project-Id-Version: Goodreads Character and Settings 1.3.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-28 00:00+0000\n"
-"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"POT-Creation-Date: 2026-11-05 00:00+0000\n"
+"PO-Revision-Date: 2026-11-05 00:00+0000\n"
 "Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -295,3 +295,123 @@ msgstr "Country row {} has invalid comma-separated aliases. Use double quotes ar
 
 msgid "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
 msgstr "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
+
+msgid "Access denied (HTTP 403)"
+msgstr "Pääsy estetty (HTTP 403)"
+
+msgid "Background job"
+msgstr "Taustatyö"
+
+msgid "Book not found (HTTP 404)"
+msgstr "Kirjaa ei löydy (HTTP 404)"
+
+msgid "Browser challenge (HTTP 202)"
+msgstr "Selaimen tarkistus (HTTP 202)"
+
+#, python-brace-format
+msgid "Cannot lock the Goodreads request coordinator: {}"
+msgstr "Goodreads-pyyntöjen koordinaattoria ei voi lukita: {}"
+
+#, python-brace-format
+msgid "Cannot read Goodreads request timing: {}"
+msgstr "Goodreads-pyyntöjen ajoitusta ei voi lukea: {}"
+
+#, python-brace-format
+msgid "Cannot save Goodreads request timing: {}"
+msgstr "Goodreads-pyyntöjen ajoitusta ei voi tallentaa: {}"
+
+msgid "Disabled"
+msgstr "Ei käytössä"
+
+msgid "Goodreads CS"
+msgstr "Goodreads CS"
+
+msgid "Goodreads Debug"
+msgstr "Goodreadsin virheenjäljitys"
+
+msgid "Goodreads could not find this book page."
+msgstr "Goodreads: kirjan sivua ei löytynyt."
+
+msgid "Goodreads denied access to this book page."
+msgstr "Goodreads: pääsy kirjan sivulle estettiin."
+
+msgid "Goodreads import errors"
+msgstr "Goodreads-tuonnin virheet"
+
+msgid "Goodreads is requiring a browser challenge and returned no usable book page."
+msgstr "Goodreads vaatii selaimen tarkistuksen eikä palauttanut käyttökelpoista kirjan sivua."
+
+msgid "Goodreads is temporarily rate-limiting requests."
+msgstr "Goodreads rajoittaa pyyntöjä tilapäisesti."
+
+#, python-brace-format
+msgid "Goodreads is temporarily unavailable (HTTP {})."
+msgstr "Goodreads ei ole tilapäisesti käytettävissä (HTTP {})."
+
+msgid "Goodreads redirected to a different or unidentified book page."
+msgstr "Goodreads ohjasi toisen tai tunnistamattoman kirjan sivulle."
+
+msgid "Goodreads requires sign-in to access this book page."
+msgstr "Goodreads vaatii kirjautumisen tälle kirjan sivulle."
+
+msgid "Goodreads returned a 200 response without usable book data."
+msgstr "Goodreads: HTTP 200 ilman käyttökelpoisia kirjatietoja."
+
+msgid "Goodreads returned a response without an HTTP status."
+msgstr "Goodreads: vastaus ilman HTTP-tilakoodia."
+
+#, python-brace-format
+msgid "Goodreads returned an unusable response (HTTP {})."
+msgstr "Goodreads: käyttökelvoton vastaus (HTTP {})."
+
+msgid "Goodreads returned missing or conflicting book identity."
+msgstr "Goodreads: kirjan tunniste puuttuu tai on ristiriitainen."
+
+msgid "Goodreads returned no content for this book page."
+msgstr "Goodreads: kirjan sivulla ei ole sisältöä."
+
+msgid "Goodreads timed out while handling this request."
+msgstr "Goodreads: pyynnön aikakatkaisu."
+
+msgid "Invalid Goodreads book identifier."
+msgstr "Virheellinen Goodreads-kirjatunniste."
+
+msgid "Invalid Goodreads request timing state (unsupported version)."
+msgstr "Virheellinen Goodreads-pyyntöjen ajoitustila (versiota ei tueta)."
+
+#, python-brace-format
+msgid "Invalid Goodreads request timing state ({})."
+msgstr "Virheellinen Goodreads-pyyntöjen ajoitustila ({})."
+
+#, python-brace-format
+msgid "Invalid comma-separated list: {}"
+msgstr "Virheellinen pilkuilla erotettu luettelo: {}"
+
+msgid "No book data (HTTP 200)"
+msgstr "Ei kirjatietoja (HTTP 200)"
+
+msgid "Rate limited (HTTP 429)"
+msgstr "Pyyntöraja saavutettu (HTTP 429)"
+
+msgid "Simulate Goodreads error:"
+msgstr "Simuloi Goodreads-virhettä:"
+
+#, python-brace-format
+msgid "Some books could not be updated. Their existing values were left unchanged.\n\n{}"
+msgstr "Joitakin kirjoja ei voitu päivittää. Niiden nykyiset arvot säilytettiin.\n\n{}"
+
+msgid "The Goodreads job ended before it could return results."
+msgstr "Goodreads-työ päättyi ennen tulosten palauttamista."
+
+msgid "This Goodreads book page is no longer available."
+msgstr "Tämä Goodreads-kirjan sivu ei ole enää saatavilla."
+
+msgid "Unknown Goodreads detail URL variant."
+msgstr "Tuntematon Goodreads-tietosivun URL-muoto."
+
+msgid "Unknown Goodreads error."
+msgstr "Tuntematon Goodreads-virhe."
+
+#, python-brace-format
+msgid "{} additional book(s) failed."
+msgstr "Vielä {} kirjan käsittely epäonnistui."

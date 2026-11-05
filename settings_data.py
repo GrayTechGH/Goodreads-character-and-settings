@@ -6,6 +6,17 @@ __license__   = 'GPL v3'
 __copyright__ = '2026, GrayTechGH'
 __docformat__ = 'restructuredtext en'
 
+try:
+    load_translations()
+except NameError:
+    pass
+
+try:
+    _
+except NameError:
+    def _(text):
+        return text
+
 import csv
 import io
 import json
@@ -306,7 +317,7 @@ def parse_csv_list(value):
     try:
         rows = list(csv.reader([text], skipinitialspace=True, strict=True))
     except csv.Error as err:
-        raise ValueError('Invalid comma-separated list: {}'.format(err))
+        raise ValueError(_('Invalid comma-separated list: {}').format(err))
     return [item.strip() for item in (rows[0] if rows else []) if item.strip()]
 
 

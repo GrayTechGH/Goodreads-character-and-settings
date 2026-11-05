@@ -1,11 +1,11 @@
 # Goodreads Character and Settings plugin translations
-# This file was generated from plugin UI gettext strings.
+# This file was maintained from plugin user-visible gettext strings.
 msgid ""
 msgstr ""
-"Project-Id-Version: Goodreads Character and Settings 1.1.1\n"
+"Project-Id-Version: Goodreads Character and Settings 1.3.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-28 00:00+0000\n"
-"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"POT-Creation-Date: 2026-11-05 00:00+0000\n"
+"PO-Revision-Date: 2026-11-05 00:00+0000\n"
 "Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
 "Language-Team: \n"
 "Language: vi\n"
@@ -295,3 +295,123 @@ msgstr "Country row {} has invalid comma-separated aliases. Use double quotes ar
 
 msgid "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
 msgstr "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
+
+msgid "Access denied (HTTP 403)"
+msgstr "Truy cập bị từ chối (HTTP 403)"
+
+msgid "Background job"
+msgstr "Tác vụ nền"
+
+msgid "Book not found (HTTP 404)"
+msgstr "Không tìm thấy sách (HTTP 404)"
+
+msgid "Browser challenge (HTTP 202)"
+msgstr "Xác minh trình duyệt (HTTP 202)"
+
+#, python-brace-format
+msgid "Cannot lock the Goodreads request coordinator: {}"
+msgstr "Không thể khóa bộ điều phối yêu cầu Goodreads: {}"
+
+#, python-brace-format
+msgid "Cannot read Goodreads request timing: {}"
+msgstr "Không thể đọc thời gian yêu cầu Goodreads: {}"
+
+#, python-brace-format
+msgid "Cannot save Goodreads request timing: {}"
+msgstr "Không thể lưu thời gian yêu cầu Goodreads: {}"
+
+msgid "Disabled"
+msgstr "Đã tắt"
+
+msgid "Goodreads CS"
+msgstr "Goodreads CS"
+
+msgid "Goodreads Debug"
+msgstr "Gỡ lỗi Goodreads"
+
+msgid "Goodreads could not find this book page."
+msgstr "Goodreads: không tìm thấy trang sách."
+
+msgid "Goodreads denied access to this book page."
+msgstr "Goodreads: truy cập trang sách bị từ chối."
+
+msgid "Goodreads import errors"
+msgstr "Lỗi nhập Goodreads"
+
+msgid "Goodreads is requiring a browser challenge and returned no usable book page."
+msgstr "Goodreads yêu cầu xác minh trình duyệt và không trả về trang sách có thể sử dụng."
+
+msgid "Goodreads is temporarily rate-limiting requests."
+msgstr "Goodreads đang tạm thời giới hạn yêu cầu."
+
+#, python-brace-format
+msgid "Goodreads is temporarily unavailable (HTTP {})."
+msgstr "Goodreads tạm thời không khả dụng (HTTP {})."
+
+msgid "Goodreads redirected to a different or unidentified book page."
+msgstr "Goodreads đã chuyển hướng đến trang của sách khác hoặc sách chưa xác định."
+
+msgid "Goodreads requires sign-in to access this book page."
+msgstr "Goodreads yêu cầu đăng nhập để truy cập trang sách này."
+
+msgid "Goodreads returned a 200 response without usable book data."
+msgstr "Goodreads: phản hồi HTTP 200 không có dữ liệu sách có thể sử dụng."
+
+msgid "Goodreads returned a response without an HTTP status."
+msgstr "Goodreads: phản hồi không có trạng thái HTTP."
+
+#, python-brace-format
+msgid "Goodreads returned an unusable response (HTTP {})."
+msgstr "Goodreads: phản hồi không thể sử dụng (HTTP {})."
+
+msgid "Goodreads returned missing or conflicting book identity."
+msgstr "Goodreads: thông tin nhận dạng sách bị thiếu hoặc mâu thuẫn."
+
+msgid "Goodreads returned no content for this book page."
+msgstr "Goodreads: không có nội dung cho trang sách này."
+
+msgid "Goodreads timed out while handling this request."
+msgstr "Goodreads: đã hết thời gian xử lý yêu cầu."
+
+msgid "Invalid Goodreads book identifier."
+msgstr "Mã định danh sách Goodreads không hợp lệ."
+
+msgid "Invalid Goodreads request timing state (unsupported version)."
+msgstr "Trạng thái thời gian yêu cầu Goodreads không hợp lệ (phiên bản không được hỗ trợ)."
+
+#, python-brace-format
+msgid "Invalid Goodreads request timing state ({})."
+msgstr "Trạng thái thời gian yêu cầu Goodreads không hợp lệ ({})."
+
+#, python-brace-format
+msgid "Invalid comma-separated list: {}"
+msgstr "Danh sách phân cách bằng dấu phẩy không hợp lệ: {}"
+
+msgid "No book data (HTTP 200)"
+msgstr "Không có dữ liệu sách (HTTP 200)"
+
+msgid "Rate limited (HTTP 429)"
+msgstr "Đạt giới hạn yêu cầu (HTTP 429)"
+
+msgid "Simulate Goodreads error:"
+msgstr "Mô phỏng lỗi Goodreads:"
+
+#, python-brace-format
+msgid "Some books could not be updated. Their existing values were left unchanged.\n\n{}"
+msgstr "Không thể cập nhật một số sách. Các giá trị hiện có của chúng được giữ nguyên.\n\n{}"
+
+msgid "The Goodreads job ended before it could return results."
+msgstr "Tác vụ Goodreads đã kết thúc trước khi trả về kết quả."
+
+msgid "This Goodreads book page is no longer available."
+msgstr "Trang sách Goodreads này không còn khả dụng."
+
+msgid "Unknown Goodreads detail URL variant."
+msgstr "Biến thể URL chi tiết Goodreads không xác định."
+
+msgid "Unknown Goodreads error."
+msgstr "Lỗi Goodreads không xác định."
+
+#, python-brace-format
+msgid "{} additional book(s) failed."
+msgstr "Có thêm {} sách bị lỗi."

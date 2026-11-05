@@ -1,11 +1,11 @@
 # Goodreads Character and Settings plugin translations
-# This file was generated from plugin UI gettext strings.
+# This file was maintained from plugin user-visible gettext strings.
 msgid ""
 msgstr ""
-"Project-Id-Version: Goodreads Character and Settings 1.1.1\n"
+"Project-Id-Version: Goodreads Character and Settings 1.3.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-28 00:00+0000\n"
-"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"POT-Creation-Date: 2026-11-05 00:00+0000\n"
+"PO-Revision-Date: 2026-11-05 00:00+0000\n"
 "Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
 "Language-Team: \n"
 "Language: kn\n"
@@ -295,3 +295,123 @@ msgstr "Country row {} has invalid comma-separated aliases. Use double quotes ar
 
 msgid "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
 msgstr "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
+
+msgid "Access denied (HTTP 403)"
+msgstr "ಪ್ರವೇಶ ನಿರಾಕರಿಸಲಾಗಿದೆ (HTTP 403)"
+
+msgid "Background job"
+msgstr "ಹಿನ್ನೆಲೆ ಕಾರ್ಯ"
+
+msgid "Book not found (HTTP 404)"
+msgstr "ಪುಸ್ತಕ ಕಂಡುಬಂದಿಲ್ಲ (HTTP 404)"
+
+msgid "Browser challenge (HTTP 202)"
+msgstr "ಬ್ರೌಸರ್ ಪರಿಶೀಲನೆ (HTTP 202)"
+
+#, python-brace-format
+msgid "Cannot lock the Goodreads request coordinator: {}"
+msgstr "Goodreads ವಿನಂತಿ ಸಂಯೋಜಕವನ್ನು ಲಾಕ್ ಮಾಡಲು ಸಾಧ್ಯವಿಲ್ಲ: {}"
+
+#, python-brace-format
+msgid "Cannot read Goodreads request timing: {}"
+msgstr "Goodreads ವಿನಂತಿಗಳ ಸಮಯವನ್ನು ಓದಲು ಸಾಧ್ಯವಿಲ್ಲ: {}"
+
+#, python-brace-format
+msgid "Cannot save Goodreads request timing: {}"
+msgstr "Goodreads ವಿನಂತಿಗಳ ಸಮಯವನ್ನು ಉಳಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ: {}"
+
+msgid "Disabled"
+msgstr "ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ"
+
+msgid "Goodreads CS"
+msgstr "Goodreads CS"
+
+msgid "Goodreads Debug"
+msgstr "Goodreads ದೋಷನಿವಾರಣೆ"
+
+msgid "Goodreads could not find this book page."
+msgstr "Goodreads: ಪುಸ್ತಕದ ಪುಟ ಕಂಡುಬಂದಿಲ್ಲ."
+
+msgid "Goodreads denied access to this book page."
+msgstr "Goodreads: ಪುಸ್ತಕದ ಪುಟಕ್ಕೆ ಪ್ರವೇಶ ನಿರಾಕರಿಸಲಾಗಿದೆ."
+
+msgid "Goodreads import errors"
+msgstr "Goodreads ಆಮದು ದೋಷಗಳು"
+
+msgid "Goodreads is requiring a browser challenge and returned no usable book page."
+msgstr "Goodreads ಬ್ರೌಸರ್ ಪರಿಶೀಲನೆಯನ್ನು ಕೇಳುತ್ತಿದೆ ಮತ್ತು ಬಳಸಬಹುದಾದ ಪುಸ್ತಕದ ಪುಟವನ್ನು ಹಿಂತಿರುಗಿಸಿಲ್ಲ."
+
+msgid "Goodreads is temporarily rate-limiting requests."
+msgstr "Goodreads ತಾತ್ಕಾಲಿಕವಾಗಿ ವಿನಂತಿಗಳನ್ನು ಮಿತಿಗೊಳಿಸುತ್ತಿದೆ."
+
+#, python-brace-format
+msgid "Goodreads is temporarily unavailable (HTTP {})."
+msgstr "Goodreads ತಾತ್ಕಾಲಿಕವಾಗಿ ಲಭ್ಯವಿಲ್ಲ (HTTP {})."
+
+msgid "Goodreads redirected to a different or unidentified book page."
+msgstr "Goodreads ಬೇರೆ ಅಥವಾ ಗುರುತಿಸಲಾಗದ ಪುಸ್ತಕದ ಪುಟಕ್ಕೆ ಮರುನಿರ್ದೇಶಿಸಿದೆ."
+
+msgid "Goodreads requires sign-in to access this book page."
+msgstr "ಈ ಪುಸ್ತಕದ ಪುಟವನ್ನು ಪ್ರವೇಶಿಸಲು Goodreads ಗೆ ಸೈನ್ ಇನ್ ಮಾಡಬೇಕು."
+
+msgid "Goodreads returned a 200 response without usable book data."
+msgstr "Goodreads: HTTP 200 ಪ್ರತಿಕ್ರಿಯೆಯಲ್ಲಿ ಬಳಸಬಹುದಾದ ಪುಸ್ತಕದ ಮಾಹಿತಿ ಇಲ್ಲ."
+
+msgid "Goodreads returned a response without an HTTP status."
+msgstr "Goodreads: ಪ್ರತಿಕ್ರಿಯೆಯಲ್ಲಿ HTTP ಸ್ಥಿತಿ ಇಲ್ಲ."
+
+#, python-brace-format
+msgid "Goodreads returned an unusable response (HTTP {})."
+msgstr "Goodreads: ಬಳಸಲಾಗದ ಪ್ರತಿಕ್ರಿಯೆ (HTTP {})."
+
+msgid "Goodreads returned missing or conflicting book identity."
+msgstr "Goodreads: ಪುಸ್ತಕದ ಗುರುತು ಕಾಣೆಯಾಗಿದೆ ಅಥವಾ ಹೊಂದಿಕೆಯಾಗುತ್ತಿಲ್ಲ."
+
+msgid "Goodreads returned no content for this book page."
+msgstr "Goodreads: ಈ ಪುಸ್ತಕದ ಪುಟಕ್ಕೆ ವಿಷಯವಿಲ್ಲ."
+
+msgid "Goodreads timed out while handling this request."
+msgstr "Goodreads: ವಿನಂತಿಯ ಪ್ರಕ್ರಿಯೆಗೆ ನೀಡಿದ ಸಮಯ ಮುಗಿದಿದೆ."
+
+msgid "Invalid Goodreads book identifier."
+msgstr "ಅಮಾನ್ಯ Goodreads ಪುಸ್ತಕ ಗುರುತು."
+
+msgid "Invalid Goodreads request timing state (unsupported version)."
+msgstr "ಅಮಾನ್ಯ Goodreads ವಿನಂತಿ ಸಮಯದ ಸ್ಥಿತಿ (ಬೆಂಬಲಿಸದ ಆವೃತ್ತಿ)."
+
+#, python-brace-format
+msgid "Invalid Goodreads request timing state ({})."
+msgstr "ಅಮಾನ್ಯ Goodreads ವಿನಂತಿ ಸಮಯದ ಸ್ಥಿತಿ ({})."
+
+#, python-brace-format
+msgid "Invalid comma-separated list: {}"
+msgstr "ಅಲ್ಪವಿರಾಮದಿಂದ ಬೇರ್ಪಟ್ಟ ಅಮಾನ್ಯ ಪಟ್ಟಿ: {}"
+
+msgid "No book data (HTTP 200)"
+msgstr "ಪುಸ್ತಕದ ಮಾಹಿತಿ ಇಲ್ಲ (HTTP 200)"
+
+msgid "Rate limited (HTTP 429)"
+msgstr "ವಿನಂತಿಗಳ ಮಿತಿ ತಲುಪಿದೆ (HTTP 429)"
+
+msgid "Simulate Goodreads error:"
+msgstr "Goodreads ದೋಷವನ್ನು ಅನುಕರಿಸಿ:"
+
+#, python-brace-format
+msgid "Some books could not be updated. Their existing values were left unchanged.\n\n{}"
+msgstr "ಕೆಲವು ಪುಸ್ತಕಗಳನ್ನು ನವೀಕರಿಸಲಾಗಲಿಲ್ಲ. ಅವುಗಳ ಅಸ್ತಿತ್ವದಲ್ಲಿರುವ ಮೌಲ್ಯಗಳನ್ನು ಬದಲಾಯಿಸಲಾಗಿಲ್ಲ.\n\n{}"
+
+msgid "The Goodreads job ended before it could return results."
+msgstr "ಫಲಿತಾಂಶಗಳನ್ನು ಹಿಂತಿರುಗಿಸುವ ಮೊದಲು Goodreads ಕಾರ್ಯ ಕೊನೆಗೊಂಡಿತು."
+
+msgid "This Goodreads book page is no longer available."
+msgstr "ಈ Goodreads ಪುಸ್ತಕದ ಪುಟ ಇನ್ನು ಲಭ್ಯವಿಲ್ಲ."
+
+msgid "Unknown Goodreads detail URL variant."
+msgstr "ಅಜ್ಞಾತ Goodreads ವಿವರ URL ರೂಪಾಂತರ."
+
+msgid "Unknown Goodreads error."
+msgstr "ಅಜ್ಞಾತ Goodreads ದೋಷ."
+
+#, python-brace-format
+msgid "{} additional book(s) failed."
+msgstr "ಇನ್ನೂ {} ಪುಸ್ತಕಗಳ ಪ್ರಕ್ರಿಯೆ ವಿಫಲವಾಗಿದೆ."

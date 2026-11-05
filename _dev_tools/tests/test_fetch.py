@@ -1,6 +1,7 @@
 """Transport integration with synthetic Goodreads pages and a deterministic clock."""
 
 import json
+import io
 import unittest
 from unittest.mock import patch
 from urllib.error import HTTPError, URLError
@@ -168,7 +169,7 @@ class FetchTests(unittest.TestCase):
         self.assertTrue(all(url.endswith('.xml') for url, _ in self.requests))
 
     def test_http_exception_and_header_only_challenge_preserve_metadata(self):
-        error = HTTPError('https://www.goodreads.com/book/show/34.xml', 429, 'limited', {'Retry-After': '125'}, None)
+        error = HTTPError('https://www.goodreads.com/book/show/34.xml', 429, 'limited', {'Retry-After': '125'}, io.BytesIO(b''))
         self.responses = [error]
         with self.assertRaises(self.worker.GoodreadsHttpError) as caught:
             self.fetch(retry_attempts=0)

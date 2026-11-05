@@ -1,11 +1,11 @@
 # Goodreads Character and Settings plugin translations
-# This file was generated from plugin UI gettext strings.
+# This file was maintained from plugin user-visible gettext strings.
 msgid ""
 msgstr ""
-"Project-Id-Version: Goodreads Character and Settings 1.1.1\n"
+"Project-Id-Version: Goodreads Character and Settings 1.3.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-28 00:00+0000\n"
-"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"POT-Creation-Date: 2026-11-05 00:00+0000\n"
+"PO-Revision-Date: 2026-11-05 00:00+0000\n"
 "Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -295,3 +295,123 @@ msgstr "Country row {} has invalid comma-separated aliases. Use double quotes ar
 
 msgid "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
 msgstr "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
+
+msgid "Access denied (HTTP 403)"
+msgstr "Accesso negato (HTTP 403)"
+
+msgid "Background job"
+msgstr "Attività in background"
+
+msgid "Book not found (HTTP 404)"
+msgstr "Libro non trovato (HTTP 404)"
+
+msgid "Browser challenge (HTTP 202)"
+msgstr "Verifica del browser (HTTP 202)"
+
+#, python-brace-format
+msgid "Cannot lock the Goodreads request coordinator: {}"
+msgstr "Impossibile bloccare il coordinatore delle richieste Goodreads: {}"
+
+#, python-brace-format
+msgid "Cannot read Goodreads request timing: {}"
+msgstr "Impossibile leggere i tempi delle richieste Goodreads: {}"
+
+#, python-brace-format
+msgid "Cannot save Goodreads request timing: {}"
+msgstr "Impossibile salvare i tempi delle richieste Goodreads: {}"
+
+msgid "Disabled"
+msgstr "Disattivato"
+
+msgid "Goodreads CS"
+msgstr "Goodreads CS"
+
+msgid "Goodreads Debug"
+msgstr "Debug di Goodreads"
+
+msgid "Goodreads could not find this book page."
+msgstr "Goodreads: pagina del libro non trovata."
+
+msgid "Goodreads denied access to this book page."
+msgstr "Goodreads: accesso alla pagina del libro negato."
+
+msgid "Goodreads import errors"
+msgstr "Errori di importazione Goodreads"
+
+msgid "Goodreads is requiring a browser challenge and returned no usable book page."
+msgstr "Goodreads richiede una verifica del browser e non ha restituito una pagina del libro utilizzabile."
+
+msgid "Goodreads is temporarily rate-limiting requests."
+msgstr "Goodreads sta limitando temporaneamente le richieste."
+
+#, python-brace-format
+msgid "Goodreads is temporarily unavailable (HTTP {})."
+msgstr "Goodreads è temporaneamente non disponibile (HTTP {})."
+
+msgid "Goodreads redirected to a different or unidentified book page."
+msgstr "Goodreads ha reindirizzato alla pagina di un libro diverso o non identificato."
+
+msgid "Goodreads requires sign-in to access this book page."
+msgstr "Goodreads richiede l’accesso per visualizzare questa pagina del libro."
+
+msgid "Goodreads returned a 200 response without usable book data."
+msgstr "Goodreads: risposta HTTP 200 senza dati del libro utilizzabili."
+
+msgid "Goodreads returned a response without an HTTP status."
+msgstr "Goodreads: risposta priva di stato HTTP."
+
+#, python-brace-format
+msgid "Goodreads returned an unusable response (HTTP {})."
+msgstr "Goodreads: risposta inutilizzabile (HTTP {})."
+
+msgid "Goodreads returned missing or conflicting book identity."
+msgstr "Goodreads: identità del libro mancante o in conflitto."
+
+msgid "Goodreads returned no content for this book page."
+msgstr "Goodreads: nessun contenuto per questa pagina del libro."
+
+msgid "Goodreads timed out while handling this request."
+msgstr "Goodreads: tempo scaduto durante la richiesta."
+
+msgid "Invalid Goodreads book identifier."
+msgstr "Identificatore del libro Goodreads non valido."
+
+msgid "Invalid Goodreads request timing state (unsupported version)."
+msgstr "Stato dei tempi delle richieste Goodreads non valido (versione non supportata)."
+
+#, python-brace-format
+msgid "Invalid Goodreads request timing state ({})."
+msgstr "Stato dei tempi delle richieste Goodreads non valido ({})."
+
+#, python-brace-format
+msgid "Invalid comma-separated list: {}"
+msgstr "Elenco separato da virgole non valido: {}"
+
+msgid "No book data (HTTP 200)"
+msgstr "Nessun dato del libro (HTTP 200)"
+
+msgid "Rate limited (HTTP 429)"
+msgstr "Limite di richieste raggiunto (HTTP 429)"
+
+msgid "Simulate Goodreads error:"
+msgstr "Simula un errore Goodreads:"
+
+#, python-brace-format
+msgid "Some books could not be updated. Their existing values were left unchanged.\n\n{}"
+msgstr "Impossibile aggiornare alcuni libri. I valori esistenti sono rimasti invariati.\n\n{}"
+
+msgid "The Goodreads job ended before it could return results."
+msgstr "L’attività Goodreads è terminata prima di restituire risultati."
+
+msgid "This Goodreads book page is no longer available."
+msgstr "Questa pagina del libro Goodreads non è più disponibile."
+
+msgid "Unknown Goodreads detail URL variant."
+msgstr "Variante dell’URL dei dettagli Goodreads sconosciuta."
+
+msgid "Unknown Goodreads error."
+msgstr "Errore Goodreads sconosciuto."
+
+#, python-brace-format
+msgid "{} additional book(s) failed."
+msgstr "Operazione non riuscita per altri {} libri."
