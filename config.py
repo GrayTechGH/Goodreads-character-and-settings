@@ -102,7 +102,6 @@ prefs.defaults['include_country_with_location'] = True
 prefs.defaults['keep_region_in_settings'] = True
 prefs.defaults['write_empty_to_custom_fields'] = False
 prefs.defaults['query_interval_seconds'] = 30
-prefs.defaults['max_books_per_job'] = 5
 prefs.defaults['debug_preview'] = False
 prefs.defaults['debug_character_sources'] = False
 prefs.defaults['debug_settings_pipeline'] = False
@@ -251,12 +250,6 @@ class ConfigWidget(QWidget):
         self.query_interval_seconds.setSuffix(_(' seconds'))
         self.query_interval_seconds.setValue(prefs['query_interval_seconds'])
         self.form.addRow(_('Time between queries:'), self.query_interval_seconds)
-
-        self.max_books_per_job = QSpinBox(self)
-        self.max_books_per_job.setMinimum(1)
-        self.max_books_per_job.setMaximum(100000)
-        self.max_books_per_job.setValue(prefs['max_books_per_job'])
-        self.form.addRow(_('Max. Books/Job:'), self.max_books_per_job)
 
         self.character_field.currentIndexChanged.connect(
             self.update_empty_option_state
@@ -1275,7 +1268,6 @@ class ConfigWidget(QWidget):
         prefs['country_name_language'] = self.country_name_language.currentData()
         prefs['country_name_mode'] = self.current_country_name_mode()
         prefs['query_interval_seconds'] = self.query_interval_seconds.value()
-        prefs['max_books_per_job'] = self.max_books_per_job.value()
         if self._countries_dirty:
             save_user_country_data(self.collect_country_rows())
         if self._regions_dirty:
