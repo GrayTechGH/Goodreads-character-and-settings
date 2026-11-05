@@ -25,10 +25,6 @@ from calibre_plugins.Goodreads_character_and_settings import common
 
 
 GOODREADS_BASE_URL = 'https://www.goodreads.com'
-GOODREADS_USER_AGENT = (
-    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
-    'AppleWebKit/537.36 Chrome/125 Safari/537.36'
-)
 GOODREADS_WAF_CHALLENGE_MESSAGE = (
     'Goodreads is requiring a browser challenge and returned no usable book page.'
 )
@@ -147,12 +143,17 @@ def goodreads_response_error(response):
     )
 
 
+def random_goodreads_user_agent():
+    from calibre.utils.random_ua import random_common_chrome_user_agent
+    return random_common_chrome_user_agent()
+
+
 def fetch_goodreads_page(goodreads_id, timeout=30):
     url = '{}/book/show/{}'.format(GOODREADS_BASE_URL, goodreads_id)
     try:
         br = browser()
         br.set_handle_robots(False)
-        br.addheaders = [('User-Agent', GOODREADS_USER_AGENT)]
+        br.addheaders = [('User-Agent', random_goodreads_user_agent())]
         response = br.open(url, timeout=timeout)
         response_error = goodreads_response_error(response)
         if response_error is not None:
@@ -169,28 +170,39 @@ def fetch_goodreads_page(goodreads_id, timeout=30):
     return raw.decode('utf-8', errors='replace')
 
 
+def should_retry_fetch(error):
+    if isinstance(error, GoodreadsWafChallengeError):
+        return True
+    if isinstance(error, GoodreadsHttpError):
+        return error.retryable or error.status_code == 403
+    return not isinstance(error, GoodreadsFetchError)
+
+
 def fetch_and_extract_goodreads_data(goodreads_id, retry_attempts=3, retry_delay_seconds=2):
     last_error = None
 
-    for attempt in range(1, retry_attempts + 1):
+    for attempt in range(retry_attempts + 1):
         try:
             html = fetch_goodreads_page(goodreads_id)
             if not common.has_goodreads_book_data(html):
                 raise GoodreadsPageDataError(GOODREADS_MISSING_BOOK_DATA_MESSAGE)
             characters = common.extract_goodreads_values(html, 'Characters')
             settings = common.extract_goodreads_values(html, 'Setting')
-            if characters or settings or attempt >= retry_attempts:
+            if characters or settings or attempt == retry_attempts:
                 return characters, settings
         except GoodreadsFetchError as err:
             last_error = err
-            if not err.retryable or attempt >= retry_attempts:
+            if (
+                attempt == retry_attempts
+                or not should_retry_fetch(err)
+            ):
                 raise
         except Exception as err:
             last_error = err
-            if attempt >= retry_attempts:
+            if attempt == retry_attempts:
                 raise
 
-        if attempt < retry_attempts:
+        if attempt != retry_attempts:
             time.sleep(retry_delay_seconds)
 
     if last_error is not None:

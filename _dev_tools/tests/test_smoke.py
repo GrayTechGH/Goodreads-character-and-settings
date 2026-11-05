@@ -46,16 +46,20 @@ def install_fake_calibre_modules(config_dir):
             'eng': (r'A\s+', r'The\s+', r'An\s+'),
         },
     }
+    random_ua = types.ModuleType('calibre.utils.random_ua')
+    random_ua.random_common_chrome_user_agent = lambda: 'calibre-random-agent'
 
     utils = sys.modules.setdefault('calibre.utils', types.ModuleType('calibre.utils'))
     utils.localization = localization
     utils.config = config
+    utils.random_ua = random_ua
     calibre.constants = constants
     calibre.utils = utils
 
     sys.modules['calibre.constants'] = constants
     sys.modules['calibre.utils.config'] = config
     sys.modules['calibre.utils.localization'] = localization
+    sys.modules['calibre.utils.random_ua'] = random_ua
 
 
 def install_plugin_package():
@@ -420,7 +424,7 @@ class PluginSmokeTests(unittest.TestCase):
 
         self.assertFalse(response.read_called)
         self.assertEqual(
-            [('User-Agent', worker.GOODREADS_USER_AGENT)],
+            [('User-Agent', 'calibre-random-agent')],
             browser.addheaders,
         )
         header_only_response = type(
@@ -432,6 +436,68 @@ class PluginSmokeTests(unittest.TestCase):
             },
         )()
         self.assertTrue(worker.is_goodreads_waf_challenge(header_only_response))
+
+    def test_waf_challenge_retries_with_three_random_user_agents(self):
+        """The first request and all three retries use fresh Calibre random agents."""
+        class Response(object):
+            headers = {}
+
+            def __init__(self, status, raw=b''):
+                self.status = status
+                self.raw = raw
+
+            def read(self):
+                return self.raw
+
+        responses = [
+            Response(202),
+            Response(202),
+            Response(202),
+            Response(200, b'<html>book data</html>'),
+        ]
+        used_agents = []
+
+        class FakeBrowser(object):
+            def __init__(self):
+                self.addheaders = []
+
+            def set_handle_robots(self, _enabled):
+                pass
+
+            def open(self, _url, timeout=None):
+                used_agents.append(dict(self.addheaders)['User-Agent'])
+                return responses.pop(0)
+
+        worker = self.load_worker_process(FakeBrowser)
+        random_agents = iter((
+            'random-agent-1', 'random-agent-2', 'random-agent-3', 'random-agent-4',
+        ))
+        original_has_book_data = worker.common.has_goodreads_book_data
+        original_extract = worker.common.extract_goodreads_values
+        original_sleep = worker.time.sleep
+        worker.random_goodreads_user_agent = lambda: next(random_agents)
+        worker.common.has_goodreads_book_data = lambda _html: True
+        worker.common.extract_goodreads_values = (
+            lambda _html, label: ['Alice'] if label == 'Characters' else ['London']
+        )
+        worker.time.sleep = lambda _seconds: None
+        try:
+            values = worker.fetch_and_extract_goodreads_data('230926478')
+        finally:
+            worker.common.has_goodreads_book_data = original_has_book_data
+            worker.common.extract_goodreads_values = original_extract
+            worker.time.sleep = original_sleep
+
+        self.assertEqual((['Alice'], ['London']), values)
+        self.assertEqual(
+            [
+                'random-agent-1',
+                'random-agent-2',
+                'random-agent-3',
+                'random-agent-4',
+            ],
+            used_agents,
+        )
 
     def test_non_ok_response_errors_are_descriptive_and_skip_the_body(self):
         """Every final non-200 Goodreads response should preserve its failure reason."""
@@ -525,7 +591,9 @@ class PluginSmokeTests(unittest.TestCase):
         worker = self.load_worker_process(lambda: None)
         original_fetch_page = worker.fetch_goodreads_page
         original_has_book_data = worker.common.has_goodreads_book_data
-        worker.fetch_goodreads_page = lambda _goodreads_id: '<html></html>'
+        worker.fetch_goodreads_page = (
+            lambda _goodreads_id, **_kwargs: '<html></html>'
+        )
         worker.common.has_goodreads_book_data = lambda _html: False
         try:
             results = worker.process_goodreads_batch(
