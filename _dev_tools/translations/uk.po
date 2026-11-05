@@ -1,11 +1,11 @@
 # Goodreads Character and Settings plugin translations
-# This file was generated from plugin UI gettext strings.
+# This file was maintained from plugin user-visible gettext strings.
 msgid ""
 msgstr ""
-"Project-Id-Version: Goodreads Character and Settings 1.1.1\n"
+"Project-Id-Version: Goodreads Character and Settings 1.3.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-28 00:00+0000\n"
-"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"POT-Creation-Date: 2026-11-05 00:00+0000\n"
+"PO-Revision-Date: 2026-11-05 00:00+0000\n"
 "Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
 "Language-Team: \n"
 "Language: uk\n"
@@ -295,3 +295,123 @@ msgstr "Country row {} has invalid comma-separated aliases. Use double quotes ar
 
 msgid "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
 msgstr "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
+
+msgid "Access denied (HTTP 403)"
+msgstr "Доступ заборонено (HTTP 403)"
+
+msgid "Background job"
+msgstr "Фонове завдання"
+
+msgid "Book not found (HTTP 404)"
+msgstr "Книгу не знайдено (HTTP 404)"
+
+msgid "Browser challenge (HTTP 202)"
+msgstr "Перевірка браузера (HTTP 202)"
+
+#, python-brace-format
+msgid "Cannot lock the Goodreads request coordinator: {}"
+msgstr "Не вдалося заблокувати координатор запитів Goodreads: {}"
+
+#, python-brace-format
+msgid "Cannot read Goodreads request timing: {}"
+msgstr "Не вдалося прочитати часові дані запитів Goodreads: {}"
+
+#, python-brace-format
+msgid "Cannot save Goodreads request timing: {}"
+msgstr "Не вдалося зберегти часові дані запитів Goodreads: {}"
+
+msgid "Disabled"
+msgstr "Вимкнено"
+
+msgid "Goodreads CS"
+msgstr "Goodreads CS"
+
+msgid "Goodreads Debug"
+msgstr "Налагодження Goodreads"
+
+msgid "Goodreads could not find this book page."
+msgstr "Goodreads: сторінку книги не знайдено."
+
+msgid "Goodreads denied access to this book page."
+msgstr "Goodreads: доступ до сторінки книги заборонено."
+
+msgid "Goodreads import errors"
+msgstr "Помилки імпорту Goodreads"
+
+msgid "Goodreads is requiring a browser challenge and returned no usable book page."
+msgstr "Goodreads вимагає перевірки браузера та не повернув придатну сторінку книги."
+
+msgid "Goodreads is temporarily rate-limiting requests."
+msgstr "Goodreads тимчасово обмежує запити."
+
+#, python-brace-format
+msgid "Goodreads is temporarily unavailable (HTTP {})."
+msgstr "Goodreads тимчасово недоступний (HTTP {})."
+
+msgid "Goodreads redirected to a different or unidentified book page."
+msgstr "Goodreads переспрямував на сторінку іншої або невизначеної книги."
+
+msgid "Goodreads requires sign-in to access this book page."
+msgstr "Для доступу до цієї сторінки книги Goodreads потрібен вхід."
+
+msgid "Goodreads returned a 200 response without usable book data."
+msgstr "Goodreads: HTTP 200 без придатних даних книги."
+
+msgid "Goodreads returned a response without an HTTP status."
+msgstr "Goodreads: відповідь без стану HTTP."
+
+#, python-brace-format
+msgid "Goodreads returned an unusable response (HTTP {})."
+msgstr "Goodreads: непридатна відповідь (HTTP {})."
+
+msgid "Goodreads returned missing or conflicting book identity."
+msgstr "Goodreads: ідентифікатор книги відсутній або суперечливий."
+
+msgid "Goodreads returned no content for this book page."
+msgstr "Goodreads: сторінка книги не містить даних."
+
+msgid "Goodreads timed out while handling this request."
+msgstr "Goodreads: вичерпано час очікування запиту."
+
+msgid "Invalid Goodreads book identifier."
+msgstr "Недійсний ідентифікатор книги Goodreads."
+
+msgid "Invalid Goodreads request timing state (unsupported version)."
+msgstr "Недійсний стан часу запитів Goodreads (непідтримувана версія)."
+
+#, python-brace-format
+msgid "Invalid Goodreads request timing state ({})."
+msgstr "Недійсний стан часу запитів Goodreads ({})."
+
+#, python-brace-format
+msgid "Invalid comma-separated list: {}"
+msgstr "Недійсний список із розділювачами-комами: {}"
+
+msgid "No book data (HTTP 200)"
+msgstr "Немає даних книги (HTTP 200)"
+
+msgid "Rate limited (HTTP 429)"
+msgstr "Досягнуто обмеження запитів (HTTP 429)"
+
+msgid "Simulate Goodreads error:"
+msgstr "Імітувати помилку Goodreads:"
+
+#, python-brace-format
+msgid "Some books could not be updated. Their existing values were left unchanged.\n\n{}"
+msgstr "Деякі книги не вдалося оновити. Їхні наявні значення збережено.\n\n{}"
+
+msgid "The Goodreads job ended before it could return results."
+msgstr "Завдання Goodreads завершилося до повернення результатів."
+
+msgid "This Goodreads book page is no longer available."
+msgstr "Ця сторінка книги Goodreads більше недоступна."
+
+msgid "Unknown Goodreads detail URL variant."
+msgstr "Невідомий варіант URL відомостей Goodreads."
+
+msgid "Unknown Goodreads error."
+msgstr "Невідома помилка Goodreads."
+
+#, python-brace-format
+msgid "{} additional book(s) failed."
+msgstr "Додаткових книг із помилкою: {}."

@@ -1,11 +1,11 @@
 # Goodreads Character and Settings plugin translations
-# This file was generated from plugin UI gettext strings.
+# This file was maintained from plugin user-visible gettext strings.
 msgid ""
 msgstr ""
-"Project-Id-Version: Goodreads Character and Settings 1.1.1\n"
+"Project-Id-Version: Goodreads Character and Settings 1.3.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-28 00:00+0000\n"
-"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"POT-Creation-Date: 2026-11-05 00:00+0000\n"
+"PO-Revision-Date: 2026-11-05 00:00+0000\n"
 "Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
 "Language-Team: \n"
 "Language: sk\n"
@@ -295,3 +295,123 @@ msgstr "Country row {} has invalid comma-separated aliases. Use double quotes ar
 
 msgid "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
 msgstr "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
+
+msgid "Access denied (HTTP 403)"
+msgstr "Prístup odmietnutý (HTTP 403)"
+
+msgid "Background job"
+msgstr "Úloha na pozadí"
+
+msgid "Book not found (HTTP 404)"
+msgstr "Kniha sa nenašla (HTTP 404)"
+
+msgid "Browser challenge (HTTP 202)"
+msgstr "Overenie prehliadača (HTTP 202)"
+
+#, python-brace-format
+msgid "Cannot lock the Goodreads request coordinator: {}"
+msgstr "Nemožno uzamknúť koordinátor požiadaviek Goodreads: {}"
+
+#, python-brace-format
+msgid "Cannot read Goodreads request timing: {}"
+msgstr "Nemožno načítať časovanie požiadaviek Goodreads: {}"
+
+#, python-brace-format
+msgid "Cannot save Goodreads request timing: {}"
+msgstr "Nemožno uložiť časovanie požiadaviek Goodreads: {}"
+
+msgid "Disabled"
+msgstr "Vypnuté"
+
+msgid "Goodreads CS"
+msgstr "Goodreads CS"
+
+msgid "Goodreads Debug"
+msgstr "Ladenie Goodreads"
+
+msgid "Goodreads could not find this book page."
+msgstr "Goodreads: stránka knihy sa nenašla."
+
+msgid "Goodreads denied access to this book page."
+msgstr "Goodreads: prístup na stránku knihy bol odmietnutý."
+
+msgid "Goodreads import errors"
+msgstr "Chyby importu Goodreads"
+
+msgid "Goodreads is requiring a browser challenge and returned no usable book page."
+msgstr "Goodreads vyžaduje overenie prehliadača a nevrátil použiteľnú stránku knihy."
+
+msgid "Goodreads is temporarily rate-limiting requests."
+msgstr "Goodreads dočasne obmedzuje požiadavky."
+
+#, python-brace-format
+msgid "Goodreads is temporarily unavailable (HTTP {})."
+msgstr "Goodreads je dočasne nedostupný (HTTP {})."
+
+msgid "Goodreads redirected to a different or unidentified book page."
+msgstr "Goodreads presmeroval na stránku inej alebo neurčenej knihy."
+
+msgid "Goodreads requires sign-in to access this book page."
+msgstr "Goodreads vyžaduje prihlásenie na prístup k tejto stránke knihy."
+
+msgid "Goodreads returned a 200 response without usable book data."
+msgstr "Goodreads: HTTP 200 bez použiteľných údajov o knihe."
+
+msgid "Goodreads returned a response without an HTTP status."
+msgstr "Goodreads: odpoveď bez stavu HTTP."
+
+#, python-brace-format
+msgid "Goodreads returned an unusable response (HTTP {})."
+msgstr "Goodreads: nepoužiteľná odpoveď (HTTP {})."
+
+msgid "Goodreads returned missing or conflicting book identity."
+msgstr "Goodreads: chýbajúca alebo rozporná identita knihy."
+
+msgid "Goodreads returned no content for this book page."
+msgstr "Goodreads: stránka knihy nemá obsah."
+
+msgid "Goodreads timed out while handling this request."
+msgstr "Goodreads: vypršal časový limit požiadavky."
+
+msgid "Invalid Goodreads book identifier."
+msgstr "Neplatný identifikátor knihy Goodreads."
+
+msgid "Invalid Goodreads request timing state (unsupported version)."
+msgstr "Neplatný stav časovania požiadaviek Goodreads (nepodporovaná verzia)."
+
+#, python-brace-format
+msgid "Invalid Goodreads request timing state ({})."
+msgstr "Neplatný stav časovania požiadaviek Goodreads ({})."
+
+#, python-brace-format
+msgid "Invalid comma-separated list: {}"
+msgstr "Neplatný zoznam oddelený čiarkami: {}"
+
+msgid "No book data (HTTP 200)"
+msgstr "Žiadne údaje o knihe (HTTP 200)"
+
+msgid "Rate limited (HTTP 429)"
+msgstr "Dosiahnutý limit požiadaviek (HTTP 429)"
+
+msgid "Simulate Goodreads error:"
+msgstr "Simulovať chybu Goodreads:"
+
+#, python-brace-format
+msgid "Some books could not be updated. Their existing values were left unchanged.\n\n{}"
+msgstr "Niektoré knihy sa nepodarilo aktualizovať. Ich existujúce hodnoty zostali nezmenené.\n\n{}"
+
+msgid "The Goodreads job ended before it could return results."
+msgstr "Úloha Goodreads skončila pred vrátením výsledkov."
+
+msgid "This Goodreads book page is no longer available."
+msgstr "Táto stránka knihy Goodreads už nie je dostupná."
+
+msgid "Unknown Goodreads detail URL variant."
+msgstr "Neznámy variant adresy URL podrobností Goodreads."
+
+msgid "Unknown Goodreads error."
+msgstr "Neznáma chyba Goodreads."
+
+#, python-brace-format
+msgid "{} additional book(s) failed."
+msgstr "Počet ďalších neúspešných kníh: {}."

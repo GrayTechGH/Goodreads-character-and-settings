@@ -1,11 +1,11 @@
 # Goodreads Character and Settings plugin translations
-# This file was generated from plugin UI gettext strings.
+# This file was maintained from plugin user-visible gettext strings.
 msgid ""
 msgstr ""
-"Project-Id-Version: Goodreads Character and Settings 1.1.1\n"
+"Project-Id-Version: Goodreads Character and Settings 1.3.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-28 00:00+0000\n"
-"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"POT-Creation-Date: 2026-11-05 00:00+0000\n"
+"PO-Revision-Date: 2026-11-05 00:00+0000\n"
 "Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
 "Language-Team: \n"
 "Language: tr\n"
@@ -295,3 +295,123 @@ msgstr "Country row {} has invalid comma-separated aliases. Use double quotes ar
 
 msgid "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
 msgstr "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
+
+msgid "Access denied (HTTP 403)"
+msgstr "Erişim reddedildi (HTTP 403)"
+
+msgid "Background job"
+msgstr "Arka plan görevi"
+
+msgid "Book not found (HTTP 404)"
+msgstr "Kitap bulunamadı (HTTP 404)"
+
+msgid "Browser challenge (HTTP 202)"
+msgstr "Tarayıcı doğrulaması (HTTP 202)"
+
+#, python-brace-format
+msgid "Cannot lock the Goodreads request coordinator: {}"
+msgstr "Goodreads istek koordinatörü kilitlenemiyor: {}"
+
+#, python-brace-format
+msgid "Cannot read Goodreads request timing: {}"
+msgstr "Goodreads istek zamanlaması okunamıyor: {}"
+
+#, python-brace-format
+msgid "Cannot save Goodreads request timing: {}"
+msgstr "Goodreads istek zamanlaması kaydedilemiyor: {}"
+
+msgid "Disabled"
+msgstr "Devre dışı"
+
+msgid "Goodreads CS"
+msgstr "Goodreads CS"
+
+msgid "Goodreads Debug"
+msgstr "Goodreads hata ayıklama"
+
+msgid "Goodreads could not find this book page."
+msgstr "Goodreads: kitap sayfası bulunamadı."
+
+msgid "Goodreads denied access to this book page."
+msgstr "Goodreads: kitap sayfasına erişim reddedildi."
+
+msgid "Goodreads import errors"
+msgstr "Goodreads içe aktarma hataları"
+
+msgid "Goodreads is requiring a browser challenge and returned no usable book page."
+msgstr "Goodreads tarayıcı doğrulaması istiyor ve kullanılabilir bir kitap sayfası döndürmedi."
+
+msgid "Goodreads is temporarily rate-limiting requests."
+msgstr "Goodreads istekleri geçici olarak sınırlıyor."
+
+#, python-brace-format
+msgid "Goodreads is temporarily unavailable (HTTP {})."
+msgstr "Goodreads geçici olarak kullanılamıyor (HTTP {})."
+
+msgid "Goodreads redirected to a different or unidentified book page."
+msgstr "Goodreads başka veya kimliği belirlenemeyen bir kitabın sayfasına yönlendirdi."
+
+msgid "Goodreads requires sign-in to access this book page."
+msgstr "Goodreads bu kitap sayfasına erişmek için oturum açılmasını istiyor."
+
+msgid "Goodreads returned a 200 response without usable book data."
+msgstr "Goodreads: kullanılabilir kitap verisi içermeyen HTTP 200 yanıtı."
+
+msgid "Goodreads returned a response without an HTTP status."
+msgstr "Goodreads: HTTP durumu içermeyen yanıt."
+
+#, python-brace-format
+msgid "Goodreads returned an unusable response (HTTP {})."
+msgstr "Goodreads: kullanılamaz yanıt (HTTP {})."
+
+msgid "Goodreads returned missing or conflicting book identity."
+msgstr "Goodreads: kitap kimliği eksik veya tutarsız."
+
+msgid "Goodreads returned no content for this book page."
+msgstr "Goodreads: bu kitap sayfası için içerik yok."
+
+msgid "Goodreads timed out while handling this request."
+msgstr "Goodreads: istek zaman aşımına uğradı."
+
+msgid "Invalid Goodreads book identifier."
+msgstr "Geçersiz Goodreads kitap tanımlayıcısı."
+
+msgid "Invalid Goodreads request timing state (unsupported version)."
+msgstr "Geçersiz Goodreads istek zamanlama durumu (desteklenmeyen sürüm)."
+
+#, python-brace-format
+msgid "Invalid Goodreads request timing state ({})."
+msgstr "Geçersiz Goodreads istek zamanlama durumu ({})."
+
+#, python-brace-format
+msgid "Invalid comma-separated list: {}"
+msgstr "Geçersiz virgülle ayrılmış liste: {}"
+
+msgid "No book data (HTTP 200)"
+msgstr "Kitap verisi yok (HTTP 200)"
+
+msgid "Rate limited (HTTP 429)"
+msgstr "İstek sınırına ulaşıldı (HTTP 429)"
+
+msgid "Simulate Goodreads error:"
+msgstr "Goodreads hatasını benzet:"
+
+#, python-brace-format
+msgid "Some books could not be updated. Their existing values were left unchanged.\n\n{}"
+msgstr "Bazı kitaplar güncellenemedi. Mevcut değerleri değiştirilmedi.\n\n{}"
+
+msgid "The Goodreads job ended before it could return results."
+msgstr "Goodreads görevi sonuç döndüremeden sona erdi."
+
+msgid "This Goodreads book page is no longer available."
+msgstr "Bu Goodreads kitap sayfası artık kullanılamıyor."
+
+msgid "Unknown Goodreads detail URL variant."
+msgstr "Bilinmeyen Goodreads ayrıntı URL biçimi."
+
+msgid "Unknown Goodreads error."
+msgstr "Bilinmeyen Goodreads hatası."
+
+#, python-brace-format
+msgid "{} additional book(s) failed."
+msgstr "{} kitap daha başarısız oldu."

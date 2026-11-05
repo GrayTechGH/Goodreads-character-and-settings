@@ -6,6 +6,7 @@
   - Defines `GoodreadsCharacterSettingsPlugin`, the Calibre `InterfaceActionBase` wrapper.
   - Keeps GUI imports out of module import time so Calibre command-line utilities can load the plugin metadata without loading Qt.
   - Exposes customization by returning `ConfigWidget` from `config.py`.
+  - Declares minimum Calibre 5.40.0, verified with that actual runtime. Earlier 5.x versions lack the required `random_common_chrome_user_agent` API; 5.0 also lacks `qt.core`.
 
 - `ui.py`
   - Defines `InterfacePlugin`, the real GUI action class named by `actual_plugin`.
@@ -14,12 +15,23 @@
 
 - `main.py`
   - Owns the GUI-side import runner.
+  - Uses a fixed internal `BOOKS_PER_JOB = 5`. The former Books/Job preference is no longer read or displayed; saved legacy values are ignored without a migration.
   - Collects selected rows, reads Goodreads identifiers and existing destination values, chunks work into Calibre jobs, and applies worker results back through `new_api.set_field` when available.
   - Handles GUI refreshes, tag-view recounts, status messages, and job accounting.
 
 - `worker_process.py`
   - Owns background Goodreads fetch and extraction.
-  - Uses Calibre's `browser()` helper, retries empty/error fetches, sleeps between books according to preferences, and returns pure data payloads for the GUI process to write.
+  - Uses Calibre's `browser()` helper, tries the `.xml` detail URL first, and allows one transition to the extensionless URL within a default four-attempt budget.
+  - Checks the final Goodreads URL and the titled Book entities' numeric `legacyId` against the requested ID. Valid empty character/settings results succeed immediately; unusable pages remain failures and cannot generate empty field writes.
+  - Returns the existing pure data result payloads for the GUI process to write.
+
+- `fetch_policy.py`
+  - Coordinates all plugin workers using Calibre's `ExclusiveFile` and versioned JSON state beneath the Calibre cache, keyed by configuration-profile path.
+  - Reserves request starts before HTTP access and holds the shared lock through each attempt and cooldown update. Timing sleeps happen outside the lock and recheck state afterward.
+  - Enforces the greater of the previous/current configured query intervals, local retry backoff, and shared cooldown. There is no additional between-book sleep.
+  - Supports capped exponential backoff with positive jitter, seconds/date `Retry-After` on 429/503, and a 60-second minimum shared cooldown on WAF challenges/403. A longer server delay wins, including responses that also carry a challenge header.
+  - Missing state initializes; corrupt, unsupported, or inaccessible state fails without an uncoordinated request. The stable lock file is separate from the atomically replaced state file.
+  - Sharing applies to this plugin and configuration profile, not other plugins or profiles. Calibre's HTTP client may follow redirects inside one application attempt; the accepted final URL still must identify the requested book.
 
 ## Data Extraction And Normalization
 

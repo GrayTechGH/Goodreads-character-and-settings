@@ -41,7 +41,7 @@ class InterfacePlugin(InterfaceAction):
     name = 'Goodreads character and settings'
     popup_type = QToolButton.MenuButtonPopup
 
-    action_spec = ('Goodreads CS', None,
+    action_spec = (_('Goodreads CS'), None,
             _('Run Goodreads character and settings'), None)
 
     def genesis(self):

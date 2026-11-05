@@ -549,11 +549,25 @@ def get_goodreads_next_data_payload(html):
         return {}
 
 
-def has_goodreads_book_data(html):
-    return goodreads_payload_has_book_data(get_goodreads_next_data_payload(html))
+def has_goodreads_book_data(html, goodreads_id=None):
+    return goodreads_payload_has_book_data(get_goodreads_next_data_payload(html), goodreads_id)
 
 
-def goodreads_payload_has_book_data(payload):
+def goodreads_book_url_matches_id(url, goodreads_id):
+    from urllib.parse import urlsplit
+    try:
+        parsed = urlsplit(url)
+        match = re.fullmatch(r'/book/show/([0-9]+)(?:[.-][^/]*)?/?', parsed.path)
+        return bool(
+            parsed.scheme == 'https'
+            and parsed.netloc.lower() in ('www.goodreads.com', 'goodreads.com')
+            and match and int(match.group(1)) == int(goodreads_id)
+        )
+    except (ValueError, TypeError):
+        return False
+
+
+def goodreads_payload_has_book_data(payload, goodreads_id=None):
     try:
         apollo_state = payload['props']['pageProps']['apolloState']
     except (KeyError, TypeError):
@@ -562,12 +576,19 @@ def goodreads_payload_has_book_data(payload):
     if not isinstance(apollo_state, dict):
         return False
 
+    found = False
+    expected = str(goodreads_id).lstrip('0') if goodreads_id is not None else None
     for key, value in apollo_state.items():
         if not str(key).startswith('Book:') or not isinstance(value, dict):
             continue
         if cleanup_value(value.get('title') or value.get('titleComplete')):
-            return True
-    return False
+            if expected is None:
+                return True
+            legacy_id = str(value.get('legacyId', ''))
+            if not re.fullmatch(r'[0-9]+', legacy_id) or legacy_id.lstrip('0') != expected:
+                return False
+            found = True
+    return found
 
 
 def get_allowed_entity_types(label):

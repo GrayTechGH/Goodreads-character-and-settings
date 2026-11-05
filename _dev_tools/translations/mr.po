@@ -1,11 +1,11 @@
 # Goodreads Character and Settings plugin translations
-# This file was generated from plugin UI gettext strings.
+# This file was maintained from plugin user-visible gettext strings.
 msgid ""
 msgstr ""
-"Project-Id-Version: Goodreads Character and Settings 1.1.1\n"
+"Project-Id-Version: Goodreads Character and Settings 1.3.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-28 00:00+0000\n"
-"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"POT-Creation-Date: 2026-11-05 00:00+0000\n"
+"PO-Revision-Date: 2026-11-05 00:00+0000\n"
 "Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
 "Language-Team: \n"
 "Language: mr\n"
@@ -295,3 +295,123 @@ msgstr "Country row {} has invalid comma-separated aliases. Use double quotes ar
 
 msgid "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
 msgstr "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
+
+msgid "Access denied (HTTP 403)"
+msgstr "प्रवेश नाकारला (HTTP 403)"
+
+msgid "Background job"
+msgstr "पार्श्वभूमीतील कार्य"
+
+msgid "Book not found (HTTP 404)"
+msgstr "पुस्तक सापडले नाही (HTTP 404)"
+
+msgid "Browser challenge (HTTP 202)"
+msgstr "ब्राउझर पडताळणी (HTTP 202)"
+
+#, python-brace-format
+msgid "Cannot lock the Goodreads request coordinator: {}"
+msgstr "Goodreads विनंती समन्वयक लॉक करता येत नाही: {}"
+
+#, python-brace-format
+msgid "Cannot read Goodreads request timing: {}"
+msgstr "Goodreads विनंत्यांची वेळ वाचता येत नाही: {}"
+
+#, python-brace-format
+msgid "Cannot save Goodreads request timing: {}"
+msgstr "Goodreads विनंत्यांची वेळ जतन करता येत नाही: {}"
+
+msgid "Disabled"
+msgstr "अक्षम"
+
+msgid "Goodreads CS"
+msgstr "Goodreads CS"
+
+msgid "Goodreads Debug"
+msgstr "Goodreads दोषनिवारण"
+
+msgid "Goodreads could not find this book page."
+msgstr "Goodreads: पुस्तकाचे पृष्ठ सापडले नाही."
+
+msgid "Goodreads denied access to this book page."
+msgstr "Goodreads: पुस्तकाच्या पृष्ठाचा प्रवेश नाकारला."
+
+msgid "Goodreads import errors"
+msgstr "Goodreads आयात त्रुटी"
+
+msgid "Goodreads is requiring a browser challenge and returned no usable book page."
+msgstr "Goodreads ला ब्राउझर पडताळणी आवश्यक आहे आणि वापरण्यायोग्य पुस्तक पृष्ठ मिळाले नाही."
+
+msgid "Goodreads is temporarily rate-limiting requests."
+msgstr "Goodreads तात्पुरत्या स्वरूपात विनंत्यांवर मर्यादा घालत आहे."
+
+#, python-brace-format
+msgid "Goodreads is temporarily unavailable (HTTP {})."
+msgstr "Goodreads तात्पुरते अनुपलब्ध आहे (HTTP {})."
+
+msgid "Goodreads redirected to a different or unidentified book page."
+msgstr "Goodreads ने दुसऱ्या किंवा ओळख न पटलेल्या पुस्तकाच्या पृष्ठावर पुनर्निर्देशित केले."
+
+msgid "Goodreads requires sign-in to access this book page."
+msgstr "या पुस्तकाच्या पृष्ठासाठी Goodreads मध्ये प्रवेश करणे आवश्यक आहे."
+
+msgid "Goodreads returned a 200 response without usable book data."
+msgstr "Goodreads: HTTP 200 प्रतिसादात वापरण्यायोग्य पुस्तक माहिती नाही."
+
+msgid "Goodreads returned a response without an HTTP status."
+msgstr "Goodreads: प्रतिसादात HTTP स्थिती नाही."
+
+#, python-brace-format
+msgid "Goodreads returned an unusable response (HTTP {})."
+msgstr "Goodreads: वापरता न येणारा प्रतिसाद (HTTP {})."
+
+msgid "Goodreads returned missing or conflicting book identity."
+msgstr "Goodreads: पुस्तकाची ओळख गहाळ किंवा विसंगत आहे."
+
+msgid "Goodreads returned no content for this book page."
+msgstr "Goodreads: या पुस्तकाच्या पृष्ठावर मजकूर नाही."
+
+msgid "Goodreads timed out while handling this request."
+msgstr "Goodreads: विनंती हाताळण्याची वेळ संपली."
+
+msgid "Invalid Goodreads book identifier."
+msgstr "अवैध Goodreads पुस्तक ओळखकर्ता."
+
+msgid "Invalid Goodreads request timing state (unsupported version)."
+msgstr "Goodreads विनंती वेळेची स्थिती अवैध आहे (असमर्थित आवृत्ती)."
+
+#, python-brace-format
+msgid "Invalid Goodreads request timing state ({})."
+msgstr "Goodreads विनंती वेळेची स्थिती अवैध आहे ({})."
+
+#, python-brace-format
+msgid "Invalid comma-separated list: {}"
+msgstr "स्वल्पविरामाने विभक्त केलेली यादी अवैध आहे: {}"
+
+msgid "No book data (HTTP 200)"
+msgstr "पुस्तकाची माहिती नाही (HTTP 200)"
+
+msgid "Rate limited (HTTP 429)"
+msgstr "विनंत्यांची मर्यादा गाठली (HTTP 429)"
+
+msgid "Simulate Goodreads error:"
+msgstr "Goodreads त्रुटीचे अनुकरण करा:"
+
+#, python-brace-format
+msgid "Some books could not be updated. Their existing values were left unchanged.\n\n{}"
+msgstr "काही पुस्तके अद्यतनित करता आली नाहीत. त्यांची विद्यमान मूल्ये बदललेली नाहीत.\n\n{}"
+
+msgid "The Goodreads job ended before it could return results."
+msgstr "परिणाम मिळण्यापूर्वी Goodreads कार्य संपले."
+
+msgid "This Goodreads book page is no longer available."
+msgstr "या Goodreads पुस्तकाचे पृष्ठ आता उपलब्ध नाही."
+
+msgid "Unknown Goodreads detail URL variant."
+msgstr "Goodreads तपशील URL चा अज्ञात प्रकार."
+
+msgid "Unknown Goodreads error."
+msgstr "अज्ञात Goodreads त्रुटी."
+
+#, python-brace-format
+msgid "{} additional book(s) failed."
+msgstr "आणखी {} पुस्तकांवर प्रक्रिया अयशस्वी झाली."

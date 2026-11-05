@@ -24,6 +24,9 @@ from calibre_plugins.Goodreads_character_and_settings.common import cleanup_valu
 from calibre_plugins.Goodreads_character_and_settings.config import FIELD_NONE, FIELD_TAGS, prefs
 
 
+BOOKS_PER_JOB = 5
+
+
 class GoodreadsPreviewRunner(object):
 
     def __init__(self, gui, finished_callback=None):
@@ -53,8 +56,7 @@ class GoodreadsPreviewRunner(object):
             self.finish()
             return
 
-        batch_size = max(1, int(prefs['max_books_per_job']))
-        batches = chunk_books(books_with_ids, batch_size)
+        batches = chunk_books(books_with_ids, BOOKS_PER_JOB)
         self.active_jobs = {}
         self.pending_jobs = len(batches)
         self.completed_jobs = 0

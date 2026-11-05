@@ -1,11 +1,11 @@
 # Goodreads Character and Settings plugin translations
-# This file was generated from plugin UI gettext strings.
+# This file was maintained from plugin user-visible gettext strings.
 msgid ""
 msgstr ""
-"Project-Id-Version: Goodreads Character and Settings 1.1.1\n"
+"Project-Id-Version: Goodreads Character and Settings 1.3.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-28 00:00+0000\n"
-"PO-Revision-Date: 2026-04-28 00:00+0000\n"
+"POT-Creation-Date: 2026-11-05 00:00+0000\n"
+"PO-Revision-Date: 2026-11-05 00:00+0000\n"
 "Last-Translator: Managed by Goodreads Character and Settings gettext catalogs\n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -295,3 +295,123 @@ msgstr "Country row {} has invalid comma-separated aliases. Use double quotes ar
 
 msgid "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
 msgstr "Regions row {} has invalid comma-separated values. Use double quotes around values containing commas."
+
+msgid "Access denied (HTTP 403)"
+msgstr "访问被拒绝（HTTP 403）"
+
+msgid "Background job"
+msgstr "后台任务"
+
+msgid "Book not found (HTTP 404)"
+msgstr "找不到图书（HTTP 404）"
+
+msgid "Browser challenge (HTTP 202)"
+msgstr "浏览器验证（HTTP 202）"
+
+#, python-brace-format
+msgid "Cannot lock the Goodreads request coordinator: {}"
+msgstr "无法锁定 Goodreads 请求协调器：{}"
+
+#, python-brace-format
+msgid "Cannot read Goodreads request timing: {}"
+msgstr "无法读取 Goodreads 请求时间信息：{}"
+
+#, python-brace-format
+msgid "Cannot save Goodreads request timing: {}"
+msgstr "无法保存 Goodreads 请求时间信息：{}"
+
+msgid "Disabled"
+msgstr "已禁用"
+
+msgid "Goodreads CS"
+msgstr "Goodreads CS"
+
+msgid "Goodreads Debug"
+msgstr "Goodreads 调试"
+
+msgid "Goodreads could not find this book page."
+msgstr "Goodreads：找不到此图书页面。"
+
+msgid "Goodreads denied access to this book page."
+msgstr "Goodreads：拒绝访问此图书页面。"
+
+msgid "Goodreads import errors"
+msgstr "Goodreads 导入错误"
+
+msgid "Goodreads is requiring a browser challenge and returned no usable book page."
+msgstr "Goodreads 要求进行浏览器验证，未返回可用的图书页面。"
+
+msgid "Goodreads is temporarily rate-limiting requests."
+msgstr "Goodreads 暂时限制请求频率。"
+
+#, python-brace-format
+msgid "Goodreads is temporarily unavailable (HTTP {})."
+msgstr "Goodreads 暂时不可用（HTTP {}）。"
+
+msgid "Goodreads redirected to a different or unidentified book page."
+msgstr "Goodreads 重定向到了其他图书或无法识别的图书页面。"
+
+msgid "Goodreads requires sign-in to access this book page."
+msgstr "访问此图书页面需要登录 Goodreads。"
+
+msgid "Goodreads returned a 200 response without usable book data."
+msgstr "Goodreads：HTTP 200 响应中没有可用的图书数据。"
+
+msgid "Goodreads returned a response without an HTTP status."
+msgstr "Goodreads：响应中没有 HTTP 状态。"
+
+#, python-brace-format
+msgid "Goodreads returned an unusable response (HTTP {})."
+msgstr "Goodreads：响应不可用（HTTP {}）。"
+
+msgid "Goodreads returned missing or conflicting book identity."
+msgstr "Goodreads：图书标识缺失或存在冲突。"
+
+msgid "Goodreads returned no content for this book page."
+msgstr "Goodreads：此图书页面没有内容。"
+
+msgid "Goodreads timed out while handling this request."
+msgstr "Goodreads：处理请求超时。"
+
+msgid "Invalid Goodreads book identifier."
+msgstr "Goodreads 图书标识符无效。"
+
+msgid "Invalid Goodreads request timing state (unsupported version)."
+msgstr "Goodreads 请求时间状态无效（不支持的版本）。"
+
+#, python-brace-format
+msgid "Invalid Goodreads request timing state ({})."
+msgstr "Goodreads 请求时间状态无效（{}）。"
+
+#, python-brace-format
+msgid "Invalid comma-separated list: {}"
+msgstr "逗号分隔列表无效：{}"
+
+msgid "No book data (HTTP 200)"
+msgstr "没有图书数据（HTTP 200）"
+
+msgid "Rate limited (HTTP 429)"
+msgstr "请求频率受限（HTTP 429）"
+
+msgid "Simulate Goodreads error:"
+msgstr "模拟 Goodreads 错误："
+
+#, python-brace-format
+msgid "Some books could not be updated. Their existing values were left unchanged.\n\n{}"
+msgstr "部分图书无法更新，其现有值未作更改。\n\n{}"
+
+msgid "The Goodreads job ended before it could return results."
+msgstr "Goodreads 任务在返回结果之前结束。"
+
+msgid "This Goodreads book page is no longer available."
+msgstr "此 Goodreads 图书页面已不可用。"
+
+msgid "Unknown Goodreads detail URL variant."
+msgstr "未知的 Goodreads 详情 URL 格式。"
+
+msgid "Unknown Goodreads error."
+msgstr "未知的 Goodreads 错误。"
+
+#, python-brace-format
+msgid "{} additional book(s) failed."
+msgstr "另有 {} 本图书处理失败。"

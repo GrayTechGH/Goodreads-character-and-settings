@@ -13,6 +13,7 @@ import tempfile
 import types
 import unittest
 import zipfile
+from contextlib import nullcontext
 
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -383,10 +384,20 @@ class PluginSmokeTests(unittest.TestCase):
         calibre = sys.modules['calibre']
         calibre.browser = browser_factory
         sys.modules.pop(PLUGIN_PACKAGE + '.worker_process', None)
-        return load_module(
+        worker = load_module(
             PLUGIN_PACKAGE + '.worker_process',
             os.path.join(ROOT, 'worker_process.py'),
         )
+        clock = {'now': 1000.0}
+        coordinator = worker.RequestCoordinator(
+            directory=self.temp_dir.name,
+            clock=lambda: clock['now'],
+            sleep=lambda seconds: clock.update(now=clock['now'] + seconds),
+            lock_factory=lambda *_args, **_kwargs: nullcontext(),
+            log=lambda _message: None,
+        )
+        worker.RequestCoordinator = lambda: coordinator
+        return worker
 
     def test_waf_challenge_is_reported_without_reading_the_empty_body(self):
         """A Goodreads WAF response should fail safely before parsing its empty body."""
@@ -437,8 +448,8 @@ class PluginSmokeTests(unittest.TestCase):
         )()
         self.assertTrue(worker.is_goodreads_waf_challenge(header_only_response))
 
-    def test_waf_challenge_retries_with_three_random_user_agents(self):
-        """The first request and all three retries use fresh Calibre random agents."""
+    def test_waf_challenge_falls_back_with_a_fresh_random_user_agent(self):
+        """A challenge changes the URL once and retains random Chrome agents."""
         class Response(object):
             headers = {}
 
@@ -449,9 +460,10 @@ class PluginSmokeTests(unittest.TestCase):
             def read(self):
                 return self.raw
 
+            def geturl(self):
+                return 'https://www.goodreads.com/book/show/230926478'
+
         responses = [
-            Response(202),
-            Response(202),
             Response(202),
             Response(200, b'<html>book data</html>'),
         ]
@@ -476,7 +488,7 @@ class PluginSmokeTests(unittest.TestCase):
         original_extract = worker.common.extract_goodreads_values
         original_sleep = worker.time.sleep
         worker.random_goodreads_user_agent = lambda: next(random_agents)
-        worker.common.has_goodreads_book_data = lambda _html: True
+        worker.common.has_goodreads_book_data = lambda *_args: True
         worker.common.extract_goodreads_values = (
             lambda _html, label: ['Alice'] if label == 'Characters' else ['London']
         )
@@ -493,8 +505,6 @@ class PluginSmokeTests(unittest.TestCase):
             [
                 'random-agent-1',
                 'random-agent-2',
-                'random-agent-3',
-                'random-agent-4',
             ],
             used_agents,
         )
@@ -592,7 +602,10 @@ class PluginSmokeTests(unittest.TestCase):
         original_fetch_page = worker.fetch_goodreads_page
         original_has_book_data = worker.common.has_goodreads_book_data
         worker.fetch_goodreads_page = (
-            lambda _goodreads_id, **_kwargs: '<html></html>'
+            lambda _goodreads_id, **_kwargs: {
+                'html': '<html></html>',
+                'final_url': 'https://www.goodreads.com/book/show/230926478',
+            }
         )
         worker.common.has_goodreads_book_data = lambda _html: False
         try:
